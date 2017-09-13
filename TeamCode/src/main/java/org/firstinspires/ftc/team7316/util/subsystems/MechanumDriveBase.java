@@ -4,6 +4,7 @@ import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Loopable;
 import org.firstinspires.ftc.team7316.util.PID;
 import org.firstinspires.ftc.team7316.util.hardware.Hardware;
+import org.firstinspires.ftc.team7316.util.subsystems.mecanum.MecanumVectorSet;
 
 /**
  * Created by andrew on 9/12/17.
@@ -28,6 +29,9 @@ public class MechanumDriveBase implements Loopable {
         this.gyroPID = new PID(Constants.gyroP, Constants.gyroI, Constants.gyroD);
     }
 
+    public void applyPowers(MecanumVectorSet mvs) {
+        // to be implementd
+    }
 
     //setters
     public void setWantedSpeed(float speed) {
