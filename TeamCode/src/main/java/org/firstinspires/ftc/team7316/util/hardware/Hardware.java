@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.team7316.util.hardware;
 
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -23,10 +24,14 @@ public class Hardware {
     private static final String LEFT_BACK_DRIVE_MOTOR_NAME = "mdbl";
     private static final String RIGHT_BACK_DRIVE_MOTOR_NAME = "mdbr";
 
+    private static final String GYRO_NAME = "gyro";
+
     public DcMotor leftFrontDriveMotor;
     public DcMotor rightFrontDriveMotor;
     public DcMotor leftBackDriveMotor;
     public DcMotor rightBackDriveMotor;
+
+    public ModernRoboticsI2cGyro gyro;
 
     public Hardware (HardwareMap map) {
 
@@ -43,6 +48,8 @@ public class Hardware {
 
         rightBackDriveMotor = map.dcMotor.get(RIGHT_BACK_DRIVE_MOTOR_NAME);
         rightBackDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        //gyro = map.get(ModernRoboticsI2cGyro.class, GYRO_NAME);
 
         //Scheduler.instance.addTask(frontSideInfaredSensor);
     }

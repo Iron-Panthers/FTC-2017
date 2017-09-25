@@ -53,14 +53,18 @@ public class MechanumDriveBase implements Loopable {
     }
 
     private float gyroError() {
-        return 0;
+        float angle = (float)Hardware.instance.gyro.getHeading();
+
+        float dif = angle - wantedAngle;
+
+        return dif;
     }
 
 
 
     private float pidToMotorPower(float out) {
         float absOut = Math.abs(out);
-        float mult = (float)Math.floor(absOut/out);
+        float mult = (absOut/out); //1 if positive -1 if negative
 
         if (absOut > 1) {
             absOut = mult;
