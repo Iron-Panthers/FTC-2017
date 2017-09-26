@@ -13,6 +13,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 import org.firstinspires.ftc.team7316.modes.BaseOpMode;
 import org.firstinspires.ftc.team7316.util.Constants;
+import org.firstinspires.ftc.team7316.util.PID;
 import org.firstinspires.ftc.team7316.util.hardware.Hardware;
 import org.firstinspires.ftc.team7316.util.input.GamepadAxis;
 import org.firstinspires.ftc.team7316.util.input.GamepadWrapper;
@@ -52,7 +53,9 @@ public class DriveMode extends BaseOpMode {
         //gyro = hardwareMap.get(ModernRoboticsI2cGyro.class, "gyro"); */
         Hardware.setHardwareMap(hardwareMap);
 
+
         gp = new GamepadWrapper(gamepad1);
+
 
         // Set up our telemetry dashboard
         //composeTelemetry();
@@ -80,6 +83,8 @@ public class DriveMode extends BaseOpMode {
         if (Math.abs(rY) < Constants.JOYSTICK_DRIVE_DEADZONE) {
             rY = 0;
         }
+
+        //pbl.newError()
 
         Hardware.instance.rightBackDriveMotor.setPower(lY + lX);
         Hardware.instance.leftFrontDriveMotor.setPower(lY - lX);

@@ -3,6 +3,7 @@ package org.firstinspires.ftc.team7316.util.subsystems;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Loopable;
 import org.firstinspires.ftc.team7316.util.PID;
+import org.firstinspires.ftc.team7316.util.Util;
 import org.firstinspires.ftc.team7316.util.hardware.Hardware;
 import org.firstinspires.ftc.team7316.util.subsystems.mecanum.MecanumVectorSet;
 
@@ -48,22 +49,21 @@ public class MechanumDriveBase implements Loopable {
 
 
     //errors
-    private float fR_bL_Error() {
+    private double fR_bL_Error() {
         return 0;
     }
 
-    private float fL_bR_Error() {
+    private double fL_bR_Error() {
         return 0;
     }
 
-    private float gyroError() {
+    private double gyroError() {
         float angle = (float)Hardware.instance.gyro.getHeading();
 
         float dif = angle - wantedAngle;
 
-        return dif;
+        return Util.wrap(dif);
     }
-
 
 
     private float pidToMotorPower(float out) {
