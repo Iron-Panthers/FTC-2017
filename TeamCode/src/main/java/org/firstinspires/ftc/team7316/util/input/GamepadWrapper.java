@@ -7,7 +7,7 @@ import org.firstinspires.ftc.team7316.util.Loopable;
 import org.firstinspires.ftc.team7316.util.Scheduler;
 
 /**
- * Created by wayne on 9/15/16.
+ * Created by Wesley on 9/15/16.
  */
 public class GamepadWrapper implements Loopable {
 
