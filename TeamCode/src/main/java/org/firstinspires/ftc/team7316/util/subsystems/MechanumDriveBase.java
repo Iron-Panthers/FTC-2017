@@ -14,11 +14,15 @@ import org.firstinspires.ftc.team7316.util.subsystems.mecanum.MecanumVectorSet;
 public class MechanumDriveBase implements Loopable {
 
     private PID fR_bL_PID; //front right and back left PID engine
+    private float wantedFrBlTicks = 0;
+
     private PID fL_bR_PID; //front left and back right PID engine;
+    private float wantedFlBrTicks = 0;
 
     private PID gyroPID;
+    private float wantedAngle = 0;
 
-    private float wantedAngle, wantedMovementAngle; //in degrees
+    private float wantedOmega, wantedMovementOmega; //in degrees
     private float wantedSpeed; //in some sort of units idk lol
 
     private float weighting = 0.7f;
@@ -28,10 +32,9 @@ public class MechanumDriveBase implements Loopable {
         this.fR_bL_PID = new PID(Constants.encoderP, Constants.encoderI, Constants.encoderD);
         this.fL_bR_PID = new PID(Constants.encoderP, Constants.encoderI, Constants.encoderD);
         this.gyroPID = new PID(Constants.gyroP, Constants.gyroI, Constants.gyroD);
-    }
 
-    public void applyPowers(MecanumVectorSet mvs) {
-        // to be implementd
+        this.wantedFlBrTicks = fL_bR_Error();
+        this.wantedFrBlTicks = fR_bL_Error();
     }
 
     //setters
@@ -39,25 +42,33 @@ public class MechanumDriveBase implements Loopable {
         this.wantedSpeed = speed;
     }
 
-    public void setWantedAngle(float wantedAngle) {
-        this.wantedAngle = wantedAngle;
+    public void setWantedAngle(float wantedOmega) {
+        this.wantedOmega = wantedOmega;
     }
 
-    public void setWantedMovementAngle(float wantedMovementAngle) {
-        this.wantedMovementAngle = wantedMovementAngle;
+    public void setWantedMovementAngle(float wantedMovementOmega) {
+        this.wantedMovementOmega = wantedMovementOmega;
     }
 
 
     //errors
-    private double fR_bL_Error() {
-        return 0;
+    private float fR_bL_Error() {
+        int fRError = Hardware.instance.rightFrontDriveMotor.getCurrentPosition();
+        int bLError = Hardware.instance.leftBackDriveMotor.getCurrentPosition();
+
+        float average = (fRError + bLError) / 2.0f;
+        return average - this.wantedFrBlTicks;
     }
 
-    private double fL_bR_Error() {
-        return 0;
+    private float fL_bR_Error() {
+        int fLError = Hardware.instance.leftFrontDriveMotor.getCurrentPosition();
+        int bRError = Hardware.instance.rightBackDriveMotor.getCurrentPosition();
+
+        float average = (fLError + bRError) / 2.0f;
+        return average - this.wantedFlBrTicks;
     }
 
-    private double gyroError() {
+    private float gyroError() {
         float angle = (float)Hardware.instance.gyro.getHeading();
 
         float dif = angle - wantedAngle;
@@ -81,6 +92,9 @@ public class MechanumDriveBase implements Loopable {
         return absOut;
     }
 
+    public void updateWantedFromJoystick() {
+
+    }
 
     @Override
     public void loop() {

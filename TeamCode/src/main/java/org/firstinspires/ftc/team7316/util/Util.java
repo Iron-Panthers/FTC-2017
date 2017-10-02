@@ -27,8 +27,8 @@ public class Util {
         }
     }
 
-    public static double wrap(double theta) {
-        double num = (theta - 180) % (360);
+    public static float wrap(float theta) {
+        float num = (theta - 180) % (360);
 
         if (num < 0) {
             num += 180;
