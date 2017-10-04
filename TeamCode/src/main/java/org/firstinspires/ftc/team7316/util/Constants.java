@@ -8,6 +8,7 @@ public class Constants {
     public static final float JOYSTICK_DRIVE_DEADZONE = 0.03f;
     public static final float DRIVER_MOTOR_DEADZONE = 0.18f;
     public static final int ENCODER_TICK_PER_REV = 1120;
+    public static final int DRIVE_RPM_MAX = 280; // can change later actual max 320
     public static final double DISTANCE_PER_REV = 4*Math.PI;
     public static final double COLOR_DIFFERENCE = 2;
 
@@ -20,11 +21,12 @@ public class Constants {
     public static final float gyroI = 0;
     public static final float gyroD = 0;
 
+    public static final double sqrt2 = Math.sqrt(2);
+
     public static double distanceToTicks(double dist) {
         double inches = dist*12;
         double revs = inches/DISTANCE_PER_REV;
         double ticks = revs*ENCODER_TICK_PER_REV;
         return ticks;
     }
-
 }
