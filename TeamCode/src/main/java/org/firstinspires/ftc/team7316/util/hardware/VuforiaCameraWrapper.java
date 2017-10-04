@@ -4,6 +4,7 @@ import com.vuforia.HINT;
 import com.vuforia.Vuforia;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
 import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
@@ -24,19 +25,18 @@ public class VuforiaCameraWrapper implements Loopable {
     VuforiaLocalizer vuforia;
     VuforiaTrackables glyphKeys;
 
-    public VuforiaCameraWrapper() {
-        VuforiaLocalizer.Parameters params = new VuforiaLocalizer.Parameters(R.id.cameraMonitorViewId);
+    @Override
+    public void init() {
+        params = new VuforiaLocalizer.Parameters(R.id.cameraMonitorViewId);
         params.vuforiaLicenseKey = Constants.vuforiaLicenseKey;
         params.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
 
-        VuforiaLocalizer vuforia = ClassFactory.createVuforiaLocalizer(params);
+        vuforia = ClassFactory.createVuforiaLocalizer(params);
         Vuforia.setHint(HINT.HINT_MAX_SIMULTANEOUS_IMAGE_TARGETS, 4);
 
-        VuforiaTrackables glyphKeys = vuforia.loadTrackablesFromAsset("RelicVuMark");
-    }
+        glyphKeys = vuforia.loadTrackablesFromAsset("RelicVuMark");
+        glyphKeys.get(0).setName("RelicVuMark");
 
-    @Override
-    public void init() {
         glyphKeys.activate();
     }
 
@@ -53,6 +53,7 @@ public class VuforiaCameraWrapper implements Loopable {
                 Hardware.log(keys.getName() + "-Translation", translation);
             }
         }
+
     }
 
     @Override
