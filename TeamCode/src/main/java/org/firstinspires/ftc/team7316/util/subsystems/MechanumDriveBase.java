@@ -19,18 +19,18 @@ public class MechanumDriveBase implements Loopable {
     //all speed in ticks per second
 
     private PID fR_bL_PID; //front right and back left PID engine
-    private float wantedFrBlSpeed = 0; // encoder ticks per second
+    private double wantedFrBlSpeed = 0; // encoder ticks per second
 
     private PID fL_bR_PID; //front left and back right PID engine;
-    private float wantedFlBrSpeed = 0; // encoder ticks per second
+    private double wantedFlBrSpeed = 0; // encoder ticks per second
 
     private PID gyroPID;
-    private float wantedOmega; //in degrees per second
+    private double wantedOmega; //in degrees per second
 
     private long currentTime = 0;
     private long previousTime = 0; //in seconds
 
-    private float weighting = 0.7f;
+    private double weighting = 0.7;
 
     @Override
     public void init() {
@@ -45,54 +45,54 @@ public class MechanumDriveBase implements Loopable {
     }
 
     //setters
-    public void setWantedAngle(float wantedOmega) {
+    public void setWantedOmega(double wantedOmega) {
         // something something wanted speed
         this.wantedOmega = wantedOmega; // degrees per second
     }
 
-    public void setWantedSpeedAndMovementAngle(float wantedSpeed, float wantedMovementOmega) {
-        // this tidbit is for strafing
-        double x = wantedSpeed * Math.cos(wantedMovementOmega * Math.PI / 180);
-        double y = wantedSpeed * Math.sin(wantedMovementOmega * Math.PI / 180);
+    public void setWantedSpeedAndMovementAngle(double wantedSpeed, double wantedMovementAngle) {
+        // this  T I D B I T  is for strafing
+        double x = wantedSpeed * Math.cos(wantedMovementAngle * Math.PI / 180);
+        double y = wantedSpeed * Math.sin(wantedMovementAngle * Math.PI / 180);
 
         double fR_bLpower = Constants.sqrt2 * (y + (x-y)/2); //length of da vector
         double fL_bRpower = Constants.sqrt2 * ((x-y)/2); //again
 
         // ticks per second
-        wantedFrBlSpeed = (float)(Constants.DRIVE_RPM_MAX / 60 * Constants.ENCODER_TICK_PER_REV * fR_bLpower);
-        wantedFlBrSpeed = (float)(Constants.DRIVE_RPM_MAX / 60 * Constants.ENCODER_TICK_PER_REV * fL_bRpower);
+        wantedFrBlSpeed = (double)(Constants.DRIVE_RPM_MAX / 60 * Constants.ENCODER_TICK_PER_REV * fR_bLpower);
+        wantedFlBrSpeed = (double)(Constants.DRIVE_RPM_MAX / 60 * Constants.ENCODER_TICK_PER_REV * fL_bRpower);
     }
 
 
     //errors
-    private float fR_bL_Error() {
+    private double fR_bL_Error() {
         int fRError = Hardware.instance.rightFrontDriveMotor.getCurrentPosition();
         int bLError = Hardware.instance.leftBackDriveMotor.getCurrentPosition();
 
-        float average = (fRError + bLError) / (2 * (currentTime - previousTime));
+        double average = (fRError + bLError) / (2 * (currentTime - previousTime));
         return this.wantedFrBlSpeed - average; // ticks per second
     }
 
-    private float fL_bR_Error() {
+    private double fL_bR_Error() {
         int fLError = Hardware.instance.leftFrontDriveMotor.getCurrentPosition();
         int bRError = Hardware.instance.rightBackDriveMotor.getCurrentPosition();
 
-        float average = (fLError + bRError) / (2 * (currentTime - previousTime));
+        double average = (fLError + bRError) / (2 * (currentTime - previousTime));
         return this.wantedFlBrSpeed - average; // ticks per second
     }
 
-    private float gyroError() {
-        float angle = (float)Hardware.instance.gyro.getHeading();
+    private double gyroError() {
+        double angle = (double)Hardware.instance.gyro.getHeading();
 
-        float dif = (wantedOmega - angle) / (currentTime - previousTime); // degrees per second
+        double dif = (wantedOmega - angle) / (currentTime - previousTime); // degrees per second
 
         return Util.wrap(dif);
     }
 
 
-    private float pidToMotorPower(float out) {
-        float absOut = Math.abs(out);
-        float mult = (absOut/out); //1 if positive -1 if negative
+    private double pidToMotorPower(double out) {
+        double absOut = Math.abs(out);
+        double mult = (absOut/out); //1 if positive -1 if negative
 
         if (absOut > 1) {
             absOut = mult;
@@ -112,10 +112,10 @@ public class MechanumDriveBase implements Loopable {
         //setWantedSpeedAndMovementAngle(some_speed, some_angle);
         //setWantedAngle(some_angle);
 
-        float fR_bL_Pwr = pidToMotorPower(this.fR_bL_PID.newError(fR_bL_Error()));
-        float fL_bR_Pwr = pidToMotorPower(this.fL_bR_PID.newError(fL_bR_Error()));
+        double fR_bL_Pwr = pidToMotorPower(this.fR_bL_PID.newError(fR_bL_Error()));
+        double fL_bR_Pwr = pidToMotorPower(this.fL_bR_PID.newError(fL_bR_Error()));
 
-        float gyro_Pwr = pidToMotorPower(this.gyroPID.newError(gyroError()));
+        double gyro_Pwr = pidToMotorPower(this.gyroPID.newError(gyroError()));
 
         previousTime = currentTime;
 

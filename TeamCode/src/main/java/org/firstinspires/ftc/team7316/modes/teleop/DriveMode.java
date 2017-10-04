@@ -14,9 +14,11 @@ import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 import org.firstinspires.ftc.team7316.modes.BaseOpMode;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.PID;
+import org.firstinspires.ftc.team7316.util.Scheduler;
 import org.firstinspires.ftc.team7316.util.hardware.Hardware;
 import org.firstinspires.ftc.team7316.util.input.GamepadAxis;
 import org.firstinspires.ftc.team7316.util.input.GamepadWrapper;
+import org.firstinspires.ftc.team7316.util.subsystems.MechanumDriveBase;
 
 import java.util.Locale;
 
@@ -27,6 +29,7 @@ public class DriveMode extends BaseOpMode {
     //private ModernRoboticsI2cGyro gyro;
 
     private GamepadWrapper gp;
+    private MechanumDriveBase driveBase;
 
     // State used for updating telemetry
     Orientation angles;
@@ -56,6 +59,8 @@ public class DriveMode extends BaseOpMode {
 
         gp = new GamepadWrapper(gamepad1);
 
+        driveBase = new MechanumDriveBase();
+        Scheduler.instance.addTask(driveBase);
 
         // Set up our telemetry dashboard
         //composeTelemetry();
@@ -69,27 +74,27 @@ public class DriveMode extends BaseOpMode {
         //telemetry.addData("heading", formatAngle(angles.angleUnit, angles.firstAngle));
         //telemetry.addData("heading", gyro.getIntegratedZValue());
 
-        float lX = gp.axisValue(GamepadAxis.L_STICK_X);
+        double lX = gp.axisValue(GamepadAxis.L_STICK_X);
         if (Math.abs(lX) < Constants.JOYSTICK_DRIVE_DEADZONE) {
             lX = 0;
         }
 
-        float lY = gp.axisValue(GamepadAxis.L_STICK_Y);
-        if (Math.abs(lY) < Constants.JOYSTICK_DRIVE_DEADZONE) {
-            lY = 0;
+        double rX = gp.axisValue(GamepadAxis.R_STICK_X);
+        if (Math.abs(rX) < Constants.JOYSTICK_DRIVE_DEADZONE) {
+            rX = 0;
         }
 
-        float rY = gp.axisValue(GamepadAxis.R_STICK_Y);
+        double rY = gp.axisValue(GamepadAxis.R_STICK_Y);
         if (Math.abs(rY) < Constants.JOYSTICK_DRIVE_DEADZONE) {
             rY = 0;
         }
 
-        //pbl.newError()
+        double turnSpeed = lX;
+        double moveDir = Math.atan2(rY, rX);
+        double moveSpeed = Math.sqrt(rX*rX + rY*rY);
 
-        Hardware.instance.rightBackDriveMotor.setPower(lY + lX);
-        Hardware.instance.leftFrontDriveMotor.setPower(lY - lX);
-        Hardware.instance.rightFrontDriveMotor.setPower(rY + lX);
-        Hardware.instance.leftBackDriveMotor.setPower(rY - lX);
+        driveBase.setWantedOmega(turnSpeed);
+        driveBase.setWantedSpeedAndMovementAngle(moveSpeed, moveDir);
     }
 
     //----------------------------------------------------------------------------------------------

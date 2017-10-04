@@ -19,7 +19,7 @@ public class TurnUntilConditional extends TurnGyro {
      * @param rightMotor
      * @param gyro
      */
-    public TurnUntilConditional(float deltaBearing, double power, DcMotor leftMotor, DcMotor rightMotor, GyroSensor gyro, Conditional conditional) {
+    public TurnUntilConditional(double deltaBearing, double power, DcMotor leftMotor, DcMotor rightMotor, GyroSensor gyro, Conditional conditional) {
         super(deltaBearing, power, leftMotor, rightMotor, gyro);
         this.conditional = conditional;
     }

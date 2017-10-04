@@ -11,8 +11,8 @@ import org.firstinspires.ftc.team7316.util.Loopable;
  */
 public class TurnAccurate implements Loopable {
 
-    public static final float ERROR_THRESHOLD = 4f;
-    public static final float decreaseAmount = 0.85f;
+    public static final double ERROR_THRESHOLD = 4;
+    public static final double decreaseAmount = 0.85;
     public static final int decreaseStart = 45;
     private double minPower = 0.05; //Constants.DRIVER_MOTOR_DEADZONE + 0.05;
     public double power = 0;
@@ -21,7 +21,7 @@ public class TurnAccurate implements Loopable {
     private DcMotor left, right;
     private GyroSensor gyro;
     private int target;
-    public float sumError, lastError, deltaError;
+    public double sumError, lastError, deltaError;
 
     /**
      *

@@ -13,8 +13,8 @@ import org.firstinspires.ftc.team7316.util.hardware.Hardware;
  */
 public class TurnGyroPID implements Loopable {
 
-    public static final float P = 0.01f, I = 0, D = 0;
-    public static final float ERROR_THRESHOLD = 3, DELTA_THRESHOLD = 0;
+    public static final double P = 0.01f, I = 0, D = 0;
+    public static final double ERROR_THRESHOLD = 3, DELTA_THRESHOLD = 0;
     private static final double maxPower = 0.45;
     private static final double minPower = 0.2;
     public double power = 0;
@@ -24,7 +24,7 @@ public class TurnGyroPID implements Loopable {
     private GyroSensor gyro;
     private ElapsedTime timer;
     private int target;
-    public float sumError, lastError, deltaError;
+    public double sumError, lastError, deltaError;
 
     /**
      *
@@ -53,8 +53,8 @@ public class TurnGyroPID implements Loopable {
 
     @Override
     public void loop() {
-        float deltaTime = (float) timer.time();
-        float error = error();
+        double deltaTime = (double) timer.time();
+        double error = error();
         deltaError = (error - lastError) / deltaTime;
         sumError += deltaError;
 

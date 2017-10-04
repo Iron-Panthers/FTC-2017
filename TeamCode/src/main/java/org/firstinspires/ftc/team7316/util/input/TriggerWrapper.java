@@ -7,7 +7,7 @@ public class TriggerWrapper extends ButtonWrapper {
 
     private boolean value = false;
     private AxisWrapper axisWrapper;
-    private static final float threshold = (float) 0.8;
+    private static final double threshold = (double) 0.8;
 
     public TriggerWrapper(GamepadAxis inputName, GamepadWrapper gpWrapper) {
         super(null, gpWrapper);
