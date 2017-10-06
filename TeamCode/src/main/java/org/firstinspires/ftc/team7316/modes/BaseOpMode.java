@@ -13,7 +13,7 @@ public abstract class BaseOpMode extends OpMode {
     @Override
     public void init() {
         Scheduler.instance.clear();
-        Hardware.setHardwareMap(hardwareMap);
+        //Hardware.setHardwareMap(hardwareMap);
         Hardware.setTelemetry(telemetry);
         onInit();
     }
