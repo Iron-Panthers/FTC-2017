@@ -79,19 +79,19 @@ public class DriveMode extends BaseOpMode {
             lX = 0;
         }
 
+        double lY = gp.axisValue(GamepadAxis.L_STICK_Y);
+        if (Math.abs(lY) < Constants.JOYSTICK_DRIVE_DEADZONE) {
+            lY = 0;
+        }
+
         double rX = gp.axisValue(GamepadAxis.R_STICK_X);
         if (Math.abs(rX) < Constants.JOYSTICK_DRIVE_DEADZONE) {
             rX = 0;
         }
 
-        double rY = gp.axisValue(GamepadAxis.R_STICK_Y);
-        if (Math.abs(rY) < Constants.JOYSTICK_DRIVE_DEADZONE) {
-            rY = 0;
-        }
-
-        double turnSpeed = lX;
-        double moveDir = Math.atan2(rY, rX);
-        double moveSpeed = Math.sqrt(rX*rX + rY*rY);
+        double turnSpeed = rX;
+        double moveDir = Math.atan2(lY, lX);
+        double moveSpeed = Math.sqrt(lX*lX + lY*lY);
 
         driveBase.setWantedOmega(turnSpeed);
         driveBase.setWantedSpeedAndMovementAngle(moveSpeed, moveDir);
