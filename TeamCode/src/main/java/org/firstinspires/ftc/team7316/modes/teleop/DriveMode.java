@@ -1,24 +1,17 @@
 package org.firstinspires.ftc.team7316.modes.teleop;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
-import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.robotcore.external.navigation.Position;
-import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 import org.firstinspires.ftc.team7316.modes.BaseOpMode;
 import org.firstinspires.ftc.team7316.util.Constants;
-import org.firstinspires.ftc.team7316.util.PID;
 import org.firstinspires.ftc.team7316.util.Scheduler;
 import org.firstinspires.ftc.team7316.util.hardware.Hardware;
 import org.firstinspires.ftc.team7316.util.input.GamepadAxis;
 import org.firstinspires.ftc.team7316.util.input.GamepadWrapper;
-import org.firstinspires.ftc.team7316.util.subsystems.MechanumDriveBase;
+import org.firstinspires.ftc.team7316.util.subsystems.MecanumDriveBase;
 
 import java.util.Locale;
 
@@ -29,7 +22,7 @@ public class DriveMode extends BaseOpMode {
     //private ModernRoboticsI2cGyro gyro;
 
     private GamepadWrapper gp;
-    private MechanumDriveBase driveBase;
+    private MecanumDriveBase driveBase;
 
     // State used for updating telemetry
     Orientation angles;
@@ -59,7 +52,7 @@ public class DriveMode extends BaseOpMode {
 
         gp = new GamepadWrapper(gamepad1);
 
-        driveBase = new MechanumDriveBase();
+        driveBase = new MecanumDriveBase();
         Scheduler.instance.addTask(driveBase);
 
         // Set up our telemetry dashboard

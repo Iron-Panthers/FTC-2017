@@ -31,8 +31,6 @@ public class Hardware {
     public DcMotor leftBackDriveMotor;
     public DcMotor rightBackDriveMotor;
 
-    public ModernRoboticsI2cGyro gyro;
-
     public Hardware (HardwareMap map) {
 
         leftFrontDriveMotor = map.dcMotor.get(LEFT_FRONT_DRIVE_MOTOR_NAME);
@@ -48,8 +46,6 @@ public class Hardware {
 
         rightBackDriveMotor = map.dcMotor.get(RIGHT_BACK_DRIVE_MOTOR_NAME);
         rightBackDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        //gyro = map.get(ModernRoboticsI2cGyro.class, GYRO_NAME);
 
         //Scheduler.instance.addTask(frontSideInfaredSensor);
     }
