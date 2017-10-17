@@ -11,6 +11,8 @@ import org.firstinspires.ftc.team7316.util.Scheduler;
 import org.firstinspires.ftc.team7316.util.hardware.Hardware;
 import org.firstinspires.ftc.team7316.util.input.GamepadAxis;
 import org.firstinspires.ftc.team7316.util.input.GamepadWrapper;
+import org.firstinspires.ftc.team7316.util.input.JoystickWrapper;
+import org.firstinspires.ftc.team7316.util.subsystems.GlyphIntake;
 import org.firstinspires.ftc.team7316.util.subsystems.MecanumDriveBase;
 
 import java.util.Locale;
@@ -23,6 +25,7 @@ public class DriveMode extends BaseOpMode {
 
     private GamepadWrapper gp;
     private MecanumDriveBase driveBase;
+    private GlyphIntake glyphIntake;
 
     // State used for updating telemetry
     Orientation angles;
@@ -52,8 +55,13 @@ public class DriveMode extends BaseOpMode {
 
         gp = new GamepadWrapper(gamepad1);
 
+        JoystickWrapper leftStick = new JoystickWrapper(JoystickWrapper.Joystick.RIGHT, gp);
+
         driveBase = new MecanumDriveBase();
+        glyphIntake = new GlyphIntake(Hardware.instance.intakeServo, Hardware.instance.rightIntakeMotor, Hardware.instance.leftIntakeMotor, leftStick);
+
         Scheduler.instance.addTask(driveBase);
+        Scheduler.instance.addTask(glyphIntake);
 
         // Set up our telemetry dashboard
         //composeTelemetry();

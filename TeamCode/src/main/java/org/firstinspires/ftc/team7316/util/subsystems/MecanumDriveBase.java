@@ -69,10 +69,6 @@ public class MecanumDriveBase implements Loopable {
         wantedFlBrSpeed = fL_bRpower;
     }
 
-
-
-
-
     @Override
     public void loop() {
         Hardware.instance.rightBackDriveMotor.setPower(weighting * (wantedFlBrSpeed - wantedTurnSpeed));
