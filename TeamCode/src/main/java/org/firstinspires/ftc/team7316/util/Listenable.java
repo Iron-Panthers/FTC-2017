@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.team7316.util;
 
 import org.firstinspires.ftc.team7316.util.commands.conditions.Conditional;
-import org.firstinspires.ftc.team7316.util.input.ButtonListener;
+import org.firstinspires.ftc.team7316.util.commands.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +10,19 @@ import java.util.List;
  * Created by andrew on 11/29/16.
  */
 public abstract class Listenable implements Loopable, Conditional {
-    private List<ButtonListener> listeners = new ArrayList<>();
+    private List<Command> onPressed = new ArrayList<>();
+    private List<Command> whileHeld = new ArrayList<>();
     private boolean lastValue = false;
 
-    public void addListener(ButtonListener listener) {
-        this.listeners.add(listener);
+    public void onPressed(Command listener) {
+        this.onPressed.add(listener);
+    }
+    public void whileHeld(Command listener) {
+        this.whileHeld.add(listener);
+    }
+
+    public void subLoop() {
+
     }
 
     @Override
@@ -23,16 +31,22 @@ public abstract class Listenable implements Loopable, Conditional {
         subLoop();
 
         if (currentValue && !lastValue) { // Rising edge
-            for (ButtonListener listener: listeners) {
-                listener.onPressed();
+            for (Command listener: onPressed) {
+                listener.start();
             }
-        } else if (!currentValue && lastValue) { // Falling edge
-            for (ButtonListener listener: listeners) {
-                listener.onReleased();
+
+            for (Command listener: whileHeld) {
+                listener.start();
             }
         }
+
+        if (!currentValue && lastValue) { //falling edge
+            for (Command listener: whileHeld) {
+                listener.end();
+            }
+        }
+
         lastValue = currentValue;
     }
 
-    protected abstract void subLoop();
 }

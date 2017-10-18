@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.team7316.util.input;
 
 import org.firstinspires.ftc.team7316.util.Listenable;
+import org.firstinspires.ftc.team7316.util.Scheduler;
+import org.firstinspires.ftc.team7316.util.commands.flow.DifferentSubsystemSequence;
 
 /**
  * A wrapper for a button.
@@ -24,11 +26,6 @@ public class ButtonWrapper extends Listenable {
     }
 
     @Override
-    protected void subLoop() {
-
-    }
-
-    @Override
     public boolean shouldRemove() {
         return false;
     }
@@ -42,4 +39,5 @@ public class ButtonWrapper extends Listenable {
     public boolean state() {
         return gpSource.buttonState(gamepadInput);
     }
+
 }

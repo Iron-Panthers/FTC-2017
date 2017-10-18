@@ -2,12 +2,15 @@ package org.firstinspires.ftc.team7316.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import org.firstinspires.ftc.team7316.util.commands.*;
+import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
 
 /**
  * Created by andrew on 9/15/16.
  */
 public class Scheduler {
 
+    public static final boolean inTeleop = false;
     public static final Scheduler instance = new Scheduler();
 
     private ArrayList<Loopable> tasks = new ArrayList<Loopable>();
@@ -15,9 +18,19 @@ public class Scheduler {
 
     private Scheduler () {}
 
-    public void addTask(Loopable task) {
-        tasks.add(task);
-        hasInitialized.put(task, true);
+    public void addTask(Loopable newTask) {
+        tasks.add(newTask);
+        hasInitialized.put(newTask, false);
+    }
+
+    public void addCommand(Command newTask) {
+        if (newTask.requiredSubystem() == null) {
+            tasks.add(newTask);
+            hasInitialized.put(newTask, false);
+        } else {
+            newTask.requiredSubystem().setCurrentCmd(newTask);
+            hasInitialized.put(newTask, true);
+        }
     }
 
     public void loop() {
@@ -30,10 +43,12 @@ public class Scheduler {
             }
 
             thisTask.loop();
+
             if (thisTask.shouldRemove()) {
                 tasks.remove(i);
                 thisTask.terminate();
-                hasInitialized.remove(thisTask);
+
+
             } else {
                 i++;
             }
