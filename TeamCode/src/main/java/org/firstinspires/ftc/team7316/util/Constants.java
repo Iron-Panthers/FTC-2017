@@ -12,6 +12,11 @@ public class Constants {
     public static final double DISTANCE_PER_REV = 4*Math.PI;
     public static final double COLOR_DIFFERENCE = 2;
 
+    public static final double FORWARD_MOTOR_DEADZONE = 0.2;
+    public static final double STRAFING_MOTOR_DEADZONE = 0.5;
+    public static final double TURNING_MOTOR_DEADZONE = 0.2;
+    public static final double MOTOR_BUFFER_DEADZONE = 0.05;
+
     //Drive Base PID Constants
     public static final double encoderP = 0;
     public static final double encoderI = 0;

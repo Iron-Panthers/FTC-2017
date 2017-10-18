@@ -81,12 +81,17 @@ public class DriveMode extends BaseOpMode {
         if (Math.abs(rX) < Constants.JOYSTICK_DRIVE_DEADZONE) {
             rX = 0;
         }
+        Hardware.log("rX", rX);
+        Hardware.log("lX", lX);
+        Hardware.log("lY", lY);
+
+        //forward/backward deadzone 0.3
 
         double turnSpeed = rX;
-        double moveDir = Math.atan2(lY, lX);
+        double moveDir = Math.atan2(lX, lY);
         double moveSpeed = Math.sqrt(lX*lX + lY*lY);
 
-        driveBase.setWantedOmega(turnSpeed);
+        driveBase.setWantedTurnSpeed(turnSpeed);
         driveBase.setWantedSpeedAndMovementAngle(moveSpeed, moveDir);
     }
 

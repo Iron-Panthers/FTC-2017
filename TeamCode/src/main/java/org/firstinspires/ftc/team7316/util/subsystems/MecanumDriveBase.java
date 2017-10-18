@@ -25,6 +25,8 @@ public class MecanumDriveBase implements Loopable {
 
     private double wantedTurnSpeed = 0;
 
+    private double strafingDeadzone = 0; // this deadzone will change, not turning deadzone
+
     private PID gyroPID;
     private double wantedOmega; //in degrees per second
 
@@ -40,7 +42,7 @@ public class MecanumDriveBase implements Loopable {
         //this.wantedFlBrSpeed = fL_bR_Error();
         //this.wantedFrBlSpeed = fR_bL_Error();
 
-        this.previousTime = System.currentTimeMillis() / 1000;
+        //this.previousTime = System.currentTimeMillis() / 1000;
     }
 
     //setters
@@ -51,10 +53,22 @@ public class MecanumDriveBase implements Loopable {
 
     //something something no pid here
     public void setWantedTurnSpeed(double wantedTurnSpeed) {
+        wantedTurnSpeed = (1 - Constants.TURNING_MOTOR_DEADZONE) * wantedTurnSpeed + Constants.TURNING_MOTOR_DEADZONE;
         this.wantedTurnSpeed = wantedTurnSpeed;
     }
 
+    public void setMotorStrafeDeadzone(double wantedMovementAngle)
+    {
+        double maxDeadzone = Constants.STRAFING_MOTOR_DEADZONE - Constants.FORWARD_MOTOR_DEADZONE;
+        double bufferOffset = Constants.FORWARD_MOTOR_DEADZONE - Constants.MOTOR_BUFFER_DEADZONE;
+        strafingDeadzone = Math.abs(maxDeadzone * Math.sin(wantedMovementAngle)) + bufferOffset;
+    }
+
     public void setWantedSpeedAndMovementAngle(double wantedSpeed, double wantedMovementAngle) {
+
+        setMotorStrafeDeadzone(wantedMovementAngle);
+        wantedSpeed = (1 - strafingDeadzone) * wantedSpeed + strafingDeadzone;
+
         // this  T I D B I T  is for strafing
         double y = wantedSpeed * Math.cos(wantedMovementAngle);
         double x = wantedSpeed * Math.sin(wantedMovementAngle);
@@ -69,16 +83,12 @@ public class MecanumDriveBase implements Loopable {
         wantedFlBrSpeed = fL_bRpower;
     }
 
-
-
-
-
     @Override
     public void loop() {
-        Hardware.instance.rightBackDriveMotor.setPower(weighting * (wantedFlBrSpeed - wantedTurnSpeed));
-        Hardware.instance.leftFrontDriveMotor.setPower(weighting * (wantedFlBrSpeed + wantedTurnSpeed));
-        Hardware.instance.rightFrontDriveMotor.setPower(weighting * (wantedFrBlSpeed - wantedTurnSpeed));
-        Hardware.instance.leftBackDriveMotor.setPower(weighting * (wantedFrBlSpeed + wantedTurnSpeed));
+        Hardware.instance.rightBackDriveMotor.setPower(weighting * (wantedFlBrSpeed + wantedTurnSpeed));
+        Hardware.instance.leftFrontDriveMotor.setPower(weighting * (wantedFlBrSpeed - wantedTurnSpeed));
+        Hardware.instance.rightFrontDriveMotor.setPower(weighting * (wantedFrBlSpeed + wantedTurnSpeed));
+        Hardware.instance.leftBackDriveMotor.setPower(weighting * (wantedFrBlSpeed - wantedTurnSpeed));
     }
 
     @Override
