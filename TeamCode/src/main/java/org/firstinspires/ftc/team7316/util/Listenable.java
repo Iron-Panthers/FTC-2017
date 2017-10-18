@@ -21,9 +21,14 @@ public abstract class Listenable implements Loopable, Conditional {
         this.whileHeld.add(listener);
     }
 
+    public void subLoop() {
+
+    }
+
     @Override
     public void loop() {
         boolean currentValue = state();
+        subLoop();
 
         if (currentValue && !lastValue) { // Rising edge
             for (Command listener: onPressed) {
