@@ -3,7 +3,7 @@ package org.firstinspires.ftc.team7316.modes;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.team7316.util.Scheduler;
-import org.firstinspires.ftc.team7316.util.hardware.Hardware;
+import org.firstinspires.ftc.team7316.util.Hardware;
 
 /**
  * OpMode that initializes Hardware and Scheduler for you. Please use this instead of rewriting the

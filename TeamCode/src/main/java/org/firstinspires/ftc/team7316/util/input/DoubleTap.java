@@ -3,7 +3,7 @@ package org.firstinspires.ftc.team7316.util.input;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.team7316.util.Listenable;
-import org.firstinspires.ftc.team7316.util.hardware.Hardware;
+import org.firstinspires.ftc.team7316.util.Hardware;
 
 /**
  * Created by Maxim on 1/31/2017.

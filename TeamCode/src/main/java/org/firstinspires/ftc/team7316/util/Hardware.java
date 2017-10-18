@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.team7316.util.hardware;
+package org.firstinspires.ftc.team7316.util;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
 import com.qualcomm.robotcore.hardware.DcMotor;
