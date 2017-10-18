@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.team7316.util.Scheduler;
 import org.firstinspires.ftc.team7316.util.Hardware;
+import org.firstinspires.ftc.team7316.util.input.OI;
+import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 /**
  * OpMode that initializes Hardware and Scheduler for you. Please use this instead of rewriting the
@@ -15,6 +17,8 @@ public abstract class BaseOpMode extends OpMode {
         Scheduler.instance.clear();
         Hardware.setHardwareMap(hardwareMap);
         Hardware.setTelemetry(telemetry);
+        Subsystems.createSubsystems();
+        OI.createInputs();
         onInit();
     }
 

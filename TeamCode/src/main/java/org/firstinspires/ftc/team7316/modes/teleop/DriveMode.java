@@ -21,9 +21,6 @@ public class DriveMode extends BaseOpMode {
     //private BNO055IMU imu;
     //private ModernRoboticsI2cGyro gyro;
 
-    private GamepadWrapper gp;
-    private MecanumDriveBase driveBase;
-
     // State used for updating telemetry
     Orientation angles;
     Acceleration gravity;
@@ -31,12 +28,6 @@ public class DriveMode extends BaseOpMode {
     @Override
     public void onInit() {
         Hardware.setHardwareMap(hardwareMap);
-
-
-        gp = new GamepadWrapper(gamepad1);
-
-        driveBase = new MecanumDriveBase();
-        Scheduler.instance.addTask(driveBase);
 
         // Set up our telemetry dashboard
         //composeTelemetry();
@@ -49,33 +40,6 @@ public class DriveMode extends BaseOpMode {
     public void onLoop() {
         //telemetry.addData("heading", formatAngle(angles.angleUnit, angles.firstAngle));
         //telemetry.addData("heading", gyro.getIntegratedZValue());
-
-        double lX = gp.axisValue(GamepadAxis.L_STICK_X);
-        if (Math.abs(lX) < Constants.JOYSTICK_DRIVE_DEADZONE) {
-            lX = 0;
-        }
-
-        double lY = gp.axisValue(GamepadAxis.L_STICK_Y);
-        if (Math.abs(lY) < Constants.JOYSTICK_DRIVE_DEADZONE) {
-            lY = 0;
-        }
-
-        double rX = gp.axisValue(GamepadAxis.R_STICK_X);
-        if (Math.abs(rX) < Constants.JOYSTICK_DRIVE_DEADZONE) {
-            rX = 0;
-        }
-        Hardware.log("rX", rX);
-        Hardware.log("lX", lX);
-        Hardware.log("lY", lY);
-
-        //forward/backward deadzone 0.3
-
-        double turnSpeed = rX;
-        double moveDir = Math.atan2(lX, lY);
-        double moveSpeed = Math.sqrt(lX*lX + lY*lY);
-
-        driveBase.setWantedTurnSpeed(turnSpeed);
-        driveBase.setWantedSpeedAndMovementAngle(moveSpeed, moveDir);
     }
 
     //----------------------------------------------------------------------------------------------

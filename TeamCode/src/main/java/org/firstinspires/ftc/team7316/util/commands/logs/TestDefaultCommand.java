@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.team7316.util.commands;
+package org.firstinspires.ftc.team7316.util.commands.logs;
 
 /**
  * Created by andrew on 10/18/17.

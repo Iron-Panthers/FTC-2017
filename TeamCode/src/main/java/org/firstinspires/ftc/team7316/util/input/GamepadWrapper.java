@@ -9,12 +9,9 @@ import org.firstinspires.ftc.team7316.util.Scheduler;
 /**
  * Created by Wesley on 9/15/16.
  */
-public class GamepadWrapper implements Loopable {
+public class GamepadWrapper {
 
     private Gamepad gamepad;
-
-    private double multLeft = 1;
-    private double multRight = 1;
 
     public JoystickWrapper left_stick, right_stick;
     public AxisWrapper left_axis_y, right_axis_y;
@@ -87,9 +84,9 @@ public class GamepadWrapper implements Loopable {
     public double axisValue(GamepadAxis axisIndex) {
         switch (axisIndex) {
             case L_STICK_X: return gamepad.left_stick_x;
-            case L_STICK_Y: return deadzone(-gamepad.left_stick_y, multLeft);
+            case L_STICK_Y: return deadzone(-gamepad.left_stick_y);
             case R_STICK_X: return gamepad.right_stick_x;
-            case R_STICK_Y: return deadzone(-gamepad.right_stick_y, multRight);
+            case R_STICK_Y: return deadzone(-gamepad.right_stick_y);
             case L_TRIGGER: return gamepad.left_trigger;
             case R_TRIGGER: return gamepad.right_trigger;
         }
@@ -101,11 +98,11 @@ public class GamepadWrapper implements Loopable {
         return value > 0 ? result : -result;
     }
 
-    private double deadzone(double value, double mult) {
+    private double deadzone(double value) {
         if (Math.abs(value) < Constants.JOYSTICK_DRIVE_DEADZONE) {
             return 0;
         } else {
-            double slope = (1 - Constants.DRIVER_MOTOR_DEADZONE) / (1 - Constants.JOYSTICK_DRIVE_DEADZONE) * mult;
+            double slope = (1 - Constants.DRIVER_MOTOR_DEADZONE) / (1 - Constants.JOYSTICK_DRIVE_DEADZONE);
             double preval = slope * (Math.abs(value) - Constants.JOYSTICK_DRIVE_DEADZONE) + Constants.DRIVER_MOTOR_DEADZONE;
 
             if (value > 0) {
@@ -115,35 +112,5 @@ public class GamepadWrapper implements Loopable {
             }
 
         }
-    }
-
-    @Override
-    public void init() {
-        multLeft = 1;
-        multRight = 1;
-    }
-
-    @Override
-    public void loop() {
-        if (this.right_bumper.state()) {
-            multRight = 0.1;
-        } else {
-            multRight = 1;
-        }
-
-        if (this.left_bumper.state()) {
-            multLeft = 0.1;
-        } else {
-            multLeft = 1;
-        }
-    }
-
-    @Override
-    public boolean shouldRemove() {
-        return false;
-    }
-
-    @Override
-    public void terminate() {
     }
 }

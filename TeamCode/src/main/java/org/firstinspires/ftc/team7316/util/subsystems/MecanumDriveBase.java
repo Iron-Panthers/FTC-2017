@@ -7,13 +7,15 @@ import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Loopable;
 import org.firstinspires.ftc.team7316.util.PID;
 import org.firstinspires.ftc.team7316.util.Util;
+import org.firstinspires.ftc.team7316.util.commands.BlankCommand;
+import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.hardware.Hardware;
 
 /**
  * Created by andrew on 9/12/17.
  */
 
-public class MecanumDriveBase implements Loopable {
+public class MecanumDriveBase extends Subsystem {
 
     //all speed in ticks per second
 
@@ -34,6 +36,16 @@ public class MecanumDriveBase implements Loopable {
     private long previousTime = 0; //in seconds
 
     private double weighting = 0.75;
+
+    @Override
+    public Command defaultAutoCommand() {
+        return new BlankCommand(this);
+    }
+
+    @Override
+    public Command defaultTeleopCommand() {
+        return null;
+    }
 
     @Override
     public void init() {
