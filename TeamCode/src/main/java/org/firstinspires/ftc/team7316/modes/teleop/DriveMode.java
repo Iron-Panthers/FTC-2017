@@ -7,6 +7,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.team7316.modes.BaseOpMode;
 import org.firstinspires.ftc.team7316.util.Hardware;
+import org.firstinspires.ftc.team7316.util.input.ButtonWrapper;
 import org.firstinspires.ftc.team7316.util.input.GamepadWrapper;
 
 import java.util.Locale;
@@ -18,6 +19,7 @@ public class DriveMode extends BaseOpMode {
     //private ModernRoboticsI2cGyro gyro;
 
     private GamepadWrapper gp;
+    private ButtonWrapper button1;
 
     // State used for updating telemetry
     Orientation angles;
@@ -28,6 +30,7 @@ public class DriveMode extends BaseOpMode {
         Hardware.setHardwareMap(hardwareMap);
 
         gp = new GamepadWrapper(gamepad1);
+
     }
 
     @Override

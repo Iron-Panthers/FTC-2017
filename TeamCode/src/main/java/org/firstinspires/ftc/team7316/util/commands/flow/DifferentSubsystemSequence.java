@@ -35,7 +35,7 @@ public class DifferentSubsystemSequence implements Loopable {
     public void loop() {
         if (cmds[index].shouldRemove()) {
             index++;
-            cmds[index].requiredSubystem().setCurrentCmd(cmds[index]);
+            cmds[index].start();
         }
     }
 

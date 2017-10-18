@@ -7,7 +7,7 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
  * Created by andrew on 10/17/17.
  */
 
-public class SingleSubsystemSequence implements Command {
+public class SingleSubsystemSequence extends Command {
 
     private Command[] cmds;
     private int index = 0;
@@ -30,7 +30,7 @@ public class SingleSubsystemSequence implements Command {
     }
 
     @Override
-    public void init() {
+    public void onInit() {
         cmds[index].init();
     }
 
@@ -47,7 +47,7 @@ public class SingleSubsystemSequence implements Command {
     }
 
     @Override
-    public boolean shouldRemove() {
+    public boolean shouldEnd() {
         return index >= cmds.length;
     }
 
