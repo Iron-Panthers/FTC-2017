@@ -40,14 +40,4 @@ public class ButtonWrapper extends Listenable {
         return gpSource.buttonState(gamepadInput);
     }
 
-    public static void main(String[] args) {
-
-        DifferentSubsystemSequence sequence = new DifferentSubsystemSequence(new );
-        Scheduler.instance.addTask(sequence);
-
-        for (int i = 0; i < 10; i++) {
-            Scheduler.instance.loop();
-        }
-
-    }
 }
