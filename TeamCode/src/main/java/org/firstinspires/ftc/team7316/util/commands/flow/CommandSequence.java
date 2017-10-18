@@ -3,7 +3,6 @@ package org.firstinspires.ftc.team7316.util.commands.flow;
 import android.util.Log;
 
 import org.firstinspires.ftc.team7316.util.Loopable;
-import org.firstinspires.ftc.team7316.util.hardware.Hardware;
 
 /**
  * Created by andrew on 10/28/16.
@@ -26,8 +25,6 @@ public class CommandSequence implements Loopable {
     public void loop() {
         Loopable cmd = cmds[index];
         cmd.loop();
-        Log.i(Hardware.tag, String.valueOf(cmd.getClass()));
-        Log.i(Hardware.tag, String.valueOf(index));
 
         if (cmds[index].shouldRemove()) {
             cmds[index].terminate();
