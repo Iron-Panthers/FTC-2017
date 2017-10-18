@@ -2,12 +2,14 @@ package org.firstinspires.ftc.team7316.util.commands.flow;
 
 import android.util.Log;
 
+import org.firstinspires.ftc.team7316.util.commands.*;
 import org.firstinspires.ftc.team7316.util.Loopable;
+import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
 
 /**
  * Created by andrew on 10/28/16.
  */
-public class CommandSequence implements Loopable {
+public class CommandSequence implements Command {
     private Loopable[] cmds;
     private int index = 0;
 
@@ -23,7 +25,8 @@ public class CommandSequence implements Loopable {
 
     @Override
     public void loop() {
-        Loopable cmd = cmds[index];
+        Loopable cmd = cmds[index
+                ];
         cmd.loop();
 
         if (cmds[index].shouldRemove()) {
@@ -43,5 +46,10 @@ public class CommandSequence implements Loopable {
     @Override
     public void terminate() {
 
+    }
+
+    @Override
+    public Subsystem requiredSubystem() {
+        return null;
     }
 }

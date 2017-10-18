@@ -2,6 +2,7 @@ package org.firstinspires.ftc.team7316.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import org.firstinspires.ftc.team7316.util.commands.*;
 
 /**
  * Created by andrew on 9/15/16.
@@ -10,20 +11,33 @@ public class Scheduler {
 
     public static final Scheduler instance = new Scheduler();
 
-    private ArrayList<Loopable> tasks = new ArrayList<Loopable>();
-    private HashMap<Loopable, Boolean> hasInitialized = new HashMap<>();
+    private ArrayList<Command> tasks = new ArrayList<Command>();
+    private HashMap<Command, Boolean> hasInitialized = new HashMap<>();
 
     private Scheduler () {}
 
-    public void addTask(Loopable task) {
-        tasks.add(task);
-        hasInitialized.put(task, true);
+    public void addTask(Command newTask) {
+        int i = 0;
+        for (Command task : tasks) {
+            if (task.requiredSubystem() == newTask.requiredSubystem()) {
+                tasks.remove(i);
+                task.terminate();
+                hasInitialized.remove(task);
+                tasks.add(newTask);
+                hasInitialized.put(newTask, true);
+                return;
+            }
+            i++;
+        }
+
+        tasks.add(newTask);
+        hasInitialized.put(newTask, true);
     }
 
     public void loop() {
         int i = 0;
         while (i < tasks.size()) {
-            Loopable thisTask = tasks.get(i);
+            Command thisTask = tasks.get(i);
             if (hasInitialized.get(thisTask)) {
                 thisTask.init();
                 hasInitialized.put(thisTask, false);
@@ -34,6 +48,7 @@ public class Scheduler {
                 tasks.remove(i);
                 thisTask.terminate();
                 hasInitialized.remove(thisTask);
+                addTask(thisTask.requiredSubystem().defaultTeleopCommand());
             } else {
                 i++;
             }
