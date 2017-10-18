@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.team7316.util;
 
 /**
- * Created by andrew on 9/15/16.
+ * Goes in a scheduler
  */
 public interface Loopable {
 
