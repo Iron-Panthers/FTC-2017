@@ -9,9 +9,10 @@ import org.firstinspires.ftc.team7316.util.commands.*;
  * Created by andrew on 10/17/17.
  */
 
-public abstract class Subsystem implements Loopable {
+public abstract class Subsystem {
 
-    private Command currentCmd;
+    public Command currentCmd;
+    public boolean needsDefault = true;
 
     public abstract Command defaultAutoCommand();
     public abstract Command defaultTeleopCommand();
@@ -24,28 +25,4 @@ public abstract class Subsystem implements Loopable {
         }
     }
 
-    public void setCurrentCmd(Command newCmd) {
-        this.currentCmd.terminate();
-        this.currentCmd = newCmd;
-        this.currentCmd.init();
-    }
-
-    @Override
-    public void init() {
-        currentCmd = getDefaultCommand();
-    }
-
-    @Override
-    public void loop() {
-        currentCmd.loop();
-
-        if (currentCmd.shouldRemove()) {
-            setCurrentCmd(getDefaultCommand());
-        }
-    }
-
-    @Override
-    public boolean shouldRemove() {
-        return false;
-    }
 }
