@@ -24,6 +24,7 @@ public class DriveMode extends BaseOpMode {
     //private ModernRoboticsI2cGyro gyro;
 
     private GamepadWrapper gp;
+    private GamepadWrapper gp2;
     private MecanumDriveBase driveBase;
     private GlyphIntake glyphIntake;
 
@@ -54,11 +55,11 @@ public class DriveMode extends BaseOpMode {
 
 
         gp = new GamepadWrapper(gamepad1);
+        gp2 = new GamepadWrapper(gamepad2);
 
-        JoystickWrapper leftStick = new JoystickWrapper(JoystickWrapper.Joystick.RIGHT, gp);
 
         driveBase = new MecanumDriveBase();
-        glyphIntake = new GlyphIntake(Hardware.instance.intakeServo, Hardware.instance.rightIntakeMotor, Hardware.instance.leftIntakeMotor, leftStick);
+        glyphIntake = new GlyphIntake(Hardware.instance.intakeServo, Hardware.instance.rightIntakeMotor, Hardware.instance.leftIntakeMotor, gp2.left_stick, gp2.right_stick);
 
         Scheduler.instance.addTask(driveBase);
         Scheduler.instance.addTask(glyphIntake);
@@ -91,11 +92,13 @@ public class DriveMode extends BaseOpMode {
         }
 
         double turnSpeed = rX;
-        double moveDir = Math.atan2(lY, lX);
+        double moveDir = Math.atan2(lX, lY);
         double moveSpeed = Math.sqrt(lX*lX + lY*lY);
 
         driveBase.setWantedOmega(turnSpeed);
         driveBase.setWantedSpeedAndMovementAngle(moveSpeed, moveDir);
+
+        Hardware.log("servo position", Hardware.instance.intakeServo.getPosition());
     }
 
     //----------------------------------------------------------------------------------------------

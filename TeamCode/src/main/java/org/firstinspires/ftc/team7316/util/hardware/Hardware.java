@@ -27,10 +27,11 @@ public class Hardware {
 
     private static final String RIGHT_INTAKE_MOTOR_NAME = "rim";
     private static final String LEFT_INTAKE_MOTOR_NAME = "lim";
-
-    private static final String GYRO_NAME = "gyro";
+    private static final String INTAKE_LIFT_MOTOR_NAME = "ilm";
 
     private static final String INTAKE_SERVO_NAME = "is";
+
+    private static final String GYRO_NAME = "gyro";
 
     public DcMotor leftFrontDriveMotor;
     public DcMotor rightFrontDriveMotor;

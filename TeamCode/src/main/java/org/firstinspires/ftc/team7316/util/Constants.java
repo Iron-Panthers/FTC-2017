@@ -12,10 +12,15 @@ public class Constants {
     public static final double DISTANCE_PER_REV = 4*Math.PI;
     public static final double COLOR_DIFFERENCE = 2;
 
+    public static final double INTAKE_SERVO_MAX_POSITION = 0.85;
+    public static final double INTAKE_SERVO_MIN_POSITION = 0.55;
+
     //Drive Base PID Constants
     public static final double encoderP = 0;
     public static final double encoderI = 0;
     public static final double encoderD = 0;
+
+
 
     public static final double gyroP = 0;
     public static final double gyroI = 0;
