@@ -9,7 +9,7 @@ public class Constants {
     public static final double DRIVER_MOTOR_DEADZONE = 0.18;
     public static final int ENCODER_TICK_PER_REV = 1120;
     public static final int DRIVE_RPM_MAX = 280; // can change later actual max 320
-    public static final double DISTANCE_PER_REV = 4*Math.PI;
+    public static final double DISTANCE_PER_REV = 4 * Math.PI;
     public static final double COLOR_DIFFERENCE = 2;
 
     public static final double INTAKE_SERVO_MAX_POSITION = 0.85;
