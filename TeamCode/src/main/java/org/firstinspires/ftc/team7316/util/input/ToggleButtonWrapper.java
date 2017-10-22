@@ -38,7 +38,7 @@ public class ToggleButtonWrapper extends ButtonWrapper {
     }
 
     @Override
-    public void terminate() {
+    public void end() {
 
     }
 }

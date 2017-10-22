@@ -51,7 +51,7 @@ public class Hardware {
 
         //gyro = map.get(ModernRoboticsI2cGyro.class, GYRO_NAME);
 
-        //Scheduler.instance.addTask(frontSideInfaredSensor);
+        //Scheduler.instance.add(frontSideInfaredSensor);
     }
 
     public static void setHardwareMap(HardwareMap map) {

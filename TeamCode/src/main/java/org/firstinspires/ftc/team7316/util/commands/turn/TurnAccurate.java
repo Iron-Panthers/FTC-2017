@@ -4,12 +4,12 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.GyroSensor;
 
 import org.firstinspires.ftc.team7316.util.Constants;
-import org.firstinspires.ftc.team7316.util.Loopable;
+import org.firstinspires.ftc.team7316.util.commands.*;
 
 /**
  * Created by andrew on 1/10/17.
  */
-public class TurnAccurate implements Loopable {
+public class TurnAccurate extends Command {
 
     public static final float ERROR_THRESHOLD = 4f;
     public static final float decreaseAmount = 0.85f;
@@ -70,8 +70,7 @@ public class TurnAccurate implements Loopable {
         return Math.abs(error()) <= ERROR_THRESHOLD;
     }
 
-    @Override
-    public void terminate() {
+    @Override     public void end() {
         left.setPower(0);
         right.setPower(0);
     }

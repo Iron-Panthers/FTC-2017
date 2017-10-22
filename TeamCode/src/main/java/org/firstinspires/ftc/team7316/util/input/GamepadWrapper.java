@@ -3,13 +3,13 @@ package org.firstinspires.ftc.team7316.util.input;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.team7316.util.Constants;
-import org.firstinspires.ftc.team7316.util.Loopable;
+import org.firstinspires.ftc.team7316.util.commands.*;
 import org.firstinspires.ftc.team7316.util.Scheduler;
 
 /**
  * Created by wayne on 9/15/16.
  */
-public class GamepadWrapper implements Loopable {
+public class GamepadWrapper extends Command {
 
     private Gamepad gamepad;
 
@@ -54,18 +54,18 @@ public class GamepadWrapper implements Loopable {
 
         this.r_trigger = new AxisWrapper(GamepadAxis.L_TRIGGER, this);
 
-        Scheduler.instance.addTask(a_button);
-        Scheduler.instance.addTask(b_button);
-        Scheduler.instance.addTask(x_button);
-        Scheduler.instance.addTask(y_button);
-        Scheduler.instance.addTask(dpLeftWrapper);
-        Scheduler.instance.addTask(dp_right);
-        Scheduler.instance.addTask(dp_down);
-        Scheduler.instance.addTask(dp_up);
-        Scheduler.instance.addTask(left_bumper);
-        Scheduler.instance.addTask(right_bumper);
-        Scheduler.instance.addTask(leftTriggerWrapper);
-        Scheduler.instance.addTask(rightTriggerWrapper);
+        Scheduler.instance.add(a_button);
+        Scheduler.instance.add(b_button);
+        Scheduler.instance.add(x_button);
+        Scheduler.instance.add(y_button);
+        Scheduler.instance.add(dpLeftWrapper);
+        Scheduler.instance.add(dp_right);
+        Scheduler.instance.add(dp_down);
+        Scheduler.instance.add(dp_up);
+        Scheduler.instance.add(left_bumper);
+        Scheduler.instance.add(right_bumper);
+        Scheduler.instance.add(leftTriggerWrapper);
+        Scheduler.instance.add(rightTriggerWrapper);
     }
 
     public boolean buttonState(GamepadButton buttonIndex) {
@@ -144,6 +144,6 @@ public class GamepadWrapper implements Loopable {
     }
 
     @Override
-    public void terminate() {
+    public void end() {
     }
 }

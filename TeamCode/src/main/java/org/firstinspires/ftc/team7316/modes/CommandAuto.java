@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.team7316.modes;
 
-import org.firstinspires.ftc.team7316.util.Loopable;
 import org.firstinspires.ftc.team7316.util.Scheduler;
+import org.firstinspires.ftc.team7316.util.commands.*;
 
 /**
  * Used for those autonomodes that have a single command (basically a lot of files)
@@ -9,12 +9,12 @@ import org.firstinspires.ftc.team7316.util.Scheduler;
  */
 public abstract class CommandAuto extends BaseOpMode {
 
-    protected abstract Loopable getTask();
+    protected abstract Command getTask();
 
     @Override
     public void init() {
         super.init();
-        Scheduler.instance.addTask(getTask());
+        Scheduler.instance.add(getTask());
     }
 
     @Override

@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.team7316.util.subsystems;
 
 import org.firstinspires.ftc.team7316.util.Constants;
-import org.firstinspires.ftc.team7316.util.Loopable;
+import org.firstinspires.ftc.team7316.util.commands.*;
 import org.firstinspires.ftc.team7316.util.PID;
 import org.firstinspires.ftc.team7316.util.Hardware;
 
@@ -9,7 +9,7 @@ import org.firstinspires.ftc.team7316.util.Hardware;
  * Created by andrew on 9/12/17.
  */
 
-public class MechanumDriveBase implements Loopable {
+public class MechanumDriveBase extends Command {
 
     private PID fR_bL_PID; //front right and back left PID engine
     private PID fL_bR_PID; //front left and back right PID engine;
@@ -96,8 +96,7 @@ public class MechanumDriveBase implements Loopable {
         return false;
     }
 
-    @Override
-    public void terminate() {
+    @Override     public void end() {
         Hardware.instance.rightBackDriveMotor.setPower(0);
         Hardware.instance.leftBackDriveMotor.setPower(0);
         Hardware.instance.rightFrontDriveMotor.setPower(0);

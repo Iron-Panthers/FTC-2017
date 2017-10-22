@@ -1,13 +1,12 @@
 package org.firstinspires.ftc.team7316.util.commands;
 
-
-import org.firstinspires.ftc.team7316.util.Loopable;
+import org.firstinspires.ftc.team7316.util.commands.*;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
 
 import java.util.ArrayList;
 
 /**
- * A Loopable with a required subsystem
+ * A Command with a required subsystem
  */
 
 public abstract class Command  {
