@@ -9,7 +9,7 @@ public class AutoCodes {
     /*public static SimultaneousCommands robotDriveDistanceAccurate(double distance, double power) {
         DriveDistanceAccurate leftMotor = new DriveDistanceAccurate(Constants.distanceToTicks(distance), power, Hardware.instance.leftDriveMotor);
         DriveDistanceAccurate rightMotor = new DriveDistanceAccurate(Constants.distanceToTicks(distance), power, Hardware.instance.rightDriveMotor);
-        Loopable[] both = {leftMotor, rightMotor};
+        Command[] both = {leftMotor, rightMotor};
 
         SimultaneousCommands bothDrive = new SimultaneousCommands(both);
         return bothDrive;

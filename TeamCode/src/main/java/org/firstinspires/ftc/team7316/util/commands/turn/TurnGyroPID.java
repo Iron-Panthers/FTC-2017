@@ -4,14 +4,14 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.team7316.util.Loopable;
+import org.firstinspires.ftc.team7316.util.commands.*;
 import org.firstinspires.ftc.team7316.util.Hardware;
 
 /**
  * Turn the robot a specific distance using PID. Stops when the correction speed is under a threshold and
  * the robot's distance from the correct angle is also under a threshold.
  */
-public class TurnGyroPID implements Loopable {
+public class TurnGyroPID extends Command {
 
     public static final double P = 0.01f, I = 0, D = 0;
     public static final double ERROR_THRESHOLD = 3, DELTA_THRESHOLD = 0;
@@ -81,8 +81,7 @@ public class TurnGyroPID implements Loopable {
         return Math.abs(error()) <= ERROR_THRESHOLD && Math.abs(deltaError) <= DELTA_THRESHOLD;
     }
 
-    @Override
-    public void terminate() {
+    @Override     public void end() {
         left.setPower(0);
         right.setPower(0);
     }

@@ -2,6 +2,7 @@ package org.firstinspires.ftc.team7316.util;
 
 import org.firstinspires.ftc.team7316.util.commands.conditions.Conditional;
 import org.firstinspires.ftc.team7316.util.commands.*;
+import org.firstinspires.ftc.team7316.util.commands.flow.WhileHeldWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,15 +10,15 @@ import java.util.List;
 /**
  * Created by andrew on 11/29/16.
  */
-public abstract class Listenable implements Loopable, Conditional {
+public abstract class Listenable extends Command implements Conditional {
     private List<Command> onPressed = new ArrayList<>();
-    private List<Command> whileHeld = new ArrayList<>();
+    private List<WhileHeldWrapper> whileHeld = new ArrayList<>();
     private boolean lastValue = false;
 
     public void onPressed(Command listener) {
         this.onPressed.add(listener);
     }
-    public void whileHeld(Command listener) {
+    public void whileHeld(WhileHeldWrapper listener) {
         this.whileHeld.add(listener);
     }
 
@@ -31,18 +32,18 @@ public abstract class Listenable implements Loopable, Conditional {
         subLoop();
 
         if (currentValue && !lastValue) { // Rising edge
-            for (Command listener: onPressed) {
-                listener.start();
+            for (Command listener : onPressed) {
+                Scheduler.instance.add(listener);
             }
 
-            for (Command listener: whileHeld) {
-                listener.start();
+            for (WhileHeldWrapper listener : whileHeld) {
+                Scheduler.instance.add(listener);
             }
         }
 
         if (!currentValue && lastValue) { //falling edge
-            for (Command listener: whileHeld) {
-                listener.end();
+            for (WhileHeldWrapper listener: whileHeld) {
+                listener.needsEnd = true;
             }
         }
 

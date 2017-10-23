@@ -3,12 +3,12 @@ package org.firstinspires.ftc.team7316.util.commands.turn;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.GyroSensor;
 
-import org.firstinspires.ftc.team7316.util.Loopable;
+import org.firstinspires.ftc.team7316.util.commands.*;
 
 /**
  * Created by andrew on 11/1/16.
  */
-public class TurnGyro implements Loopable {
+public class TurnGyro extends Command {
 
     protected DcMotor leftMotor;
     protected DcMotor rightMotor;
@@ -64,8 +64,7 @@ public class TurnGyro implements Loopable {
         }
     }
 
-    @Override
-    public void terminate() {
+    @Override     public void end() {
         this.leftMotor.setPower(0);
         this.rightMotor.setPower(0);
     }

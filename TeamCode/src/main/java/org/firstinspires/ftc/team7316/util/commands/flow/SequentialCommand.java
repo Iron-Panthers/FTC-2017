@@ -1,26 +1,25 @@
 package org.firstinspires.ftc.team7316.util.commands.flow;
 
-import org.firstinspires.ftc.team7316.util.commands.*;
+import org.firstinspires.ftc.team7316.modes.CommandAuto;
 import org.firstinspires.ftc.team7316.util.Scheduler;
 import org.firstinspires.ftc.team7316.util.commands.*;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 /**
- * Created by andrew on 11/2/16.
+ * Created by andrew on 10/21/17.
  */
-public class SimultaneousCommands extends Command {
+
+public class SequentialCommand extends Command {
 
     private Command[] cmds;
+    private int index = 0;
 
-    public SimultaneousCommands(Command... cmds) {
-        this.cmds = cmds;
+    public SequentialCommand(Command... commands) {
+        this.cmds = commands;
 
-        for (Command cmd : this.cmds) {
-            for (Subsystem subsystem : cmd.requiredSubsystems) {
-                this.requires(subsystem);
+        for (Command cmd : commands) {
+            for (Subsystem sub : cmd.requiredSubsystems) {
+                this.requires(sub);
             }
         }
     }
@@ -31,25 +30,28 @@ public class SimultaneousCommands extends Command {
             subsystem.needsDefault = false;
         }
 
-        for (Command cmd : this.cmds) {
-            Scheduler.instance.add(cmd);
+        if (index < cmds.length) {
+            Command cmd = cmds[index];
             cmd.shouldReplace = false;
+            Scheduler.instance.add(cmd);
         }
     }
 
     @Override
     public void loop() {
+        if (cmds[index].shouldRemove()) {
+            index++;
+            if (index < cmds.length) {
+                Command cmd = cmds[index];
+                cmd.shouldReplace = false;
+                Scheduler.instance.add(cmd);
+            }
+        }
     }
 
     @Override
     public boolean shouldRemove() {
-        for (Command cmd : cmds) {
-            if (!cmd.shouldRemove()) {
-                return false;
-            }
-        }
-
-        return true;
+        return index >= cmds.length;
     }
 
     @Override
@@ -61,5 +63,4 @@ public class SimultaneousCommands extends Command {
             cmd.shouldReplace = true;
         }
     }
-
 }

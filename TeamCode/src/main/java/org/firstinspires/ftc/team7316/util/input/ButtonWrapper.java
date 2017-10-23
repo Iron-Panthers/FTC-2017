@@ -1,8 +1,6 @@
 package org.firstinspires.ftc.team7316.util.input;
 
 import org.firstinspires.ftc.team7316.util.Listenable;
-import org.firstinspires.ftc.team7316.util.Scheduler;
-import org.firstinspires.ftc.team7316.util.commands.flow.DifferentSubsystemSequence;
 
 /**
  * A wrapper for a button.
@@ -31,7 +29,7 @@ public class ButtonWrapper extends Listenable {
     }
 
     @Override
-    public void terminate() {
+    public void end() {
 
     }
 

@@ -46,7 +46,7 @@ public class DoubleTap extends Listenable {
     }
 
     @Override
-    public void terminate() {
+    public void end() {
 
     }
 

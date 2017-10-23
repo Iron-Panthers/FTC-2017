@@ -3,13 +3,13 @@ package org.firstinspires.ftc.team7316.util.commands.drive;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.team7316.util.Loopable;
+import org.firstinspires.ftc.team7316.util.commands.*;
 import org.firstinspires.ftc.team7316.util.Util;
 
 /**
  * Drive a motor for an amount of time. Increase power linearly over time between starting and ending.
  */
-public class DriveMotorAccelerate implements Loopable {
+public class DriveMotorAccelerate extends Command {
 
     private DcMotor motor;
     private ElapsedTime elapsedTime;
@@ -40,7 +40,7 @@ public class DriveMotorAccelerate implements Loopable {
     }
 
     @Override
-    public void terminate() {
+    public void end() {
         motor.setPower(0);
     }
 }

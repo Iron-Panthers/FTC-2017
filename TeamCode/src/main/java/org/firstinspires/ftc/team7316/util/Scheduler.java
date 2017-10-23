@@ -10,54 +10,72 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
  */
 public class Scheduler {
 
-    public static final boolean inTeleop = false;
+    public static boolean inTeleop = false;
     public static final Scheduler instance = new Scheduler();
 
-    private ArrayList<Loopable> tasks = new ArrayList<Loopable>();
-    private HashMap<Loopable, Boolean> hasInitialized = new HashMap<>();
+    private ArrayList<Command> commands = new ArrayList<>();
+    private ArrayList<Command> newCommandBuffer = new ArrayList<>();
 
     private Scheduler () {}
 
-    public void addTask(Loopable newTask) {
-        tasks.add(newTask);
-        hasInitialized.put(newTask, false);
-    }
-
-    public void addCommand(Command newTask) {
-        if (newTask.requiredSubystem() == null) {
-            tasks.add(newTask);
-            hasInitialized.put(newTask, false);
-        } else {
-            newTask.requiredSubystem().setCurrentCmd(newTask);
-            hasInitialized.put(newTask, true);
-        }
+    public void add(Command newCommand) {
+        newCommandBuffer.add(newCommand);
     }
 
     public void loop() {
-        int i = 0;
-        while (i < tasks.size()) {
-            Loopable thisTask = tasks.get(i);
-            if (hasInitialized.get(thisTask)) {
-                thisTask.init();
-                hasInitialized.put(thisTask, false);
+        addFromBuffer();
+
+        for (int i = commands.size() - 1; i >= 0; i--) {
+            Command cmd = commands.get(i);
+            cmd.loop();
+
+            if (cmd.shouldRemove()) {
+                commands.remove(i);
+                cmd.end();
+
+                for (Subsystem subsystem : cmd.requiredSubsystems) {
+                    if (subsystem.needsDefault) {
+                        // we set the command to null so that it isn't interrupted.
+                        // If we didn't do this, the command we receive "end" and also "interrupt"
+                        subsystem.currentCmd = null;
+
+                        this.add(subsystem.getDefaultCommand());
+                    }
+                }
+            }
+        }
+    }
+
+    private void addFromBuffer() {
+        int size = newCommandBuffer.size();
+        for (int i = size - 1; i >= 0; i--) {
+            Command newCmd = newCommandBuffer.get(i);
+            newCommandBuffer.remove(i);
+            commands.add(newCmd);
+
+            if (newCmd.shouldReplace) {
+                for (Subsystem subsystem : newCmd.requiredSubsystems) {
+                    if (subsystem.currentCmd != null) {
+                        subsystem.currentCmd.interrupt();
+                        this.commands.remove(subsystem.currentCmd);
+                    }
+
+                    subsystem.currentCmd = newCmd;
+                }
             }
 
-            thisTask.loop();
-
-            if (thisTask.shouldRemove()) {
-                tasks.remove(i);
-                thisTask.terminate();
-
-
-            } else {
-                i++;
-            }
+            newCmd.init();
         }
     }
 
     public void clear() {
-        this.hasInitialized.clear();
-        this.tasks.clear();
+        this.commands.clear();
+    }
+
+    public static void main(String[] args) {
+        //chris was here :::))))))) in me ass heHAA
+
+        
     }
 
 }
