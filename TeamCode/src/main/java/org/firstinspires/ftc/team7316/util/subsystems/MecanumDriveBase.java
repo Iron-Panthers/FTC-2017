@@ -4,10 +4,9 @@ import com.qualcomm.robotcore.eventloop.SyncdDevice;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.team7316.util.Constants;
-import org.firstinspires.ftc.team7316.util.Loopable;
 import org.firstinspires.ftc.team7316.util.PID;
 import org.firstinspires.ftc.team7316.util.Util;
-import org.firstinspires.ftc.team7316.util.hardware.Hardware;
+import org.firstinspires.ftc.team7316.util.Hardware;
 
 /**
  * Created by andrew on 9/12/17.
