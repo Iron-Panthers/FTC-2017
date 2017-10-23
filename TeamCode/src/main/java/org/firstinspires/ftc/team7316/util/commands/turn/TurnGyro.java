@@ -15,12 +15,12 @@ public class TurnGyro extends Command {
 
     private GyroSensor gyro;
 
-    private float remainingBearing;
+    private double remainingBearing;
 
     protected double power;
-    protected float deltaBearing;
+    protected double deltaBearing;
 
-    private final float CORRECTION_PERCENT_GYRO = 0.85f;
+    private final double CORRECTION_PERCENT_GYRO = 0.85;
 
     /**
      *
@@ -31,7 +31,7 @@ public class TurnGyro extends Command {
      * @param gyro
      */
 
-    public TurnGyro(float deltaBearing, double power, DcMotor leftMotor, DcMotor rightMotor, GyroSensor gyro) { //+power = clockwise
+    public TurnGyro(double deltaBearing, double power, DcMotor leftMotor, DcMotor rightMotor, GyroSensor gyro) { //+power = clockwise
         this.deltaBearing = deltaBearing*CORRECTION_PERCENT_GYRO;
         this.power = power;
         this.leftMotor = leftMotor;
