@@ -29,6 +29,7 @@ public class SequentialCommand extends Command {
         for (Subsystem subsystem : this.requiredSubsystems) {
             subsystem.needsDefault = false;
         }
+        index = 0;
 
         if (index < cmds.length) {
             Command cmd = cmds[index];

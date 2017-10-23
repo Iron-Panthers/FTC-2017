@@ -18,6 +18,10 @@ public class Scheduler {
 
     private Scheduler () {}
 
+    public ArrayList<Command> getCommands() {
+        return commands;
+    }
+
     public void add(Command newCommand) {
         newCommandBuffer.add(newCommand);
     }
