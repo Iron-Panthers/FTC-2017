@@ -72,4 +72,10 @@ public class Scheduler {
         this.commands.clear();
     }
 
+    public static void main(String[] args) {
+        //chris was here :::))))))) in me ass heHAA
+
+        
+    }
+
 }
