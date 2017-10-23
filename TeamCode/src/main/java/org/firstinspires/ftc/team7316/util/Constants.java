@@ -12,8 +12,8 @@ public class Constants {
     public static final double DISTANCE_PER_REV = 4 * Math.PI;
     public static final double COLOR_DIFFERENCE = 2;
 
-    public static final double INTAKE_SERVO_MAX_POSITION = 0.85;
-    public static final double INTAKE_SERVO_MIN_POSITION = 0.55;
+    public static final double INTAKE_SERVO_MAX_POSITION = 1;
+    public static final double INTAKE_SERVO_MIN_POSITION = 0;
 
     //Drive Base PID Constants
     public static final double encoderP = 0;
