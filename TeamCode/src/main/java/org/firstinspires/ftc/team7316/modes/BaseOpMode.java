@@ -17,8 +17,8 @@ public abstract class BaseOpMode extends OpMode {
         Scheduler.instance.clear();
         Hardware.setHardwareMap(hardwareMap);
         Hardware.setTelemetry(telemetry);
+        OI.createInputs(gamepad1, gamepad2);
         Subsystems.createSubsystems();
-        OI.createInputs();
         onInit();
     }
 

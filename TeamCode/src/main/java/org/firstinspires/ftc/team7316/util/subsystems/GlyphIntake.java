@@ -4,10 +4,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.team7316.util.Constants;
-import org.firstinspires.ftc.team7316.util.Loopable;
+import org.firstinspires.ftc.team7316.util.Hardware;
+import org.firstinspires.ftc.team7316.util.commands.BlankCommand;
 import org.firstinspires.ftc.team7316.util.commands.Command;
-import org.firstinspires.ftc.team7316.util.hardware.Hardware;
-import org.firstinspires.ftc.team7316.util.hardware.ServoWrapper;
+import org.firstinspires.ftc.team7316.util.commands.GlyphIntakeJoystick;
 import org.firstinspires.ftc.team7316.util.input.JoystickWrapper;
 
 /**
@@ -19,28 +19,32 @@ public class GlyphIntake extends Subsystem {
     private Servo servo;
     private DcMotor rightIntakeMotor;
     private DcMotor leftIntakeMotor;
-    private JoystickWrapper leftJoystick;
-    private JoystickWrapper rightJoystick;
 
-    public GlyphIntake(Servo servo, DcMotor rightIntakeMotor, DcMotor leftIntakeMotor, JoystickWrapper leftJoystick, JoystickWrapper rightJoystick)
+    public GlyphIntake()
     {
-        this.leftJoystick = leftJoystick;
-        this.rightJoystick = rightJoystick;
-        this.rightIntakeMotor = rightIntakeMotor;
-        this.leftIntakeMotor = leftIntakeMotor;
-        this.servo = servo;
+        this.rightIntakeMotor = Hardware.instance.rightIntakeMotor;
+        this.leftIntakeMotor = Hardware.instance.leftIntakeMotor;
+        this.servo = Hardware.instance.intakeServo;
 
         this.servo.scaleRange(Constants.INTAKE_SERVO_MIN_POSITION, Constants.INTAKE_SERVO_MAX_POSITION);
     }
 
+    public void setPosition(double position) {
+        this.servo.setPosition(position);
+    }
+
+    public void setIntakePower(double power) {
+        this.rightIntakeMotor.setPower(-power);
+        this.leftIntakeMotor.setPower(power);
+    }
 
     @Override
     public Command defaultAutoCommand() {
-        return null;
+        return new BlankCommand(this);
     }
 
     @Override
     public Command defaultTeleopCommand() {
-        return null;
+        return new GlyphIntakeJoystick();
     }
 }

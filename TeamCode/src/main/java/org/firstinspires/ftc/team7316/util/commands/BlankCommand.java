@@ -8,24 +8,13 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
 
 public class BlankCommand extends Command {
 
-    private Subsystem required;
-
     public BlankCommand(Subsystem required) {
-        this.required = required;
+        requires(required);
     }
 
     @Override
-    public Subsystem requiredSubystem() {
-        return this.required;
-    }
+    public void init() {
 
-    @Override
-    public void onInit() {
-    }
-
-    @Override
-    public boolean shouldEnd() {
-        return false;
     }
 
     @Override
@@ -34,7 +23,12 @@ public class BlankCommand extends Command {
     }
 
     @Override
-    public void terminate() {
+    public boolean shouldRemove() {
+        return false;
+    }
+
+    @Override
+    public void end() {
 
     }
 }

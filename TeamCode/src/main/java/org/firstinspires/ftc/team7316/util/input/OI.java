@@ -15,10 +15,12 @@ public class OI {
     public static OI instance = null;
 
     public GamepadWrapper gp1;
+    public GamepadWrapper gp2;
 
-    public OI(Gamepad gamepad1, Gamepad gamepad2) {
+    private OI(Gamepad gamepad1, Gamepad gamepad2) {
 
         gp1 = new GamepadWrapper(gamepad1);
+        gp2 = new GamepadWrapper(gamepad2);
 
     }
 

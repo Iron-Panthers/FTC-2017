@@ -1,12 +1,6 @@
 package org.firstinspires.ftc.team7316.util.subsystems;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.team7316.util.Scheduler;
-import org.firstinspires.ftc.team7316.util.hardware.Hardware;
 
 /**
  * Created by andrew on 10/18/17.
@@ -17,11 +11,16 @@ public class Subsystems {
     public static Subsystems instance = null;
 
     public MecanumDriveBase driveBase;
+    public GlyphIntake glyphIntake;
 
-    public Subsystems () {
+    private Subsystems () {
 
         driveBase = new MecanumDriveBase();
-        Scheduler.instance.addTask(driveBase);
+        Scheduler.instance.add(driveBase.getDefaultCommand());
+
+        glyphIntake = new GlyphIntake();
+        Scheduler.instance.add(glyphIntake.getDefaultCommand());
+
     }
 
     public static void createSubsystems() {

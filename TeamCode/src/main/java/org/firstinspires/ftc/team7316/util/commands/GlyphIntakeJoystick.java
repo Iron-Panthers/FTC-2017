@@ -5,23 +5,27 @@ package org.firstinspires.ftc.team7316.util.commands;
  */
 
 import org.firstinspires.ftc.team7316.util.commands.*;
+import org.firstinspires.ftc.team7316.util.input.OI;
+import org.firstinspires.ftc.team7316.util.subsystems.GlyphIntake;
+import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 public class GlyphIntakeJoystick extends Command {
 
-    public GlyphIntakeJoystick() {
+    private GlyphIntake intake = Subsystems.instance.glyphIntake;
 
+    public GlyphIntakeJoystick() {
+        requires(Subsystems.instance.glyphIntake);
     }
 
     @Override
     public void init() {
-        this.servo.setPosition(0);
+        this.intake.setPosition(0);
     }
 
     @Override
     public void loop() {
-        this.rightIntakeMotor.setPower(-leftJoystick.getY());
-        this.leftIntakeMotor.setPower(leftJoystick.getY());
-        this.servo.setPosition(rightJoystick.getX());
+        this.intake.setIntakePower(OI.instance.gp2.left_stick.getY());
+        this.intake.setPosition(OI.instance.gp2.right_stick.getX());
     }
 
     @Override
@@ -31,8 +35,7 @@ public class GlyphIntakeJoystick extends Command {
 
     @Override
     public void end() {
-        this.rightIntakeMotor.setPower(0);
-        this.leftIntakeMotor.setPower(0);
+        this.intake.setIntakePower(0);
     }
 
 }

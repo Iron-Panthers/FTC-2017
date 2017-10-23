@@ -2,10 +2,9 @@ package org.firstinspires.ftc.team7316.util.commands.drive;
 
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.commands.Command;
-import org.firstinspires.ftc.team7316.util.hardware.Hardware;
+import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.input.GamepadAxis;
 import org.firstinspires.ftc.team7316.util.input.OI;
-import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 /**
@@ -13,18 +12,15 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
  */
 
 public class DriveWithJoystick extends Command {
-    @Override
-    public Subsystem requiredSubystem() {
-        return Subsystems.instance.driveBase;
+
+    public DriveWithJoystick() {
+        requires(Subsystems.instance.driveBase);
     }
 
     @Override
-    public void onInit() {
-    }
-
-    @Override
-    public boolean shouldEnd() {
-        return false;
+    public void init() {
+        Subsystems.instance.driveBase.setWantedTurnSpeed(0);
+        Subsystems.instance.driveBase.setWantedSpeedAndMovementAngle(0, 0);
     }
 
     @Override
@@ -55,10 +51,17 @@ public class DriveWithJoystick extends Command {
 
         Subsystems.instance.driveBase.setWantedTurnSpeed(turnSpeed);
         Subsystems.instance.driveBase.setWantedSpeedAndMovementAngle(moveSpeed, moveDir);
+        Subsystems.instance.driveBase.driveWithSpeeds();
     }
 
     @Override
-    public void terminate() {
+    public boolean shouldRemove() {
+        return false;
+    }
 
+    @Override
+    public void end() {
+        Subsystems.instance.driveBase.setWantedTurnSpeed(0);
+        Subsystems.instance.driveBase.setWantedSpeedAndMovementAngle(0, 0);
     }
 }

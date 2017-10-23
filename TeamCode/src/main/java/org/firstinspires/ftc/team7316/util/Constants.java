@@ -20,7 +20,10 @@ public class Constants {
     public static final double encoderI = 0;
     public static final double encoderD = 0;
 
-
+    public static final double FORWARD_MOTOR_DEADZONE = 0.2;
+    public static final double STRAFING_MOTOR_DEADZONE = 0.5;
+    public static final double TURNING_MOTOR_DEADZONE = 0.2;
+    public static final double MOTOR_BUFFER_DEADZONE = 0.05;
 
     public static final double gyroP = 0;
     public static final double gyroI = 0;
