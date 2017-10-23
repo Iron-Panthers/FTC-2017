@@ -19,4 +19,22 @@ public class Util {
         return (b2 - a2) * (x - a1) / (b1 - a1) + a2;
     }
 
+    public static double modBueno(double a, double b) {
+        if (a > 0) {
+            return a % b;
+        } else {
+            return a % b + b;
+        }
+    }
+
+    public static double wrap(double theta) {
+        double num = (theta - 180) % (360);
+
+        if (num < 0) {
+            num += 180;
+        } else {
+            num -= 180;
+        }
+        return num;
+    }
 }
