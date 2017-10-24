@@ -35,7 +35,7 @@ public class Scheduler {
 
             if (cmd.shouldRemove()) {
                 commands.remove(i);
-                cmd.end();
+                cmd._end();
 
                 for (Subsystem subsystem : cmd.requiredSubsystems) {
                     if (subsystem.needsDefault) {

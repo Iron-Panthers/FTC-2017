@@ -2,6 +2,7 @@ package org.firstinspires.ftc.team7316.test;
 
 import org.firstinspires.ftc.team7316.util.Scheduler;
 import org.firstinspires.ftc.team7316.util.commands.flow.SequentialCommand;
+import org.firstinspires.ftc.team7316.util.commands.flow.SimultaneousCommands;
 
 /**
  * Created by Maxim on 10/23/2017.
@@ -32,6 +33,17 @@ public class SchedulerTesting {
         performTest(15);
     }
 
+    static void simultaneousTest() {
+        System.out.println("Simultaneous");
+        TestIterateCommand cmdA = new TestIterateCommand("first", 5, subA);
+        TestIterateCommand cmdB = new TestIterateCommand("second", 10, subA);
+
+        SimultaneousCommands sim = new SimultaneousCommands(cmdA, cmdB);
+
+        Scheduler.instance.add(sim);
+        performTest(15);
+    }
+
     static void simpleOverwriteTest() {
         System.out.println("Simple Overwrite");
         TestIterateCommand first = new TestIterateCommand("first", 5, subA);
@@ -51,8 +63,9 @@ public class SchedulerTesting {
     }
 
     public static void main(String[] args) {
-        //basicTest();
+        basicTest();
         sequentialTest();
+        simultaneousTest();
         //simpleOverwriteTest();
     }
 
