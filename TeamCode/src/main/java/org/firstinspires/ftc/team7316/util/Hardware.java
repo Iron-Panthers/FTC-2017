@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.team7316.util;
 
-import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
+import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -43,6 +44,8 @@ public class Hardware {
 
     public Servo intakeServo;
 
+    public BNO055IMU gyro;
+
     public Hardware (HardwareMap map) {
 
         leftFrontDriveMotor = map.dcMotor.get(LEFT_FRONT_DRIVE_MOTOR_NAME);
@@ -66,6 +69,17 @@ public class Hardware {
         leftIntakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         intakeServo = map.servo.get(INTAKE_SERVO_NAME);
+
+        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+        parameters.loggingEnabled      = true;
+        parameters.loggingTag          = "IMU";
+        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+
+        gyro = map.get(BNO055IMU.class, GYRO_NAME);
+
         //Scheduler.instance.addTask(frontSideInfaredSensor);
     }
 

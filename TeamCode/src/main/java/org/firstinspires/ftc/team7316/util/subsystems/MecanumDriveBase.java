@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.team7316.util.subsystems;
 
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.PID;
+import org.firstinspires.ftc.team7316.util.Util;
 import org.firstinspires.ftc.team7316.util.commands.BlankCommand;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.Hardware;
@@ -75,13 +77,67 @@ public class MecanumDriveBase extends Subsystem {
         double fR_bLpower = -Constants.sqrt2 * ((x-y)/2); //again
 
         // ticks per second
-        //wantedFrBlSpeed = (double)(Constants.DRIVE_RPM_MAX / 60 * Constants.ENCODER_TICK_PER_REV * fR_bLpower);
-        //wantedFlBrSpeed = (double)(Constants.DRIVE_RPM_MAX / 60 * Constants.ENCODER_TICK_PER_REV * fL_bRpower);
-        wantedFrBlSpeed = fR_bLpower;
-        wantedFlBrSpeed = fL_bRpower;
+        wantedFrBlSpeed = (double)(Constants.DRIVE_RPM_MAX / 60 * Constants.ENCODER_TICK_PER_REV * fR_bLpower);
+        wantedFlBrSpeed = (double)(Constants.DRIVE_RPM_MAX / 60 * Constants.ENCODER_TICK_PER_REV * fL_bRpower);
+    }
+
+    //errors
+    private double fR_bL_Error() {
+        int fRError = Hardware.instance.rightFrontDriveMotor.getCurrentPosition();
+        int bLError = Hardware.instance.leftBackDriveMotor.getCurrentPosition();
+
+        double average = (fRError + bLError) / (2 * (currentTime - previousTime));
+        return this.wantedFrBlSpeed - average; // ticks per second
+    }
+
+    private double fL_bR_Error() {
+        int fLError = Hardware.instance.leftFrontDriveMotor.getCurrentPosition();
+        int bRError = Hardware.instance.rightBackDriveMotor.getCurrentPosition();
+
+        double average = (fLError + bRError) / (2 * (currentTime - previousTime));
+        return this.wantedFlBrSpeed - average; // ticks per second
+    }
+
+    private double gyroError() {
+        //New gyro has some cool beans return types
+        //Orientation angle = Hardware.instance.gyro.getAngularOrientation();
+
+        //double dif = (wantedOmega - angle) / (currentTime - previousTime); // degrees per second
+
+        //return Util.wrap(dif);
+        return 0;
+    }
+
+
+    private double pidToMotorPower(double out) {
+        double absOut = Math.abs(out);
+        double mult = (absOut/out); //1 if positive -1 if negative
+
+        if (absOut > 1) {
+            absOut = mult;
+        } else if (absOut < Constants.DRIVER_MOTOR_DEADZONE) {
+            absOut = Constants.DRIVER_MOTOR_DEADZONE * mult;
+        } else {
+            absOut = out;
+        }
+
+        return absOut;
     }
 
     public void driveWithSpeeds() {
+
+        currentTime = System.currentTimeMillis() / 1000;
+
+        //setWantedSpeedAndMovementAngle(some_speed, some_angle);
+        //setWantedAngle(some_angle);
+
+        double fR_bL_Pwr = pidToMotorPower(this.fR_bL_PID.newError(fR_bL_Error()));
+        double fL_bR_Pwr = pidToMotorPower(this.fL_bR_PID.newError(fL_bR_Error()));
+
+        double gyro_Pwr = pidToMotorPower(this.gyroPID.newError(gyroError()));
+
+        previousTime = currentTime;
+
         Hardware.instance.rightBackDriveMotor.setPower(weighting * (wantedFlBrSpeed + wantedTurnSpeed));
         Hardware.instance.leftFrontDriveMotor.setPower(weighting * (wantedFlBrSpeed - wantedTurnSpeed));
         Hardware.instance.rightFrontDriveMotor.setPower(weighting * (wantedFrBlSpeed + wantedTurnSpeed));
