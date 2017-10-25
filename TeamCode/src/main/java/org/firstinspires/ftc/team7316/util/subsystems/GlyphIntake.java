@@ -19,12 +19,16 @@ public class GlyphIntake extends Subsystem {
     private Servo servo;
     private DcMotor rightIntakeMotor;
     private DcMotor leftIntakeMotor;
+    private DcMotor intakeLiftMotor;
+
+    private final double LIFTPOWER = 0.5;
 
     public GlyphIntake()
     {
         this.rightIntakeMotor = Hardware.instance.rightIntakeMotor;
         this.leftIntakeMotor = Hardware.instance.leftIntakeMotor;
         this.servo = Hardware.instance.intakeServo;
+        this.intakeLiftMotor = Hardware.instance.intakeLiftMotor;
 
         this.servo.scaleRange(Constants.INTAKE_SERVO_MIN_POSITION, Constants.INTAKE_SERVO_MAX_POSITION);
     }
@@ -36,6 +40,14 @@ public class GlyphIntake extends Subsystem {
     public void setIntakePower(double power) {
         this.rightIntakeMotor.setPower(-power);
         this.leftIntakeMotor.setPower(power);
+    }
+
+    public void setLiftPower(boolean up) {
+        if(up) {
+            this.intakeLiftMotor.setPower(LIFTPOWER);
+        } else {
+            this.intakeLiftMotor.setPower(-LIFTPOWER);
+        }
     }
 
     @Override

@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.team7316.util;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -31,6 +32,9 @@ public class Hardware {
 
     private static final String INTAKE_SERVO_NAME = "is";
 
+    private static final String RELIC_ARM_SERVO_NAME = "ras";
+    private static final String RELIC_GRABBER_SERVO_NAME = "rgs";
+
     private static final String GYRO_NAME = "gyro";
 
     public DcMotor leftFrontDriveMotor;
@@ -41,7 +45,12 @@ public class Hardware {
     public DcMotor rightIntakeMotor;
     public DcMotor leftIntakeMotor;
 
+    public DcMotor intakeLiftMotor;
+
     public Servo intakeServo;
+
+    public Servo relicGrabberServo;
+    public CRServo relicArmServo;
 
     public Hardware (HardwareMap map) {
 
@@ -65,7 +74,14 @@ public class Hardware {
         leftIntakeMotor = map.dcMotor.get(LEFT_INTAKE_MOTOR_NAME);
         leftIntakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
+        intakeLiftMotor = map.dcMotor.get(INTAKE_LIFT_MOTOR_NAME);
+        intakeLiftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
         intakeServo = map.servo.get(INTAKE_SERVO_NAME);
+
+        relicGrabberServo = map.servo.get(RELIC_GRABBER_SERVO_NAME);
+        relicArmServo = map.crservo.get(RELIC_ARM_SERVO_NAME);
+
         //Scheduler.instance.addTask(frontSideInfaredSensor);
     }
 
