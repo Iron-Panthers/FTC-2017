@@ -2,6 +2,7 @@ package org.firstinspires.ftc.team7316.util;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -35,6 +36,8 @@ public class Hardware {
     private static final String RELIC_ARM_SERVO_NAME = "ras";
     private static final String RELIC_GRABBER_SERVO_NAME = "rgs";
 
+    private static final String COLOR_SENSOR_NAME = "cs";
+
     private static final String GYRO_NAME = "gyro";
 
     public DcMotor leftFrontDriveMotor;
@@ -51,6 +54,8 @@ public class Hardware {
 
     public Servo relicGrabberServo;
     public CRServo relicArmServo;
+
+    public ColorSensor colorsensor;
 
     public Hardware (HardwareMap map) {
 
@@ -79,8 +84,10 @@ public class Hardware {
 
         intakeServo = map.servo.get(INTAKE_SERVO_NAME);
 
-        relicGrabberServo = map.servo.get(RELIC_GRABBER_SERVO_NAME);
-        relicArmServo = map.crservo.get(RELIC_ARM_SERVO_NAME);
+        colorsensor = map.colorSensor.get(COLOR_SENSOR_NAME);
+
+        //relicGrabberServo = map.servo.get(RELIC_GRABBER_SERVO_NAME);
+        //relicArmServo = map.crservo.get(RELIC_ARM_SERVO_NAME);
 
         //Scheduler.instance.addTask(frontSideInfaredSensor);
     }
