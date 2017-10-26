@@ -8,9 +8,11 @@ import org.firstinspires.ftc.team7316.util.Buffer;
 
 public class AggregrateColorSensor extends Command {
 
-    public Buffer blueBuffer;
-    public Buffer greenBuffer;
-    public Buffer redBuffer;
+    public Buffer blueSum;
+    public Buffer greenSum;
+    public Buffer redSum;
+
+    
 
     @Override
     public void init() {
