@@ -10,7 +10,7 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
  */
 public class Scheduler {
 
-    public static boolean inTeleop = false;
+    public static boolean inTeleop = true;
     public static final Scheduler instance = new Scheduler();
 
     private ArrayList<Command> commands = new ArrayList<>();
