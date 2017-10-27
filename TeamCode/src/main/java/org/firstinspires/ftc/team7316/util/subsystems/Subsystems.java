@@ -16,15 +16,17 @@ public class Subsystems {
     private Subsystems () {
 
         driveBase = new MecanumDriveBase();
-        Scheduler.instance.add(driveBase.getDefaultCommand());
 
         glyphIntake = new GlyphIntake();
-        Scheduler.instance.add(glyphIntake.getDefaultCommand());
 
     }
 
     public static void createSubsystems() {
         instance = new Subsystems();
+
+        Scheduler.instance.add(instance.driveBase.getDefaultCommand());
+        Scheduler.instance.add(instance.glyphIntake.getDefaultCommand());
+
     }
 
 }
