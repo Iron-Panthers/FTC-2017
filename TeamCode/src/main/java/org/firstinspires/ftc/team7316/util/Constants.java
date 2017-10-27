@@ -12,10 +12,16 @@ public class Constants {
     public static final double DISTANCE_PER_REV = 4 * Math.PI;
     public static final double COLOR_DIFFERENCE = 2;
 
+    public static final double DRIVE_SLOW_MULTIPLIER  = 0.55;
+
+
+    //Intake shenanigans
     public static final double INTAKE_SERVO_MAX_POSITION = 0.8;
     public static final double INTAKE_SERVO_MIN_POSITION = 0.4;
 
-    public static final double INTAKE_LIFT_POWER = 0.5;
+    public static final double INTAKE_LIFT_POWER = 0.6;
+
+    public static final double INTAKE_LIFT_ERROR = 0.05;
 
     //Drive Base PID Constants
     public static final double encoderP = 0;

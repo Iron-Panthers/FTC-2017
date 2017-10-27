@@ -79,8 +79,8 @@ public class Hardware {
 
         intakeServo = map.servo.get(INTAKE_SERVO_NAME);
 
-        relicGrabberServo = map.servo.get(RELIC_GRABBER_SERVO_NAME);
-        relicArmServo = map.crservo.get(RELIC_ARM_SERVO_NAME);
+        //relicGrabberServo = map.servo.get(RELIC_GRABBER_SERVO_NAME);
+        //relicArmServo = map.crservo.get(RELIC_ARM_SERVO_NAME);
 
         //Scheduler.instance.addTask(frontSideInfaredSensor);
     }

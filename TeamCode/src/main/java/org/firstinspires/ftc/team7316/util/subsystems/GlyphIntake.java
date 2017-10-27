@@ -20,6 +20,7 @@ public class GlyphIntake extends Subsystem {
     private DcMotor leftIntakeMotor;
     private DcMotor intakeLiftMotor;
 
+    public boolean liftStopped;
 
     public GlyphIntake()
     {
@@ -29,6 +30,8 @@ public class GlyphIntake extends Subsystem {
         this.intakeLiftMotor = Hardware.instance.intakeLiftMotor;
 
         this.servo.scaleRange(Constants.INTAKE_SERVO_MIN_POSITION, Constants.INTAKE_SERVO_MAX_POSITION);
+
+        liftStopped = false;
     }
 
     public void setPosition(double position) {
@@ -40,11 +43,14 @@ public class GlyphIntake extends Subsystem {
         this.leftIntakeMotor.setPower(power);
     }
 
-    public void setLiftPower(boolean up) {
-        if(up) {
-            this.intakeLiftMotor.setPower(Constants.INTAKE_LIFT_POWER);
-        } else {
-            this.intakeLiftMotor.setPower(-Constants.INTAKE_LIFT_POWER);
+    public void setLiftPower(double power) {
+        this.intakeLiftMotor.setPower(power);
+    }
+
+    public void maintainLiftPosition() {
+        if(!liftStopped) {
+            this.intakeLiftMotor.setTargetPosition(intakeLiftMotor.getCurrentPosition());
+            liftStopped = true;
         }
     }
 

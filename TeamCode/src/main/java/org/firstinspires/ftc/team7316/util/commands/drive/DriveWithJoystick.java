@@ -51,7 +51,8 @@ public class DriveWithJoystick extends Command {
         double moveSpeed = Math.sqrt(lX*lX + lY*lY);
 
         if(OI.instance.gp1.right_bumper.state()) {
-            moveSpeed *= 0.6;
+            moveSpeed *= Constants.DRIVE_SLOW_MULTIPLIER;
+            turnSpeed *= Constants.DRIVE_SLOW_MULTIPLIER;
         }
 
         Subsystems.instance.driveBase.setWantedTurnSpeed(turnSpeed);

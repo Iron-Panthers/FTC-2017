@@ -4,6 +4,7 @@ package org.firstinspires.ftc.team7316.util.commands;
  * Created by andrew on 10/23/17.
  */
 
+import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.commands.*;
 import org.firstinspires.ftc.team7316.util.input.OI;
 import org.firstinspires.ftc.team7316.util.subsystems.GlyphIntake;
@@ -27,10 +28,19 @@ public class GlyphIntakeJoystick extends Command {
         this.intake.setIntakePower(OI.instance.gp2.left_stick.getY());
         this.intake.setPosition(OI.instance.gp2.right_stick.getX());
         if(OI.instance.gp2.dp_up.state()) {
-            this.intake.setLiftPower(true);
+            if(this.intake.liftStopped) {
+                this.intake.liftStopped = false;
+            }
+            this.intake.setLiftPower(Constants.INTAKE_LIFT_POWER);
         }
         else if(OI.instance.gp2.dp_down.state()) {
-            this.intake.setLiftPower(false);
+            if(this.intake.liftStopped) {
+                this.intake.liftStopped = false;
+            }
+            this.intake.setLiftPower(-Constants.INTAKE_LIFT_POWER);
+        }
+        else {
+            this.intake.maintainLiftPosition();
         }
     }
 

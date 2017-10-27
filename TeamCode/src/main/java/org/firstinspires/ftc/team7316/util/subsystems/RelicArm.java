@@ -12,8 +12,8 @@ import org.firstinspires.ftc.team7316.util.commands.Command;
 
 public class RelicArm extends Subsystem {
 
-    private Servo relicGrabberServo = Hardware.instance.relicGrabberServo;
-    private CRServo relicArmServo = Hardware.instance.relicArmServo;
+    //private Servo relicGrabberServo = Hardware.instance.relicGrabberServo;
+    //private CRServo relicArmServo = Hardware.instance.relicArmServo;
 
     @Override
     public Command defaultAutoCommand() {
@@ -26,6 +26,6 @@ public class RelicArm extends Subsystem {
     }
 
     public void stopRelicArm(){
-        relicArmServo.setPower(0);
+        /*relicArmServo.setPower(0);*/
     }
 }
