@@ -8,7 +8,6 @@ import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.BlankCommand;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.commands.GlyphIntakeJoystick;
-import org.firstinspires.ftc.team7316.util.input.JoystickWrapper;
 
 /**
  * Created by jerry on 10/11/17.
@@ -21,7 +20,6 @@ public class GlyphIntake extends Subsystem {
     private DcMotor leftIntakeMotor;
     private DcMotor intakeLiftMotor;
 
-    private final double LIFTPOWER = 0.5;
 
     public GlyphIntake()
     {
@@ -44,9 +42,9 @@ public class GlyphIntake extends Subsystem {
 
     public void setLiftPower(boolean up) {
         if(up) {
-            this.intakeLiftMotor.setPower(LIFTPOWER);
+            this.intakeLiftMotor.setPower(Constants.INTAKE_LIFT_POWER);
         } else {
-            this.intakeLiftMotor.setPower(-LIFTPOWER);
+            this.intakeLiftMotor.setPower(-Constants.INTAKE_LIFT_POWER);
         }
     }
 
