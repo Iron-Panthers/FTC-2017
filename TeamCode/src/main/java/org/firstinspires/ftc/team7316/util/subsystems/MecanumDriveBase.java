@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.team7316.util.subsystems;
 
+import org.firstinspires.ftc.robotcore.external.Const;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.PID;
@@ -25,15 +26,13 @@ public class MecanumDriveBase extends Subsystem {
 
     private double wantedTurnSpeed = 0;
 
-    private double strafingDeadzone = 0; // this deadzone will change, not turning deadzone
-
     private PID gyroPID;
     private double wantedOmega; //in degrees per second
 
     private long currentTime = 0;
     private long previousTime = 0; //in seconds
 
-    private double weighting = 0.75;
+    private double weighting = 1;
 
     @Override
     public Command defaultAutoCommand() {
@@ -45,13 +44,6 @@ public class MecanumDriveBase extends Subsystem {
         return new DriveWithJoystick();
     }
 
-    public void setMotorStrafeDeadzone(double wantedMovementAngle)
-    {
-        double maxDeadzone = Constants.STRAFING_MOTOR_DEADZONE - Constants.FORWARD_MOTOR_DEADZONE;
-        double bufferOffset = Constants.FORWARD_MOTOR_DEADZONE - Constants.MOTOR_BUFFER_DEADZONE;
-        strafingDeadzone = Math.abs(maxDeadzone * Math.sin(wantedMovementAngle)) + bufferOffset;
-    }
-
     //setters
     public void setWantedOmega(double wantedOmega) {
         // something something wanted speed
@@ -60,14 +52,27 @@ public class MecanumDriveBase extends Subsystem {
 
     //something something no pid here
     public void setWantedTurnSpeed(double wantedTurnSpeed) {
-        wantedTurnSpeed = (1 - Constants.TURNING_MOTOR_DEADZONE) * wantedTurnSpeed + Constants.TURNING_MOTOR_DEADZONE;
+        if (wantedTurnSpeed > 0) {
+            wantedTurnSpeed = (1 - Constants.TURNING_MOTOR_DEADZONE) * wantedTurnSpeed + Constants.TURNING_MOTOR_DEADZONE;
+        } else {
+            wantedTurnSpeed = (1 - Constants.TURNING_MOTOR_DEADZONE) * wantedTurnSpeed - Constants.TURNING_MOTOR_DEADZONE;
+        }
+
         this.wantedTurnSpeed = wantedTurnSpeed;
+    }
+
+    private double strafingDeadzone(double wantedMovementAngle) {
+        double maxDeadzone = Constants.STRAFING_MOTOR_DEADZONE - Constants.FORWARD_MOTOR_DEADZONE;
+        double bufferOffset = Constants.FORWARD_MOTOR_DEADZONE;
+        return Math.abs(maxDeadzone * Math.sin(wantedMovementAngle)) + bufferOffset;
     }
 
     public void setWantedSpeedAndMovementAngle(double wantedSpeed, double wantedMovementAngle) {
 
-        setMotorStrafeDeadzone(wantedMovementAngle);
-        wantedSpeed = (1 - strafingDeadzone) * wantedSpeed + strafingDeadzone;
+        Hardware.log("wantedSpeed", wantedSpeed);
+
+        double strafingDeadzone = strafingDeadzone(wantedMovementAngle);
+        wantedSpeed = (Constants.sqrt2 - strafingDeadzone) * wantedSpeed + strafingDeadzone;
 
         // this  T I D B I T  is for strafing
         double y = wantedSpeed * Math.cos(wantedMovementAngle);
@@ -75,6 +80,9 @@ public class MecanumDriveBase extends Subsystem {
 
         double fL_bRpower = Constants.sqrt2 * (y + (x-y)/2); //length of da vector
         double fR_bLpower = -Constants.sqrt2 * ((x-y)/2); //again
+
+        Hardware.log("front left back right", fL_bRpower);
+        Hardware.log("front right back left", fR_bLpower);
 
         // ticks per second
         wantedFrBlSpeed = (double)(Constants.DRIVE_RPM_MAX / 60 * Constants.ENCODER_TICK_PER_REV * fR_bLpower);
