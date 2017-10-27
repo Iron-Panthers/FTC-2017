@@ -90,10 +90,10 @@ public class MecanumDriveBase extends Subsystem {
     }
 
     public void driveWithSpeeds() {
-        Hardware.instance.rightBackDriveMotor.setPower(weighting * (wantedFlBrSpeed + wantedTurnSpeed));
-        Hardware.instance.leftFrontDriveMotor.setPower(weighting * (wantedFlBrSpeed - wantedTurnSpeed));
-        Hardware.instance.rightFrontDriveMotor.setPower(weighting * (wantedFrBlSpeed + wantedTurnSpeed));
-        Hardware.instance.leftBackDriveMotor.setPower(weighting * (wantedFrBlSpeed - wantedTurnSpeed));
+        Hardware.instance.rightBackDriveMotor.setPower(weighting * (wantedFlBrSpeed - wantedTurnSpeed));
+        Hardware.instance.leftFrontDriveMotor.setPower(weighting * (wantedFlBrSpeed + wantedTurnSpeed));
+        Hardware.instance.rightFrontDriveMotor.setPower(weighting * (wantedFrBlSpeed - wantedTurnSpeed));
+        Hardware.instance.leftBackDriveMotor.setPower(weighting * (wantedFrBlSpeed + wantedTurnSpeed));
     }
 
 }

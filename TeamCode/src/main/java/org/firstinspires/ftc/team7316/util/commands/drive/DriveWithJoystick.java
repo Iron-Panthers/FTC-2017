@@ -50,6 +50,10 @@ public class DriveWithJoystick extends Command {
         double moveDir = Math.atan2(lX, lY);
         double moveSpeed = Math.sqrt(lX*lX + lY*lY);
 
+        if(OI.instance.gp1.right_bumper.state()) {
+            moveSpeed *= 0.6;
+        }
+
         Subsystems.instance.driveBase.setWantedTurnSpeed(turnSpeed);
         Subsystems.instance.driveBase.setWantedSpeedAndMovementAngle(moveSpeed, moveDir);
         Subsystems.instance.driveBase.driveWithSpeeds();
