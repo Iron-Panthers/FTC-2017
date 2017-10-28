@@ -3,6 +3,8 @@ package org.firstinspires.ftc.team7316.util.commands;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 
 import org.firstinspires.ftc.team7316.util.Buffer;
+import org.firstinspires.ftc.team7316.util.subsystems.JewelArm;
+import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 /**
  * Created by jerry on 10/26/17.
@@ -20,7 +22,7 @@ public class AggregrateColorSensor extends Command {
 
     public AggregrateColorSensor(ColorSensor sensor) {
         this.sensor = sensor;
-        requires(null);
+        requires(Subsystems.instance.jewelArm);
     }
     
     @Override

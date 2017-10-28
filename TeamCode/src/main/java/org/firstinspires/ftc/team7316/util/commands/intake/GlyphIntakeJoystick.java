@@ -27,25 +27,24 @@ public class GlyphIntakeJoystick extends Command {
 
     @Override
     public void loop() {
-        this.intake.setIntakePower(OI.instance.gp2.left_stick.getY());
-        this.intake.setServoPosition(OI.instance.gp2.right_stick.getX());
         // JANKJANKJANK
         if(OI.instance.gp2.dp_up.state()) {
             if(this.intake.getLiftStopped()) {
                 this.intake.setLiftStopped(false);
-                Hardware.instance.intakeLiftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             }
-            this.intake.setLiftPower(Constants.INTAKE_LIFT_POWER);
+            this.intake.setLiftPower(-Constants.INTAKE_LIFT_POWER);
         }
         else if(OI.instance.gp2.dp_down.state()) {
             if(this.intake.getLiftStopped()) {
                 this.intake.setLiftStopped(false);
-                Hardware.instance.intakeLiftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             }
-            this.intake.setLiftPower(-Constants.INTAKE_LIFT_POWER);
+            this.intake.setLiftPower(Constants.INTAKE_LIFT_POWER);
         }
         else {
-            this.intake.maintainLiftPosition();
+            this.intake.setLiftPower(0);
+            // CHANGE LATER
+            this.intake.setIntakePower(OI.instance.gp2.left_stick.getY());
+            this.intake.setServoPosition(OI.instance.gp2.right_stick.getX());
         }
     }
 
@@ -57,6 +56,7 @@ public class GlyphIntakeJoystick extends Command {
     @Override
     public void end() {
         this.intake.setIntakePower(0);
+        Hardware.instance.intakeLiftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
 }

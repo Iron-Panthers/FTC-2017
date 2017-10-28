@@ -22,4 +22,15 @@ public enum Alliance {
         }
         throw new IllegalArgumentException("Something wrong happened in enum Alliance even though nothing wrong should have happened");
     }
+
+    // for jewel auto hitting jewel by driving
+    public boolean shouldDriveForward(ColorSensor sensor) {
+        switch (this) {
+            case BLUE:
+                return sensor.red() - sensor.blue() >= Constants.COLOR_DIFFERENCE;
+            case RED:
+                return sensor.blue() - sensor.red() >= Constants.COLOR_DIFFERENCE;
+        }
+        throw new IllegalArgumentException("Something wrong happened in enum Alliance even though nothing wrong should have happened");
+    }
 }

@@ -36,6 +36,7 @@ public class Hardware {
     private static final String RELIC_ARM_SERVO_NAME = "ras";
     private static final String RELIC_GRABBER_SERVO_NAME = "rgs";
 
+    private static final String RIGHT_JEWEL_ARM_NAME = "rja";
     private static final String COLOR_SENSOR_NAME = "cs";
 
     private static final String GYRO_NAME = "gyro";
@@ -55,6 +56,7 @@ public class Hardware {
     public Servo relicGrabberServo;
     public CRServo relicArmServo;
 
+    public Servo rightJewelArm;
     public ColorSensor colorsensor;
 
     public Hardware (HardwareMap map) {
@@ -87,6 +89,7 @@ public class Hardware {
 
         intakeLiftMotor = map.dcMotor.get(INTAKE_LIFT_MOTOR_NAME);
         intakeLiftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        intakeLiftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         intakeServo = map.servo.get(INTAKE_SERVO_NAME);
         intakeServo.setDirection(Servo.Direction.REVERSE);
@@ -99,8 +102,9 @@ public class Hardware {
         //relicGrabberServo = map.servo.get(RELIC_GRABBER_SERVO_NAME);
         //relicArmServo = map.crservo.get(RELIC_ARM_SERVO_NAME);
 
-        //other hardware
-        //colorsensor = map.colorSensor.get(COLOR_SENSOR_NAME);
+        //jewel arm hardware
+        rightJewelArm = map.servo.get(RIGHT_JEWEL_ARM_NAME);
+        colorsensor = map.colorSensor.get(COLOR_SENSOR_NAME);
 
         //Scheduler.instance.addTask(frontSideInfaredSensor);
     }

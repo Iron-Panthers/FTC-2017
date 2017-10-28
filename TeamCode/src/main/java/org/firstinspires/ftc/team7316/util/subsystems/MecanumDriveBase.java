@@ -30,7 +30,7 @@ public class MecanumDriveBase extends Subsystem {
     private long currentTime = 0;
     private long previousTime = 0; //in seconds
 
-    private double weighting = 1;
+    private double weighting = 0.85;
 
     @Override
     public Command defaultAutoCommand() {

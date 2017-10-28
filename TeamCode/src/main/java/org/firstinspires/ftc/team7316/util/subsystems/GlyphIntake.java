@@ -3,11 +3,10 @@ package org.firstinspires.ftc.team7316.util.subsystems;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.BlankCommand;
 import org.firstinspires.ftc.team7316.util.commands.Command;
-import org.firstinspires.ftc.team7316.util.commands.GlyphIntakeJoystick;
+import org.firstinspires.ftc.team7316.util.commands.intake.GlyphIntakeJoystick;
 
 /**
  * Created by jerry on 10/11/17.
@@ -21,6 +20,9 @@ public class GlyphIntake extends Subsystem {
     private DcMotor intakeLiftMotor;
 
     private boolean liftStopped;
+
+    public final double liftLowerLimit = 1510; //not even the low number lul
+    public final double liftUpperLimit = -9913; //actually the smaller number because reverse
 
     public GlyphIntake()
     {
@@ -43,15 +45,6 @@ public class GlyphIntake extends Subsystem {
 
     public void setLiftPower(double power) {
         this.intakeLiftMotor.setPower(power);
-    }
-
-    public void maintainLiftPosition() {
-        if(!liftStopped) {
-            this.intakeLiftMotor.setTargetPosition(intakeLiftMotor.getCurrentPosition());
-            this.intakeLiftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            this.intakeLiftMotor.setPower(0.2);
-            liftStopped = true;
-        }
     }
 
     public boolean getLiftStopped() { return liftStopped; }
