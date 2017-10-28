@@ -16,12 +16,10 @@ public class Constants {
 
 
     //Intake shenanigans
-    public static final double INTAKE_SERVO_MAX_POSITION = 0.8;
-    public static final double INTAKE_SERVO_MIN_POSITION = 0.4;
+    public static final double INTAKE_SERVO_MAX_POSITION = 0.75;
+    public static final double INTAKE_SERVO_MIN_POSITION = 0.35;
 
-    public static final double INTAKE_LIFT_POWER = 0.6;
-
-    public static final double INTAKE_LIFT_ERROR = 0.05;
+    public static final double INTAKE_LIFT_POWER = 0.65;
 
     //Drive Base PID Constants
     public static final double encoderP = 0;

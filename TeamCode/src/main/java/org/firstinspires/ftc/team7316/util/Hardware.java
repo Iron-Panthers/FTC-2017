@@ -59,20 +59,26 @@ public class Hardware {
 
     public Hardware (HardwareMap map) {
 
+        //drive motors
         leftFrontDriveMotor = map.dcMotor.get(LEFT_FRONT_DRIVE_MOTOR_NAME);
         leftFrontDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         leftFrontDriveMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftFrontDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         rightFrontDriveMotor = map.dcMotor.get(RIGHT_FRONT_DRIVE_MOTOR_NAME);
         rightFrontDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightFrontDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         leftBackDriveMotor = map.dcMotor.get(LEFT_BACK_DRIVE_MOTOR_NAME);
         leftBackDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         leftBackDriveMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftBackDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         rightBackDriveMotor = map.dcMotor.get(RIGHT_BACK_DRIVE_MOTOR_NAME);
         rightBackDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightBackDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        //intake hardware
         rightIntakeMotor = map.dcMotor.get(RIGHT_INTAKE_MOTOR_NAME);
         rightIntakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
@@ -83,13 +89,18 @@ public class Hardware {
         intakeLiftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         intakeServo = map.servo.get(INTAKE_SERVO_NAME);
+        intakeServo.setDirection(Servo.Direction.REVERSE);
+        intakeServo.scaleRange(Constants.INTAKE_SERVO_MIN_POSITION, Constants.INTAKE_SERVO_MAX_POSITION);
+
+        //relic grabber hardware
+        //relicGrabberServo = map.servo.get(RELIC_GRABBER_SERVO_NAME);
+        //relicArmServo = map.crservo.get(RELIC_ARM_SERVO_NAME);
 
         //relicGrabberServo = map.servo.get(RELIC_GRABBER_SERVO_NAME);
         //relicArmServo = map.crservo.get(RELIC_ARM_SERVO_NAME);
-        colorsensor = map.colorSensor.get(COLOR_SENSOR_NAME);
 
-        //relicGrabberServo = map.servo.get(RELIC_GRABBER_SERVO_NAME);
-        //relicArmServo = map.crservo.get(RELIC_ARM_SERVO_NAME);
+        //other hardware
+        //colorsensor = map.colorSensor.get(COLOR_SENSOR_NAME);
 
         //Scheduler.instance.addTask(frontSideInfaredSensor);
     }
