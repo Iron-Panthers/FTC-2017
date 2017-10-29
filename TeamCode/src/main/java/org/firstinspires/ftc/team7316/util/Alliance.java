@@ -24,7 +24,7 @@ public enum Alliance {
     }
 
     // for jewel auto hitting jewel by driving
-    public boolean shouldDriveForward(ColorSensor sensor) {
+    public boolean shouldHitForward(ColorSensor sensor) {
         switch (this) {
             case BLUE:
                 return sensor.red() - sensor.blue() >= Constants.COLOR_DIFFERENCE;

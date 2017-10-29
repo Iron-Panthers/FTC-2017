@@ -96,4 +96,11 @@ public class MecanumDriveBase extends Subsystem {
         Hardware.instance.leftBackDriveMotor.setPower(weighting * (wantedFrBlSpeed + wantedTurnSpeed));
     }
 
+    public void stopMotors() {
+        Hardware.instance.rightBackDriveMotor.setPower(0);
+        Hardware.instance.leftFrontDriveMotor.setPower(0);
+        Hardware.instance.rightFrontDriveMotor.setPower(0);
+        Hardware.instance.leftBackDriveMotor.setPower(0);
+    }
+
 }

@@ -44,8 +44,6 @@ public class JewelArm extends Subsystem {
         }
     }
 
-    public boolean hitFrontJewel(Alliance alliance) { return alliance.shouldDriveForward(sensor); }
-
     public enum JewelArmPosition {
         IN,
         OUT

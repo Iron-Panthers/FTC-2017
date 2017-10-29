@@ -3,7 +3,6 @@ package org.firstinspires.ftc.team7316.util.commands;
 import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
-import org.firstinspires.ftc.team7316.util.commands.flow.SequentialCommand;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 import java.util.ArrayList;
@@ -24,11 +23,11 @@ public class WackJewel extends Command {
 
     @Override
     public void init() {
-        if(Subsystems.instance.jewelArm.hitFrontJewel(alliance)) {
-            drivecommand = new DriveForTime(0.3, 0, 0.1);
+        if(alliance.shouldHitForward(Hardware.instance.colorsensor)) {
+            drivecommand = new DriveForTime(0.2, 0, 0.1);
         }
         else {
-            drivecommand = new DriveForTime(0.3, Math.PI, 0.1);
+            drivecommand = new DriveForTime(0.2, Math.PI, 0.1);
         }
         drivecommand.init();
     }

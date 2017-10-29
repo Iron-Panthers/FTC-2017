@@ -3,7 +3,6 @@ package org.firstinspires.ftc.team7316.util.commands.drive;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.team7316.util.commands.Command;
-import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 /**
@@ -44,6 +43,6 @@ public class DriveForTime extends Command {
 
     @Override
     protected void end() {
-        Subsystems.instance.driveBase.setWantedSpeedAndMovementAngle(0, 0);
+        Subsystems.instance.driveBase.stopMotors();
     }
 }
