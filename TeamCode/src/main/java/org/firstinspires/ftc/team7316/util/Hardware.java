@@ -111,15 +111,16 @@ public class Hardware {
         colorsensor = map.colorSensor.get(COLOR_SENSOR_NAME);
 
 
-        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
-        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-        parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
-        parameters.loggingEnabled      = true;
-        parameters.loggingTag          = "IMU";
-        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+        BNO055IMU.Parameters gyroParams = new BNO055IMU.Parameters();
+        gyroParams.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+        gyroParams.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        gyroParams.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+        gyroParams.loggingEnabled      = true;
+        gyroParams.loggingTag          = "IMU";
+        gyroParams.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
 
         gyro = map.get(BNO055IMU.class, GYRO_NAME);
+        gyro.initialize(gyroParams);
 
         //Scheduler.instance.addTask(frontSideInfaredSensor);
     }
