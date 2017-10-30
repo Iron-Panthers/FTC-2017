@@ -7,6 +7,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.team7316.modes.BaseOpMode;
 import org.firstinspires.ftc.team7316.util.Hardware;
+import org.firstinspires.ftc.team7316.util.Scheduler;
 
 import java.util.Locale;
 
@@ -23,6 +24,7 @@ public class DriveMode extends BaseOpMode {
     @Override
     public void onInit() {
         Hardware.setHardwareMap(hardwareMap);
+        Scheduler.inTeleop = true;
 
         // Set up our telemetry dashboard
         //composeTelemetry();
