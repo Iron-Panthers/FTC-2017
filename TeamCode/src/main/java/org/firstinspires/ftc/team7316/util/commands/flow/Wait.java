@@ -32,7 +32,8 @@ public class Wait extends Command {
         return time.seconds() > this.wantedTime;
     }
 
-    @Override     public void end() {
+    @Override
+    public void end() {
 
     }
 }

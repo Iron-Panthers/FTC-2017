@@ -30,7 +30,7 @@ public class MecanumDriveBase extends Subsystem {
     private long currentTime = 0;
     private long previousTime = 0; //in seconds
 
-    private double weighting = 1;
+    private double weighting = 0.85;
 
     @Override
     public Command defaultAutoCommand() {
@@ -94,6 +94,13 @@ public class MecanumDriveBase extends Subsystem {
         Hardware.instance.leftFrontDriveMotor.setPower(weighting * (wantedFlBrSpeed + wantedTurnSpeed));
         Hardware.instance.rightFrontDriveMotor.setPower(weighting * (wantedFrBlSpeed - wantedTurnSpeed));
         Hardware.instance.leftBackDriveMotor.setPower(weighting * (wantedFrBlSpeed + wantedTurnSpeed));
+    }
+
+    public void stopMotors() {
+        Hardware.instance.rightBackDriveMotor.setPower(0);
+        Hardware.instance.leftFrontDriveMotor.setPower(0);
+        Hardware.instance.rightFrontDriveMotor.setPower(0);
+        Hardware.instance.leftBackDriveMotor.setPower(0);
     }
 
 }

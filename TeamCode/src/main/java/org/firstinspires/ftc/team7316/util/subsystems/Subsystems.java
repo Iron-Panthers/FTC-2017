@@ -12,6 +12,7 @@ public class Subsystems {
 
     public MecanumDriveBase driveBase;
     public GlyphIntake glyphIntake;
+    public JewelArm jewelArm;
 
     private Subsystems () {
 
@@ -19,6 +20,7 @@ public class Subsystems {
 
         glyphIntake = new GlyphIntake();
 
+        jewelArm = new JewelArm();
     }
 
     public static void createSubsystems() {
