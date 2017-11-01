@@ -28,7 +28,11 @@ public class GlyphIntakeJoystick extends Command {
 
     @Override
     public void loop() {
-        this.intake.setIntakePower(OI.instance.gp2.left_stick.getY() * Constants.INTAKE_POWER_WEIGHTING);
+        if(OI.instance.gp2.left_stick.getY() > 0) {
+            this.intake.setIntakePower(OI.instance.gp2.left_stick.getY()); //faster outtaking
+        } else {
+            this.intake.setIntakePower(OI.instance.gp2.left_stick.getY() * Constants.INTAKE_POWER_WEIGHTING);
+        }
         this.intake.setServoPosition(OI.instance.gp2.right_stick.getX());
         // JANKJANKJANK
         if(OI.instance.gp2.dp_up.state()) {
