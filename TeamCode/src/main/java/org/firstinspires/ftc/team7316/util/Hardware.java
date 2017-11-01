@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.team7316.util;
 
-import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.hardware.bosch.BNO055IMU;
@@ -43,10 +42,10 @@ public class Hardware {
 
     private static final String GYRO_NAME = "gyro";
 
-    public DcMotor leftFrontDriveMotor;
-    public DcMotor rightFrontDriveMotor;
-    public DcMotor leftBackDriveMotor;
-    public DcMotor rightBackDriveMotor;
+    public DcMotor frontLeftDriveMotor;
+    public DcMotor frontRightDriveMotor;
+    public DcMotor backLeftDriveMotor;
+    public DcMotor backRightDriveMotor;
 
     public DcMotor rightIntakeMotor;
     public DcMotor leftIntakeMotor;
@@ -66,23 +65,23 @@ public class Hardware {
     public Hardware (HardwareMap map) {
 
         //drive motors
-        leftFrontDriveMotor = map.dcMotor.get(LEFT_FRONT_DRIVE_MOTOR_NAME);
-        leftFrontDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        leftFrontDriveMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftFrontDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontLeftDriveMotor = map.dcMotor.get(LEFT_FRONT_DRIVE_MOTOR_NAME);
+        frontLeftDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeftDriveMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontLeftDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        rightFrontDriveMotor = map.dcMotor.get(RIGHT_FRONT_DRIVE_MOTOR_NAME);
-        rightFrontDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightFrontDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontRightDriveMotor = map.dcMotor.get(RIGHT_FRONT_DRIVE_MOTOR_NAME);
+        frontRightDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRightDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        leftBackDriveMotor = map.dcMotor.get(LEFT_BACK_DRIVE_MOTOR_NAME);
-        leftBackDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        leftBackDriveMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftBackDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backLeftDriveMotor = map.dcMotor.get(LEFT_BACK_DRIVE_MOTOR_NAME);
+        backLeftDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backLeftDriveMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        backLeftDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        rightBackDriveMotor = map.dcMotor.get(RIGHT_BACK_DRIVE_MOTOR_NAME);
-        rightBackDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightBackDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backRightDriveMotor = map.dcMotor.get(RIGHT_BACK_DRIVE_MOTOR_NAME);
+        backRightDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRightDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //intake hardware
         rightIntakeMotor = map.dcMotor.get(RIGHT_INTAKE_MOTOR_NAME);

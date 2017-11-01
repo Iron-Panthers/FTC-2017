@@ -15,11 +15,11 @@ public class PID {
         this.d = d;
     }
 
-    public double newError(double error) {
+    public double newError(double error, double deltaT) {
 
         this.sum += error;
 
-        double delta = error - this.previous;
+        double delta = (error - this.previous) / deltaT;
         this.previous = error;
 
         double out = p * error + i * sum + d * delta;
