@@ -29,11 +29,12 @@ public class DriveDistance extends Command {
     public void init() {
         Subsystems.instance.driveBase.stopMotors();
         Subsystems.instance.driveBase.setMotorTargets(distance);
+        Subsystems.instance.driveBase.setMotorModeDistance();
     }
 
     @Override
     public void loop() {
-        Subsystems.instance.driveBase.driveWithSpeedsPID(power);
+        Subsystems.instance.driveBase.runMotorsDistance(power);
     }
 
     @Override
@@ -44,5 +45,6 @@ public class DriveDistance extends Command {
     @Override
     protected void end() {
         Subsystems.instance.driveBase.stopMotors();
+        Subsystems.instance.driveBase.resetMotorModes();
     }
 }

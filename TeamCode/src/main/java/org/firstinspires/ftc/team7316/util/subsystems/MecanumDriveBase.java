@@ -1,6 +1,13 @@
 package org.firstinspires.ftc.team7316.util.subsystems;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.configuration.MotorConfigurationType;
+
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AngularVelocity;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.PID;
 import org.firstinspires.ftc.team7316.util.Util;
@@ -27,14 +34,14 @@ public class MecanumDriveBase extends Subsystem {
     private int targetFrTicks = 0;
     private int targetBlTicks = 0;
     private int targetBrTicks = 0;
+    private double targetAngle = 0;
 
     private double wantedTurnSpeed = 0;
 
     private PID gyroPID;
     private double wantedOmega; //in degrees per second
 
-    private long previousTime = 0;
-    private long currentTime = 0;
+    private double previousTime = 0;
 
     private double weighting = 0.9;
 
@@ -42,9 +49,6 @@ public class MecanumDriveBase extends Subsystem {
         fR_bL_PID = new PID(Constants.encoderP, Constants.encoderI, Constants.encoderD);
         fL_bR_PID = new PID(Constants.encoderP, Constants.encoderI, Constants.encoderD);
         gyroPID = new PID(Constants.gyroP, Constants.gyroI, Constants.gyroD);
-
-        previousTime = System.currentTimeMillis() / 1000;
-        currentTime = (System.currentTimeMillis() + 1) / 1000; //xd
     }
 
     @Override
@@ -109,6 +113,33 @@ public class MecanumDriveBase extends Subsystem {
         targetBrTicks = Hardware.instance.backRightDriveMotor.getCurrentPosition() + ticks;
     }
 
+    public void setGyroTarget(double degrees) {
+        targetAngle = Hardware.instance.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle + degrees;
+    }
+
+    public void resetPrevioustime() {
+        previousTime = System.currentTimeMillis() / 1000;
+    }
+
+    public void resetMotorModes() {
+        Hardware.instance.frontRightDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        Hardware.instance.frontLeftDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        Hardware.instance.backRightDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        Hardware.instance.backLeftDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    }
+
+    public void setMotorModeDistance() {
+        Hardware.instance.frontRightDriveMotor.setTargetPosition(targetFrTicks);
+        Hardware.instance.frontLeftDriveMotor.setTargetPosition(targetFlTicks);
+        Hardware.instance.backRightDriveMotor.setTargetPosition(targetBrTicks);
+        Hardware.instance.backLeftDriveMotor.setTargetPosition(targetBlTicks);
+
+        Hardware.instance.frontRightDriveMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        Hardware.instance.frontLeftDriveMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        Hardware.instance.backRightDriveMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        Hardware.instance.backLeftDriveMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+
     //errors
     private int fR_Error() {
         int fRError = Hardware.instance.frontRightDriveMotor.getCurrentPosition();
@@ -135,18 +166,11 @@ public class MecanumDriveBase extends Subsystem {
     }
 
     private double gyroError() {
-        //New gyro has some cool beans return types
+        double currentAngle = Hardware.instance.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
 
-        //Position angle = Hardware.instance.gyro.getPosition();
-        //double currentangle = angle.z;
-        AngularVelocity angVelocity = Hardware.instance.gyro.getAngularVelocity(); //radians per second apparently
-        double currentOmega = angVelocity.zRotationRate;
-        currentOmega *= 180 / Math.PI;
+        double dif = (targetAngle - currentAngle);
 
-        double dif = (wantedOmega - currentOmega);
-
-        //return Util.wrap(dif);
-        return 0;
+        return Util.wrap(dif);
     }
 
     private boolean withinError(int target, int error) {
@@ -156,7 +180,7 @@ public class MecanumDriveBase extends Subsystem {
     public boolean completedDistance() {
         //fix this please
         return (withinError(targetFrTicks, fR_Error()) && withinError(targetFlTicks, fL_Error()))
-                || (withinError(targetBrTicks, bR_Error()) && withinError(targetBlTicks, bL_Error()));
+                && (withinError(targetBrTicks, bR_Error()) && withinError(targetBlTicks, bL_Error()));
     }
 
     private double pidToMotorPower(double out) {
@@ -165,8 +189,8 @@ public class MecanumDriveBase extends Subsystem {
 
         if (absOut > 1) {
             absOut = mult;
-        } else if (absOut < Constants.DRIVER_MOTOR_DEADZONE) {
-            absOut = Constants.DRIVER_MOTOR_DEADZONE * mult;
+        } else if (absOut < Constants.FORWARD_MOTOR_DEADZONE) {
+            absOut = Constants.FORWARD_MOTOR_DEADZONE * mult;
         } else {
             absOut = out;
         }
@@ -175,9 +199,16 @@ public class MecanumDriveBase extends Subsystem {
     }
 
     //driving
+    public void runMotorsDistance(double power) {
+        Hardware.instance.backRightDriveMotor.setPower(power);
+        Hardware.instance.frontLeftDriveMotor.setPower(power);
+        Hardware.instance.frontRightDriveMotor.setPower(power);
+        Hardware.instance.backLeftDriveMotor.setPower(power);
+    }
+
     public void driveWithSpeedsPID(double power) {
 
-        currentTime = System.currentTimeMillis() / 1000;
+        double currentTime = System.currentTimeMillis() / 1000;
         double deltaT = currentTime - previousTime;
 
         double fR_bL_Pwr = pidToMotorPower(this.fR_bL_PID.newError(((fR_Error() + bL_Error()) / 2), deltaT));
@@ -185,19 +216,25 @@ public class MecanumDriveBase extends Subsystem {
 
         double gyro_Pwr = pidToMotorPower(this.gyroPID.newError(gyroError(), deltaT));
 
-        previousTime = currentTime;
+        Hardware.log("fR_error", fR_Error());
+        Hardware.log("fL_error", fL_Error());
+        Hardware.log("bR_error", bR_Error());
+        Hardware.log("bL_error", bL_Error());
+        Hardware.log("fR_bL_Pwr", fR_bL_Pwr);
+        Hardware.log("fL_bR_Pwr", fL_bR_Pwr);
 
-        Hardware.instance.backRightDriveMotor.setPower(power * weighting * (fL_bR_Pwr + gyro_Pwr));
-        Hardware.instance.frontLeftDriveMotor.setPower(power * weighting * (fL_bR_Pwr - gyro_Pwr));
-        Hardware.instance.frontRightDriveMotor.setPower(power * weighting * (fR_bL_Pwr + gyro_Pwr));
-        Hardware.instance.backLeftDriveMotor.setPower(power * weighting * (fR_bL_Pwr - gyro_Pwr));
+        previousTime = currentTime;
+        Hardware.instance.backRightDriveMotor.setPower(power * (fL_bR_Pwr - gyro_Pwr));
+        Hardware.instance.frontLeftDriveMotor.setPower(power * (fL_bR_Pwr + gyro_Pwr));
+        Hardware.instance.frontRightDriveMotor.setPower(power * (fR_bL_Pwr - gyro_Pwr));
+        Hardware.instance.backLeftDriveMotor.setPower(power * (fR_bL_Pwr + gyro_Pwr));
     }
 
     public void driveWithSpeeds() {
-        Hardware.instance.backRightDriveMotor.setPower(weighting * (wantedFlBrSpeed + wantedTurnSpeed));
-        Hardware.instance.frontLeftDriveMotor.setPower(weighting * (wantedFlBrSpeed - wantedTurnSpeed));
-        Hardware.instance.frontRightDriveMotor.setPower(weighting * (wantedFrBlSpeed + wantedTurnSpeed));
-        Hardware.instance.backLeftDriveMotor.setPower(weighting * (wantedFrBlSpeed - wantedTurnSpeed));
+        Hardware.instance.backRightDriveMotor.setPower(weighting * (wantedFlBrSpeed - wantedTurnSpeed));
+        Hardware.instance.frontLeftDriveMotor.setPower(weighting * (wantedFlBrSpeed + wantedTurnSpeed));
+        Hardware.instance.frontRightDriveMotor.setPower(weighting * (wantedFrBlSpeed - wantedTurnSpeed));
+        Hardware.instance.backLeftDriveMotor.setPower(weighting * (wantedFrBlSpeed + wantedTurnSpeed));
     }
 
     public void stopMotors() {

@@ -24,6 +24,7 @@ public class BlueWackJewel extends BaseOpMode {
 
     @Override
     public void onLoop() {
-
+        Hardware.log("blue", Hardware.instance.colorsensor.blue());
+        Hardware.log("red", Hardware.instance.colorsensor.red());
     }
 }

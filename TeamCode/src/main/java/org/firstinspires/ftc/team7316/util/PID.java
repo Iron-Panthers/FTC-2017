@@ -19,10 +19,11 @@ public class PID {
 
         this.sum += error;
 
-        double delta = (error - this.previous) / deltaT;
+        double delta = (error - this.previous) / deltaT; // I don't think d is for position pid?
         this.previous = error;
 
-        double out = p * error + i * sum + d * delta;
+        //double out = p * error + i * sum + d * delta;
+        double out = p * error + i * sum;
 
         return out;
     }
