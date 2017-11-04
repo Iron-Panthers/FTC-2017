@@ -14,6 +14,7 @@ import org.firstinspires.ftc.team7316.util.Util;
 import org.firstinspires.ftc.team7316.util.commands.BlankCommand;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.Hardware;
+import org.firstinspires.ftc.team7316.util.commands.drive.DriveJoystickTesting;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveWithJoystick;
 
 /**
@@ -58,7 +59,7 @@ public class MecanumDriveBase extends Subsystem {
 
     @Override
     public Command defaultTeleopCommand() {
-        return new DriveWithJoystick();
+        return new DriveJoystickTesting();
     }
 
     //setters

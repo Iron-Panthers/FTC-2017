@@ -26,4 +26,6 @@ public class Buffer {
         return sum/buffer.length;
     }
 
+    public int getIndex() { return replaceIndex; }
+
 }

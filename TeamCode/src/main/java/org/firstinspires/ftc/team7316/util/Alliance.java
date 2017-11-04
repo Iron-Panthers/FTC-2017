@@ -10,17 +10,18 @@ public enum Alliance {
 
     /**
      * Check if good good
-     * @param sensor the sensor to check if good good
+     * @param bluesum aggregate blue values from color sensor
+     * @param redsum aggregate red values from color sensor
      * @return is good good or not is good good
      */
 
     // for jewel auto hitting jewel by driving
-    public boolean shouldHitForward(ColorSensor sensor) {
+    public boolean shouldHitForward(double redsum, double bluesum) {
         switch (this) {
             case BLUE:
-                return sensor.blue() - sensor.red() >= Constants.COLOR_DIFFERENCE;
+                return bluesum - redsum >= Constants.COLOR_DIFFERENCE;
             case RED:
-                return sensor.red() - sensor.blue() >= Constants.COLOR_DIFFERENCE;
+                return redsum - bluesum >= Constants.COLOR_DIFFERENCE;
         }
         throw new IllegalArgumentException("Something wrong happened in enum Alliance even though nothing wrong should have happened");
     }

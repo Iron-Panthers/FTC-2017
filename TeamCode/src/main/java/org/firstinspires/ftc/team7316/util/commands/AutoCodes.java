@@ -2,6 +2,7 @@ package org.firstinspires.ftc.team7316.util.commands;
 
 import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Hardware;
+import org.firstinspires.ftc.team7316.util.commands.drive.DriveDistance;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
 import org.firstinspires.ftc.team7316.util.commands.flow.SequentialCommand;
 import org.firstinspires.ftc.team7316.util.subsystems.JewelArm;
@@ -29,5 +30,10 @@ public class AutoCodes {
         MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
         Command[] cmds = {movearmout, wackjewel, movearmin};
         return new SequentialCommand(cmds);
+    }
+
+    public static SequentialCommand driveStraight(double distance, double power) {
+        DriveDistance drive = new DriveDistance(distance, power);
+        return new SequentialCommand(drive);
     }
 }

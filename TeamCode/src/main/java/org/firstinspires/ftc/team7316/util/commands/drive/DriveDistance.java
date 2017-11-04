@@ -13,16 +13,14 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 public class DriveDistance extends Command {
 
     private int distance; //currently in ticks
-    private double angle;
     private double power;
 
 
     //parameter is in inches
-    public DriveDistance(double distance, double angle, double power) {
+    public DriveDistance(double distance, double power) {
         requires(Subsystems.instance.driveBase);
         this.distance = (int)(Constants.ENCODER_TICK_PER_REV * distance / Constants.WHEEL_CIRCUMFERENCE);
         this.power = power;
-        this.angle = angle;
     }
 
     @Override

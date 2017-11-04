@@ -41,7 +41,7 @@ public class AggregrateColorSensor extends Command {
 
     @Override
     public boolean shouldRemove() {
-        return false;
+        return blueSum.getIndex() == bufferSize;
     }
 
     @Override

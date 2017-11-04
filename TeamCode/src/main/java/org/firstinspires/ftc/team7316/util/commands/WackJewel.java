@@ -15,6 +15,7 @@ public class WackJewel extends Command {
 
     private Alliance alliance;
     private DriveDistance drivecommand;
+    private AggregrateColorSensor colorcommand;
 
     public WackJewel(Alliance alliance) {
         requires(Subsystems.instance.jewelArm);
@@ -23,11 +24,17 @@ public class WackJewel extends Command {
 
     @Override
     public void init() {
-        if(alliance.shouldHitForward(Hardware.instance.colorsensor)) {
-            drivecommand = new DriveDistance(3, 0, 0.5);
+        colorcommand = new AggregrateColorSensor(Hardware.instance.colorsensor);
+        colorcommand.init();
+        while (!colorcommand.shouldRemove()) {
+            colorcommand.loop();
+        }
+
+        if(alliance.shouldHitForward(colorcommand.sumR(), colorcommand.sumB())) {
+            drivecommand = new DriveDistance(3, 0.5);
         }
         else {
-            drivecommand = new DriveDistance(-3, 0, 0.5);
+            drivecommand = new DriveDistance(-3, 0.5);
         }
         drivecommand.init();
     }
