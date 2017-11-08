@@ -107,7 +107,7 @@ public class Hardware {
 
         //jewel arm hardware
         rightJewelArm = map.servo.get(RIGHT_JEWEL_ARM_NAME);
-        colorsensor = map.colorSensor.get(COLOR_SENSOR_NAME);
+        //colorsensor = map.colorSensor.get(COLOR_SENSOR_NAME);
 
 
         BNO055IMU.Parameters gyroParams = new BNO055IMU.Parameters();
