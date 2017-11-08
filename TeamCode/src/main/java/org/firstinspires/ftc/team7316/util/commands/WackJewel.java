@@ -3,9 +3,8 @@ package org.firstinspires.ftc.team7316.util.commands;
 import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveDistance;
+import org.firstinspires.ftc.team7316.util.sensors.ColorWrapper;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
-
-import java.util.ArrayList;
 
 /**
  * Created by jerry on 10/28/17.
@@ -15,22 +14,20 @@ public class WackJewel extends Command {
 
     private Alliance alliance;
     private DriveDistance drivecommand;
-    private AggregrateColorSensor colorcommand;
+    private ColorWrapper colorWrapper;
 
     public WackJewel(Alliance alliance) {
         requires(Subsystems.instance.jewelArm);
         this.alliance = alliance;
+        colorWrapper = new ColorWrapper(Hardware.instance.colorsensor);
     }
 
     @Override
     public void init() {
-        colorcommand = new AggregrateColorSensor(Hardware.instance.colorsensor);
-        colorcommand.init();
-        while (!colorcommand.shouldRemove()) {
-            colorcommand.loop();
-        }
 
-        if(alliance.shouldHitForward(colorcommand.sumR(), colorcommand.sumB())) {
+        colorWrapper.run();
+
+        if(alliance.shouldHitForward(colorWrapper.sumR(), colorWrapper.sumB())) {
             drivecommand = new DriveDistance(3, 0.5);
         }
         else {

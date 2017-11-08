@@ -59,7 +59,7 @@ public class MecanumDriveBase extends Subsystem {
 
     @Override
     public Command defaultTeleopCommand() {
-        return new DriveJoystickTesting();
+        return new DriveWithJoystick();
     }
 
     //setters
@@ -202,9 +202,9 @@ public class MecanumDriveBase extends Subsystem {
     //driving
     public void runMotorsDistance(double power) {
         Hardware.instance.backRightDriveMotor.setPower(power);
-        Hardware.instance.frontLeftDriveMotor.setPower(power);
+        Hardware.instance.frontLeftDriveMotor.setPower(-power);
         Hardware.instance.frontRightDriveMotor.setPower(power);
-        Hardware.instance.backLeftDriveMotor.setPower(power);
+        Hardware.instance.backLeftDriveMotor.setPower(-power);
     }
 
     public void driveWithSpeedsPID(double power) {

@@ -16,7 +16,7 @@ public class DriveDistance extends Command {
     private double power;
 
 
-    //parameter is in inches
+    //distance is in inches
     public DriveDistance(double distance, double power) {
         requires(Subsystems.instance.driveBase);
         this.distance = (int)(Constants.ENCODER_TICK_PER_REV * distance / Constants.WHEEL_CIRCUMFERENCE);

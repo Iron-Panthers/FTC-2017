@@ -1,52 +1,42 @@
-package org.firstinspires.ftc.team7316.util.commands;
+package org.firstinspires.ftc.team7316.util.sensors;
 
 import com.qualcomm.robotcore.hardware.ColorSensor;
 
 import org.firstinspires.ftc.team7316.util.Buffer;
-import org.firstinspires.ftc.team7316.util.subsystems.JewelArm;
-import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
+import org.firstinspires.ftc.team7316.util.Hardware;
 
 /**
- * Created by jerry on 10/26/17.
+ * Created by jerry on 11/7/17.
  */
 
-public class AggregrateColorSensor extends Command {
+public class ColorWrapper {
 
     private Buffer redSum;
     private Buffer greenSum;
     private Buffer blueSum;
 
-    private final static int bufferSize = 60;
+    private final int bufferSize = 60;
 
     private ColorSensor sensor;
 
-    public AggregrateColorSensor(ColorSensor sensor) {
+    public ColorWrapper(ColorSensor sensor) {
         this.sensor = sensor;
-        requires(Subsystems.instance.jewelArm);
-    }
-    
-    @Override
-    public void init() {
         redSum = new Buffer(bufferSize);
         greenSum = new Buffer(bufferSize);
         blueSum = new Buffer(bufferSize);
     }
 
-    @Override
-    public void loop() {
+    public void run() {
+        for(int i = 0; i < bufferSize; i++) {
+            push();
+            System.out.println("iteration " + i);
+        }
+    }
+
+    public void push() {
         redSum.pushValue(this.sensor.red());
         greenSum.pushValue(this.sensor.green());
         blueSum.pushValue(this.sensor.blue());
-    }
-
-    @Override
-    public boolean shouldRemove() {
-        return blueSum.getIndex() == bufferSize;
-    }
-
-    @Override
-    protected void end() {
-
     }
 
     public double sumR() {

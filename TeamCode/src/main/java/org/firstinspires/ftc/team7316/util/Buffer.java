@@ -6,6 +6,7 @@ package org.firstinspires.ftc.team7316.util;
 public class Buffer {
     private double[] buffer;
     private int replaceIndex = 0;
+    private int loops = 0;
     public double sum = 0;
 
     public Buffer(int bufferSize) {
@@ -19,6 +20,13 @@ public class Buffer {
         replaceIndex++;
         if (replaceIndex == buffer.length) {
             replaceIndex = 0;
+            loops += 1;
+        }
+    }
+
+    public void clear() {
+        for(int i = 0; i < buffer.length; i++) {
+            buffer[i] = 0;
         }
     }
 
@@ -26,6 +34,6 @@ public class Buffer {
         return sum/buffer.length;
     }
 
-    public int getIndex() { return replaceIndex; }
+    public int getLoops() { return loops; }
 
 }
