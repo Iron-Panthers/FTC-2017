@@ -5,6 +5,8 @@ import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveDistance;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
 import org.firstinspires.ftc.team7316.util.commands.flow.SequentialCommand;
+import org.firstinspires.ftc.team7316.util.commands.turn.TurnAccurate;
+import org.firstinspires.ftc.team7316.util.commands.turn.TurnGyroPID;
 import org.firstinspires.ftc.team7316.util.subsystems.JewelArm;
 
 import java.util.ArrayList;
@@ -35,5 +37,12 @@ public class AutoCodes {
     public static SequentialCommand driveStraight(double distance, double power) {
         DriveDistance drive = new DriveDistance(distance, power);
         return new SequentialCommand(drive);
+    }
+
+    public static SequentialCommand driveStraightTurn(double distance, int angle, double power) {
+        //DriveDistance drive = new DriveDistance(distance, power);
+        TurnGyroPID turn = new TurnGyroPID(angle);
+        Command[] cmds = {turn};
+        return new SequentialCommand(cmds);
     }
 }

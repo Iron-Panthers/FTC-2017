@@ -96,7 +96,7 @@ public class MecanumDriveBase extends Subsystem {
         double y = wantedSpeed * Math.cos(wantedMovementAngle);
         double x = wantedSpeed * Math.sin(wantedMovementAngle);
 
-        double fL_bRpower = Constants.sqrt2 * (y + (x-y)/2); //length of da vector
+        double fL_bRpower = Constants.sqrt2 * (y + (x-y)/2); //length of the vector
         double fR_bLpower = -Constants.sqrt2 * ((x-y)/2); //again
 
         Hardware.log("front left back right", fL_bRpower);
@@ -108,9 +108,9 @@ public class MecanumDriveBase extends Subsystem {
     }
 
     public void setMotorTargets(int ticks) {
-        targetFlTicks = Hardware.instance.frontLeftDriveMotor.getCurrentPosition() - ticks;
+        targetFlTicks = Hardware.instance.frontLeftDriveMotor.getCurrentPosition() + ticks;
         targetFrTicks = Hardware.instance.frontRightDriveMotor.getCurrentPosition() + ticks;
-        targetBlTicks = Hardware.instance.backLeftDriveMotor.getCurrentPosition() - ticks;
+        targetBlTicks = Hardware.instance.backLeftDriveMotor.getCurrentPosition() + ticks;
         targetBrTicks = Hardware.instance.backRightDriveMotor.getCurrentPosition() + ticks;
     }
 
@@ -202,9 +202,16 @@ public class MecanumDriveBase extends Subsystem {
     //driving
     public void runMotorsDistance(double power) {
         Hardware.instance.backRightDriveMotor.setPower(power);
-        Hardware.instance.frontLeftDriveMotor.setPower(-power);
+        Hardware.instance.frontLeftDriveMotor.setPower(power);
         Hardware.instance.frontRightDriveMotor.setPower(power);
-        Hardware.instance.backLeftDriveMotor.setPower(-power);
+        Hardware.instance.backLeftDriveMotor.setPower(power);
+    }
+
+    public void turnMotors(double power) {
+        Hardware.instance.backRightDriveMotor.setPower(-power);
+        Hardware.instance.frontLeftDriveMotor.setPower(power);
+        Hardware.instance.frontRightDriveMotor.setPower(-power);
+        Hardware.instance.backLeftDriveMotor.setPower(power);
     }
 
     public void driveWithSpeedsPID(double power) {

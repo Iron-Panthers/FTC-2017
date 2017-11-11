@@ -14,6 +14,8 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 public class DriveWithJoystick extends Command {
 
+    private double slow_multiplier = 1;
+
     public DriveWithJoystick() {
         requires(Subsystems.instance.driveBase);
     }
@@ -58,8 +60,11 @@ public class DriveWithJoystick extends Command {
             //unmodified speed is very speedy
         }
         else {
-            moveSpeed *= Constants.DRIVE_SLOW_MULTIPLIER;
-            turnSpeed *= Constants.DRIVE_SLOW_MULTIPLIER;
+            double strafeMultiplier = 1 - Constants.DRIVE_SLOW_MULTIPLIER;
+            double offSet = Constants.DRIVE_SLOW_MULTIPLIER;
+            slow_multiplier = Math.abs(strafeMultiplier * Math.sin(moveDir)) + offSet;
+            moveSpeed *= slow_multiplier;
+            turnSpeed *= slow_multiplier;
         }
 
         Subsystems.instance.driveBase.setWantedTurnSpeed(turnSpeed);

@@ -19,12 +19,11 @@ public class WackJewel extends Command {
     public WackJewel(Alliance alliance) {
         requires(Subsystems.instance.jewelArm);
         this.alliance = alliance;
-        colorWrapper = new ColorWrapper(Hardware.instance.colorsensor);
+        colorWrapper = Hardware.instance.colorWrapper;
     }
 
     @Override
     public void init() {
-
         colorWrapper.run();
 
         if(alliance.shouldHitForward(colorWrapper.sumR(), colorWrapper.sumB())) {
@@ -33,6 +32,7 @@ public class WackJewel extends Command {
         else {
             drivecommand = new DriveDistance(-3, 0.5);
         }
+
         drivecommand.init();
     }
 

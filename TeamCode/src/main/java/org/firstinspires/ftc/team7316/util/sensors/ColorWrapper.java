@@ -29,7 +29,6 @@ public class ColorWrapper {
     public void run() {
         for(int i = 0; i < bufferSize; i++) {
             push();
-            System.out.println("iteration " + i);
         }
     }
 

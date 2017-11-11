@@ -6,7 +6,7 @@ package org.firstinspires.ftc.team7316.util;
 public class Buffer {
     private double[] buffer;
     private int replaceIndex = 0;
-    private int loops = 0;
+    public int loops = 0;
     public double sum = 0;
 
     public Buffer(int bufferSize) {

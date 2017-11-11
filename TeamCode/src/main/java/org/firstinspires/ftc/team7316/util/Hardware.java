@@ -7,9 +7,12 @@ import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.team7316.util.sensors.ColorWrapper;
+import org.firstinspires.ftc.team7316.util.sensors.GyroWrapper;
 
 /**
  * Created by andrew on 9/15/16.
@@ -59,8 +62,10 @@ public class Hardware {
 
     public Servo rightJewelArm;
     public ColorSensor colorsensor;
+    public ColorWrapper colorWrapper;
 
     public BNO055IMU gyro;
+    public GyroWrapper gyroWrapper;
 
     public Hardware (HardwareMap map) {
 
@@ -107,7 +112,8 @@ public class Hardware {
 
         //jewel arm hardware
         rightJewelArm = map.servo.get(RIGHT_JEWEL_ARM_NAME);
-        //colorsensor = map.colorSensor.get(COLOR_SENSOR_NAME);
+        colorsensor = map.colorSensor.get(COLOR_SENSOR_NAME);
+        colorsensor.enableLed(false);
 
 
         BNO055IMU.Parameters gyroParams = new BNO055IMU.Parameters();
@@ -120,6 +126,9 @@ public class Hardware {
 
         gyro = map.get(BNO055IMU.class, GYRO_NAME);
         gyro.initialize(gyroParams);
+
+        colorWrapper = new ColorWrapper(colorsensor);
+        gyroWrapper = new GyroWrapper(gyro);
 
         //Scheduler.instance.addTask(frontSideInfaredSensor);
     }

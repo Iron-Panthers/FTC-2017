@@ -14,10 +14,11 @@ import org.firstinspires.ftc.team7316.util.commands.AutoCodes;
 
 @Autonomous(name = "drivedistancetest")
 public class DriveDistanceTest extends BaseOpMode {
+
     @Override
     public void onInit() {
         Scheduler.inTeleop = false;
-        Scheduler.instance.add(AutoCodes.driveStraight(10, 1));
+        Scheduler.instance.add(AutoCodes.driveStraight(10, 0.5));
     }
 
     @Override
