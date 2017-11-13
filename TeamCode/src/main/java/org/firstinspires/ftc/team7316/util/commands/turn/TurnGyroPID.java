@@ -30,10 +30,7 @@ public class TurnGyroPID extends Command {
     private double target;
     public double sumError, lastError, deltaError;
 
-    /**
-     *
-     * @param turnAngle the amount to turn
-     */
+    /** @param turnAngle the amount to turn */
     public TurnGyroPID(double turnAngle) {
         requires(Subsystems.instance.driveBase);
 
@@ -49,22 +46,23 @@ public class TurnGyroPID extends Command {
         deltaError = 0;
         timer.reset();
         target = turnAngle;
-        lastError = Util.wrap(target - gyro.getHeading());
+        lastError = error();
     }
 
     @Override
     public void loop() {
-        double deltaTime = timer.time();
-        double error = Util.wrap(target - gyro.getHeading());
-        deltaError = (error - lastError) / deltaTime;
-        sumError += deltaError;
+        //double deltaTime = timer.time();
+        double error = error();
+        //deltaError = (error - lastError) / deltaTime;
+        //sumError += deltaError;
 
-        power = P*error + I*sumError + D*deltaError;
+        //power = P*error + I*sumError + D*deltaError;
+        power = P*error;
 
         if (Math.abs(power) > maxPower) {
             power = (power > 0 ? maxPower : -maxPower);
         }
-        if (Math.abs(power) < minPower) {
+        else if (Math.abs(power) < minPower) {
             power = (power > 0 ? minPower : -minPower);
         }
 
@@ -79,7 +77,8 @@ public class TurnGyroPID extends Command {
 
     @Override
     public boolean shouldRemove() {
-        return Math.abs(Util.wrap(target - gyro.getHeading())) <= ERROR_THRESHOLD && Math.abs(deltaError) <= DELTA_THRESHOLD;
+        //return Math.abs(Util.wrap(target - gyro.getHeading())) <= ERROR_THRESHOLD && Math.abs(deltaError) <= DELTA_THRESHOLD;
+        return Math.abs(error()) <= ERROR_THRESHOLD;
     }
 
     @Override
@@ -93,6 +92,6 @@ public class TurnGyroPID extends Command {
      * @return the error
      */
     private double error() {
-        return (gyro.getHeading() + 540 - target) % 360 - 180;
+        return Util.wrap(gyro.getHeading() - target);
     }
 }
