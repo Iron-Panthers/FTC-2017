@@ -6,23 +6,24 @@ package org.firstinspires.ftc.team7316.util;
 
 public class PID {
 
-    private float p, i, d;
-    private float previous, sum;
+    private double p, i, d;
+    private double previous, sum;
 
-    public PID(float p, float i, float d) {
+    public PID(double p, double i, double d) {
         this.p = p;
         this.i = i;
         this.d = d;
     }
 
-    public float newError(float error) {
+    public double newError(double error, double deltaT) {
 
         this.sum += error;
 
-        float delta = error - this.previous;
+        double delta = (error - this.previous) / deltaT; // I don't think d is for position pid?
         this.previous = error;
 
-        float out = p * error + i * sum + d * delta;
+        //double out = p * error + i * sum + d * delta;
+        double out = p * error + i * sum;
 
         return out;
     }

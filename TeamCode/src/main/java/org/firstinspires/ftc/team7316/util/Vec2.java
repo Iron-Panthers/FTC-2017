@@ -40,7 +40,7 @@ public class Vec2 {
     }
 
     public double mag() {
-        return (float) Math.sqrt(mag2());
+        return (double) Math.sqrt(mag2());
     }
 
     public double angle() {

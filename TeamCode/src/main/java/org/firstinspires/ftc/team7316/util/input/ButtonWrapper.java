@@ -24,17 +24,12 @@ public class ButtonWrapper extends Listenable {
     }
 
     @Override
-    protected void subLoop() {
-
-    }
-
-    @Override
     public boolean shouldRemove() {
         return false;
     }
 
     @Override
-    public void terminate() {
+    public void end() {
 
     }
 
@@ -42,4 +37,5 @@ public class ButtonWrapper extends Listenable {
     public boolean state() {
         return gpSource.buttonState(gamepadInput);
     }
+
 }

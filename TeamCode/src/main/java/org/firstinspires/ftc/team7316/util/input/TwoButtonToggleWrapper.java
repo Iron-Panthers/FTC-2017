@@ -1,13 +1,13 @@
 package org.firstinspires.ftc.team7316.util.input;
 
-import org.firstinspires.ftc.team7316.util.Loopable;
+import org.firstinspires.ftc.team7316.util.commands.*;
 
 /**
  * Created by andrew on 11/10/16.
  */
 
 
-public class TwoButtonToggleWrapper implements Loopable {
+public class TwoButtonToggleWrapper extends Command {
 
     public enum TwoButtonToggleState {
         NEUTRAL,
@@ -78,7 +78,7 @@ public class TwoButtonToggleWrapper implements Loopable {
     }
 
     @Override
-    public void terminate() {
+    public void end() {
 
     }
 }

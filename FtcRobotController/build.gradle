@@ -11,7 +11,10 @@ android {
     }
 
     compileSdkVersion 23
+<<<<<<< HEAD
     buildToolsVersion '25.0.3'
+=======
+>>>>>>> auto_testing
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7

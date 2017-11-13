@@ -3,18 +3,15 @@ package org.firstinspires.ftc.team7316.util.input;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.team7316.util.Constants;
-import org.firstinspires.ftc.team7316.util.Loopable;
+import org.firstinspires.ftc.team7316.util.commands.*;
 import org.firstinspires.ftc.team7316.util.Scheduler;
 
 /**
  * Created by Wesley on 9/15/16.
  */
-public class GamepadWrapper implements Loopable {
+public class GamepadWrapper {
 
     private Gamepad gamepad;
-
-    private float multLeft = 1f;
-    private float multRight = 1f;
 
     public JoystickWrapper left_stick, right_stick;
     public AxisWrapper left_axis_y, right_axis_y;
@@ -54,18 +51,18 @@ public class GamepadWrapper implements Loopable {
 
         this.r_trigger = new AxisWrapper(GamepadAxis.L_TRIGGER, this);
 
-        Scheduler.instance.addTask(a_button);
-        Scheduler.instance.addTask(b_button);
-        Scheduler.instance.addTask(x_button);
-        Scheduler.instance.addTask(y_button);
-        Scheduler.instance.addTask(dpLeftWrapper);
-        Scheduler.instance.addTask(dp_right);
-        Scheduler.instance.addTask(dp_down);
-        Scheduler.instance.addTask(dp_up);
-        Scheduler.instance.addTask(left_bumper);
-        Scheduler.instance.addTask(right_bumper);
-        Scheduler.instance.addTask(leftTriggerWrapper);
-        Scheduler.instance.addTask(rightTriggerWrapper);
+        Scheduler.instance.add(a_button);
+        Scheduler.instance.add(b_button);
+        Scheduler.instance.add(x_button);
+        Scheduler.instance.add(y_button);
+        Scheduler.instance.add(dpLeftWrapper);
+        Scheduler.instance.add(dp_right);
+        Scheduler.instance.add(dp_down);
+        Scheduler.instance.add(dp_up);
+        Scheduler.instance.add(left_bumper);
+        Scheduler.instance.add(right_bumper);
+        Scheduler.instance.add(leftTriggerWrapper);
+        Scheduler.instance.add(rightTriggerWrapper);
     }
 
     public boolean buttonState(GamepadButton buttonIndex) {
@@ -84,29 +81,29 @@ public class GamepadWrapper implements Loopable {
         throw new IllegalArgumentException();
     }
 
-    public float axisValue(GamepadAxis axisIndex) {
+    public double axisValue(GamepadAxis axisIndex) {
         switch (axisIndex) {
             case L_STICK_X: return gamepad.left_stick_x;
-            case L_STICK_Y: return deadzone(-gamepad.left_stick_y, multLeft);
+            case L_STICK_Y: return deadzone(-gamepad.left_stick_y);
             case R_STICK_X: return gamepad.right_stick_x;
-            case R_STICK_Y: return deadzone(-gamepad.right_stick_y, multRight);
+            case R_STICK_Y: return deadzone(-gamepad.right_stick_y);
             case L_TRIGGER: return gamepad.left_trigger;
             case R_TRIGGER: return gamepad.right_trigger;
         }
         throw new IllegalArgumentException();
     }
 
-    private float squared(float value) {
-        float result = (float) Math.abs(Math.pow(value, 2));
+    private double squared(double value) {
+        double result = (double) Math.abs(Math.pow(value, 2));
         return value > 0 ? result : -result;
     }
 
-    private float deadzone(float value, float mult) {
+    private double deadzone(double value) {
         if (Math.abs(value) < Constants.JOYSTICK_DRIVE_DEADZONE) {
             return 0;
         } else {
-            float slope = (1 - Constants.DRIVER_MOTOR_DEADZONE) / (1 - Constants.JOYSTICK_DRIVE_DEADZONE) * mult;
-            float preval = slope * (Math.abs(value) - Constants.JOYSTICK_DRIVE_DEADZONE) + Constants.DRIVER_MOTOR_DEADZONE;
+            double slope = (1 - Constants.DRIVER_MOTOR_DEADZONE) / (1 - Constants.JOYSTICK_DRIVE_DEADZONE);
+            double preval = slope * (Math.abs(value) - Constants.JOYSTICK_DRIVE_DEADZONE) + Constants.DRIVER_MOTOR_DEADZONE;
 
             if (value > 0) {
                 return preval;
@@ -115,35 +112,5 @@ public class GamepadWrapper implements Loopable {
             }
 
         }
-    }
-
-    @Override
-    public void init() {
-        multLeft = 1;
-        multRight = 1;
-    }
-
-    @Override
-    public void loop() {
-        if (this.right_bumper.state()) {
-            multRight = 0.1f;
-        } else {
-            multRight = 1;
-        }
-
-        if (this.left_bumper.state()) {
-            multLeft = 0.1f;
-        } else {
-            multLeft = 1;
-        }
-    }
-
-    @Override
-    public boolean shouldRemove() {
-        return false;
-    }
-
-    @Override
-    public void terminate() {
     }
 }

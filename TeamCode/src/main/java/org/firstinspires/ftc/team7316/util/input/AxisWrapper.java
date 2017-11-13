@@ -19,7 +19,7 @@ public class AxisWrapper {
         this(inputName, gpWrapper, 1);
     }
 
-    public float value() {
+    public double value() {
         return gpWrapper.axisValue(inputName);
     }
 

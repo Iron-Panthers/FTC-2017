@@ -2,12 +2,12 @@ package org.firstinspires.ftc.team7316.util.commands.flow;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.team7316.util.Loopable;
+import org.firstinspires.ftc.team7316.util.commands.*;
 
 /**
  * Created by andrew on 11/19/16.
  */
-public class Wait implements Loopable {
+public class Wait extends Command {
 
     private ElapsedTime time;
     private double wantedTime;
@@ -33,7 +33,7 @@ public class Wait implements Loopable {
     }
 
     @Override
-    public void terminate() {
+    public void end() {
 
     }
 }

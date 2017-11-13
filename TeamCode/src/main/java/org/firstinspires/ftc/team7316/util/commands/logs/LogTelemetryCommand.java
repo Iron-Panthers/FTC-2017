@@ -1,13 +1,13 @@
-package org.firstinspires.ftc.team7316.util.commands;
+package org.firstinspires.ftc.team7316.util.commands.logs;
 
-import org.firstinspires.ftc.team7316.util.Loopable;
-import org.firstinspires.ftc.team7316.util.hardware.Hardware;
+import org.firstinspires.ftc.team7316.util.commands.*;
+import org.firstinspires.ftc.team7316.util.Hardware;
 
 /**
  * Created by Maxim on 2/16/2017.
  */
 
-public class LogTelemetryCommand implements Loopable {
+public class LogTelemetryCommand extends Command {
 
     private Object data;
     private String tag;
@@ -32,8 +32,7 @@ public class LogTelemetryCommand implements Loopable {
         return true;
     }
 
-    @Override
-    public void terminate() {
+    @Override     public void end() {
 
     }
 }

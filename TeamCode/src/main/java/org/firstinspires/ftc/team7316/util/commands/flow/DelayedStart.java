@@ -2,19 +2,19 @@ package org.firstinspires.ftc.team7316.util.commands.flow;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.team7316.util.Loopable;
+import org.firstinspires.ftc.team7316.util.commands.*;
 
 /**
  * Created by Maxim on 10/24/2016.
  */
-public class DelayedStart implements Loopable {
+public class DelayedStart extends Command {
 
     Runnable callback;
     ElapsedTime timer;
     double delay;
 
     /**
-     * Create a DelayedStart loopable
+     * Create a DelayedStart Command
      * @param delay in seconds
      * @param callback the callback to run
      */
@@ -39,8 +39,7 @@ public class DelayedStart implements Loopable {
         return timer.seconds() >= delay;
     }
 
-    @Override
-    public void terminate() {
+    @Override     public void end() {
         callback.run();
     }
 }

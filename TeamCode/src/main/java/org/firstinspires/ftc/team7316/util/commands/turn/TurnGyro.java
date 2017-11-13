@@ -3,24 +3,24 @@ package org.firstinspires.ftc.team7316.util.commands.turn;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.GyroSensor;
 
-import org.firstinspires.ftc.team7316.util.Loopable;
+import org.firstinspires.ftc.team7316.util.commands.*;
 
 /**
  * Created by andrew on 11/1/16.
  */
-public class TurnGyro implements Loopable {
+public class TurnGyro extends Command {
 
     protected DcMotor leftMotor;
     protected DcMotor rightMotor;
 
     private GyroSensor gyro;
 
-    private float remainingBearing;
+    private double remainingBearing;
 
     protected double power;
-    protected float deltaBearing;
+    protected double deltaBearing;
 
-    private final float CORRECTION_PERCENT_GYRO = 0.85f;
+    private final double CORRECTION_PERCENT_GYRO = 0.85;
 
     /**
      *
@@ -31,7 +31,7 @@ public class TurnGyro implements Loopable {
      * @param gyro
      */
 
-    public TurnGyro(float deltaBearing, double power, DcMotor leftMotor, DcMotor rightMotor, GyroSensor gyro) { //+power = clockwise
+    public TurnGyro(double deltaBearing, double power, DcMotor leftMotor, DcMotor rightMotor, GyroSensor gyro) { //+power = clockwise
         this.deltaBearing = deltaBearing*CORRECTION_PERCENT_GYRO;
         this.power = power;
         this.leftMotor = leftMotor;
@@ -64,8 +64,7 @@ public class TurnGyro implements Loopable {
         }
     }
 
-    @Override
-    public void terminate() {
+    @Override     public void end() {
         this.leftMotor.setPower(0);
         this.rightMotor.setPower(0);
     }

@@ -1,42 +1,41 @@
 package org.firstinspires.ftc.team7316.util.commands.turn;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.team7316.util.Loopable;
-import org.firstinspires.ftc.team7316.util.hardware.Hardware;
+import org.firstinspires.ftc.team7316.util.Util;
+import org.firstinspires.ftc.team7316.util.commands.*;
+import org.firstinspires.ftc.team7316.util.Hardware;
+import org.firstinspires.ftc.team7316.util.sensors.GyroWrapper;
+import org.firstinspires.ftc.team7316.util.subsystems.MecanumDriveBase;
+import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 /**
  * Turn the robot a specific distance using PID. Stops when the correction speed is under a threshold and
  * the robot's distance from the correct angle is also under a threshold.
  */
-public class TurnGyroPID implements Loopable {
+public class TurnGyroPID extends Command {
 
-    public static final float P = 0.01f, I = 0, D = 0;
-    public static final float ERROR_THRESHOLD = 3, DELTA_THRESHOLD = 0;
-    private static final double maxPower = 0.45;
-    private static final double minPower = 0.2;
+    public static final double P = 0.025f, I = 0, D = 0;
+    public static final double ERROR_THRESHOLD = 5, DELTA_THRESHOLD = 0;
+    private static final double maxPower = 0.4;
+    private static final double minPower = 0.1;
     public double power = 0;
-    private int turnAngle;
+    private double turnAngle;
 
-    private DcMotor left, right;
-    private GyroSensor gyro;
+    private GyroWrapper gyro;
     private ElapsedTime timer;
-    private int target;
-    public float sumError, lastError, deltaError;
+    private double target;
+    public double sumError, lastError, deltaError;
 
-    /**
-     *
-     * @param left
-     * @param right
-     * @param gyro
-     * @param turnAngle the amount to turn
-     */
-    public TurnGyroPID(DcMotor left, DcMotor right, GyroSensor gyro, int turnAngle) {
-        this.left = left;
-        this.right = right;
-        this.gyro = gyro;
+    /** @param turnAngle the amount to turn */
+    public TurnGyroPID(double turnAngle) {
+        requires(Subsystems.instance.driveBase);
+
+        Subsystems.instance.driveBase.resetMotorModes();
+        gyro = new GyroWrapper(Hardware.instance.gyro);
         this.turnAngle = turnAngle;
         this.timer = new ElapsedTime();
     }
@@ -44,47 +43,47 @@ public class TurnGyroPID implements Loopable {
     @Override
     public void init() {
         sumError = 0;
-        lastError = error();
         deltaError = 0;
         timer.reset();
-        gyro.resetZAxisIntegrator();
         target = turnAngle;
+        lastError = error();
     }
 
     @Override
     public void loop() {
-        float deltaTime = (float) timer.time();
-        float error = error();
-        deltaError = (error - lastError) / deltaTime;
-        sumError += deltaError;
+        //double deltaTime = timer.time();
+        double error = error();
+        //deltaError = (error - lastError) / deltaTime;
+        //sumError += deltaError;
 
-        power = P*error + I*sumError + D*deltaError;
+        //power = P*error + I*sumError + D*deltaError;
+        power = P*error;
 
         if (Math.abs(power) > maxPower) {
             power = (power > 0 ? maxPower : -maxPower);
         }
-        if (Math.abs(power) < minPower) {
+        else if (Math.abs(power) < minPower) {
             power = (power > 0 ? minPower : -minPower);
         }
 
-        left.setPower(-power);
-        right.setPower(power);
+        Subsystems.instance.driveBase.turnMotors(power);
 
         lastError = error;
         timer.reset();
 
         Hardware.log(Hardware.tag, power);
+        Hardware.log("gyro target", target);
     }
 
     @Override
     public boolean shouldRemove() {
-        return Math.abs(error()) <= ERROR_THRESHOLD && Math.abs(deltaError) <= DELTA_THRESHOLD;
+        //return Math.abs(Util.wrap(target - gyro.getHeading())) <= ERROR_THRESHOLD && Math.abs(deltaError) <= DELTA_THRESHOLD;
+        return Math.abs(error()) <= ERROR_THRESHOLD;
     }
 
     @Override
-    public void terminate() {
-        left.setPower(0);
-        right.setPower(0);
+    public void end() {
+        Subsystems.instance.driveBase.stopMotors();
     }
 
     /**
@@ -92,8 +91,7 @@ public class TurnGyroPID implements Loopable {
      * Positive angles mean to the right, while negative angles mean to the left.
      * @return the error
      */
-    private int error() {
-            return (gyro.getHeading() + 540 - target) % 360 - 180;
-        }
-
+    private double error() {
+        return Util.wrap(gyro.getHeading() - target);
+    }
 }

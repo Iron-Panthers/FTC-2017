@@ -1,14 +1,16 @@
 package org.firstinspires.ftc.team7316.util.input;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
+import org.firstinspires.ftc.team7316.util.commands.*;
 
 import org.firstinspires.ftc.team7316.util.Listenable;
-import org.firstinspires.ftc.team7316.util.hardware.Hardware;
+import org.firstinspires.ftc.team7316.util.Hardware;
+import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
 
 /**
  * Created by Maxim on 1/31/2017.
  */
-public class DoubleTap extends Listenable implements ButtonListener {
+public class DoubleTap extends Listenable {
 
     private ElapsedTime timer;
     private double delay;
@@ -20,15 +22,22 @@ public class DoubleTap extends Listenable implements ButtonListener {
         this.delay = delay;
     }
 
+
     @Override
     public void init() {
         secondPress = false;
     }
 
     @Override
-    protected void subLoop() {
-        Hardware.log("timer", timer.seconds() < delay);
-        Hardware.log("state", this.state());
+    public void subLoop() {
+        if (state()) {
+            if (timer.seconds() <= delay) {
+                this.secondPress = true;
+            } else {
+                timer.reset();
+                this.secondPress = false;
+            }
+        }
     }
 
     @Override
@@ -37,33 +46,13 @@ public class DoubleTap extends Listenable implements ButtonListener {
     }
 
     @Override
-    public void terminate() {
+    public void end() {
 
     }
 
     @Override
     public boolean state() {
         return secondPress;
-    }
-
-    @Override
-    public void onPressed() {
-        if (timer.seconds() <= delay) {
-            this.secondPress = true;
-        } else {
-            timer.reset();
-            this.secondPress = false;
-        }
-
-        /*if (timer.seconds() <= delay) {
-            state = true;
-        } else {
-            timer.reset();
-        }*/
-    }
-
-    @Override
-    public void onReleased() {
     }
 
 }
