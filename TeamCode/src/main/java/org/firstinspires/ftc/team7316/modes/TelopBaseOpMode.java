@@ -11,9 +11,10 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
  * OpMode that initializes Hardware and Scheduler for you. Please use this instead of rewriting the
  * same things over and over again because it's much nicer.
  */
-public abstract class BaseOpMode extends OpMode {
+public abstract class TelopBaseOpMode extends OpMode {
     @Override
     public void init() {
+        Scheduler.inTeleop = true;
         Scheduler.instance.clear();
         Hardware.setHardwareMap(hardwareMap);
         Hardware.setTelemetry(telemetry);

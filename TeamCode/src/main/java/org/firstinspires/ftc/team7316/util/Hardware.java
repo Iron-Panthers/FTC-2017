@@ -45,6 +45,9 @@ public class Hardware {
 
     private static final String GYRO_NAME = "gyro";
 
+    private static boolean colorsensor_offline = false;
+    private static boolean gyro_offline = false;
+
     public DcMotor frontLeftDriveMotor;
     public DcMotor frontRightDriveMotor;
     public DcMotor backLeftDriveMotor;
@@ -112,8 +115,15 @@ public class Hardware {
 
         //jewel arm hardware
         rightJewelArm = map.servo.get(RIGHT_JEWEL_ARM_NAME);
-        colorsensor = map.colorSensor.get(COLOR_SENSOR_NAME);
-        colorsensor.enableLed(false);
+        try {
+            colorsensor = map.colorSensor.get(COLOR_SENSOR_NAME);
+            colorsensor.enableLed(true);
+            colorWrapper = new ColorWrapper(colorsensor);
+            colorsensor_offline = false;
+        }
+        catch (Exception e) {
+            colorsensor_offline = true;
+        }
 
 
         BNO055IMU.Parameters gyroParams = new BNO055IMU.Parameters();
@@ -124,11 +134,15 @@ public class Hardware {
         gyroParams.loggingTag          = "IMU";
         gyroParams.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
 
-        gyro = map.get(BNO055IMU.class, GYRO_NAME);
-        gyro.initialize(gyroParams);
-
-        colorWrapper = new ColorWrapper(colorsensor);
-        gyroWrapper = new GyroWrapper(gyro);
+        try {
+            gyro = map.get(BNO055IMU.class, GYRO_NAME);
+            gyro.initialize(gyroParams);
+            gyroWrapper = new GyroWrapper(gyro);
+            gyro_offline = false;
+        }
+        catch (Exception e) {
+            gyro_offline = true;
+        }
 
         //Scheduler.instance.addTask(frontSideInfaredSensor);
     }

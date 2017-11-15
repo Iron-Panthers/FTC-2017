@@ -15,7 +15,9 @@ public class ColorWrapper {
     private Buffer greenSum;
     private Buffer blueSum;
 
-    private final int bufferSize = 60;
+    private final int bufferSize = 20;
+
+    public boolean noColor = false;
 
     private ColorSensor sensor;
 
@@ -36,6 +38,10 @@ public class ColorWrapper {
         redSum.pushValue(this.sensor.red());
         greenSum.pushValue(this.sensor.green());
         blueSum.pushValue(this.sensor.blue());
+    }
+
+    public void setNoColor() {
+        noColor = redSum.sum == greenSum.sum;
     }
 
     public double sumR() {

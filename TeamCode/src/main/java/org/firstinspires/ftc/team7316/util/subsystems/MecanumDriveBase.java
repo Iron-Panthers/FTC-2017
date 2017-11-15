@@ -111,7 +111,7 @@ public class MecanumDriveBase extends Subsystem {
         targetFlTicks = Hardware.instance.frontLeftDriveMotor.getCurrentPosition() + ticks;
         targetFrTicks = Hardware.instance.frontRightDriveMotor.getCurrentPosition() + ticks;
         targetBlTicks = Hardware.instance.backLeftDriveMotor.getCurrentPosition() + ticks;
-        targetBrTicks = Hardware.instance.backRightDriveMotor.getCurrentPosition() + ticks;
+        //targetBrTicks = Hardware.instance.backRightDriveMotor.getCurrentPosition() + ticks;
     }
 
     public void setGyroTarget(double degrees) {
@@ -132,12 +132,12 @@ public class MecanumDriveBase extends Subsystem {
     public void setMotorModeDistance() {
         Hardware.instance.frontRightDriveMotor.setTargetPosition(targetFrTicks);
         Hardware.instance.frontLeftDriveMotor.setTargetPosition(targetFlTicks);
-        Hardware.instance.backRightDriveMotor.setTargetPosition(targetBrTicks);
+        //Hardware.instance.backRightDriveMotor.setTargetPosition(targetBrTicks);
         Hardware.instance.backLeftDriveMotor.setTargetPosition(targetBlTicks);
 
         Hardware.instance.frontRightDriveMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         Hardware.instance.frontLeftDriveMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        Hardware.instance.backRightDriveMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //Hardware.instance.backRightDriveMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         Hardware.instance.backLeftDriveMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
@@ -180,8 +180,13 @@ public class MecanumDriveBase extends Subsystem {
 
     public boolean completedDistance() {
         //fix this please
+//        return (withinError(targetFrTicks, fR_Error()) && withinError(targetFlTicks, fL_Error()))
+//                && (withinError(targetBrTicks, bR_Error()) && withinError(targetBlTicks, bL_Error()));
+//        return Hardware.instance.frontLeftDriveMotor.isBusy() || Hardware.instance.frontRightDriveMotor.isBusy()
+//                 || Hardware.instance.backLeftDriveMotor.isBusy();
+
         return (withinError(targetFrTicks, fR_Error()) && withinError(targetFlTicks, fL_Error()))
-                && (withinError(targetBrTicks, bR_Error()) && withinError(targetBlTicks, bL_Error()));
+                 && withinError(targetBlTicks, bL_Error());
     }
 
     private double pidToMotorPower(double out) {
@@ -201,10 +206,12 @@ public class MecanumDriveBase extends Subsystem {
 
     //driving
     public void runMotorsDistance(double power) {
-        Hardware.instance.backRightDriveMotor.setPower(power);
+//        Hardware.instance.backRightDriveMotor.setPower(power);
+        Hardware.instance.backRightDriveMotor.setPower(Hardware.instance.backLeftDriveMotor.getPower());
         Hardware.instance.frontLeftDriveMotor.setPower(power);
         Hardware.instance.frontRightDriveMotor.setPower(power);
         Hardware.instance.backLeftDriveMotor.setPower(power);
+        Hardware.log("flerror", targetFlTicks - Hardware.instance.frontLeftDriveMotor.getCurrentPosition());
     }
 
     public void turnMotors(double power) {

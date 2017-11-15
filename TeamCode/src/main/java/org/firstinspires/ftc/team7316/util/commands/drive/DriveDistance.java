@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.team7316.util.commands.drive;
 
 import org.firstinspires.ftc.team7316.util.Constants;
+import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
@@ -33,6 +34,10 @@ public class DriveDistance extends Command {
     @Override
     public void loop() {
         Subsystems.instance.driveBase.runMotorsDistance(power);
+        Hardware.log("flpower", Hardware.instance.frontLeftDriveMotor.getPower());
+        Hardware.log("frpower", Hardware.instance.frontRightDriveMotor.getPower());
+        Hardware.log("blpower", Hardware.instance.backLeftDriveMotor.getPower());
+        Hardware.log("brpower", Hardware.instance.backRightDriveMotor.getPower());
     }
 
     @Override

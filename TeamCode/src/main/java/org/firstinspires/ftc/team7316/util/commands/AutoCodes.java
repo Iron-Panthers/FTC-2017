@@ -28,9 +28,10 @@ public class AutoCodes {
 
     public static SequentialCommand jewelWack(Alliance alliance) {
         MoveJewelArm movearmout = new MoveJewelArm(JewelArm.JewelArmPosition.OUT);
+        PollColor pollColor = new PollColor();
         WackJewel wackjewel = new WackJewel(alliance);
         MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
-        Command[] cmds = {movearmout, wackjewel, movearmin};
+        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin};
         return new SequentialCommand(cmds);
     }
 

@@ -11,7 +11,7 @@ public class Constants {
     public static final int DRIVE_RPM_MAX = 280; // can change later actual max 320
     public static final double WHEEL_RADIUS = 2; // I THINK THIS IS IN INCHES
     public static final double WHEEL_CIRCUMFERENCE = WHEEL_RADIUS * 2 * Math.PI;
-    public static final double COLOR_DIFFERENCE = 25;
+    public static final double COLOR_DIFFERENCE = 5;
 
     public static final double DRIVE_SLOW_MULTIPLIER  = 0.7;
     public static final double DRIVE_VERY_SLOW_MULTIPLIER = 0.35;

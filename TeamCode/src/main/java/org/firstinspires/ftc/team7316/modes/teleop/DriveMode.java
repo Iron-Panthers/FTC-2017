@@ -5,14 +5,14 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.team7316.modes.BaseOpMode;
+import org.firstinspires.ftc.team7316.modes.TelopBaseOpMode;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.Scheduler;
 
 import java.util.Locale;
 
 @TeleOp(name = "TeleopDrive")
-public class DriveMode extends BaseOpMode {
+public class DriveMode extends TelopBaseOpMode {
 
     //private BNO055IMU imu;
     //private ModernRoboticsI2cGyro gyro;

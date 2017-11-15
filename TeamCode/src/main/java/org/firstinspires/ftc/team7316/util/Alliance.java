@@ -25,4 +25,6 @@ public enum Alliance {
         }
         throw new IllegalArgumentException("Something wrong happened in enum Alliance even though nothing wrong should have happened");
     }
+
+
 }

@@ -18,10 +18,10 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
  */
 public class TurnGyroPID extends Command {
 
-    public static final double P = 0.025f, I = 0, D = 0;
+    public static final double P = 0.023f, I = 0, D = 0;
     public static final double ERROR_THRESHOLD = 5, DELTA_THRESHOLD = 0;
     private static final double maxPower = 0.4;
-    private static final double minPower = 0.1;
+    private static final double minPower = 0.08;
     public double power = 0;
     private double turnAngle;
 
