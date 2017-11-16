@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.team7316.util.hardware;
+package org.firstinspires.ftc.team7316.util.sensors;
 
 import com.vuforia.HINT;
 import com.vuforia.Vuforia;
@@ -16,22 +16,24 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 import org.firstinspires.ftc.team7316.util.Constants;
-import org.firstinspires.ftc.team7316.util.Loopable;
+import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.teamcode.R;
 
 /**
  * Created by jerry on 9/27/17.
  */
 
-public class VuforiaCameraWrapper implements Loopable {
+public class VuforiaCameraWrapper {
 
-    VuforiaLocalizer.Parameters params;
-    VuforiaLocalizer vuforia;
-    VuforiaTrackables relicTrackables;
-    VuforiaTrackable relicTemplate;
+    private VuforiaLocalizer.Parameters params;
+    private VuforiaLocalizer vuforia;
+    private VuforiaTrackables relicTrackables;
+    private VuforiaTrackable relicTemplate;
 
-    @Override
-    public void init() {
+    private double tX, tY, tZ;
+    private double rX, rY, rZ;
+
+    public VuforiaCameraWrapper() {
         params = new VuforiaLocalizer.Parameters(R.id.cameraMonitorViewId);
         params.vuforiaLicenseKey = Constants.vuforiaLicenseKey;
         params.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
@@ -46,8 +48,11 @@ public class VuforiaCameraWrapper implements Loopable {
         relicTrackables.activate();
     }
 
-    @Override
-    public void loop() {
+    public RelicRecoveryVuMark getCipher() {
+        return RelicRecoveryVuMark.from(relicTemplate);
+    }
+
+    public void updatePositions() {
         RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
 
         if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
@@ -70,14 +75,14 @@ public class VuforiaCameraWrapper implements Loopable {
                 Orientation rot = Orientation.getOrientation(pose, AxesReference.EXTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);
 
                 // Extract the X, Y, and Z components of the offset of the target relative to the robot
-                double tX = trans.get(0);
-                double tY = trans.get(1);
-                double tZ = trans.get(2);
+                tX = trans.get(0);
+                tY = trans.get(1);
+                tZ = trans.get(2);
 
                 // Extract the rotational components of the target relative to the robot
-                double rX = rot.firstAngle;
-                double rY = rot.secondAngle;
-                double rZ = rot.thirdAngle;
+                rX = rot.firstAngle;
+                rY = rot.secondAngle;
+                rZ = rot.thirdAngle;
             }
         }
         else {
@@ -85,17 +90,6 @@ public class VuforiaCameraWrapper implements Loopable {
         }
     }
 
-    @Override
-    public boolean shouldRemove() {
-        return false;
-    }
-
-    @Override
-    public void terminate() {
-
-    }
-
-    // for testing probably shout put somewhere else
     private String format(OpenGLMatrix transformationMatrix) {
         return (transformationMatrix != null) ? transformationMatrix.formatAsTransform() : "null";
     }

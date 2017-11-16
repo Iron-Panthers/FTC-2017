@@ -32,7 +32,7 @@ public class AutoCodes {
     }
 
     public static SequentialCommand driveStraight(double distance, double power) {
-        DriveDistance drive = new DriveDistance(distance, power);
+        DriveDistance drive = new DriveDistance(distance);
         return new SequentialCommand(drive);
     }
 
