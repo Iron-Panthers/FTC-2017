@@ -10,30 +10,29 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
  * Created by jerry on 10/28/17.
  */
 
-// right now don't strafe please
 public class DriveDistance extends Command {
 
-    private int distance; //currently in ticks
-    private double power;
+    private int distance; // in ticks
 
-
-    //distance is in inches
-    public DriveDistance(double distance, double power) {
+    /**
+     * @param distance desired distance in inches
+     */
+    public DriveDistance(double distance) {
         requires(Subsystems.instance.driveBase);
         this.distance = (int)(Constants.ENCODER_TICK_PER_REV * distance / Constants.WHEEL_CIRCUMFERENCE);
-        this.power = power;
     }
 
     @Override
     public void init() {
         Subsystems.instance.driveBase.stopMotors();
+        Subsystems.instance.driveBase.resetMotorModes();
+        Subsystems.instance.driveBase.resetEncoders();
         Subsystems.instance.driveBase.setMotorTargets(distance);
-        //Subsystems.instance.driveBase.setMotorModeDistance();
     }
 
     @Override
     public void loop() {
-        Subsystems.instance.driveBase.runMotorsDistance();
+        Subsystems.instance.driveBase.driveWithSpeedsPID();
         Hardware.log("flpower", Hardware.instance.frontLeftDriveMotor.getPower());
         Hardware.log("frpower", Hardware.instance.frontRightDriveMotor.getPower());
         Hardware.log("blpower", Hardware.instance.backLeftDriveMotor.getPower());
@@ -48,6 +47,5 @@ public class DriveDistance extends Command {
     @Override
     protected void end() {
         Subsystems.instance.driveBase.stopMotors();
-        Subsystems.instance.driveBase.resetMotorModes();
     }
 }

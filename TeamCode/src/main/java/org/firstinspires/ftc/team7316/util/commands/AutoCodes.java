@@ -1,15 +1,11 @@
 package org.firstinspires.ftc.team7316.util.commands;
 
 import org.firstinspires.ftc.team7316.util.Alliance;
-import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveDistance;
-import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
 import org.firstinspires.ftc.team7316.util.commands.flow.SequentialCommand;
-import org.firstinspires.ftc.team7316.util.commands.turn.TurnAccurate;
-import org.firstinspires.ftc.team7316.util.commands.turn.TurnGyroPID;
+import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroPID;
+import org.firstinspires.ftc.team7316.util.commands.sensors.PollColor;
 import org.firstinspires.ftc.team7316.util.subsystems.JewelArm;
-
-import java.util.ArrayList;
 
 /**
  * Created by andrew on 11/2/16.

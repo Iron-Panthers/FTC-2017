@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.team7316.util.motorwrappers.DCMotorWrapper;
 import org.firstinspires.ftc.team7316.util.sensors.ColorWrapper;
 import org.firstinspires.ftc.team7316.util.sensors.GyroWrapper;
 
@@ -53,6 +54,11 @@ public class Hardware {
     public DcMotor backLeftDriveMotor;
     public DcMotor backRightDriveMotor;
 
+    public DCMotorWrapper frontLeftDriveMotorWrapper;
+    public DCMotorWrapper frontRightDriveMotorWrapper;
+    public DCMotorWrapper backLeftDriveMotorWrapper;
+    public DCMotorWrapper backRightDriveMotorWrapper;
+
     public DcMotor rightIntakeMotor;
     public DcMotor leftIntakeMotor;
 
@@ -77,19 +83,23 @@ public class Hardware {
         frontLeftDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         frontLeftDriveMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         frontLeftDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontLeftDriveMotorWrapper = new DCMotorWrapper(frontLeftDriveMotor, new PID(Constants.DRIVE_P, Constants.DRIVE_I, Constants.DRIVE_D));
 
         frontRightDriveMotor = map.dcMotor.get(RIGHT_FRONT_DRIVE_MOTOR_NAME);
         frontRightDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         frontRightDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontRightDriveMotorWrapper = new DCMotorWrapper(frontRightDriveMotor, new PID(Constants.DRIVE_P, Constants.DRIVE_I, Constants.DRIVE_D));
 
         backLeftDriveMotor = map.dcMotor.get(LEFT_BACK_DRIVE_MOTOR_NAME);
         backLeftDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backLeftDriveMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeftDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backLeftDriveMotorWrapper = new DCMotorWrapper(backLeftDriveMotor, new PID(Constants.DRIVE_P, Constants.DRIVE_I, Constants.DRIVE_D));
 
         backRightDriveMotor = map.dcMotor.get(RIGHT_BACK_DRIVE_MOTOR_NAME);
         backRightDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backRightDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backRightDriveMotorWrapper = new DCMotorWrapper(backRightDriveMotor, new PID(Constants.DRIVE_P, Constants.DRIVE_I, Constants.DRIVE_D));
 
         //intake hardware
         rightIntakeMotor = map.dcMotor.get(RIGHT_INTAKE_MOTOR_NAME);

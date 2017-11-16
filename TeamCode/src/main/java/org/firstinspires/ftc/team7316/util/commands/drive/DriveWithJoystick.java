@@ -5,7 +5,6 @@ import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.input.GamepadAxis;
 import org.firstinspires.ftc.team7316.util.input.OI;
-import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 /**
@@ -14,7 +13,7 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 public class DriveWithJoystick extends Command {
 
-    private double slow_multiplier = 1;
+    private double strafe_speed_multiplier = 1;
 
     public DriveWithJoystick() {
         requires(Subsystems.instance.driveBase);
@@ -62,9 +61,9 @@ public class DriveWithJoystick extends Command {
         else {
             double strafeMultiplier = 1 - Constants.DRIVE_SLOW_MULTIPLIER;
             double offSet = Constants.DRIVE_SLOW_MULTIPLIER;
-            slow_multiplier = Math.abs(strafeMultiplier * Math.sin(moveDir)) + offSet;
-            moveSpeed *= slow_multiplier;
-            turnSpeed *= slow_multiplier;
+            strafe_speed_multiplier = Math.abs(strafeMultiplier * Math.sin(moveDir)) + offSet;
+            moveSpeed *= strafe_speed_multiplier;
+            turnSpeed *= strafe_speed_multiplier;
         }
 
         Subsystems.instance.driveBase.setWantedTurnSpeed(turnSpeed);
