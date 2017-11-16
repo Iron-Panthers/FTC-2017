@@ -3,6 +3,7 @@ package org.firstinspires.ftc.team7316.util.commands;
 import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveDistance;
+import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
 import org.firstinspires.ftc.team7316.util.sensors.ColorWrapper;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
@@ -13,7 +14,7 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 public class WackJewel extends Command {
 
     private Alliance alliance;
-    private DriveDistance drivecommand;
+    private Command drivecommand;
     private ColorWrapper colorWrapper;
 
     public WackJewel(Alliance alliance) {
@@ -24,16 +25,19 @@ public class WackJewel extends Command {
 
     @Override
     public void init() {
-        colorWrapper.run();
-
-        if(alliance.shouldHitForward(colorWrapper.sumR(), colorWrapper.sumB())) {
-            drivecommand = new DriveDistance(3, 0.5);
+        //TODO move drivecomand to a better place
+        if(colorWrapper.noColor) {
+            Hardware.log("oof", "no color detected");
+            drivecommand = new BlankCommand(Subsystems.instance.driveBase, true);
         }
         else {
-            drivecommand = new DriveDistance(-3, 0.5);
+            if (alliance.shouldHitForward(colorWrapper.sumR(), colorWrapper.sumB())) {
+                drivecommand = new DriveForTime(0.3, 0, 0.2);
+            } else {
+                drivecommand = new DriveForTime(0.3, Math.PI, 0.25);
+            }
+            drivecommand.init();
         }
-
-        drivecommand.init();
     }
 
     @Override

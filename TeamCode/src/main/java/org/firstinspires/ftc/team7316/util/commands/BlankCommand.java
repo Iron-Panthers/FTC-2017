@@ -8,8 +8,17 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
 
 public class BlankCommand extends Command {
 
+    private boolean shouldRemove;
+
     public BlankCommand(Subsystem required) {
         requires(required);
+        shouldRemove = false;
+    }
+
+    public BlankCommand(Subsystem required, boolean shouldRemove) {
+        requires(required);
+        this.shouldRemove = shouldRemove;
+
     }
 
     @Override
@@ -24,7 +33,7 @@ public class BlankCommand extends Command {
 
     @Override
     public boolean shouldRemove() {
-        return false;
+        return shouldRemove;
     }
 
     @Override

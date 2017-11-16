@@ -36,27 +36,24 @@ public class GlyphIntakeJoystick extends Command {
         this.intake.setServoPosition(OI.instance.gp2.right_stick.getX());
         // JANKJANKJANK
         if(OI.instance.gp2.dp_up.state()) {
-            if(this.intake.getLiftStopped()) {
-                this.intake.setLiftStopped(false);
-            }
-            if(Hardware.instance.intakeLiftMotor.getCurrentPosition() > this.intake.liftUpperLimit) {
-                this.intake.setLiftPower(-Constants.INTAKE_LIFT_POWER);
-            }
-            else {
-                this.intake.setLiftPower(0);
-            }
 
+//            if(Hardware.instance.intakeLiftMotor.getCurrentPosition() > this.intake.liftUpperLimit) {
+//                this.intake.setLiftPower(-Constants.INTAKE_LIFT_POWER);
+//            }
+//            else {
+//                this.intake.setLiftPower(0);
+//            }
+            this.intake.setLiftPower(-Constants.INTAKE_LIFT_POWER);
         }
         else if(OI.instance.gp2.dp_down.state()) {
-            if(this.intake.getLiftStopped()) {
-                this.intake.setLiftStopped(false);
-            }
+            /*
             if(Hardware.instance.intakeLiftMotor.getCurrentPosition() < this.intake.liftLowerLimit) {
                 this.intake.setLiftPower(Constants.INTAKE_LIFT_POWER);
             }
             else {
                 this.intake.setLiftPower(0);
-            }
+            }*/
+            this.intake.setLiftPower(Constants.INTAKE_LIFT_POWER);
         }
         else {
             this.intake.setLiftPower(0);

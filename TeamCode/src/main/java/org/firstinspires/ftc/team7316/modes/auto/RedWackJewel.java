@@ -1,25 +1,22 @@
 package org.firstinspires.ftc.team7316.modes.auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.team7316.modes.AutoBaseOpMode;
 import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.Scheduler;
 import org.firstinspires.ftc.team7316.util.commands.AutoCodes;
-import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 /**
- * Created by jerry on 10/28/17.
+ * Created by jerry on 11/14/17.
  */
 
-@Autonomous(name = "blueteam wackjewel")
-public class BlueWackJewel extends AutoBaseOpMode {
-
+@Autonomous(name = "redteam wackjewel")
+public class RedWackJewel extends AutoBaseOpMode {
     @Override
     public void onInit() {
-        Scheduler.instance.add(AutoCodes.jewelWack(Alliance.BLUE));
+        Scheduler.instance.add(AutoCodes.jewelWack(Alliance.RED));
     }
 
     @Override

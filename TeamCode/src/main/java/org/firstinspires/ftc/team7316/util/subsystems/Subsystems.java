@@ -28,7 +28,6 @@ public class Subsystems {
 
         Scheduler.instance.add(instance.driveBase.getDefaultCommand());
         Scheduler.instance.add(instance.glyphIntake.getDefaultCommand());
-
     }
 
 }

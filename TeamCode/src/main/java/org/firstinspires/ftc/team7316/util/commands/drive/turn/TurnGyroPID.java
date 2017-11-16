@@ -1,15 +1,11 @@
-package org.firstinspires.ftc.team7316.util.commands.turn;
+package org.firstinspires.ftc.team7316.util.commands.drive.turn;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.team7316.util.Util;
 import org.firstinspires.ftc.team7316.util.commands.*;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.sensors.GyroWrapper;
-import org.firstinspires.ftc.team7316.util.subsystems.MecanumDriveBase;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 /**
@@ -18,10 +14,10 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
  */
 public class TurnGyroPID extends Command {
 
-    public static final double P = 0.025f, I = 0, D = 0;
+    public static final double P = 0.023f, I = 0, D = 0;
     public static final double ERROR_THRESHOLD = 5, DELTA_THRESHOLD = 0;
     private static final double maxPower = 0.4;
-    private static final double minPower = 0.1;
+    private static final double minPower = 0.08;
     public double power = 0;
     private double turnAngle;
 

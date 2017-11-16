@@ -18,15 +18,13 @@ public class ColorSensorTesting extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
         ColorSensor sensor = hardwareMap.colorSensor.get("cs");
-        sensor.setI2cAddress(I2cAddr.create8bit(0x3c));
-        sensor.enableLed(false);
+        sensor.enableLed(true);
         waitForStart();
 
         while (opModeIsActive()) {
             telemetry.addData("r", sensor.red());
             telemetry.addData("g", sensor.green());
             telemetry.addData("b", sensor.blue());
-            telemetry.addData("i2c", sensor.getI2cAddress().get8Bit());
             telemetry.update();
         }
     }

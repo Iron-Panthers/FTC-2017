@@ -15,15 +15,14 @@ public class PID {
         this.d = d;
     }
 
-    public double newError(double error, double deltaT) {
+    public double newError(double error) {
 
         this.sum += error;
 
-        double delta = (error - this.previous) / deltaT; // I don't think d is for position pid?
+        double delta = error - this.previous;
         this.previous = error;
 
-        //double out = p * error + i * sum + d * delta;
-        double out = p * error + i * sum;
+        double out = p * error + i * sum + d * delta;
 
         return out;
     }

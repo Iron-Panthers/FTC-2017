@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.team7316.util.motorwrappers.DCMotorWrapper;
 import org.firstinspires.ftc.team7316.util.sensors.ColorWrapper;
 import org.firstinspires.ftc.team7316.util.sensors.GyroWrapper;
 
@@ -45,10 +46,18 @@ public class Hardware {
 
     private static final String GYRO_NAME = "gyro";
 
+    private static boolean colorsensor_offline = false;
+    private static boolean gyro_offline = false;
+
     public DcMotor frontLeftDriveMotor;
     public DcMotor frontRightDriveMotor;
     public DcMotor backLeftDriveMotor;
     public DcMotor backRightDriveMotor;
+
+    public DCMotorWrapper frontLeftDriveMotorWrapper;
+    public DCMotorWrapper frontRightDriveMotorWrapper;
+    public DCMotorWrapper backLeftDriveMotorWrapper;
+    public DCMotorWrapper backRightDriveMotorWrapper;
 
     public DcMotor rightIntakeMotor;
     public DcMotor leftIntakeMotor;
@@ -74,19 +83,23 @@ public class Hardware {
         frontLeftDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         frontLeftDriveMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         frontLeftDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontLeftDriveMotorWrapper = new DCMotorWrapper(frontLeftDriveMotor, new PID(Constants.DRIVE_P, Constants.DRIVE_I, Constants.DRIVE_D));
 
         frontRightDriveMotor = map.dcMotor.get(RIGHT_FRONT_DRIVE_MOTOR_NAME);
         frontRightDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         frontRightDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontRightDriveMotorWrapper = new DCMotorWrapper(frontRightDriveMotor, new PID(Constants.DRIVE_P, Constants.DRIVE_I, Constants.DRIVE_D));
 
         backLeftDriveMotor = map.dcMotor.get(LEFT_BACK_DRIVE_MOTOR_NAME);
         backLeftDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backLeftDriveMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeftDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backLeftDriveMotorWrapper = new DCMotorWrapper(backLeftDriveMotor, new PID(Constants.DRIVE_P, Constants.DRIVE_I, Constants.DRIVE_D));
 
         backRightDriveMotor = map.dcMotor.get(RIGHT_BACK_DRIVE_MOTOR_NAME);
         backRightDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backRightDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backRightDriveMotorWrapper = new DCMotorWrapper(backRightDriveMotor, new PID(Constants.DRIVE_P, Constants.DRIVE_I, Constants.DRIVE_D));
 
         //intake hardware
         rightIntakeMotor = map.dcMotor.get(RIGHT_INTAKE_MOTOR_NAME);
@@ -112,8 +125,15 @@ public class Hardware {
 
         //jewel arm hardware
         rightJewelArm = map.servo.get(RIGHT_JEWEL_ARM_NAME);
-        colorsensor = map.colorSensor.get(COLOR_SENSOR_NAME);
-        colorsensor.enableLed(false);
+        try {
+            colorsensor = map.colorSensor.get(COLOR_SENSOR_NAME);
+            colorsensor.enableLed(true);
+            colorWrapper = new ColorWrapper(colorsensor);
+            colorsensor_offline = false;
+        }
+        catch (Exception e) {
+            colorsensor_offline = true;
+        }
 
 
         BNO055IMU.Parameters gyroParams = new BNO055IMU.Parameters();
@@ -124,11 +144,15 @@ public class Hardware {
         gyroParams.loggingTag          = "IMU";
         gyroParams.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
 
-        gyro = map.get(BNO055IMU.class, GYRO_NAME);
-        gyro.initialize(gyroParams);
-
-        colorWrapper = new ColorWrapper(colorsensor);
-        gyroWrapper = new GyroWrapper(gyro);
+        try {
+            gyro = map.get(BNO055IMU.class, GYRO_NAME);
+            gyro.initialize(gyroParams);
+            gyroWrapper = new GyroWrapper(gyro);
+            gyro_offline = false;
+        }
+        catch (Exception e) {
+            gyro_offline = true;
+        }
 
         //Scheduler.instance.addTask(frontSideInfaredSensor);
     }

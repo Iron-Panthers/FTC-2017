@@ -11,7 +11,7 @@ public class Constants {
     public static final int DRIVE_RPM_MAX = 280; // can change later actual max 320
     public static final double WHEEL_RADIUS = 2; // I THINK THIS IS IN INCHES
     public static final double WHEEL_CIRCUMFERENCE = WHEEL_RADIUS * 2 * Math.PI;
-    public static final double COLOR_DIFFERENCE = 25;
+    public static final double COLOR_DIFFERENCE = 5;
 
     public static final double DRIVE_SLOW_MULTIPLIER  = 0.7;
     public static final double DRIVE_VERY_SLOW_MULTIPLIER = 0.35;
@@ -27,19 +27,20 @@ public class Constants {
     public static final double ARM_SERVO_TRAVEL_TIME = 1.5;
 
     //Drive Base PID Constants
-    public static final double encoderP = 0.05;
-    public static final double encoderI = 0.1;
-    public static final double encoderD = 0.1;
+    public static final double DRIVE_P = 0.005;
+    public static final double DRIVE_I = 0;
+    public static final double DRIVE_D = 0;
 
-    public static final double DISTANCE_ERROR_RANGE = 0.05;
+    public static final double DISTANCE_ERROR_RANGE = 0.4; //inches
+    public static final double DISTANCE_ERROR_RANGE_TICKS = (double)ENCODER_TICK_PER_REV / WHEEL_CIRCUMFERENCE * DISTANCE_ERROR_RANGE;
 
     public static final double FORWARD_MOTOR_DEADZONE = 0.1;
     public static final double STRAFING_MOTOR_DEADZONE = 0.5;
     public static final double TURNING_MOTOR_DEADZONE = 0;
 
-    public static final double gyroP = 0.05;
-    public static final double gyroI = 0.1;
-    public static final double gyroD = 0.1;
+    public static final double GYRO_P = 0.05;
+    public static final double GYRO_I = 0.1;
+    public static final double GYRO_D = 0.1;
 
     public static final double sqrt2 = Math.sqrt(2);
 
