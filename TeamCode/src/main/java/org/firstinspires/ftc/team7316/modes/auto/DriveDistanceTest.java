@@ -16,7 +16,7 @@ public class DriveDistanceTest extends TelopBaseOpMode {
     @Override
     public void onInit() {
         Scheduler.inTeleop = false;
-        Scheduler.instance.add(AutoCodes.driveStraight(10, 0.5));
+        Scheduler.instance.add(AutoCodes.driveStraight(10, 0.4));
     }
 
     @Override

@@ -28,12 +28,12 @@ public class DriveDistance extends Command {
     public void init() {
         Subsystems.instance.driveBase.stopMotors();
         Subsystems.instance.driveBase.setMotorTargets(distance);
-        Subsystems.instance.driveBase.setMotorModeDistance();
+        //Subsystems.instance.driveBase.setMotorModeDistance();
     }
 
     @Override
     public void loop() {
-        Subsystems.instance.driveBase.runMotorsDistance(power);
+        Subsystems.instance.driveBase.runMotorsDistance();
         Hardware.log("flpower", Hardware.instance.frontLeftDriveMotor.getPower());
         Hardware.log("frpower", Hardware.instance.frontRightDriveMotor.getPower());
         Hardware.log("blpower", Hardware.instance.backLeftDriveMotor.getPower());

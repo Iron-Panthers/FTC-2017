@@ -1,20 +1,16 @@
 package org.firstinspires.ftc.team7316.util.subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.configuration.MotorConfigurationType;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AngularVelocity;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.PID;
 import org.firstinspires.ftc.team7316.util.Util;
 import org.firstinspires.ftc.team7316.util.commands.BlankCommand;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.Hardware;
-import org.firstinspires.ftc.team7316.util.commands.drive.DriveJoystickTesting;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveWithJoystick;
 
 /**
@@ -47,9 +43,9 @@ public class MecanumDriveBase extends Subsystem {
     private double weighting = 0.9;
 
     public MecanumDriveBase() {
-        fR_bL_PID = new PID(Constants.encoderP, Constants.encoderI, Constants.encoderD);
-        fL_bR_PID = new PID(Constants.encoderP, Constants.encoderI, Constants.encoderD);
-        gyroPID = new PID(Constants.gyroP, Constants.gyroI, Constants.gyroD);
+        fR_bL_PID = new PID(Constants.DRIVE_P, Constants.DRIVE_I, Constants.DRIVE_D);
+        fL_bR_PID = new PID(Constants.DRIVE_P, Constants.DRIVE_I, Constants.DRIVE_D);
+        gyroPID = new PID(Constants.GYRO_P, Constants.GYRO_I, Constants.GYRO_D);
     }
 
     @Override
@@ -111,7 +107,7 @@ public class MecanumDriveBase extends Subsystem {
         targetFlTicks = Hardware.instance.frontLeftDriveMotor.getCurrentPosition() + ticks;
         targetFrTicks = Hardware.instance.frontRightDriveMotor.getCurrentPosition() + ticks;
         targetBlTicks = Hardware.instance.backLeftDriveMotor.getCurrentPosition() + ticks;
-        //targetBrTicks = Hardware.instance.backRightDriveMotor.getCurrentPosition() + ticks;
+        targetBrTicks = Hardware.instance.backRightDriveMotor.getCurrentPosition() + ticks;
     }
 
     public void setGyroTarget(double degrees) {
@@ -132,12 +128,12 @@ public class MecanumDriveBase extends Subsystem {
     public void setMotorModeDistance() {
         Hardware.instance.frontRightDriveMotor.setTargetPosition(targetFrTicks);
         Hardware.instance.frontLeftDriveMotor.setTargetPosition(targetFlTicks);
-        //Hardware.instance.backRightDriveMotor.setTargetPosition(targetBrTicks);
+        Hardware.instance.backRightDriveMotor.setTargetPosition(targetBrTicks);
         Hardware.instance.backLeftDriveMotor.setTargetPosition(targetBlTicks);
 
         Hardware.instance.frontRightDriveMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         Hardware.instance.frontLeftDriveMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        //Hardware.instance.backRightDriveMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        Hardware.instance.backRightDriveMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         Hardware.instance.backLeftDriveMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
@@ -167,7 +163,7 @@ public class MecanumDriveBase extends Subsystem {
     }
 
     private double gyroError() {
-        double currentAngle = Hardware.instance.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
+        double currentAngle = Hardware.instance.gyroWrapper.getHeading();
 
         double dif = (targetAngle - currentAngle);
 
@@ -175,18 +171,12 @@ public class MecanumDriveBase extends Subsystem {
     }
 
     private boolean withinError(int target, int error) {
-        return Math.abs(error) < Math.abs(target * Constants.DISTANCE_ERROR_RANGE);
+        return Math.abs(target - error) < Constants.DISTANCE_ERROR_RANGE_TICKS;
     }
 
     public boolean completedDistance() {
-        //fix this please
-//        return (withinError(targetFrTicks, fR_Error()) && withinError(targetFlTicks, fL_Error()))
-//                && (withinError(targetBrTicks, bR_Error()) && withinError(targetBlTicks, bL_Error()));
-//        return Hardware.instance.frontLeftDriveMotor.isBusy() || Hardware.instance.frontRightDriveMotor.isBusy()
-//                 || Hardware.instance.backLeftDriveMotor.isBusy();
-
         return (withinError(targetFrTicks, fR_Error()) && withinError(targetFlTicks, fL_Error()))
-                 && withinError(targetBlTicks, bL_Error());
+           && (withinError(targetBrTicks, bR_Error()) && withinError(targetBlTicks, bL_Error()));
     }
 
     private double pidToMotorPower(double out) {
@@ -205,9 +195,10 @@ public class MecanumDriveBase extends Subsystem {
     }
 
     //driving
-    public void runMotorsDistance(double power) {
-//        Hardware.instance.backRightDriveMotor.setPower(power);
-        Hardware.instance.backRightDriveMotor.setPower(Hardware.instance.backLeftDriveMotor.getPower());
+    public void runMotorsDistance() {
+        int error = targetFlTicks - Hardware.instance.frontLeftDriveMotor.getCurrentPosition();
+        double power = Constants.DRIVE_P * (double)error;
+        Hardware.instance.backRightDriveMotor.setPower(power);
         Hardware.instance.frontLeftDriveMotor.setPower(power);
         Hardware.instance.frontRightDriveMotor.setPower(power);
         Hardware.instance.backLeftDriveMotor.setPower(power);
