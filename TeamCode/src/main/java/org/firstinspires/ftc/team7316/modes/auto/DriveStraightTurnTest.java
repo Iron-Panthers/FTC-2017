@@ -16,7 +16,7 @@ public class DriveStraightTurnTest extends TelopBaseOpMode {
     @Override
     public void onInit() {
         Scheduler.inTeleop = false;
-        Scheduler.instance.add(AutoCodes.driveStraightTurn(5, 90, 0.5));
+        Scheduler.instance.add(AutoCodes.driveStraightTurn(5, 90));
     }
 
     @Override

@@ -13,10 +13,11 @@ public class PID {
         this.p = p;
         this.i = i;
         this.d = d;
+
+        reset();
     }
 
-    public double newError(double error) {
-
+    public double getPower(double error) {
         this.sum += error;
 
         double delta = error - this.previous;
@@ -27,4 +28,8 @@ public class PID {
         return out;
     }
 
+    public void reset() {
+        previous = 0;
+        sum = 0;
+    }
 }

@@ -19,24 +19,22 @@ public class DriveDistance extends Command {
      */
     public DriveDistance(double distance) {
         requires(Subsystems.instance.driveBase);
-        this.distance = (int)(Constants.ENCODER_TICK_PER_REV * distance / Constants.WHEEL_CIRCUMFERENCE);
+        this.distance = (int)(Constants.ENCODER_TICK_PER_REV / Constants.ENCODER_REV_PER_WHEEL_REV * distance / Constants.WHEEL_CIRCUMFERENCE);
     }
 
     @Override
     public void init() {
         Subsystems.instance.driveBase.stopMotors();
         Subsystems.instance.driveBase.resetMotorModes();
-        Subsystems.instance.driveBase.resetEncoders();
+        //Subsystems.instance.driveBase.resetEncoders();
         Subsystems.instance.driveBase.setMotorTargets(distance);
+        Subsystems.instance.driveBase.setMotorMaxSpeeds(Constants.STRAIGHT_DRIVE_MAXSPEED);
+
     }
 
     @Override
     public void loop() {
         Subsystems.instance.driveBase.driveWithSpeedsPID();
-        Hardware.log("flpower", Hardware.instance.frontLeftDriveMotor.getPower());
-        Hardware.log("frpower", Hardware.instance.frontRightDriveMotor.getPower());
-        Hardware.log("blpower", Hardware.instance.backLeftDriveMotor.getPower());
-        Hardware.log("brpower", Hardware.instance.backRightDriveMotor.getPower());
     }
 
     @Override

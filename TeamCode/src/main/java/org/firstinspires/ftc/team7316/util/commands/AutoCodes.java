@@ -31,13 +31,13 @@ public class AutoCodes {
         return new SequentialCommand(cmds);
     }
 
-    public static SequentialCommand driveStraight(double distance, double power) {
-        DriveDistance drive = new DriveDistance(distance, power);
+    public static SequentialCommand driveStraight(double distance) {
+        DriveDistance drive = new DriveDistance(distance);
         return new SequentialCommand(drive);
     }
 
-    public static SequentialCommand driveStraightTurn(double distance, int angle, double power) {
-        //DriveDistance drive = new DriveDistance(distance, power);
+    public static SequentialCommand driveStraightTurn(double distance, int angle) {
+        //DriveDistance drive = new DriveDistance(distance);
         TurnGyroPID turn = new TurnGyroPID(angle);
         Command[] cmds = {turn};
         return new SequentialCommand(cmds);
