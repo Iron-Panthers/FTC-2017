@@ -24,17 +24,24 @@ public class Constants {
     public static final double INTAKE_LIFT_POWER = 0.65;
     public static final double INTAKE_POWER_WEIGHTING = 0.6;
 
+
+    //drive distances
+    public static final double JEWEL_WHACK_DISTANCE = 3.5; //inches
+    public static final double PARKING_FOWARD_DISTANCE = 33; //inches
+    public static final double CRYPTOBOX_STRAFE_DISTANCE = 11.5;//inches too
+
     //Jewel arm shenanigans
     public static final double ARM_SERVO_TRAVEL_TIME = 1.5;
 
     //Drive Base PID Constants
+    //tested 11/17
     public static final double DRIVE_P = 0.0025;
-    public static final double DRIVE_I = 0.0001;
-    public static final double DRIVE_D = 0;
+    public static final double DRIVE_I = 0.0004;
+    public static final double DRIVE_D = 0.004;
 
     public static final double STRAIGHT_DRIVE_MAXSPEED = 0.7;
 
-    public static final double DISTANCE_ERROR_RANGE = 0.2; //inches
+    public static final double DISTANCE_ERROR_RANGE = 0.4; //inches
     public static final double DISTANCE_ERROR_RANGE_TICKS = (double)ENCODER_TICK_PER_REV / ENCODER_REV_PER_WHEEL_REV / WHEEL_CIRCUMFERENCE * DISTANCE_ERROR_RANGE;
 
     public static final double FORWARD_MOTOR_DEADZONE = 0.1;

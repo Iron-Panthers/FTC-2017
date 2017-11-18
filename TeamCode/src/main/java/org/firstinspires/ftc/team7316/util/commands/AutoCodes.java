@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.team7316.util.commands;
 
 import org.firstinspires.ftc.team7316.util.Alliance;
+import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveDistance;
+import org.firstinspires.ftc.team7316.util.commands.drive.Strafe;
 import org.firstinspires.ftc.team7316.util.commands.flow.SequentialCommand;
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroPID;
 import org.firstinspires.ftc.team7316.util.commands.sensors.PollColor;
@@ -27,7 +29,9 @@ public class AutoCodes {
         PollColor pollColor = new PollColor();
         WackJewel wackjewel = new WackJewel(alliance);
         MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
-        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin};
+        DriveDistance foward = new DriveDistance(Constants.PARKING_FOWARD_DISTANCE);
+        Strafe strafeleft = new Strafe(11.5, -1);
+        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, foward, strafeleft};
         return new SequentialCommand(cmds);
     }
 

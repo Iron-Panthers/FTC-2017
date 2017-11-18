@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.team7316.util.commands;
 
 import org.firstinspires.ftc.team7316.util.Alliance;
+import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveDistance;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
@@ -32,9 +33,9 @@ public class WackJewel extends Command {
         }
         else {
             if (alliance.shouldHitForward(colorWrapper.sumR(), colorWrapper.sumB())) {
-                drivecommand = new DriveForTime(0.3, 0, 0.2);
+                drivecommand = new DriveDistance(Constants.JEWEL_WHACK_DISTANCE);
             } else {
-                drivecommand = new DriveForTime(0.3, Math.PI, 0.25);
+                drivecommand = new DriveDistance(-Constants.JEWEL_WHACK_DISTANCE);
             }
             drivecommand.init();
         }

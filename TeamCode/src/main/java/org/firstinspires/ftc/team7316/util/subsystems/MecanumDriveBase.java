@@ -106,6 +106,20 @@ public class MecanumDriveBase extends Subsystem {
         Hardware.instance.backRightDriveMotorWrapper.setMaxPower(power);
     }
 
+    public void strafeLeft(int ticks) {
+        Hardware.instance.frontLeftDriveMotorWrapper.setTargetEncoderTicks(ticks);
+        Hardware.instance.frontRightDriveMotorWrapper.setTargetEncoderTicks(-ticks);
+        Hardware.instance.backLeftDriveMotorWrapper.setTargetEncoderTicks(-ticks);
+        Hardware.instance.backRightDriveMotorWrapper.setTargetEncoderTicks(ticks);
+    }
+
+    public void strafeRight(int ticks) {
+        Hardware.instance.frontLeftDriveMotorWrapper.setTargetEncoderTicks(-ticks);
+        Hardware.instance.frontRightDriveMotorWrapper.setTargetEncoderTicks(ticks);
+        Hardware.instance.backLeftDriveMotorWrapper.setTargetEncoderTicks(ticks);
+        Hardware.instance.backRightDriveMotorWrapper.setTargetEncoderTicks(-ticks);
+    }
+
     public void setGyroTarget(double degrees) {
         targetAngle = Hardware.instance.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle + degrees;
     }
