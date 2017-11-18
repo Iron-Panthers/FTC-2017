@@ -23,7 +23,7 @@ public class GlyphIntakeJoystick extends Command {
 
     @Override
     public void init() {
-        this.intake.setServoPosition(0.5);
+        this.intake.setServoPositionScaled(0.5);
     }
 
     @Override
@@ -33,8 +33,7 @@ public class GlyphIntakeJoystick extends Command {
         } else {
             this.intake.setIntakePower(OI.instance.gp2.left_stick.getY() * Constants.INTAKE_POWER_WEIGHTING);
         }
-        this.intake.setServoPosition(OI.instance.gp2.right_stick.getX());
-        // JANKJANKJANK
+
         if(OI.instance.gp2.dp_up.state()) {
 
 //            if(Hardware.instance.intakeLiftMotor.getCurrentPosition() > this.intake.liftUpperLimit) {
@@ -57,6 +56,13 @@ public class GlyphIntakeJoystick extends Command {
         }
         else {
             this.intake.setLiftPower(0);
+        }
+
+        if(OI.instance.gp2.right_bumper.state()) {
+            this.intake.setServoPosition(1);
+        }
+        else {
+            this.intake.setServoPositionScaled(OI.instance.gp2.right_stick.getX());
         }
         Hardware.log("lift position", Hardware.instance.intakeLiftMotor.getCurrentPosition());
     }

@@ -19,6 +19,8 @@ public class ColorWrapper {
 
     public boolean noColor = false;
 
+    public boolean drivenForward = false;
+
     private ColorSensor sensor;
 
     public ColorWrapper(ColorSensor sensor) {
@@ -41,7 +43,7 @@ public class ColorWrapper {
     }
 
     public void setNoColor() {
-        noColor = redSum.sum == greenSum.sum;
+        noColor = redSum.sum == 0 && blueSum.sum == 0;
     }
 
     public double sumR() {

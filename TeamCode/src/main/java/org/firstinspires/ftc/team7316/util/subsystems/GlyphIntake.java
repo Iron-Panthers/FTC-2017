@@ -3,6 +3,7 @@ package org.firstinspires.ftc.team7316.util.subsystems;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.BlankCommand;
 import org.firstinspires.ftc.team7316.util.commands.Command;
@@ -36,6 +37,12 @@ public class GlyphIntake extends Subsystem {
 
     public void setServoPosition(double position) {
         this.servo.setPosition(position);
+    }
+
+    public void setServoPositionScaled(double position) {
+        double ratio = position / 1;
+        double out = (Constants.INTAKE_SERVO_MAX_POSITION - Constants.INTAKE_SERVO_MIN_POSITION) * ratio + Constants.INTAKE_SERVO_MIN_POSITION;
+        this.servo.setPosition(out);
     }
 
     public void setIntakePower(double power) {

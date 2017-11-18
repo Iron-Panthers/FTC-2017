@@ -9,16 +9,21 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
  */
 
 public class PollColor extends Command {
+
+    public PollColor() {
+        //requires(Subsystems.instance.jewelArm);
+    }
+
     @Override
     public void init() {
-        requires(Subsystems.instance.jewelArm);
         Hardware.instance.colorWrapper.run();
         Hardware.instance.colorWrapper.setNoColor();
+        System.out.println("c===============================================cegsafxbhaxfhiufxhiufxuhafbyfwxbwbudwwab");
     }
 
     @Override
     public void loop() {
-
+        System.out.println("c===============================================colors polled");
     }
 
     @Override

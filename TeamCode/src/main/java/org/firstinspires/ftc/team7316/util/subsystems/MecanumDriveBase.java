@@ -107,17 +107,17 @@ public class MecanumDriveBase extends Subsystem {
     }
 
     public void strafeLeft(int ticks) {
+        Hardware.instance.frontLeftDriveMotorWrapper.setTargetEncoderTicks(-ticks); //originally neg
+        Hardware.instance.frontRightDriveMotorWrapper.setTargetEncoderTicks(ticks); //originally pos
+        Hardware.instance.backLeftDriveMotorWrapper.setTargetEncoderTicks(ticks);//orginallt pos
+        Hardware.instance.backRightDriveMotorWrapper.setTargetEncoderTicks(-ticks); //originally neg
+    }
+
+    public void strafeRight(int ticks) {
         Hardware.instance.frontLeftDriveMotorWrapper.setTargetEncoderTicks(ticks);
         Hardware.instance.frontRightDriveMotorWrapper.setTargetEncoderTicks(-ticks);
         Hardware.instance.backLeftDriveMotorWrapper.setTargetEncoderTicks(-ticks);
         Hardware.instance.backRightDriveMotorWrapper.setTargetEncoderTicks(ticks);
-    }
-
-    public void strafeRight(int ticks) {
-        Hardware.instance.frontLeftDriveMotorWrapper.setTargetEncoderTicks(-ticks);
-        Hardware.instance.frontRightDriveMotorWrapper.setTargetEncoderTicks(ticks);
-        Hardware.instance.backLeftDriveMotorWrapper.setTargetEncoderTicks(ticks);
-        Hardware.instance.backRightDriveMotorWrapper.setTargetEncoderTicks(-ticks);
     }
 
     public void setGyroTarget(double degrees) {

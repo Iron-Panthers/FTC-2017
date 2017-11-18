@@ -19,7 +19,8 @@ public class WackJewel extends Command {
     private ColorWrapper colorWrapper;
 
     public WackJewel(Alliance alliance) {
-        requires(Subsystems.instance.jewelArm);
+        //requires(Subsystems.instance.jewelArm);
+        //requires(Subsystems.instance.driveBase);
         this.alliance = alliance;
         colorWrapper = Hardware.instance.colorWrapper;
     }
@@ -34,8 +35,10 @@ public class WackJewel extends Command {
         else {
             if (alliance.shouldHitForward(colorWrapper.sumR(), colorWrapper.sumB())) {
                 drivecommand = new DriveDistance(Constants.JEWEL_WHACK_DISTANCE);
+                colorWrapper.drivenForward = true;
             } else {
                 drivecommand = new DriveDistance(-Constants.JEWEL_WHACK_DISTANCE);
+                colorWrapper.drivenForward = false;
             }
             drivecommand.init();
         }
@@ -43,6 +46,9 @@ public class WackJewel extends Command {
 
     @Override
     public void loop() {
+        Hardware.log("whacking jewel", "yes");
+        Hardware.log("flError", Hardware.instance.frontLeftDriveMotorWrapper.getError());
+        Hardware.log("frError", Hardware.instance.frontRightDriveMotorWrapper.getError());
         drivecommand.loop();
     }
 

@@ -114,7 +114,7 @@ public class Hardware {
 
         intakeServo = map.servo.get(INTAKE_SERVO_NAME);
         intakeServo.setDirection(Servo.Direction.REVERSE);
-        intakeServo.scaleRange(Constants.INTAKE_SERVO_MIN_POSITION, Constants.INTAKE_SERVO_MAX_POSITION);
+        //intakeServo.scaleRange(Constants.INTAKE_SERVO_MIN_POSITION, Constants.INTAKE_SERVO_MAX_POSITION);
 
         //relic grabber hardware
         //relicGrabberServo = map.servo.get(RELIC_GRABBER_SERVO_NAME);

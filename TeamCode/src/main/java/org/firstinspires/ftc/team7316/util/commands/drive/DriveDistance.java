@@ -13,13 +13,15 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 public class DriveDistance extends Command {
 
     private int distance; // in ticks
+    private double power;
 
     /**
      * @param distance desired distance in inches
      */
     public DriveDistance(double distance) {
-        requires(Subsystems.instance.driveBase);
+        //requires(Subsystems.instance.driveBase);
         this.distance = (int)(Constants.ENCODER_TICK_PER_REV / Constants.ENCODER_REV_PER_WHEEL_REV * distance / Constants.WHEEL_CIRCUMFERENCE);
+        this.distance = (int)Constants.distanceToTicks(distance);
     }
 
     @Override
@@ -34,6 +36,10 @@ public class DriveDistance extends Command {
 
     @Override
     public void loop() {
+        System.out.println("c===============================================driving");
+        Hardware.log("driving distance", "cool and good");
+        Hardware.log("flError", Hardware.instance.frontLeftDriveMotorWrapper.getError());
+        Hardware.log("frError", Hardware.instance.frontRightDriveMotorWrapper.getError());
         Subsystems.instance.driveBase.driveWithSpeedsPID();
     }
 

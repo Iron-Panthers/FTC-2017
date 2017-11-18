@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.team7316.util.commands.drive;
 
 import org.firstinspires.ftc.team7316.util.Constants;
+import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
@@ -10,22 +11,19 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 public class Strafe extends Command {
 
-    private int distance; //ticks
-    private int direction; //-1 for left, 1 for right
+    private int distance; //ticks (negative for left, positive for right
 
     /**
      * @param distance in inches
-     * @param direction -1 for left, 1 for right
      */
-    public Strafe(double distance, int direction) {
-        this.distance = (int)(Constants.ENCODER_TICK_PER_REV / Constants.ENCODER_REV_PER_WHEEL_REV * distance / Constants.WHEEL_CIRCUMFERENCE);
-        this.direction = direction;
+    public Strafe(double distance) {
+        //requires(Subsystems.instance.driveBase);
+        this.distance = (int)Constants.distanceToTicks(distance);
     }
 
     @Override
     public void init() {
-        requires(Subsystems.instance.driveBase);
-        if(direction == -1) {
+        if(distance < 0) {
             Subsystems.instance.driveBase.strafeLeft(distance);
         }
         else {
@@ -35,6 +33,9 @@ public class Strafe extends Command {
 
     @Override
     public void loop() {
+        Hardware.log("strafing", "very nice move man");
+        Hardware.log("flError", Hardware.instance.frontLeftDriveMotorWrapper.getError());
+        Hardware.log("frError", Hardware.instance.frontRightDriveMotorWrapper.getError());
         Subsystems.instance.driveBase.driveWithSpeedsPID();
     }
 
