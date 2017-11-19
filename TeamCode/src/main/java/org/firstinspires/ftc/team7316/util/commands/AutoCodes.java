@@ -4,9 +4,12 @@ import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveDistance;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
+import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime_PadModified;
 import org.firstinspires.ftc.team7316.util.commands.drive.Strafe;
+import org.firstinspires.ftc.team7316.util.commands.drive.turn.DriveDistance_PadModified;
 import org.firstinspires.ftc.team7316.util.commands.flow.SequentialCommand;
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroPID;
+import org.firstinspires.ftc.team7316.util.commands.intake.IntakeForTime;
 import org.firstinspires.ftc.team7316.util.commands.sensors.PollColor;
 import org.firstinspires.ftc.team7316.util.subsystems.JewelArm;
 
@@ -17,8 +20,8 @@ import org.firstinspires.ftc.team7316.util.subsystems.JewelArm;
 public class AutoCodes {
 
     /*public static SimultaneousCommands robotDriveDistanceAccurate(double distance, double power) {
-        DriveDistanceAccurate leftMotor = new DriveDistanceAccurate(Constants.distanceToTicks(distance), power, Hardware.instance.leftDriveMotor);
-        DriveDistanceAccurate rightMotor = new DriveDistanceAccurate(Constants.distanceToTicks(distance), power, Hardware.instance.rightDriveMotor);
+        DriveDistanceAccurate leftMotor = new DriveDistanceAccurate(Constants.inchesToTicks(distance), power, Hardware.instance.leftDriveMotor);
+        DriveDistanceAccurate rightMotor = new DriveDistanceAccurate(Constants.inchesToTicks(distance), power, Hardware.instance.rightDriveMotor);
         Command[] both = {leftMotor, rightMotor};
 
         SimultaneousCommands bothDrive = new SimultaneousCommands(both);
@@ -39,7 +42,7 @@ public class AutoCodes {
         return new SequentialCommand(cmds);
     }
 
-    public static SequentialCommand closeRedJewel() {
+    public static SequentialCommand farRedJewel() {
         MoveJewelArm movearmout = new MoveJewelArm(JewelArm.JewelArmPosition.OUT);
         PollColor pollColor = new PollColor();
         WackJewel wackjewel = new WackJewel(Alliance.RED);
@@ -48,11 +51,13 @@ public class AutoCodes {
         //DriveDistance foward = new DriveDistance(Constants.PARKING_FOWARD_DISTANCE + Hardware.instance.colorWrapper.distanceincrease);
         //Strafe strafeleft = new Strafe(-Constants.CRYPTOBOX_STRAFE_DISTANCE);
 
-        DriveForTime offPad = new DriveForTime(Constants.FORWARD_POWER_TIME, 0, Constants.OFF_PAD_TIME);
-        DriveDistance forward = new DriveDistance(Constants.PARKING_FOWARD_DISTANCE);
+        DriveForTime_PadModified offPad = new DriveForTime_PadModified(Constants.FORWARD_POWER_TIME, 0, Constants.OFF_PAD_TIME);
+        DriveDistance_PadModified forward = new DriveDistance_PadModified(Constants.PARKING_FOWARD_DISTANCE);
         DriveForTime strafe = new DriveForTime(Constants.LEFT_POWER_TIME, -Math.PI/2, Constants.STRAFE_LEFT_TIME);
 
-        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, forward, strafe};
+        IntakeForTime outtake = new IntakeForTime(-0.7, 1); //add to constants later
+
+        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, forward, strafe, outtake};
         return new SequentialCommand(cmds);
     }
 

@@ -4,7 +4,6 @@ import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveDistance;
-import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
 
 /**
  * Created by jerry on 11/18/17.
@@ -12,20 +11,20 @@ import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
 
 public class DriveDistance_PadModified extends Command {
 
-    private int distance;
+    private double distance;
     private DriveDistance cmd;
 
     public DriveDistance_PadModified(double distance) {
-        this.distance = (int)Constants.distanceToTicks(distance);
+        this.distance = distance;
     }
 
     @Override
     public void init() {
         if(Hardware.instance.colorWrapper.drivenForward) {
-            cmd = new DriveDistance(distance - Constants.DISTANCE_PAD_OFFSET);
+            cmd = new DriveDistance(distance - Constants.DISTANCE_ERROR_RANGE);
         }
         else {
-            cmd = new DriveDistance(distance + Constants.DISTANCE_PAD_OFFSET);
+            cmd = new DriveDistance(distance + Constants.DISTANCE_ERROR_RANGE);
         }
         cmd.init();
     }

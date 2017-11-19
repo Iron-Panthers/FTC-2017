@@ -18,7 +18,7 @@ public class Strafe extends Command {
      */
     public Strafe(double distance) {
         //requires(Subsystems.instance.driveBase);
-        this.distance = (int)Constants.distanceToTicks(distance);
+        this.distance = (int)Constants.inchesToTicks(distance);
     }
 
     @Override

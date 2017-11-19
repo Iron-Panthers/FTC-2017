@@ -2,22 +2,24 @@ package org.firstinspires.ftc.team7316.modes.auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
+import org.firstinspires.ftc.team7316.modes.AutoBaseOpMode;
 import org.firstinspires.ftc.team7316.modes.TelopBaseOpMode;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.Scheduler;
 import org.firstinspires.ftc.team7316.util.commands.AutoCodes;
+import org.firstinspires.ftc.team7316.util.commands.drive.DriveDistance;
 
 /**
  * Created by jerry on 11/3/17.
  */
 
 @Autonomous(name = "drivedistancetest")
-public class DriveDistanceTest extends TelopBaseOpMode {
+public class DriveDistanceTest extends AutoBaseOpMode {
 
     @Override
     public void onInit() {
         Scheduler.inTeleop = false;
-        Scheduler.instance.add(AutoCodes.driveStraight(10));
+        Scheduler.instance.add(new DriveDistance(10));
     }
 
     @Override

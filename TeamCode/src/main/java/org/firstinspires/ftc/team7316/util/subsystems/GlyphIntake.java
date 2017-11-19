@@ -36,13 +36,14 @@ public class GlyphIntake extends Subsystem {
     }
 
     public void setServoPosition(double position) {
+        servo.scaleRange(0, 1);
         this.servo.setPosition(position);
     }
 
     public void setServoPositionScaled(double position) {
-        double ratio = position / 1;
-        double out = (Constants.INTAKE_SERVO_MAX_POSITION - Constants.INTAKE_SERVO_MIN_POSITION) * ratio + Constants.INTAKE_SERVO_MIN_POSITION;
-        this.servo.setPosition(out);
+        servo.scaleRange(Constants.INTAKE_SERVO_MIN_POSITION, Constants.INTAKE_SERVO_MAX_POSITION);
+
+        this.servo.setPosition(position);
     }
 
     public void setIntakePower(double power) {

@@ -18,12 +18,10 @@ public class PollColor extends Command {
     public void init() {
         Hardware.instance.colorWrapper.run();
         Hardware.instance.colorWrapper.setNoColor();
-        System.out.println("c===============================================cegsafxbhaxfhiufxhiufxuhafbyfwxbwbudwwab");
     }
 
     @Override
     public void loop() {
-        System.out.println("c===============================================colors polled");
     }
 
     @Override

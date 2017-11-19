@@ -19,7 +19,7 @@ public class ColorWrapper {
 
     public boolean noColor = false;
 
-    public boolean drivenForward = false;
+    public boolean drivenForward = true; //by default drives a shorter distance - less likely to crash?
 
     private ColorSensor sensor;
 

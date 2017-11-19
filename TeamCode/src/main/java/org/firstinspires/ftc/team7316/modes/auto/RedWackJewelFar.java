@@ -14,7 +14,7 @@ import org.firstinspires.ftc.team7316.util.commands.AutoCodes;
 public class RedWackJewelFar extends AutoBaseOpMode {
     @Override
     public void onInit() {
-        Scheduler.instance.add(AutoCodes.closeRedJewel());
+        Scheduler.instance.add(AutoCodes.farRedJewel());
     }
 
     @Override
