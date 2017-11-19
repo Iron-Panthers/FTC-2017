@@ -37,7 +37,7 @@ public class Constants {
     //drive times(temporary) and their powers
     public static final double OFF_PAD_TIME = 1.1;
     public static final double DRIVE_FORWARD_TIME = 1.6; //driving off the pad and to the parking also for now
-    public static final double FORWARD_POWER_TIME = 0.3;
+    public static final double FORWARD_POWER_TIME = 0.4; //was 0.3
     public static final double STRAFE_LEFT_TIME = 1;
     public static final double LEFT_POWER_TIME = 0.8;
 
