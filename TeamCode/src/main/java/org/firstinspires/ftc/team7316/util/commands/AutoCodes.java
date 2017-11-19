@@ -78,7 +78,7 @@ public class AutoCodes {
         Wait stop = new Wait(1);
         DriveDistance backward = new DriveDistance(-10);
         TurnForTime turn = new TurnForTime(Constants.ROTATIONS_90_DEGREES);
-        DriveDistance inchforward = new DriveDistance(4);
+        DriveDistance inchforward = new DriveDistance(7);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
         Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, backward, turn, inchforward, outtake};
@@ -93,7 +93,7 @@ public class AutoCodes {
 
         DriveForTime_PadModified offPad = new DriveForTime_PadModified(Constants.FORWARD_POWER_TIME, Math.PI, Constants.OFF_PAD_TIME);
         Wait stop = new Wait(1);
-        DriveDistance backward = new DriveDistance(10);
+        DriveDistance backward = new DriveDistance(7);
         TurnForTime turn = new TurnForTime(Constants.ROTATIONS_90_DEGREES);
         DriveDistance inchforward = new DriveDistance(4);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
