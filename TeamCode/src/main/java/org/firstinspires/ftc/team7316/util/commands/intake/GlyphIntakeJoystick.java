@@ -23,7 +23,7 @@ public class GlyphIntakeJoystick extends Command {
 
     @Override
     public void init() {
-        this.intake.setServoPositionScaled(0.5);
+        this.intake.setServoPositionScaled(0);
     }
 
     @Override

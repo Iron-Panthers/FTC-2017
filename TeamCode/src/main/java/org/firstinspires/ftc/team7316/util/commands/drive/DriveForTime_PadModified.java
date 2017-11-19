@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.team7316.util.commands.drive;
 
-import com.qualcomm.robotcore.util.ElapsedTime;
-
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.Command;
@@ -35,12 +33,12 @@ public class DriveForTime_PadModified extends Command {
             cmd = new DriveForTime(power, direction, duration);
         }
         if(Hardware.instance.colorWrapper.drivenForward) {
-            duration = duration - Constants.TIME_PAD_OFFSET;
+            duration = duration - Constants.TIME_PAD_OFFSET_FORWARD;
             duration = Math.abs(duration);
             cmd = new DriveForTime(power, direction, duration);
         }
         else {
-            duration = duration + Constants.TIME_PAD_OFFSET;
+            duration = duration + Constants.TIME_PAD_OFFSET_BACKWARD;
             duration = Math.abs(duration);
             cmd = new DriveForTime(power, direction, duration);
         }

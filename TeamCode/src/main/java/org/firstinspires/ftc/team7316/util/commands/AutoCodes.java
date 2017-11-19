@@ -44,7 +44,7 @@ public class AutoCodes {
         TurnForTime turn = new TurnForTime(Constants.ROTATIONS_180_DEGREES);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
-        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin};
+        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offpad, stop, backward, strafeleft, turn, outtake};
         return new SequentialCommand(cmds);
     }
 

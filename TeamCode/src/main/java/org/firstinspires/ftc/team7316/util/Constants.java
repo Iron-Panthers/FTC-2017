@@ -18,8 +18,8 @@ public class Constants {
     public static final double DRIVE_VERY_SLOW_MULTIPLIER = 0.35;
 
     //Intake shenanigans
-    public static final double INTAKE_SERVO_MAX_POSITION = 1;
-    public static final double INTAKE_SERVO_MIN_POSITION = 0.2;
+    public static final double INTAKE_SERVO_MAX_POSITION = 0.8;
+    public static final double INTAKE_SERVO_MIN_POSITION = 0.4;
 
     public static final double INTAKE_LIFT_POWER = 0.65;
     public static final double INTAKE_POWER_WEIGHTING = 0.6;
@@ -46,7 +46,8 @@ public class Constants {
     //balancing pad offsets after whacking jewel
     public static final double DISTANCE_PAD_OFFSET = 1; //inches offset after jewel hit
     public static final int DISTANCE_PAD_OFFSET_TICKS = (int)(inchesToTicks(DISTANCE_PAD_OFFSET));
-    public static final double TIME_PAD_OFFSET = 0.3; //seconds offset after jewel hit
+    public static final double TIME_PAD_OFFSET_FORWARD = 0.3; //seconds offset after jewel hit
+    public static final double TIME_PAD_OFFSET_BACKWARD = 0.4; //seconds offset after jewel hit
 
     //Jewel arm shenanigans
     public static final double ARM_SERVO_TRAVEL_TIME = 1;

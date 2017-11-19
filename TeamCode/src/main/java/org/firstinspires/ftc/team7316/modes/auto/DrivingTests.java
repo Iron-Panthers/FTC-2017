@@ -22,6 +22,6 @@ public class DrivingTests extends AutoBaseOpMode {
 
     @Override
     public void onLoop() {
-        Hardware.log("gyro heading", Hardware.instance.gyroWrapper.getHeading());
+        //Hardware.log("gyro heading", Hardware.instance.gyroWrapper.getHeading());
     }
 }

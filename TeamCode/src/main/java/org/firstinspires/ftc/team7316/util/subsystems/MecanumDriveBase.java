@@ -120,9 +120,10 @@ public class MecanumDriveBase extends Subsystem {
         Hardware.instance.backRightDriveMotorWrapper.setTargetEncoderTicks(ticks);
     }
 
-    public void setGyroTarget(double degrees) {
-        targetAngle = Hardware.instance.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle + degrees;
-    }
+
+//    public void setGyroTarget(double degrees) {
+//        targetAngle = Hardware.instance.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle + degrees;
+//    }
 
     public void resetMotorModes() {
         Hardware.instance.frontRightDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -138,39 +139,14 @@ public class MecanumDriveBase extends Subsystem {
         Hardware.instance.backRightDriveMotorWrapper.resetEncoder();
     }
 
-    //errors
-    /* Dealt with motor wrappers now
-    private int fR_Error() {
-        int fRError = Hardware.instance.frontRightDriveMotor.getCurrentPosition();
-
-        return targetFrTicks - fRError;
-    }
-
-    private int fL_Error() {
-        int fLError = Hardware.instance.frontRightDriveMotor.getCurrentPosition();
-
-        return targetFlTicks - fLError;
-    }
-
-    private int bR_Error() {
-        int bRError = Hardware.instance.backLeftDriveMotor.getCurrentPosition();
-
-        return targetBrTicks - bRError;
-    }
-
-    private int bL_Error() {
-        int bLError = Hardware.instance.backLeftDriveMotor.getCurrentPosition();
-
-        return targetBlTicks - bLError;
-    }*/
-
-    private double gyroError() {
-        double currentAngle = Hardware.instance.gyroWrapper.getHeading();
-
-        double dif = (targetAngle - currentAngle);
-
-        return Util.wrap(dif);
-    }
+//
+//    private double gyroError() {
+//        double currentAngle = Hardware.instance.gyroWrapper.getHeading();
+//
+//        double dif = (targetAngle - currentAngle);
+//
+//        return Util.wrap(dif);
+//    }
 
     public boolean completedDistance() {
         return Hardware.instance.frontLeftDriveMotorWrapper.completedDistance() && Hardware.instance.frontRightDriveMotorWrapper.completedDistance()
