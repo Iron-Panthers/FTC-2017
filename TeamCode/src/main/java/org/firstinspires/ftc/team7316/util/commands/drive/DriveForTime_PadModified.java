@@ -31,13 +31,18 @@ public class DriveForTime_PadModified extends Command {
     @Override
     public void init() {
         if(Hardware.instance.colorWrapper.noColor) {
+            duration = Math.abs(duration);
             cmd = new DriveForTime(power, direction, duration);
         }
         if(Hardware.instance.colorWrapper.drivenForward) {
-            cmd = new DriveForTime(power, direction, duration - Constants.TIME_PAD_OFFSET);
+            duration = duration - Constants.TIME_PAD_OFFSET;
+            duration = Math.abs(duration);
+            cmd = new DriveForTime(power, direction, duration);
         }
         else {
-            cmd = new DriveForTime(power, direction, duration + Constants.TIME_PAD_OFFSET);
+            duration = duration + Constants.TIME_PAD_OFFSET;
+            duration = Math.abs(duration);
+            cmd = new DriveForTime(power, direction, duration);
         }
         cmd.init();
     }

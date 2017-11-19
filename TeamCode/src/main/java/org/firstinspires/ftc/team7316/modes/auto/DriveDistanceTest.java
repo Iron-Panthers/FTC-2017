@@ -13,7 +13,7 @@ import org.firstinspires.ftc.team7316.util.commands.drive.DriveDistance;
  * Created by jerry on 11/3/17.
  */
 
-@Autonomous(name = "drivedistancetest")
+@Autonomous(name = "you run this, i kms")
 public class DriveDistanceTest extends AutoBaseOpMode {
 
     @Override

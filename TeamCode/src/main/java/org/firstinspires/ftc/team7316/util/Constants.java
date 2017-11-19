@@ -26,6 +26,9 @@ public class Constants {
 
 
     //-----------Auto constants-----------//
+    public static final double ROTATIONS_PERFIVESECONDS = 3.5; //all full speedy
+    public static final double ROTATIONS_PER_SECOND = ROTATIONS_PERFIVESECONDS / 5;
+    public static final double ROTATIONS_180_DEGREES = 0.5;
     //drive distances
     public static final double JEWEL_WHACK_DISTANCE = 3.5; //inches
     public static final double PARKING_FOWARD_DISTANCE = 9; //inches after driving for time after off the balancing pad
@@ -41,9 +44,9 @@ public class Constants {
     public static final double OUTTAKE_TIME = 1;
 
     //balancing pad offsets after whacking jewel
-    public static final double DISTANCE_PAD_OFFSET = 1; //inches offset after jewel
+    public static final double DISTANCE_PAD_OFFSET = 1; //inches offset after jewel hit
     public static final int DISTANCE_PAD_OFFSET_TICKS = (int)(inchesToTicks(DISTANCE_PAD_OFFSET));
-    public static final double TIME_PAD_OFFSET = 0.1; //seconds offset after jewel
+    public static final double TIME_PAD_OFFSET = 0.3; //seconds offset after jewel hit
 
     //Jewel arm shenanigans
     public static final double ARM_SERVO_TRAVEL_TIME = 1;

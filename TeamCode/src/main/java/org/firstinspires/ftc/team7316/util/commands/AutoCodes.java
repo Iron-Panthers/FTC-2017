@@ -7,6 +7,7 @@ import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime_PadModified;
 import org.firstinspires.ftc.team7316.util.commands.drive.Strafe;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveDistance_PadModified;
+import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnForTime;
 import org.firstinspires.ftc.team7316.util.commands.flow.SequentialCommand;
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroPID;
 import org.firstinspires.ftc.team7316.util.commands.flow.Wait;
@@ -34,8 +35,14 @@ public class AutoCodes {
         PollColor pollColor = new PollColor();
         WackJewel wackjewel = new WackJewel(Alliance.BLUE);
         MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
+
+        //yes it's negative time i don't care
+        DriveForTime_PadModified offpad = new DriveForTime_PadModified(Constants.FORWARD_POWER_TIME, Math.PI, -Constants.STRAFE_LEFT_TIME);
+        Wait stop = new Wait(1);
         DriveDistance backward = new DriveDistance(-Constants.PARKING_FOWARD_DISTANCE);
-        Strafe strafeleft = new Strafe(-Constants.CRYPTOBOX_STRAFE_DISTANCE);
+        DriveForTime strafeleft = new DriveForTime(Constants.LEFT_POWER_TIME, -Math.PI/2, Constants.STRAFE_LEFT_TIME);
+        TurnForTime turn = new TurnForTime(Constants.ROTATIONS_180_DEGREES);
+        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
         Command[] cmds = {movearmout, pollColor, wackjewel, movearmin};
         return new SequentialCommand(cmds);
@@ -60,6 +67,16 @@ public class AutoCodes {
         DriveDistance backup = new DriveDistance(-2);
 
         Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, forward, strafe, outtake, backup};
+        return new SequentialCommand(cmds);
+    }
+
+    public static SequentialCommand wackJewelBasic(Alliance alliance) {
+        MoveJewelArm movearmout = new MoveJewelArm(JewelArm.JewelArmPosition.OUT);
+        PollColor pollColor = new PollColor();
+        WackJewel wackjewel = new WackJewel(alliance);
+        MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
+
+        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin};
         return new SequentialCommand(cmds);
     }
 

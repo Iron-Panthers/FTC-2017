@@ -12,7 +12,7 @@ import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
  * Created by jerry on 11/10/17.
  */
 
-@Autonomous(name = "driving test")
+@Autonomous(name = "nononononono")
 public class DrivingTests extends AutoBaseOpMode {
     @Override
     public void onInit() {
