@@ -37,7 +37,7 @@ public class AutoCodes {
         MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
 
         //yes it's negative time i don't care
-        DriveForTime_PadModified offpad = new DriveForTime_PadModified(Constants.FORWARD_POWER_TIME, Math.PI, -Constants.STRAFE_LEFT_TIME);
+        DriveForTime_PadModified offpad = new DriveForTime_PadModified(Constants.FORWARD_POWER_TIME, Math.PI, -Constants.OFF_PAD_TIME);
         Wait stop = new Wait(1);
         DriveDistance backward = new DriveDistance(-Constants.PARKING_FOWARD_DISTANCE);
         DriveForTime strafeleft = new DriveForTime(Constants.LEFT_POWER_TIME, -Math.PI/2, Constants.STRAFE_LEFT_TIME);
@@ -64,9 +64,41 @@ public class AutoCodes {
 
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME); //add to constants later
 
-        DriveDistance backup = new DriveDistance(-2);
+        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, forward, strafe, outtake};
+        return new SequentialCommand(cmds);
+    }
 
-        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, forward, strafe, outtake, backup};
+    public static SequentialCommand closeBlueJewel(Alliance alliance) {
+        MoveJewelArm movearmout = new MoveJewelArm(JewelArm.JewelArmPosition.OUT);
+        PollColor pollColor = new PollColor();
+        WackJewel wackjewel = new WackJewel(alliance);
+        MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
+
+        DriveForTime_PadModified offPad = new DriveForTime_PadModified(Constants.FORWARD_POWER_TIME, Math.PI, -Constants.OFF_PAD_TIME);
+        Wait stop = new Wait(1);
+        DriveDistance backward = new DriveDistance(-10);
+        TurnForTime turn = new TurnForTime(Constants.ROTATIONS_90_DEGREES);
+        DriveDistance inchforward = new DriveDistance(4);
+        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
+
+        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, backward, turn, inchforward, outtake};
+        return new SequentialCommand(cmds);
+    }
+
+    public static SequentialCommand closeRedJewel(Alliance alliance) {
+        MoveJewelArm movearmout = new MoveJewelArm(JewelArm.JewelArmPosition.OUT);
+        PollColor pollColor = new PollColor();
+        WackJewel wackjewel = new WackJewel(alliance);
+        MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
+
+        DriveForTime_PadModified offPad = new DriveForTime_PadModified(Constants.FORWARD_POWER_TIME, Math.PI, Constants.OFF_PAD_TIME);
+        Wait stop = new Wait(1);
+        DriveDistance backward = new DriveDistance(10);
+        TurnForTime turn = new TurnForTime(Constants.ROTATIONS_90_DEGREES);
+        DriveDistance inchforward = new DriveDistance(4);
+        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
+
+        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, backward, turn, inchforward, outtake};
         return new SequentialCommand(cmds);
     }
 
