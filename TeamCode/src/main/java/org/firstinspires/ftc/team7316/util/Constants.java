@@ -32,12 +32,15 @@ public class Constants {
     public static final double ROTATIONS_90_DEGREES = 0.6;
     //drive distances
     public static final double JEWEL_WHACK_DISTANCE = 3.5; //inches
-    public static final double PARKING_FOWARD_DISTANCE = 9; //inches after driving for time after off the balancing pad
+    public static final double FAR_CRYPTO_DISTANCE = 9; //inches after driving for time after off the balancing pad
     public static final double CRYPTOBOX_STRAFE_DISTANCE = 11.25;//inches too
+    public static final double CLOSE_CRYPTO_DISTANCE = 10;
+    public static final double CLOSE_CRYPTO_APPROACH = 7;
     //drive times(temporary) and their powers
     public static final double OFF_PAD_TIME = 1.1;
     public static final double DRIVE_FORWARD_TIME = 1.6; //driving off the pad and to the parking also for now
-    public static final double FORWARD_POWER_TIME = 0.4; //was 0.3
+    public static final double FORWARD_POWER_FOR_TIME = 0.3; //was 0.3 whne jewel waacked forward
+    public static final double BACKWARD_POWER_FOR_TIME = 0.4; //when  jewel wacked backwards
     public static final double STRAFE_LEFT_TIME = 1;
     public static final double LEFT_POWER_TIME = 0.8;
 
