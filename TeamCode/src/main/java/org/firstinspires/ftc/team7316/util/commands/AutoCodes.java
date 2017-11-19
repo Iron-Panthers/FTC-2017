@@ -42,7 +42,9 @@ public class AutoCodes {
         TurnForTime turn = new TurnForTime(Constants.ROTATIONS_180_DEGREES);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
-        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offpad, stop, backward, strafeleft, turn, outtake};
+        DriveDistance backup = new DriveDistance(-4);
+
+        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offpad, stop, backward, strafeleft, turn, outtake, backup};
         return new SequentialCommand(cmds);
     }
 
@@ -59,7 +61,9 @@ public class AutoCodes {
         DriveForTime strafe = new DriveForTime(Constants.LEFT_POWER_TIME, -Math.PI/2, Constants.STRAFE_LEFT_TIME);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME); //add to constants later
 
-        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, forward, strafe, outtake};
+        DriveDistance backup = new DriveDistance(-4);
+
+        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, forward, strafe, outtake, backup};
         return new SequentialCommand(cmds);
     }
 
@@ -77,7 +81,9 @@ public class AutoCodes {
         DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
-        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, backward, turn, inchforward, outtake};
+        DriveDistance backup = new DriveDistance(-4);
+
+        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, backward, turn, inchforward, outtake, backup};
         return new SequentialCommand(cmds);
     }
 
@@ -95,7 +101,9 @@ public class AutoCodes {
         DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
-        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, backward, turn, inchforward, outtake};
+        DriveDistance backup = new DriveDistance(-4);
+
+        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, backward, turn, inchforward, outtake, backup};
         return new SequentialCommand(cmds);
     }
 

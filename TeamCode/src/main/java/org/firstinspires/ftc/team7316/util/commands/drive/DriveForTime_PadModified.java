@@ -23,6 +23,7 @@ public class DriveForTime_PadModified extends Command {
 
     public DriveForTime_PadModified(double duration, Alliance alliance) {
         this.duration = duration;
+        this.alliance = alliance;
     }
 
     @Override
