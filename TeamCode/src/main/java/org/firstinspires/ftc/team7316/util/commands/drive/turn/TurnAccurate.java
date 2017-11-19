@@ -16,7 +16,7 @@ public class TurnAccurate extends Command {
     public static final double ERROR_THRESHOLD = 4;
     public static final double decreaseAmount = 0.95;
     public static final int decreaseStart = 45;
-    private double minPower = 0.4; //Constants.DRIVER_MOTOR_DEADZONE + 0.05;
+    private double minPower = 0.3; //Constants.DRIVER_MOTOR_DEADZONE + 0.05;
     public double power = 0;
     private double turnAngle;
 

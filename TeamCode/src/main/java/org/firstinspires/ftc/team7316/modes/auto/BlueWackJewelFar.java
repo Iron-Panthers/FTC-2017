@@ -3,8 +3,6 @@ package org.firstinspires.ftc.team7316.modes.auto;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.team7316.modes.AutoBaseOpMode;
-import org.firstinspires.ftc.team7316.util.Alliance;
-import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.Scheduler;
 import org.firstinspires.ftc.team7316.util.commands.AutoCodes;
 
@@ -17,7 +15,7 @@ public class BlueWackJewelFar extends AutoBaseOpMode {
 
     @Override
     public void onInit() {
-        Scheduler.instance.add(AutoCodes.closeBlueJewel());
+        Scheduler.instance.add(AutoCodes.farBlueJewel());
     }
 
     @Override

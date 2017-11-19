@@ -13,6 +13,9 @@ public class DriveDistance extends Command {
 
     private int distance; // in ticks
 
+    private int completedCount;
+    private final int countThreshold = 10;
+
     /**
      * @param inches desired distance
      */
@@ -23,6 +26,7 @@ public class DriveDistance extends Command {
 
     @Override
     public void init() {
+        completedCount = 0;
         Subsystems.instance.driveBase.stopMotors();
         Subsystems.instance.driveBase.resetMotorModes();
         Subsystems.instance.driveBase.resetEncoders();
@@ -33,6 +37,9 @@ public class DriveDistance extends Command {
 
     @Override
     public void loop() {
+        if(Subsystems.instance.driveBase.completedDistance()) {
+            completedCount ++;
+        }
         Hardware.log("driving distance", "cool and good");
         Hardware.log("flError", Hardware.instance.frontLeftDriveMotorWrapper.getError());
         Hardware.log("frError", Hardware.instance.frontRightDriveMotorWrapper.getError());
@@ -41,7 +48,7 @@ public class DriveDistance extends Command {
 
     @Override
     public boolean shouldRemove() {
-        return Subsystems.instance.driveBase.completedDistance();
+        return completedCount >= countThreshold;
     }
 
     @Override

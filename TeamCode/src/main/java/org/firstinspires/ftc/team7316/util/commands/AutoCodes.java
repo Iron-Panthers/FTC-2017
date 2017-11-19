@@ -6,9 +6,10 @@ import org.firstinspires.ftc.team7316.util.commands.drive.DriveDistance;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime_PadModified;
 import org.firstinspires.ftc.team7316.util.commands.drive.Strafe;
-import org.firstinspires.ftc.team7316.util.commands.drive.turn.DriveDistance_PadModified;
+import org.firstinspires.ftc.team7316.util.commands.drive.DriveDistance_PadModified;
 import org.firstinspires.ftc.team7316.util.commands.flow.SequentialCommand;
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroPID;
+import org.firstinspires.ftc.team7316.util.commands.flow.Wait;
 import org.firstinspires.ftc.team7316.util.commands.intake.IntakeForTime;
 import org.firstinspires.ftc.team7316.util.commands.sensors.PollColor;
 import org.firstinspires.ftc.team7316.util.subsystems.JewelArm;
@@ -28,7 +29,7 @@ public class AutoCodes {
         return bothDrive;
     }*/
 
-    public static SequentialCommand closeBlueJewel() {
+    public static SequentialCommand farBlueJewel() {
         MoveJewelArm movearmout = new MoveJewelArm(JewelArm.JewelArmPosition.OUT);
         PollColor pollColor = new PollColor();
         WackJewel wackjewel = new WackJewel(Alliance.BLUE);
@@ -38,7 +39,7 @@ public class AutoCodes {
 //        DriveForTime strafe = new DriveForTime(0.8, -Math.PI/2, 2.5);
         Strafe strafeleft = new Strafe(-Constants.CRYPTOBOX_STRAFE_DISTANCE);
 
-        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, foward, strafeleft};
+        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin};
         return new SequentialCommand(cmds);
     }
 
@@ -52,12 +53,13 @@ public class AutoCodes {
         //Strafe strafeleft = new Strafe(-Constants.CRYPTOBOX_STRAFE_DISTANCE);
 
         DriveForTime_PadModified offPad = new DriveForTime_PadModified(Constants.FORWARD_POWER_TIME, 0, Constants.OFF_PAD_TIME);
-        DriveDistance_PadModified forward = new DriveDistance_PadModified(Constants.PARKING_FOWARD_DISTANCE);
+        Wait stop = new Wait(1);
+        DriveDistance forward = new DriveDistance(Constants.PARKING_FOWARD_DISTANCE);
         DriveForTime strafe = new DriveForTime(Constants.LEFT_POWER_TIME, -Math.PI/2, Constants.STRAFE_LEFT_TIME);
 
         IntakeForTime outtake = new IntakeForTime(-0.7, 1); //add to constants later
 
-        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, forward, strafe, outtake};
+        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, forward, strafe, outtake};
         return new SequentialCommand(cmds);
     }
 
