@@ -37,6 +37,9 @@ public class Constants {
     public static final double STRAFE_LEFT_TIME = 1;
     public static final double LEFT_POWER_TIME = 0.8;
 
+    public static final double OUTTAKE_POWER = -0.7;
+    public static final double OUTTAKE_TIME = 1;
+
     //balancing pad offsets after whacking jewel
     public static final double DISTANCE_PAD_OFFSET = 1; //inches offset after jewel
     public static final int DISTANCE_PAD_OFFSET_TICKS = (int)(inchesToTicks(DISTANCE_PAD_OFFSET));
@@ -47,9 +50,9 @@ public class Constants {
 
     //Drive Base PID Constants
     //tested 11/17
-    public static final double DRIVE_P = 0.0025; // 0.0025
-    public static final double DRIVE_I = 0.0004; // 0.0004
-    public static final double DRIVE_D = 0.012; // 0.004
+    public static final double DRIVE_P = 0.0025; // 0.0025 original
+    public static final double DRIVE_I = 0.0004; // 0.0004 origial
+    public static final double DRIVE_D = 0.012; // 0.004 original
 
     public static final double STRAIGHT_DRIVE_MAXSPEED = 0.65;
 

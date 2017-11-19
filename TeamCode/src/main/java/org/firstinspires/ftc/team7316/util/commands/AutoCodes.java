@@ -34,9 +34,7 @@ public class AutoCodes {
         PollColor pollColor = new PollColor();
         WackJewel wackjewel = new WackJewel(Alliance.BLUE);
         MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
-        DriveDistance foward = new DriveDistance(Constants.PARKING_FOWARD_DISTANCE);
-//        DriveForTime foward = new DriveForTime(0.3, 0, 2);
-//        DriveForTime strafe = new DriveForTime(0.8, -Math.PI/2, 2.5);
+        DriveDistance backward = new DriveDistance(-Constants.PARKING_FOWARD_DISTANCE);
         Strafe strafeleft = new Strafe(-Constants.CRYPTOBOX_STRAFE_DISTANCE);
 
         Command[] cmds = {movearmout, pollColor, wackjewel, movearmin};
@@ -57,9 +55,11 @@ public class AutoCodes {
         DriveDistance forward = new DriveDistance(Constants.PARKING_FOWARD_DISTANCE);
         DriveForTime strafe = new DriveForTime(Constants.LEFT_POWER_TIME, -Math.PI/2, Constants.STRAFE_LEFT_TIME);
 
-        IntakeForTime outtake = new IntakeForTime(-0.7, 1); //add to constants later
+        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME); //add to constants later
 
-        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, forward, strafe, outtake};
+        DriveDistance backup = new DriveDistance(-2);
+
+        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, forward, strafe, outtake, backup};
         return new SequentialCommand(cmds);
     }
 
