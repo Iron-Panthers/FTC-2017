@@ -33,7 +33,7 @@ public class AutoCodes {
         WackJewel wackjewel = new WackJewel(Alliance.BLUE);
         MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
 
-        DriveForTime_PadModified offpad = new DriveForTime_PadModified(Constants.OFF_PAD_TIME, Alliance.BLUE);
+        DriveForTime_PadModified offpad = new DriveForTime_PadModified(Constants.BLUE_OFF_PAD_TIME, Alliance.BLUE);
         Wait stop = new Wait(1);
         DriveDistance backward = new DriveDistance(-Constants.FAR_CRYPTO_DISTANCE);
 
@@ -53,7 +53,7 @@ public class AutoCodes {
         WackJewel wackjewel = new WackJewel(Alliance.RED);
         MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
 
-        DriveForTime_PadModified offPad = new DriveForTime_PadModified(Constants.OFF_PAD_TIME, Alliance.RED);
+        DriveForTime_PadModified offPad = new DriveForTime_PadModified(Constants.RED_OFF_PAD_TIME, Alliance.RED);
         Wait stop = new Wait(1);
         DriveDistance forward = new DriveDistance(Constants.FAR_CRYPTO_DISTANCE);
 
@@ -72,7 +72,7 @@ public class AutoCodes {
         WackJewel wackjewel = new WackJewel(Alliance.BLUE);
         MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
 
-        DriveForTime_PadModified offPad = new DriveForTime_PadModified(Constants.OFF_PAD_TIME, Alliance.BLUE);
+        DriveForTime_PadModified offPad = new DriveForTime_PadModified(Constants.BLUE_OFF_PAD_TIME, Alliance.BLUE);
         Wait stop = new Wait(1);
         DriveDistance backward = new DriveDistance(-Constants.CLOSE_CRYPTO_DISTANCE);
 
@@ -92,7 +92,7 @@ public class AutoCodes {
         WackJewel wackjewel = new WackJewel(Alliance.RED);
         MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
 
-        DriveForTime_PadModified offPad = new DriveForTime_PadModified(Constants.OFF_PAD_TIME, Alliance.RED);
+        DriveForTime_PadModified offPad = new DriveForTime_PadModified(Constants.RED_OFF_PAD_TIME, Alliance.RED);
         Wait stop = new Wait(1);
         DriveDistance backward = new DriveDistance(Constants.CLOSE_CRYPTO_DISTANCE);
 

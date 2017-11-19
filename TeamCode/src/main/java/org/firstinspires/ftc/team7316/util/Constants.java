@@ -37,7 +37,8 @@ public class Constants {
     public static final double CLOSE_CRYPTO_DISTANCE = 10;
     public static final double CLOSE_CRYPTO_APPROACH = 7;
     //drive times(temporary) and their powers
-    public static final double OFF_PAD_TIME = 1.1;
+    public static final double RED_OFF_PAD_TIME = 1;
+    public static final double BLUE_OFF_PAD_TIME = 1.1;
     public static final double DRIVE_FORWARD_TIME = 1.6; //driving off the pad and to the parking also for now
     public static final double FORWARD_POWER_FOR_TIME = 0.3; //was 0.3 whne jewel waacked forward
     public static final double BACKWARD_POWER_FOR_TIME = 0.4; //when  jewel wacked backwards
