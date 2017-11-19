@@ -73,8 +73,8 @@ public class Hardware {
     public ColorSensor colorsensor;
     public ColorWrapper colorWrapper;
 
-    public BNO055IMU gyro;
-    public GyroWrapper gyroWrapper;
+//    public BNO055IMU gyro;
+//    public GyroWrapper gyroWrapper;
 
     public Hardware (HardwareMap map) {
 
@@ -144,15 +144,15 @@ public class Hardware {
         gyroParams.loggingTag          = "IMU";
         gyroParams.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
 
-        try {
-            gyro = map.get(BNO055IMU.class, GYRO_NAME);
-            gyro.initialize(gyroParams);
-            gyroWrapper = new GyroWrapper(gyro);
-            gyro_offline = false;
-        }
-        catch (Exception e) {
-            gyro_offline = true;
-        }
+//        try {
+//            gyro = map.get(BNO055IMU.class, GYRO_NAME);
+//            gyro.initialize(gyroParams);
+//            gyroWrapper = new GyroWrapper(gyro);
+//            gyro_offline = false;
+//        }
+//        catch (Exception e) {
+//            gyro_offline = true;
+//        }
 
         //Scheduler.instance.addTask(frontSideInfaredSensor);
     }

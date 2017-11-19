@@ -7,7 +7,6 @@ import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime_PadModified;
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnForTime;
 import org.firstinspires.ftc.team7316.util.commands.flow.SequentialCommand;
-import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroPID;
 import org.firstinspires.ftc.team7316.util.commands.flow.Wait;
 import org.firstinspires.ftc.team7316.util.commands.intake.IntakeForTime;
 import org.firstinspires.ftc.team7316.util.commands.sensors.PollColor;
@@ -122,10 +121,10 @@ public class AutoCodes {
         return new SequentialCommand(drive);
     }
 
-    public static SequentialCommand driveStraightTurn(double distance, int angle) {
-        //DriveDistance drive = new DriveDistance(distance);
-        TurnGyroPID turn = new TurnGyroPID(angle);
-        Command[] cmds = {turn};
-        return new SequentialCommand(cmds);
-    }
+//    public static SequentialCommand driveStraightTurn(double distance, int angle) {
+//        //DriveDistance drive = new DriveDistance(distance);
+//        TurnGyroPID turn = new TurnGyroPID(angle);
+//        Command[] cmds = {turn};
+//        return new SequentialCommand(cmds);
+//    }
 }
