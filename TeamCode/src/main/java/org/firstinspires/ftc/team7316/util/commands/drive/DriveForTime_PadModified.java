@@ -36,10 +36,10 @@ public class DriveForTime_PadModified extends Command {
             else {
                 double power = Hardware.instance.colorWrapper.drivenForward ? Constants.FORWARD_POWER_FOR_TIME : Constants.BACKWARD_POWER_FOR_TIME;
                 if (Hardware.instance.colorWrapper.drivenForward) {
-                    duration = duration - Constants.TIME_PAD_OFFSET_FORWARD;
+                    duration = duration - Constants.TIME_PAD_OFFSET_FORWARD_RED;
                     cmd = new DriveForTime(power, 0, duration);
                 } else {
-                    duration = duration + Constants.TIME_PAD_OFFSET_BACKWARD;
+                    duration = duration + Constants.TIME_PAD_OFFSET_BACKWARD_RED;
                     cmd = new DriveForTime(power, 0, duration);
                 }
             }
@@ -52,10 +52,10 @@ public class DriveForTime_PadModified extends Command {
             else {
                 double power = Hardware.instance.colorWrapper.drivenForward ? Constants.BACKWARD_POWER_FOR_TIME : Constants.FORWARD_POWER_FOR_TIME;
                 if (Hardware.instance.colorWrapper.drivenForward) {
-                    duration = duration + Constants.TIME_PAD_OFFSET_BACKWARD;
+                    duration = duration + Constants.TIME_PAD_OFFSET_BACKWARD_BLUE;
                     cmd = new DriveForTime(power, Math.PI, duration);
                 } else {
-                    duration = duration - Constants.TIME_PAD_OFFSET_FORWARD;
+                    duration = duration - Constants.TIME_PAD_OFFSET_FORWARD_BLUE;
                     cmd = new DriveForTime(power, Math.PI, duration);
                 }
             }

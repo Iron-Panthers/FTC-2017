@@ -60,9 +60,10 @@ public class AutoCodes {
         DriveForTime strafe = new DriveForTime(Constants.LEFT_POWER_TIME, -Math.PI/2, Constants.STRAFE_LEFT_TIME);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME); //add to constants later
 
+        DriveDistance ram = new DriveDistance(4);
         DriveDistance backup = new DriveDistance(-4);
 
-        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, forward, strafe, outtake, backup};
+        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, forward, strafe, outtake, ram, backup};
         return new SequentialCommand(cmds);
     }
 

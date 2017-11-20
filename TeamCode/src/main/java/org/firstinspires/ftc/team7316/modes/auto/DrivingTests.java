@@ -16,7 +16,7 @@ public class DrivingTests extends AutoBaseOpMode {
     @Override
     public void onInit() {
         Scheduler.inTeleop = false;
-        Scheduler.instance.add(new DriveForTime(Constants.FORWARD_POWER_FOR_TIME, 0, Constants.OFF_PAD_TIME));
+        //Scheduler.instance.add(new DriveForTime(Constants.FORWARD_POWER_FOR_TIME, 0, Constants.OFF_PAD_TIME));
     }
 
     @Override
