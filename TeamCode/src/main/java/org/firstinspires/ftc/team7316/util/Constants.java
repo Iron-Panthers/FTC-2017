@@ -56,7 +56,7 @@ public class Constants {
     public static final double TIME_PAD_OFFSET_FORWARD_RED = 0.3; //seconds offset after jewel hit
     public static final double TIME_PAD_OFFSET_FORWARD_BLUE = 0.3;
     public static final double TIME_PAD_OFFSET_BACKWARD_RED = 0.25; //seconds offset after jewel hit
-    public static final double TIME_PAD_OFFSET_BACKWARD_BLUE = 0.4; //seconds offset after jewel hit
+    public static final double TIME_PAD_OFFSET_BACKWARD_BLUE = 0.2; //seconds offset after jewel hit
 
     //Jewel arm shenanigans
     public static final double ARM_SERVO_TRAVEL_TIME = 1;
