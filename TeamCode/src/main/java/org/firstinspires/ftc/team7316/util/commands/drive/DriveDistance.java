@@ -21,8 +21,16 @@ public class DriveDistance extends Command {
     private int completedCount;
     private final int countThreshold = 10;
 
+    public DriveDistance(double inches) {
+        //requires(Subsystems.instance.driveBase);
+        this.distance = (int)Constants.inchesToTicks(inches);
+        this.timeout = 100;
+        timer = new ElapsedTime();
+    }
+
     /**
      * @param inches desired distance
+     * @param timeout the time before the command will stop
      */
     public DriveDistance(double inches, double timeout) {
         //requires(Subsystems.instance.driveBase);

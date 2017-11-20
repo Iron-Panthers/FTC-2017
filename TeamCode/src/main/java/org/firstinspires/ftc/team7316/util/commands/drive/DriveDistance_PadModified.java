@@ -21,10 +21,10 @@ public class DriveDistance_PadModified extends Command {
     @Override
     public void init() {
         if(Hardware.instance.colorWrapper.drivenForward) {
-            cmd = new DriveDistance(distance - Constants.DISTANCE_ERROR_RANGE);
+            cmd = new DriveDistance(distance - Constants.DISTANCE_ERROR_RANGE, 10);
         }
         else {
-            cmd = new DriveDistance(distance + Constants.DISTANCE_ERROR_RANGE);
+            cmd = new DriveDistance(distance + Constants.DISTANCE_ERROR_RANGE, 10);
         }
         cmd.init();
     }
