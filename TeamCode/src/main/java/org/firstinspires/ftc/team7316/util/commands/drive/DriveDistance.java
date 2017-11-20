@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.team7316.util.commands.drive;
 
+import com.qualcomm.robotcore.util.ElapsedTime;
+
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.Command;
@@ -13,19 +15,25 @@ public class DriveDistance extends Command {
 
     private int distance; // in ticks
 
+    private double timeout;
+    private ElapsedTime timer;
+
     private int completedCount;
     private final int countThreshold = 10;
 
     /**
      * @param inches desired distance
      */
-    public DriveDistance(double inches) {
+    public DriveDistance(double inches, double timeout) {
         //requires(Subsystems.instance.driveBase);
         this.distance = (int)Constants.inchesToTicks(inches);
+        this.timeout = timeout;
+        timer = new ElapsedTime();
     }
 
     @Override
     public void init() {
+        timer.reset();
         completedCount = 0;
         Subsystems.instance.driveBase.stopMotors();
         Subsystems.instance.driveBase.resetMotorModes();
@@ -48,7 +56,7 @@ public class DriveDistance extends Command {
 
     @Override
     public boolean shouldRemove() {
-        return completedCount >= countThreshold;
+        return completedCount >= countThreshold || timer.seconds() > timeout;
     }
 
     @Override

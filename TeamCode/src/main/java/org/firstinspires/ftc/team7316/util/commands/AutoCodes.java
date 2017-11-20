@@ -35,13 +35,13 @@ public class AutoCodes {
 
         DriveForTime_PadModified offpad = new DriveForTime_PadModified(Constants.BLUE_OFF_PAD_TIME, Alliance.BLUE);
         Wait stop = new Wait(1);
-        DriveDistance backward = new DriveDistance(-Constants.FAR_CRYPTO_DISTANCE);
+        DriveDistance backward = new DriveDistance(-Constants.FAR_CRYPTO_DISTANCE, 10);
 
         DriveForTime strafeleft = new DriveForTime(Constants.LEFT_POWER_TIME, -Math.PI/2, Constants.STRAFE_LEFT_TIME);
         TurnForTime turn = new TurnForTime(Constants.ROTATIONS_180_DEGREES);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
-        DriveDistance backup = new DriveDistance(-4);
+        DriveDistance backup = new DriveDistance(-4, 10);
 
         Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offpad, stop, backward, strafeleft, turn, outtake, backup};
         return new SequentialCommand(cmds);
@@ -55,13 +55,13 @@ public class AutoCodes {
 
         DriveForTime_PadModified offPad = new DriveForTime_PadModified(Constants.RED_OFF_PAD_TIME, Alliance.RED);
         Wait stop = new Wait(1);
-        DriveDistance forward = new DriveDistance(Constants.FAR_CRYPTO_DISTANCE);
+        DriveDistance forward = new DriveDistance(Constants.FAR_CRYPTO_DISTANCE, 10);
 
         DriveForTime strafe = new DriveForTime(Constants.LEFT_POWER_TIME, -Math.PI/2, Constants.STRAFE_LEFT_TIME);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME); //add to constants later
 
-        DriveDistance ram = new DriveDistance(4);
-        DriveDistance backup = new DriveDistance(-4);
+        DriveDistance ram = new DriveDistance(4, 4);
+        DriveDistance backup = new DriveDistance(-4, 4);
 
         Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, forward, strafe, outtake, ram, backup};
         return new SequentialCommand(cmds);
@@ -75,13 +75,13 @@ public class AutoCodes {
 
         DriveForTime_PadModified offPad = new DriveForTime_PadModified(Constants.BLUE_OFF_PAD_TIME, Alliance.BLUE);
         Wait stop = new Wait(1);
-        DriveDistance backward = new DriveDistance(-Constants.CLOSE_CRYPTO_DISTANCE);
+        DriveDistance backward = new DriveDistance(-Constants.CLOSE_CRYPTO_DISTANCE, 10);
 
         TurnForTime turn = new TurnForTime(Constants.ROTATIONS_90_DEGREES);
-        DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH);
+        DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH, 10);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
-        DriveDistance backup = new DriveDistance(-4);
+        DriveDistance backup = new DriveDistance(-4, 10);
 
         Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, backward, turn, inchforward, outtake, backup};
         return new SequentialCommand(cmds);
@@ -95,13 +95,13 @@ public class AutoCodes {
 
         DriveForTime_PadModified offPad = new DriveForTime_PadModified(Constants.RED_OFF_PAD_TIME, Alliance.RED);
         Wait stop = new Wait(1);
-        DriveDistance backward = new DriveDistance(Constants.CLOSE_CRYPTO_DISTANCE);
+        DriveDistance backward = new DriveDistance(Constants.CLOSE_CRYPTO_DISTANCE, 10);
 
         TurnForTime turn = new TurnForTime(Constants.ROTATIONS_90_DEGREES);
-        DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH);
+        DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH, 10);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
-        DriveDistance backup = new DriveDistance(-4);
+        DriveDistance backup = new DriveDistance(-4, 10);
 
         Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, backward, turn, inchforward, outtake, backup};
         return new SequentialCommand(cmds);
@@ -116,11 +116,11 @@ public class AutoCodes {
         Command[] cmds = {movearmout, pollColor, wackjewel, movearmin};
         return new SequentialCommand(cmds);
     }
-
-    public static SequentialCommand driveStraight(double distance) {
-        DriveDistance drive = new DriveDistance(distance);
-        return new SequentialCommand(drive);
-    }
+//
+//    public static SequentialCommand driveStraight(double distance) {
+//        DriveDistance drive = new DriveDistance(distance);
+//        return new SequentialCommand(drive);
+//    }
 
 //    public static SequentialCommand driveStraightTurn(double distance, int angle) {
 //        //DriveDistance drive = new DriveDistance(distance);
