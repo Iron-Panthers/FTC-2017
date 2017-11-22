@@ -93,10 +93,10 @@ public class MecanumDriveBase extends Subsystem {
     }
 
     public void setMotorTargets(int ticks) {
-        Hardware.instance.frontLeftDriveMotorWrapper.setTargetEncoderTicks(ticks);
-        Hardware.instance.frontRightDriveMotorWrapper.setTargetEncoderTicks(ticks);
-        Hardware.instance.backLeftDriveMotorWrapper.setTargetEncoderTicks(ticks);
-        Hardware.instance.backRightDriveMotorWrapper.setTargetEncoderTicks(ticks);
+        Hardware.instance.frontLeftDriveMotorWrapper.setTargetTicks(ticks);
+        Hardware.instance.frontRightDriveMotorWrapper.setTargetTicks(ticks);
+        Hardware.instance.backLeftDriveMotorWrapper.setTargetTicks(ticks);
+        Hardware.instance.backRightDriveMotorWrapper.setTargetTicks(ticks);
     }
 
     public void setMotorMaxSpeeds(double power) {
@@ -107,17 +107,17 @@ public class MecanumDriveBase extends Subsystem {
     }
 
     public void strafeLeft(int ticks) {
-        Hardware.instance.frontLeftDriveMotorWrapper.setTargetEncoderTicks(-ticks); //originally neg
-        Hardware.instance.frontRightDriveMotorWrapper.setTargetEncoderTicks(ticks); //originally pos
-        Hardware.instance.backLeftDriveMotorWrapper.setTargetEncoderTicks(ticks);//orginallt pos
-        Hardware.instance.backRightDriveMotorWrapper.setTargetEncoderTicks(-ticks); //originally neg
+        Hardware.instance.frontLeftDriveMotorWrapper.setTargetTicks(-ticks); //originally neg
+        Hardware.instance.frontRightDriveMotorWrapper.setTargetTicks(ticks); //originally pos
+        Hardware.instance.backLeftDriveMotorWrapper.setTargetTicks(ticks);//orginallt pos
+        Hardware.instance.backRightDriveMotorWrapper.setTargetTicks(-ticks); //originally neg
     }
 
     public void strafeRight(int ticks) {
-        Hardware.instance.frontLeftDriveMotorWrapper.setTargetEncoderTicks(ticks);
-        Hardware.instance.frontRightDriveMotorWrapper.setTargetEncoderTicks(-ticks);
-        Hardware.instance.backLeftDriveMotorWrapper.setTargetEncoderTicks(-ticks);
-        Hardware.instance.backRightDriveMotorWrapper.setTargetEncoderTicks(ticks);
+        Hardware.instance.frontLeftDriveMotorWrapper.setTargetTicks(ticks);
+        Hardware.instance.frontRightDriveMotorWrapper.setTargetTicks(-ticks);
+        Hardware.instance.backLeftDriveMotorWrapper.setTargetTicks(-ticks);
+        Hardware.instance.backRightDriveMotorWrapper.setTargetTicks(ticks);
     }
 
 
@@ -137,6 +137,13 @@ public class MecanumDriveBase extends Subsystem {
         Hardware.instance.frontRightDriveMotorWrapper.resetEncoder();
         Hardware.instance.backLeftDriveMotorWrapper.resetEncoder();
         Hardware.instance.backRightDriveMotorWrapper.resetEncoder();
+    }
+
+    public void resetMotors() {
+        Hardware.instance.frontLeftDriveMotorWrapper.reset();
+        Hardware.instance.frontRightDriveMotorWrapper.reset();
+        Hardware.instance.backLeftDriveMotorWrapper.reset();
+        Hardware.instance.backRightDriveMotorWrapper.reset();
     }
 
 //

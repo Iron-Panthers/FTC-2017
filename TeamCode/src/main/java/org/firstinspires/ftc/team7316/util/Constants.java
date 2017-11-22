@@ -26,6 +26,8 @@ public class Constants {
 
 
     //-----------Auto constants-----------//
+    public static final double COAST_TICKS_PER_SECOND = 600;
+
     public static final double ROTATIONS_PERFIVESECONDS = 3.5; //all full speedy
     public static final double ROTATIONS_PER_SECOND = ROTATIONS_PERFIVESECONDS / 5;
     public static final double ROTATIONS_180_DEGREES = 0.8;
@@ -63,9 +65,9 @@ public class Constants {
 
     //Drive Base PID Constants
     //tested 11/17
-    public static final double DRIVE_P = 0.0025; // 0.0025 original
-    public static final double DRIVE_I = 0.0004; // 0.0004 origial
-    public static final double DRIVE_D = 0.012; // 0.004 original
+    public static final double DRIVE_P = 0.0025; // DEAD
+    public static final double DRIVE_I = 0.0004; // DEAD
+    public static final double DRIVE_D = 0.012; // DEAD
 
     public static final double STRAIGHT_DRIVE_MAXSPEED = 0.65;
 

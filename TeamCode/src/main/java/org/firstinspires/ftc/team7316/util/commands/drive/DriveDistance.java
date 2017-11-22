@@ -43,9 +43,7 @@ public class DriveDistance extends Command {
     public void init() {
         timer.reset();
         completedCount = 0;
-        Subsystems.instance.driveBase.stopMotors();
-        Subsystems.instance.driveBase.resetMotorModes();
-        Subsystems.instance.driveBase.resetEncoders();
+        Subsystems.instance.driveBase.resetMotors();
         Subsystems.instance.driveBase.setMotorTargets(distance);
         Subsystems.instance.driveBase.setMotorMaxSpeeds(Constants.STRAIGHT_DRIVE_MAXSPEED);
 
