@@ -73,8 +73,8 @@ public class Hardware {
     public ColorSensor colorsensor;
     public ColorWrapper colorWrapper;
 
-    public BNO055IMU gyro;
-    public GyroWrapper gyroWrapper;
+//    public BNO055IMU gyro;
+//    public GyroWrapper gyroWrapper;
 
     public Hardware (HardwareMap map) {
 
@@ -114,7 +114,7 @@ public class Hardware {
 
         intakeServo = map.servo.get(INTAKE_SERVO_NAME);
         intakeServo.setDirection(Servo.Direction.REVERSE);
-        intakeServo.scaleRange(Constants.INTAKE_SERVO_MIN_POSITION, Constants.INTAKE_SERVO_MAX_POSITION);
+        //intakeServo.scaleRange(Constants.INTAKE_SERVO_MIN_POSITION, Constants.INTAKE_SERVO_MAX_POSITION);
 
 //        relic grabber hardware
 //        relicGrabberServo = map.servo.get(RELIC_GRABBER_SERVO_NAME);
@@ -144,15 +144,15 @@ public class Hardware {
         gyroParams.loggingTag          = "IMU";
         gyroParams.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
 
-        try {
-            gyro = map.get(BNO055IMU.class, GYRO_NAME);
-            gyro.initialize(gyroParams);
-            gyroWrapper = new GyroWrapper(gyro);
-            gyro_offline = false;
-        }
-        catch (Exception e) {
-            gyro_offline = true;
-        }
+//        try {
+//            gyro = map.get(BNO055IMU.class, GYRO_NAME);
+//            gyro.initialize(gyroParams);
+//            gyroWrapper = new GyroWrapper(gyro);
+//            gyro_offline = false;
+//        }
+//        catch (Exception e) {
+//            gyro_offline = true;
+//        }
 
         //Scheduler.instance.addTask(frontSideInfaredSensor);
     }

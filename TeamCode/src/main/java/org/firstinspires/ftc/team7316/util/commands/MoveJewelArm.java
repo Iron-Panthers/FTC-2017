@@ -1,12 +1,8 @@
 package org.firstinspires.ftc.team7316.util.commands;
 
-import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Constants;
-import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.subsystems.JewelArm;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
@@ -16,29 +12,29 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 public class MoveJewelArm extends Command {
 
-    private ElapsedTime pressedTime;
+    private ElapsedTime travelTime;
     private JewelArm.JewelArmPosition direction;
 
     public MoveJewelArm(JewelArm.JewelArmPosition direction) {
-        requires(Subsystems.instance.jewelArm);
+        //requires(Subsystems.instance.jewelArm);
         this.direction = direction;
-        this.pressedTime = new ElapsedTime();
+        this.travelTime = new ElapsedTime();
     }
 
     @Override
     public void init() {
-        pressedTime.reset();
+        travelTime.reset();
         Subsystems.instance.jewelArm.moveServo(direction);
     }
 
     @Override
     public void loop() {
-
+        System.out.println("c===============================================arm moved");
     }
 
     @Override
     public boolean shouldRemove() {
-        return pressedTime.seconds() >= Constants.ARM_SERVO_TRAVEL_TIME;
+        return travelTime.seconds() >= Constants.ARM_SERVO_TRAVEL_TIME;
     }
 
     @Override

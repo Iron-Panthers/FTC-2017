@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.team7316.util.commands;
 
 import org.firstinspires.ftc.team7316.util.Alliance;
+import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveDistance;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
@@ -18,7 +19,8 @@ public class WackJewel extends Command {
     private ColorWrapper colorWrapper;
 
     public WackJewel(Alliance alliance) {
-        requires(Subsystems.instance.jewelArm);
+        //requires(Subsystems.instance.jewelArm);
+        //requires(Subsystems.instance.driveBase);
         this.alliance = alliance;
         colorWrapper = Hardware.instance.colorWrapper;
     }
@@ -32,9 +34,11 @@ public class WackJewel extends Command {
         }
         else {
             if (alliance.shouldHitForward(colorWrapper.sumR(), colorWrapper.sumB())) {
-                drivecommand = new DriveForTime(0.3, 0, 0.2);
+                drivecommand = new DriveDistance(Constants.JEWEL_WHACK_DISTANCE);
+                colorWrapper.drivenForward = true;
             } else {
-                drivecommand = new DriveForTime(0.3, Math.PI, 0.25);
+                drivecommand = new DriveDistance(-Constants.JEWEL_WHACK_DISTANCE);
+                colorWrapper.drivenForward = false;
             }
             drivecommand.init();
         }
@@ -42,6 +46,9 @@ public class WackJewel extends Command {
 
     @Override
     public void loop() {
+        Hardware.log("whacking jewel", "yes");
+        Hardware.log("flError", Hardware.instance.frontLeftDriveMotorWrapper.getError());
+        Hardware.log("frError", Hardware.instance.frontRightDriveMotorWrapper.getError());
         drivecommand.loop();
     }
 

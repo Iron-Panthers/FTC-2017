@@ -17,7 +17,7 @@ public class DriveForTime extends Command {
     private ElapsedTime time;
 
     public DriveForTime(double power, double direction, double duration) {
-        requires(Subsystems.instance.driveBase);
+        //requires(Subsystems.instance.driveBase);
         this.power = power;
         this.direction = direction;
         this.duration = duration;

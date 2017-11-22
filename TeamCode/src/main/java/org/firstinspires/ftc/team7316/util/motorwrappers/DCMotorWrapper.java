@@ -14,15 +14,24 @@ public class DCMotorWrapper {
     private DcMotor motor;
     private PID pid;
 
+    private double maxPower;
+
     private int targetEncoderTicks = 0;
 
     public DCMotorWrapper(DcMotor motor, PID pid) {
         this.motor = motor;
         this.pid = pid;
+        maxPower = 1;
     }
 
     public void setTargetEncoderTicks(int ticks) {
+        resetEncoder();
         targetEncoderTicks = motor.getCurrentPosition() + ticks;
+        pid.reset();
+    }
+
+    public void setMaxPower(double maxPower) {
+        this.maxPower = maxPower;
     }
 
     public int getError() {
@@ -30,7 +39,11 @@ public class DCMotorWrapper {
     }
 
     public void setPowerPID() {
-        motor.setPower(pid.newError(getError()));
+        double pow = pid.getPower(getError());
+        if(Math.abs(pow) > maxPower) {
+            pow = (pow > 0) ? maxPower : -maxPower;
+        }
+        motor.setPower(pow);
     }
 
     public boolean completedDistance() {

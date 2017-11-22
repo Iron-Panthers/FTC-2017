@@ -3,9 +3,11 @@ package org.firstinspires.ftc.team7316.util.subsystems;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.BlankCommand;
 import org.firstinspires.ftc.team7316.util.commands.Command;
+import org.firstinspires.ftc.team7316.util.commands.intake.ClampIntake;
 import org.firstinspires.ftc.team7316.util.commands.intake.GlyphIntakeJoystick;
 
 /**
@@ -35,6 +37,13 @@ public class GlyphIntake extends Subsystem {
     }
 
     public void setServoPosition(double position) {
+        servo.scaleRange(0, 1);
+        this.servo.setPosition(position);
+    }
+
+    public void setServoPositionScaled(double position) {
+        servo.scaleRange(Constants.INTAKE_SERVO_MIN_POSITION, Constants.INTAKE_SERVO_MAX_POSITION);
+
         this.servo.setPosition(position);
     }
 
@@ -52,7 +61,7 @@ public class GlyphIntake extends Subsystem {
 
     @Override
     public Command defaultAutoCommand() {
-        return new BlankCommand(this);
+        return new ClampIntake();
     }
 
     @Override
