@@ -30,8 +30,8 @@ public class VuforiaCameraWrapper {
     private VuforiaTrackables relicTrackables;
     private VuforiaTrackable relicTemplate;
 
-    private double tX, tY, tZ;
-    private double rX, rY, rZ;
+    public double tX, tY, tZ;
+    public double rX, rY, rZ;
 
     private RelicRecoveryVuMark vuMark;
 
@@ -48,6 +48,8 @@ public class VuforiaCameraWrapper {
         relicTemplate.setName("relicVuMarkTemplate");
 
         relicTrackables.activate();
+
+        vuMark = RelicRecoveryVuMark.UNKNOWN;
     }
 
     public RelicRecoveryVuMark getVuMark() {
@@ -57,7 +59,7 @@ public class VuforiaCameraWrapper {
     public void update() {
         RelicRecoveryVuMark cipher = RelicRecoveryVuMark.from(relicTemplate);
 
-        if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
+        if (cipher != RelicRecoveryVuMark.UNKNOWN) {
             vuMark = cipher;
                 /* Found an instance of the template. In the actual game, you will probably
                  * loop until this condition occurs, then move on to act accordingly depending
