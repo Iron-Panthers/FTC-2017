@@ -14,6 +14,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.team7316.util.motorwrappers.DCMotorWrapper;
 import org.firstinspires.ftc.team7316.util.sensors.ColorWrapper;
 import org.firstinspires.ftc.team7316.util.sensors.GyroWrapper;
+import org.firstinspires.ftc.team7316.util.sensors.VuforiaCameraWrapper;
 
 /**
  * Created by andrew on 9/15/16.
@@ -72,6 +73,8 @@ public class Hardware {
     public Servo rightJewelArm;
     public ColorSensor colorsensor;
     public ColorWrapper colorWrapper;
+
+    public VuforiaCameraWrapper vuforiaCameraWrapper;
 
 //    public BNO055IMU gyro;
 //    public GyroWrapper gyroWrapper;
@@ -153,6 +156,8 @@ public class Hardware {
 //        catch (Exception e) {
 //            gyro_offline = true;
 //        }
+
+        vuforiaCameraWrapper = new VuforiaCameraWrapper();
 
         //Scheduler.instance.addTask(frontSideInfaredSensor);
     }

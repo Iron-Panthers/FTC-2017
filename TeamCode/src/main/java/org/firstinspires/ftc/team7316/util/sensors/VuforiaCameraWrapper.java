@@ -33,6 +33,8 @@ public class VuforiaCameraWrapper {
     private double tX, tY, tZ;
     private double rX, rY, rZ;
 
+    private RelicRecoveryVuMark vuMark;
+
     public VuforiaCameraWrapper() {
         params = new VuforiaLocalizer.Parameters(R.id.cameraMonitorViewId);
         params.vuforiaLicenseKey = Constants.vuforiaLicenseKey;
@@ -48,19 +50,19 @@ public class VuforiaCameraWrapper {
         relicTrackables.activate();
     }
 
-    public RelicRecoveryVuMark getCipher() {
-        return RelicRecoveryVuMark.from(relicTemplate);
+    public RelicRecoveryVuMark getVuMark() {
+        return vuMark;
     }
 
-    public void updatePositions() {
-        RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
+    public void update() {
+        RelicRecoveryVuMark cipher = RelicRecoveryVuMark.from(relicTemplate);
 
         if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
-
+            vuMark = cipher;
                 /* Found an instance of the template. In the actual game, you will probably
                  * loop until this condition occurs, then move on to act accordingly depending
                  * on which VuMark was visible. */
-            Hardware.log("VuMark visible", vuMark);
+            Hardware.log("VuMark visible", cipher);
 
                 /* For fun, we also exhibit the navigational pose. In the Relic Recovery game,
                  * it is perhaps unlikely that you will actually need to act on this pose information, but
@@ -87,6 +89,12 @@ public class VuforiaCameraWrapper {
         }
         else {
             Hardware.log("VuMark", "not visible");
+            tX = 0;
+            tY = 0;
+            tZ = 0;
+            rX = 0;
+            rY = 0;
+            rZ = 0;
         }
     }
 
