@@ -45,7 +45,6 @@ public class DriveDistance extends Command {
         completedCount = 0;
         Subsystems.instance.driveBase.resetMotors();
         Subsystems.instance.driveBase.setMotorTargets(distance);
-        Subsystems.instance.driveBase.setMotorMaxSpeeds(Constants.STRAIGHT_DRIVE_MAXSPEED);
     }
 
     @Override
