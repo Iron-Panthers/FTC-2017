@@ -116,6 +116,13 @@ public class AutoCodes {
         Command[] cmds = {movearmout, pollColor, wackjewel, movearmin};
         return new SequentialCommand(cmds);
     }
+
+    public static SequentialCommand driveTimeTesting() {
+        DriveForTime d = new DriveForTime(0.7, 0, 1);
+        Wait w = new Wait(551);
+        Command[] cmds = {d, w};
+        return new SequentialCommand(cmds);
+    }
 //
 //    public static SequentialCommand driveStraight(double distance) {
 //        DriveDistance drive = new DriveDistance(distance);

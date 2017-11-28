@@ -26,7 +26,7 @@ public class Constants {
 
 
     //-----------Auto constants-----------//
-    public static final double COAST_TICKS_PER_SECOND = 600;
+    public static final double COAST_TICKS_PER_SECOND = 1670;//rough estimate
 
     public static final double ROTATIONS_PERFIVESECONDS = 3.5; //all full speedy
     public static final double ROTATIONS_PER_SECOND = ROTATIONS_PERFIVESECONDS / 5;
@@ -64,12 +64,11 @@ public class Constants {
     public static final double ARM_SERVO_TRAVEL_TIME = 1;
 
     //Drive Base PID Constants
-    //tested 11/17
     public static final double DRIVE_P = 0.0025; // DEAD
-    public static final double DRIVE_I = 0.0004; // DEAD
-    public static final double DRIVE_D = 0.012; // DEAD
+    public static final double DRIVE_I = 0.0002; // DEAD
+    public static final double DRIVE_D = 0.00004; // DEAD
 
-    public static final double STRAIGHT_DRIVE_MAXSPEED = 0.65;
+    public static final double STRAIGHT_DRIVE_MAXSPEED = 0.7;
 
     public static final double DISTANCE_ERROR_RANGE = 0.4; //inches
     public static final double DISTANCE_ERROR_RANGE_TICKS = (double)ENCODER_TICK_PER_REV / ENCODER_REV_PER_WHEEL_REV / WHEEL_CIRCUMFERENCE * DISTANCE_ERROR_RANGE;

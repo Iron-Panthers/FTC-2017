@@ -13,13 +13,13 @@ import org.firstinspires.ftc.team7316.util.commands.drive.DriveDistance;
  * Created by jerry on 11/3/17.
  */
 
-@Autonomous(name = "you run this, i kms")
+@Autonomous(name = "DriveDistanceTest")
 public class DriveDistanceTest extends AutoBaseOpMode {
 
     @Override
     public void onInit() {
         Scheduler.inTeleop = false;
-        //Scheduler.instance.add(new DriveDistance(10));
+        Scheduler.instance.add(new DriveDistance(10));
     }
 
     @Override
