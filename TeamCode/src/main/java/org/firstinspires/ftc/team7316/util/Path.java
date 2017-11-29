@@ -1,7 +1,9 @@
+package org.firstinspires.ftc.team7316.util;
+
 public class Path {
 	
-	private Type type;
-	private double[] parameters;
+	private static Type type;
+	private static double[] parameters;
 
 	public double speed(double time) {
 		switch (type) {
@@ -12,7 +14,6 @@ public class Path {
 					return 0;
 				}
 
-				break;
 			case TRAPEZOIDAL:
 
 				double accel = parameters[3];
@@ -28,10 +29,10 @@ public class Path {
 					return 0;
 				}
 
-				break;
 			case CURVE:
 				break;
 		}
+		return 0;
 	}
 
 	private enum Type {
@@ -39,15 +40,16 @@ public class Path {
 	}
 
 	public static Path linear(double maxSpeed, double distance) {
-		type = LINEAR;
+		type = Type.LINEAR;
 
 		double time = distance/maxSpeed;
 
 		parameters = new double[]{time, maxSpeed};
+		return null;
 	}
 
 	public static Path trapezoid(double acceleration, double maxSpeed, double distance) {
-		type = TRAPEZOIDAL;
+		type = Type.TRAPEZOIDAL;
 
 		double accelTime = maxSpeed/acceleration;
 
@@ -55,11 +57,13 @@ public class Path {
 		double flatTimeEnd = remainingDistance / maxSpeed + accelTime;
 
 		parameters = new double[]{accelTime, flatTimeEnd, flatTimeEnd + accelTime, acceleration, maxSpeed};
+		return null;
 	}
 
 	public static Path curve(double speed, double endTime) {
-		type = CURVE;
+		type = Type.CURVE;
 		parameters = new double[]{speed, endTime};
+		return null;
 	}
 
 }
