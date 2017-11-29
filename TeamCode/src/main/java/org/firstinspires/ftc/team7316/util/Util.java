@@ -54,7 +54,7 @@ public class Util {
         Date date = new Date(System.currentTimeMillis());
         String timestamp = new SimpleDateFormat("yyyyMMdd-HH:mm:ss").format(date);
         try {
-            File dir = new File(Hardware.instance.appContext.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), timestamp + ".csv");
+            File dir = new File("/storage/emulated/0/pidoutput-" + timestamp + ".csv");
             os = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dir)));
             os.write("times,target,positions\n");
             for (int i=0; i < times.size(); i++) {
