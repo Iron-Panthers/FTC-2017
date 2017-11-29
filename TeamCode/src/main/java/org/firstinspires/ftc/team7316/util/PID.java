@@ -41,6 +41,7 @@ public class PID {
     }
 
     public void updateTargetTicksCurrent() {
+        System.out.println(direction);
         double elapsedTime = timer.seconds() - previousTime;
         double distance = Constants.COAST_TICKS_PER_SECOND * elapsedTime;
         switch (direction) {
@@ -51,6 +52,7 @@ public class PID {
                 else {
                     targetTicksCurrent += distance;
                 }
+                break;
             case BACKWARD:
                 if(targetTicksCurrent - distance < targetTicksFinal) {
                     targetTicksCurrent = targetTicksFinal;
@@ -58,6 +60,7 @@ public class PID {
                 else {
                     targetTicksCurrent -= distance;
                 }
+                break;
         }
         previousTime = timer.seconds();
     }
@@ -79,6 +82,10 @@ public class PID {
         double out = p * error + i * sum + d * delta;
 
         return out;
+    }
+
+    public Double getElapsedSeconds() {
+        return timer.seconds();
     }
 
     public void reset() {

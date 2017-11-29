@@ -1,5 +1,16 @@
 package org.firstinspires.ftc.team7316.util;
 
+import android.content.Context;
+import android.os.Environment;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 /**
  * Created by Maxim on 2/17/2017.
  */
@@ -37,4 +48,22 @@ public class Util {
         }
         return num;
     }
+
+    public static void writeCSV(List<Double> times, List<Double> targets, List<Double> positions) {
+        BufferedWriter os;
+        Date date = new Date(System.currentTimeMillis());
+        String timestamp = new SimpleDateFormat("yyyyMMdd-HH:mm:ss").format(date);
+        try {
+            File dir = new File(Hardware.instance.appContext.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), timestamp + ".csv");
+            os = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dir)));
+            os.write("times,target,positions\n");
+            for (int i=0; i < times.size(); i++) {
+                os.write(String.format("%s,%s,%s\n", times.get(i), targets.get(i), positions.get(i)));
+            }
+            os.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

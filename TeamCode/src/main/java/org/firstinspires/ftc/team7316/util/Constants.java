@@ -26,7 +26,7 @@ public class Constants {
 
 
     //-----------Auto constants-----------//
-    public static final double COAST_TICKS_PER_SECOND = 1670;//rough estimate
+    public static final double COAST_TICKS_PER_SECOND = 100;//rough estimate 1670
 
     public static final double ROTATIONS_PERFIVESECONDS = 3.5; //all full speedy
     public static final double ROTATIONS_PER_SECOND = ROTATIONS_PERFIVESECONDS / 5;

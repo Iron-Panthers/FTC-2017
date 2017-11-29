@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.team7316.util;
 
+import android.content.Context;
+
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.hardware.bosch.BNO055IMU;
@@ -73,10 +75,13 @@ public class Hardware {
     public ColorSensor colorsensor;
     public ColorWrapper colorWrapper;
 
+    public Context appContext;
 //    public BNO055IMU gyro;
 //    public GyroWrapper gyroWrapper;
 
     public Hardware (HardwareMap map) {
+
+        appContext = map.appContext;
 
         //drive motors
         frontLeftDriveMotor = map.dcMotor.get(LEFT_FRONT_DRIVE_MOTOR_NAME);

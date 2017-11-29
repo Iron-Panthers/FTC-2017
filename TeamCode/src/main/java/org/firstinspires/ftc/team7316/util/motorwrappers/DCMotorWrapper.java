@@ -12,7 +12,7 @@ import org.firstinspires.ftc.team7316.util.PID;
 public class DCMotorWrapper {
 
     private DcMotor motor;
-    private PID pid;
+    public PID pid;
 
     private double maxPower;
 
