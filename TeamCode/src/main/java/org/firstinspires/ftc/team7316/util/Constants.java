@@ -26,7 +26,7 @@ public class Constants {
 
 
     //-----------Auto constants-----------//
-    public static final double COAST_TICKS_PER_SECOND = 1000;//rough estimate 1670
+    public static final double COAST_TICKS_PER_SECOND = 500;//rough estimate 1670
 
     public static final double ROTATIONS_PERFIVESECONDS = 3.5; //all full speedy
     public static final double ROTATIONS_PER_SECOND = ROTATIONS_PERFIVESECONDS / 5;
@@ -63,8 +63,17 @@ public class Constants {
     //Jewel arm shenanigans
     public static final double ARM_SERVO_TRAVEL_TIME = 1;
 
+    public static final int COLOROFFSET_R = 65;
+    public static final int COLOROFFSET_G = 40;
+    public static final int COLOROFFSET_B = 30;
+
+    public static final int MIN_COLOR_VALUE = 10;
+    public static final int COLOR_BUFFER_SIZE = 20;
+
+    public static final int NO_COLOR_THRESHOLD = MIN_COLOR_VALUE * COLOR_BUFFER_SIZE;
+
     //Drive Base PID Constants
-    public static final double DRIVE_P = 0.005; // DEAD
+    public static final double DRIVE_P = 0.01; // DEAD
     public static final double DRIVE_I = 0.0002; // DEAD
     public static final double DRIVE_D = 0.00016; // DEAD
     public static final double DRIVE_F = 0.00042;

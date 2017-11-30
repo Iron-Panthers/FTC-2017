@@ -3,6 +3,7 @@ package org.firstinspires.ftc.team7316.util.sensors;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 
 import org.firstinspires.ftc.team7316.util.Buffer;
+import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
 
 /**
@@ -37,13 +38,13 @@ public class ColorWrapper {
     }
 
     public void push() {
-        redSum.pushValue(this.sensor.red());
-        greenSum.pushValue(this.sensor.green());
-        blueSum.pushValue(this.sensor.blue());
+        redSum.pushValue(this.sensor.red() - Constants.COLOROFFSET_R);
+        greenSum.pushValue(this.sensor.green() - Constants.COLOROFFSET_G);
+        blueSum.pushValue(this.sensor.blue() - Constants.COLOROFFSET_B);
     }
 
     public void setNoColor() {
-        noColor = redSum.sum == 0 && blueSum.sum == 0;
+        noColor = redSum.sum <= Constants.NO_COLOR_THRESHOLD && blueSum.sum <= Constants.NO_COLOR_THRESHOLD;
     }
 
     public double sumR() {

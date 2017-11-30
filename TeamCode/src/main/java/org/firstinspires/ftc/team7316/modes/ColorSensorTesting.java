@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.I2cAddr;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.team7316.util.Constants;
 
 /**
  * Created by jerry on 11/7/17.
@@ -22,9 +23,9 @@ public class ColorSensorTesting extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            telemetry.addData("r", sensor.red());
-            telemetry.addData("g", sensor.green());
-            telemetry.addData("b", sensor.blue());
+            telemetry.addData("r", sensor.red() - Constants.COLOROFFSET_R);
+            telemetry.addData("g", sensor.green() - Constants.COLOROFFSET_G);
+            telemetry.addData("b", sensor.blue() - Constants.COLOROFFSET_B);
             telemetry.update();
         }
     }
