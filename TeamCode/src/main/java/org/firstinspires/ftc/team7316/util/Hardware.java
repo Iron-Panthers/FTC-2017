@@ -16,6 +16,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.team7316.util.motorwrappers.DCMotorWrapper;
 import org.firstinspires.ftc.team7316.util.sensors.ColorWrapper;
 import org.firstinspires.ftc.team7316.util.sensors.GyroWrapper;
+import org.firstinspires.ftc.team7316.util.sensors.VuforiaCameraWrapper;
 
 /**
  * Created by andrew on 9/15/16.
@@ -48,8 +49,8 @@ public class Hardware {
 
     private static final String GYRO_NAME = "gyro";
 
-    private static boolean colorsensor_offline = false;
-    private static boolean gyro_offline = false;
+    public static boolean colorsensor_offline = false;
+    public static boolean gyro_offline = false;
 
     public DcMotor frontLeftDriveMotor;
     public DcMotor frontRightDriveMotor;
@@ -75,7 +76,8 @@ public class Hardware {
     public ColorSensor colorsensor;
     public ColorWrapper colorWrapper;
 
-    public Context appContext;
+    public VuforiaCameraWrapper vuforiaCameraWrapper;
+
 //    public BNO055IMU gyro;
 //    public GyroWrapper gyroWrapper;
 
@@ -121,12 +123,12 @@ public class Hardware {
         intakeServo.setDirection(Servo.Direction.REVERSE);
         //intakeServo.scaleRange(Constants.INTAKE_SERVO_MIN_POSITION, Constants.INTAKE_SERVO_MAX_POSITION);
 
-        //relic grabber hardware
-        //relicGrabberServo = map.servo.get(RELIC_GRABBER_SERVO_NAME);
-        //relicArmServo = map.crservo.get(RELIC_ARM_SERVO_NAME);
-
-        //relicGrabberServo = map.servo.get(RELIC_GRABBER_SERVO_NAME);
-        //relicArmServo = map.crservo.get(RELIC_ARM_SERVO_NAME);
+//        relic grabber hardware
+//        relicGrabberServo = map.servo.get(RELIC_GRABBER_SERVO_NAME);
+//        relicArmServo = map.crservo.get(RELIC_ARM_SERVO_NAME);
+//
+//        relicGrabberServo = map.servo.get(RELIC_GRABBER_SERVO_NAME);
+//        relicArmServo = map.crservo.get(RELIC_ARM_SERVO_NAME);
 
         //jewel arm hardware
         rightJewelArm = map.servo.get(RIGHT_JEWEL_ARM_NAME);
@@ -140,7 +142,7 @@ public class Hardware {
             colorsensor_offline = true;
         }
 
-
+        //gyro shenanigans
         BNO055IMU.Parameters gyroParams = new BNO055IMU.Parameters();
         gyroParams.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
         gyroParams.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
@@ -158,6 +160,8 @@ public class Hardware {
 //        catch (Exception e) {
 //            gyro_offline = true;
 //        }
+
+        vuforiaCameraWrapper = new VuforiaCameraWrapper();
 
         //Scheduler.instance.addTask(frontSideInfaredSensor);
     }
