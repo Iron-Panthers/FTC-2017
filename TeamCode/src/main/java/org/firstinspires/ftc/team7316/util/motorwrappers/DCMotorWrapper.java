@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.team7316.util.motorwrappers;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.PID;
@@ -16,10 +17,22 @@ public class DCMotorWrapper {
 
     private double maxPower;
 
+    private ElapsedTime timer;
+    private double previoustime;
+    private int previoustick;
+
     public DCMotorWrapper(DcMotor motor, PID pid) {
         this.motor = motor;
         this.pid = pid;
         maxPower = 1;
+
+        previoustick = 0;
+        previoustime = 0;
+        timer = new ElapsedTime();
+    }
+
+    public void resetTimer() {
+        timer.reset();
     }
 
     public void setTargetInches(double inches) {
@@ -34,13 +47,17 @@ public class DCMotorWrapper {
         this.maxPower = maxPower;
     }
 
+    //temporary velocity based pid
     public int getError() {
-        return pid.getTargetTicksCurrent() - motor.getCurrentPosition();
+        //return pid.getTargetTicksCurrent() - motor.getCurrentPosition();
+        return (int) ((pid.getTargetTicksFinal()) - Math.abs(motor.getCurrentPosition() - previoustick) / (timer.seconds() - previoustime));
     }
 
     public void setPowerPID() {
         pid.updateTargetTicksCurrent();
         double pow = pid.getPower(getError());
+        previoustime = timer.seconds();
+        previoustick = motor.getCurrentPosition();
         if(Math.abs(pow) > maxPower) {
             pow = (pow > 0) ? maxPower : -maxPower;
         }

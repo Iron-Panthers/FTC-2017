@@ -132,6 +132,13 @@ public class MecanumDriveBase extends Subsystem {
         Hardware.instance.backLeftDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
+    public void setBrakeMode(DcMotor.ZeroPowerBehavior mode) {
+        Hardware.instance.frontLeftDriveMotor.setZeroPowerBehavior(mode);
+        Hardware.instance.frontRightDriveMotor.setZeroPowerBehavior(mode);
+        Hardware.instance.backLeftDriveMotor.setZeroPowerBehavior(mode);
+        Hardware.instance.backRightDriveMotor.setZeroPowerBehavior(mode);
+    }
+
     public void resetEncoders() {
         Hardware.instance.frontLeftDriveMotorWrapper.resetEncoder();
         Hardware.instance.frontRightDriveMotorWrapper.resetEncoder();
