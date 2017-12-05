@@ -83,8 +83,6 @@ public class Hardware {
 
     public Hardware (HardwareMap map) {
 
-        appContext = map.appContext;
-
         //drive motors
         frontLeftDriveMotor = map.dcMotor.get(LEFT_FRONT_DRIVE_MOTOR_NAME);
         frontLeftDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);

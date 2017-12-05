@@ -78,6 +78,11 @@ public class Constants {
     public static final double DRIVE_D = 0.00016; // DEAD
     public static final double DRIVE_F = 0.00042;
 
+    public static final double VP_DRIVE_P = 0;
+    public static final double VP_DRIVE_I = 0;
+    public static final double VP_DRIVE_D = 0;
+    public static final double VP_DRIVE_F = 0;
+
     public static final double DISTANCE_ERROR_RANGE = 0.4; //inches
     public static final double DISTANCE_ERROR_RANGE_TICKS = (double)ENCODER_TICK_PER_REV / ENCODER_REV_PER_WHEEL_REV / WHEEL_CIRCUMFERENCE * DISTANCE_ERROR_RANGE;
 
