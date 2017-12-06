@@ -49,8 +49,7 @@ public class DCMotorWrapper {
 
     //temporary velocity based pid
     public int getError() {
-        //return pid.getTargetTicksCurrent() - motor.getCurrentPosition();
-        return (int) ((pid.getTargetTicksFinal()) - Math.abs(motor.getCurrentPosition() - previoustick) / (timer.seconds() - previoustime));
+        return pid.getTargetTicksCurrent() - motor.getCurrentPosition();
     }
 
     public void setPowerPID() {
