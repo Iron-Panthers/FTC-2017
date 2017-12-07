@@ -21,7 +21,7 @@ public class Constants {
     public static final double INTAKE_SERVO_MAX_POSITION = 0.8;
     public static final double INTAKE_SERVO_MIN_POSITION = 0.4;
 
-    public static final double INTAKE_LIFT_POWER = 0.65;
+    public static final double INTAKE_LIFT_POWER = 0.8;
     public static final double INTAKE_POWER_WEIGHTING = 0.6;
 
 

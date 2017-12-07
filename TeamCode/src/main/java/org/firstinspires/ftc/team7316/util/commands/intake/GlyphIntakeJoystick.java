@@ -59,10 +59,10 @@ public class GlyphIntakeJoystick extends Command {
         }
 
         if(OI.instance.gp2.right_bumper.state()) {
-            this.intake.setServoPosition(1);
+            this.intake.setServoPosition(0.8);
         }
         else {
-            this.intake.setServoPositionScaled(OI.instance.gp2.right_stick.getX());
+            this.intake.setServoPosition(OI.instance.gp2.right_stick.getX());
         }
         Hardware.log("lift position", Hardware.instance.intakeLiftMotor.getCurrentPosition());
     }
