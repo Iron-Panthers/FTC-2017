@@ -39,6 +39,7 @@ public class VuforiaCameraWrapper {
         params = new VuforiaLocalizer.Parameters(R.id.cameraMonitorViewId);
         params.vuforiaLicenseKey = Constants.vuforiaLicenseKey;
         params.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
+        params.useExtendedTracking = true;
 
         vuforia = ClassFactory.createVuforiaLocalizer(params);
         Vuforia.setHint(HINT.HINT_MAX_SIMULTANEOUS_IMAGE_TARGETS, 4);
@@ -46,6 +47,7 @@ public class VuforiaCameraWrapper {
         relicTrackables = this.vuforia.loadTrackablesFromAsset("RelicVuMark");
         relicTemplate = relicTrackables.get(0);
         relicTemplate.setName("relicVuMarkTemplate");
+        ((VuforiaTrackableDefaultListener)(relicTemplate.getListener())).setPhoneInformation(new OpenGLMatrix(), VuforiaLocalizer.CameraDirection.BACK);
 
         relicTrackables.activate();
 

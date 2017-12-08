@@ -2,13 +2,15 @@ package org.firstinspires.ftc.team7316.util;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.team7316.util.path.MotionPath;
+
 /**
  * Created by andrew on 9/12/17.
  */
 
 public class PID {
 
-    private double p, i, d, f;
+    public double p, i, d, f;
     private double previous, sum;
     private Direction direction;
 
