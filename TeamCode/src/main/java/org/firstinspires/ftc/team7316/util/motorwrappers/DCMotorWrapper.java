@@ -19,8 +19,6 @@ public class DCMotorWrapper {
 
     private double maxPower;
 
-    private ElapsedTime timer;
-
     private PIDPath pidPath;
     private boolean followPath;
 
@@ -28,12 +26,6 @@ public class DCMotorWrapper {
         this.motor = motor;
         this.pid = pid;
         maxPower = 1;
-
-        timer = new ElapsedTime();
-    }
-
-    public void resetTimer() {
-        timer.reset();
     }
 
     public void setTargetInches(double inches) {
