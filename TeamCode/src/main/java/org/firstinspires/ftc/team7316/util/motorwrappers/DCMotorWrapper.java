@@ -19,27 +19,18 @@ public class DCMotorWrapper {
 
     private double maxPower;
 
-    private PIDPath pidPath;
-    private boolean followPath;
-
     public DCMotorWrapper(DcMotor motor, PID pid) {
         this.motor = motor;
         this.pid = pid;
         maxPower = 1;
     }
 
-    public void setTargetInches(double inches) {
-        pid.setTargetTicks(motor.getCurrentPosition() + (int)Constants.inchesToTicks(inches), motor.getCurrentPosition());
-    }
-
     public void setPath(MotionPath path) {
-        this.followPath = true;
-        this.pidPath = new PIDPath(pid.p, pid.i, pid.d, pid.f, path);
+        pid.setPath(path);
     }
 
     public void setTargetTicks(int ticks) {
         pid.setTargetTicks(motor.getCurrentPosition() + ticks, motor.getCurrentPosition());
-        this.followPath = false;
     }
 
     public void setMaxPower(double maxPower) {
@@ -51,16 +42,11 @@ public class DCMotorWrapper {
     }
 
     public void setPowerPID() {
-
-        double pow = 0;
-
-        if (followPath) {
-            pow = pidPath.getPower(getError());
-        } else
-            {
+        if (!pid.usingPath()) {
             pid.updateTargetTicksCurrent();
-            pow = pid.getPower(getError());
         }
+
+        double pow = pid.getPower(getError());
 
         if (Math.abs(pow) > maxPower) {
             pow = (pow > 0) ? maxPower : -maxPower;
@@ -70,6 +56,7 @@ public class DCMotorWrapper {
 
     public boolean completedDistance() {
         return Math.abs(pid.getTargetTicksFinal() - motor.getCurrentPosition()) < Constants.DISTANCE_ERROR_RANGE_TICKS;
+
     }
 
     public void resetEncoder() {
@@ -91,9 +78,6 @@ public class DCMotorWrapper {
         maxPower = 1;
 
         pid.reset();
-        if (this.pidPath != null) {
-            this.pidPath.reset();
-        }
     }
 
 }
