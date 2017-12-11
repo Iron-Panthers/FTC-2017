@@ -20,8 +20,6 @@ public class DCMotorWrapper {
     private double maxPower;
 
     private ElapsedTime timer;
-    private double previoustime;
-    private int previoustick;
 
     private PIDPath pidPath;
     private boolean followPath;
@@ -31,8 +29,6 @@ public class DCMotorWrapper {
         this.pid = pid;
         maxPower = 1;
 
-        previoustick = 0;
-        previoustime = 0;
         timer = new ElapsedTime();
     }
 
@@ -64,8 +60,6 @@ public class DCMotorWrapper {
 
     public void setPowerPID() {
 
-        previoustime = timer.seconds();
-        previoustick = motor.getCurrentPosition();
         double pow = 0;
 
         if (followPath) {
