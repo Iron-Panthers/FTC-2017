@@ -12,6 +12,7 @@ import org.firstinspires.ftc.team7316.util.commands.BlankCommand;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveWithJoystick;
+import org.firstinspires.ftc.team7316.util.path.MotionPath;
 
 /**
  * Created by andrew on 9/12/17.
@@ -104,6 +105,13 @@ public class MecanumDriveBase extends Subsystem {
         Hardware.instance.frontRightDriveMotorWrapper.setMaxPower(power);
         Hardware.instance.backLeftDriveMotorWrapper.setMaxPower(power);
         Hardware.instance.backRightDriveMotorWrapper.setMaxPower(power);
+    }
+
+    public void setMotorPaths(MotionPath path) {
+        Hardware.instance.frontLeftDriveMotorWrapper.setPath(path);
+        Hardware.instance.frontRightDriveMotorWrapper.setPath(path);
+        Hardware.instance.backLeftDriveMotorWrapper.setPath(path);
+        Hardware.instance.backRightDriveMotorWrapper.setPath(path);
     }
 
     public void strafeLeft(int ticks) {

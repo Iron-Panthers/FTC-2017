@@ -33,6 +33,9 @@ public class VuforiaCameraWrapper {
     public double tX, tY, tZ;
     public double rX, rY, rZ;
 
+    public double itX, itY, itZ;    //initial translations of cipher
+    public double irX, irY, irZ;    //initial angle of cipher
+
     private RelicRecoveryVuMark vuMark;
 
     public VuforiaCameraWrapper() {
@@ -56,6 +59,16 @@ public class VuforiaCameraWrapper {
 
     public RelicRecoveryVuMark getVuMark() {
         return vuMark;
+    }
+
+    public void setCipherLocation() {
+        itX = tX;
+        itY = tY;
+        itZ = tZ;
+
+        irX = rX;
+        irY = rY;
+        irZ = rZ;
     }
 
     public void update() {

@@ -84,7 +84,7 @@ public class Constants {
     public static final double VP_DRIVE_F = 0;
 
     public static final double DISTANCE_ERROR_RANGE = 0.4; //inches
-    public static final double DISTANCE_ERROR_RANGE_TICKS = (double)ENCODER_TICK_PER_REV / ENCODER_REV_PER_WHEEL_REV / WHEEL_CIRCUMFERENCE * DISTANCE_ERROR_RANGE;
+    public static final int DISTANCE_ERROR_RANGE_TICKS = inchesToTicks(DISTANCE_ERROR_RANGE);
 
     public static final double FORWARD_MOTOR_DEADZONE = 0.1;
     public static final double STRAFING_MOTOR_DEADZONE = 0.5;
@@ -99,7 +99,11 @@ public class Constants {
     //Key is from Jerry's Vuforia dev account
     public static final String vuforiaLicenseKey = "AX5kYPX/////AAAAGU3PfsyXBULLmvcBPSA/sq8MU9VRtH0JkRzhv6Gggr2CpIl9G4uMhuk/GpUW7pgNKluG8PpL85nQo2AakItuDJUgOkCwK6w0YHQPx6+rf8jZM98Fp1lcmH85r/w2JyjVZB43mQAGuyrlJMi24YR9n6m93YNrtv710/h8DuurXnKBtn2ucrsyUjAVfKJzlIXrAB7sZ8MZDqA1rWD+GqoO5pWAW2sobpl64F4A1Fzf+Zzn340wOoH6UEHTyRb1clkSezxvc129fij+4Ev5jOJioiFJyCcF7YXY9zczVpyByqad0w+HqAR2VXj8hKBgL6SRZ6yQ5GmrUY1/5JUQXiMwdRfT5RKjHMlqKP9f9J1x/V7l";
     //distance in inches
-    public static double inchesToTicks(double dist) {
-        return (double)ENCODER_TICK_PER_REV / ENCODER_REV_PER_WHEEL_REV / WHEEL_CIRCUMFERENCE * dist;
+    public static int inchesToTicks(double dist) {
+        return (int)((double)ENCODER_TICK_PER_REV / ENCODER_REV_PER_WHEEL_REV / WHEEL_CIRCUMFERENCE * dist);
+    }
+    public static int millimetersToTicks(double dist) {
+        //lol
+        return (int)((double)ENCODER_TICK_PER_REV / ENCODER_TICK_PER_REV / (WHEEL_CIRCUMFERENCE * 25.4) * dist);
     }
 }
