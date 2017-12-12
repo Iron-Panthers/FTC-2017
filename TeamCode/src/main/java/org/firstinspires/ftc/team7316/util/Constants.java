@@ -38,6 +38,10 @@ public class Constants {
     public static final double CRYPTOBOX_STRAFE_DISTANCE = 11.25;//inches too
     public static final double CLOSE_CRYPTO_DISTANCE = 10;
     public static final double CLOSE_CRYPTO_APPROACH = 7;
+    //INCHES INCHESSSSS
+    public static final double RIGHT_COLUMN_DISTANCE = 9;
+    public static final double MIDDLE_COLUMN_DISTANCE = 16.5;
+    public static final double LEFT_COLUMN_DISTANCE = 24;
     //drive times(temporary) and their powers
     public static final double RED_OFF_PAD_TIME = 0.85;
     public static final double BLUE_OFF_PAD_TIME = 1.1;

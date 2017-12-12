@@ -3,6 +3,7 @@ package org.firstinspires.ftc.team7316.util.commands;
 import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveDistance;
+import org.firstinspires.ftc.team7316.util.commands.drive.DriveDistanceCipher;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime_PadModified;
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnForTime;
@@ -95,7 +96,8 @@ public class AutoCodes {
 
         DriveForTime_PadModified offPad = new DriveForTime_PadModified(Constants.RED_OFF_PAD_TIME, Alliance.RED);
         Wait stop = new Wait(1);
-        DriveDistance backward = new DriveDistance(Constants.CLOSE_CRYPTO_DISTANCE, 10);
+        //DriveDistance backward = new DriveDistance(Constants.CLOSE_CRYPTO_DISTANCE, 10);
+        DriveDistanceCipher gotocrypto = new DriveDistanceCipher();
 
         TurnForTime turn = new TurnForTime(Constants.ROTATIONS_90_DEGREES);
         DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH, 10);
@@ -103,7 +105,7 @@ public class AutoCodes {
 
         DriveDistance backup = new DriveDistance(-4, 10);
 
-        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, backward, turn, inchforward, outtake, backup};
+        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, gotocrypto, turn, inchforward, outtake, backup};
         return new SequentialCommand(cmds);
     }
 

@@ -18,7 +18,7 @@ public class ClampIntake extends Command {
     @Override
     public void init() {
         Hardware.instance.intakeServo.scaleRange(0, 1);
-        Subsystems.instance.glyphIntake.setServoPosition(Constants.INTAKE_SERVO_MAX_POSITION);
+        Subsystems.instance.glyphIntake.setServoPosition(Constants.INTAKE_SERVO_MIN_POSITION);
     }
 
     @Override
