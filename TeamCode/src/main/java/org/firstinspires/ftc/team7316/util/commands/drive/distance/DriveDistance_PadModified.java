@@ -1,9 +1,8 @@
-package org.firstinspires.ftc.team7316.util.commands.drive;
+package org.firstinspires.ftc.team7316.util.commands.drive.distance;
 
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.Command;
-import org.firstinspires.ftc.team7316.util.commands.drive.DriveDistance;
 
 /**
  * Created by jerry on 11/18/17.
