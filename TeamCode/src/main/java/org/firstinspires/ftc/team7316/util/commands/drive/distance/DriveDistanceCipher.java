@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.team7316.util.commands.drive;
+package org.firstinspires.ftc.team7316.util.commands.drive.distance;
 
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
@@ -14,7 +14,6 @@ public class DriveDistanceCipher extends Command {
 
     @Override
     public void init() {
-        Hardware.instance.vuforiaCameraWrapper.update();
         switch (Hardware.instance.vuforiaCameraWrapper.getVuMark()) {
             case LEFT:
                 drivecommand = new DriveDistance(Constants.RIGHT_COLUMN_DISTANCE);

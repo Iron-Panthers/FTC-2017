@@ -1,6 +1,4 @@
-package org.firstinspires.ftc.team7316.util.commands.drive;
-
-import android.content.Context;
+package org.firstinspires.ftc.team7316.util.commands.drive.distance;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -10,14 +8,7 @@ import org.firstinspires.ftc.team7316.util.Util;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-import java.security.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 /**
  * Created by jerry on 10/28/17.

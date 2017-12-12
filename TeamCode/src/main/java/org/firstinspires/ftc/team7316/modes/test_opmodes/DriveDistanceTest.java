@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.team7316.modes.AutoBaseOpMode;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.Scheduler;
-import org.firstinspires.ftc.team7316.util.commands.drive.DriveDistance;
+import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance;
 
 /**
  * Created by jerry on 11/3/17.
