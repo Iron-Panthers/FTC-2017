@@ -39,6 +39,7 @@ public class VuforiaCameraWrapper {
         params = new VuforiaLocalizer.Parameters(R.id.cameraMonitorViewId);
         params.vuforiaLicenseKey = Constants.vuforiaLicenseKey;
         params.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
+        params.useExtendedTracking = false;
 
         vuforia = ClassFactory.createVuforiaLocalizer(params);
         Vuforia.setHint(HINT.HINT_MAX_SIMULTANEOUS_IMAGE_TARGETS, 4);

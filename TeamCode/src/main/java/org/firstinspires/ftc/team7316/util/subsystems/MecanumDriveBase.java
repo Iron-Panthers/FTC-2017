@@ -87,6 +87,9 @@ public class MecanumDriveBase extends Subsystem {
         Hardware.log("front left back right", fL_bRpower);
         Hardware.log("front right back left", fR_bLpower);
 
+        fL_bRpower = Math.abs(fR_bLpower) < Constants.DRIVER_MOTOR_DEADZONE ? 0 : fL_bRpower;
+        fR_bLpower = Math.abs(fR_bLpower) < Constants.DRIVER_MOTOR_DEADZONE ? 0 : fR_bLpower;
+
         // power
         wantedFrBlSpeed = fR_bLpower;
         wantedFlBrSpeed = fL_bRpower;

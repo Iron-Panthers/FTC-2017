@@ -6,7 +6,7 @@ package org.firstinspires.ftc.team7316.util;
 public class Constants {
 
     public static final double JOYSTICK_DRIVE_DEADZONE = 0.03;
-    public static final double DRIVER_MOTOR_DEADZONE = 0.18;
+    public static final double DRIVER_MOTOR_DEADZONE = 0.1;
     public static final int ENCODER_TICK_PER_REV = 1120; //halved due to gear ratio
     public static final int ENCODER_REV_PER_WHEEL_REV = 2;
     public static final int DRIVE_RPM_MAX = 280; // can change later actual max 320
