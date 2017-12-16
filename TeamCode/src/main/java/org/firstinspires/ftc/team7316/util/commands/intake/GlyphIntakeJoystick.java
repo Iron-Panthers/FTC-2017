@@ -64,6 +64,11 @@ public class GlyphIntakeJoystick extends Command {
         else if(OI.instance.gp2.right_stick.getX() >= 0){
             this.intake.setServoPositionScaled(1 - OI.instance.gp2.right_stick.getX());
         }
+
+        if(Hardware.instance.glyphTouchSensor.isPressed()) {
+            Hardware.instance.flagServo.setPosition(0.5);
+        }
+        Hardware.log("butt pressed", Hardware.instance.glyphTouchSensor.isPressed());
         Hardware.log("lift position", Hardware.instance.intakeLiftMotor.getCurrentPosition());
     }
 

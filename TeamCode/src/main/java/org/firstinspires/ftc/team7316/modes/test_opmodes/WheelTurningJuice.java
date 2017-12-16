@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.team7316.modes.auto;
+package org.firstinspires.ftc.team7316.modes.test_opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;

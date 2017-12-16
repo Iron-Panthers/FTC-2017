@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.team7316.util.motorwrappers.DCMotorWrapper;
@@ -41,6 +42,9 @@ public class Hardware {
 
     private static final String INTAKE_SERVO_NAME = "is";
 
+    private static final String GLYPH_FLAG_SERVO_NAME = "flag";
+    private static final String GLYPH_TOUCH_SENSOR_NAME = "gt";
+
     private static final String RELIC_ARM_SERVO_NAME = "ras";
     private static final String RELIC_GRABBER_SERVO_NAME = "rgs";
 
@@ -68,6 +72,9 @@ public class Hardware {
     public DcMotor intakeLiftMotor;
 
     public Servo intakeServo;
+
+    public Servo flagServo;
+    public TouchSensor glyphTouchSensor;
 
     public Servo relicGrabberServo;
     public CRServo relicArmServo;
@@ -120,6 +127,9 @@ public class Hardware {
         intakeServo = map.servo.get(INTAKE_SERVO_NAME);
         intakeServo.setDirection(Servo.Direction.REVERSE);
         //intakeServo.scaleRange(Constants.INTAKE_SERVO_MIN_POSITION, Constants.INTAKE_SERVO_MAX_POSITION);
+
+        flagServo = map.servo.get(GLYPH_FLAG_SERVO_NAME);
+        glyphTouchSensor = map.touchSensor.get(GLYPH_TOUCH_SENSOR_NAME);
 
 //        relic grabber hardware
 //        relicGrabberServo = map.servo.get(RELIC_GRABBER_SERVO_NAME);
