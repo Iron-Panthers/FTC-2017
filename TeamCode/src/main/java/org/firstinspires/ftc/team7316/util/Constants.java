@@ -46,7 +46,7 @@ public class Constants {
     public static final double RED_OFF_PAD_TIME = 1.15;
     public static final double BLUE_OFF_PAD_TIME = 1.1;
     public static final double DRIVE_FORWARD_TIME = 1.6; //driving off the pad and to the parking also for now
-    public static final double FORWARD_POWER_FOR_TIME = 0.05; //was 0.3 whne jewel waacked forward
+    public static final double FORWARD_POWER_FOR_TIME = 0.15; //was 0.3 whne jewel waacked forward
     public static final double BACKWARD_POWER_FOR_TIME = 0.4; //when  jewel wacked backwards
     public static final double STRAFE_LEFT_TIME = 0.85;
     public static final double LEFT_POWER_TIME = 0.8;
@@ -55,6 +55,7 @@ public class Constants {
     public static final double OUTTAKE_TIME = 1;
 
     //balancing pad offsets after whacking jewel
+    public static final double JEWEL_WACK_DELTA = 30;
     public static final double DISTANCE_PAD_OFFSET = 1; //inches offset after jewel hit
     public static final int DISTANCE_PAD_OFFSET_TICKS = (int)(inchesToTicks(DISTANCE_PAD_OFFSET));
 

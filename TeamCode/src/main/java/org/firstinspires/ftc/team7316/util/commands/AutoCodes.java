@@ -2,11 +2,13 @@ package org.firstinspires.ftc.team7316.util.commands;
 
 import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Constants;
+import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistanceCipher;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime_PadModified;
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnForTime;
+import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroPID;
 import org.firstinspires.ftc.team7316.util.commands.flow.SequentialCommand;
 import org.firstinspires.ftc.team7316.util.commands.flow.Wait;
 import org.firstinspires.ftc.team7316.util.commands.intake.IntakeForTime;
@@ -95,12 +97,14 @@ public class AutoCodes {
 //        MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
         Command wack = wackJewelBasic(Alliance.RED);
 
-        DriveForTime_PadModified offPad = new DriveForTime_PadModified(Constants.RED_OFF_PAD_TIME, Alliance.RED);
+//        DriveForTime_PadModified offPad = new DriveForTime_PadModified(Constants.RED_OFF_PAD_TIME, Alliance.RED);
+        DriveForTime offPad = new DriveForTime(Constants.FORWARD_POWER_FOR_TIME, 0, Constants.RED_OFF_PAD_TIME);
         Wait stop = new Wait(1);
         //DriveDistance backward = new DriveDistance(Constants.CLOSE_CRYPTO_DISTANCE, 10);
         DriveDistanceCipher gotocrypto = new DriveDistanceCipher();
 
-        TurnForTime turn = new TurnForTime(Constants.ROTATIONS_90_DEGREES);
+//        TurnForTime turn = new TurnForTime(Constants.ROTATIONS_90_DEGREES);
+        TurnGyroPID turn = new TurnGyroPID(90, 3);
         DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH, 10);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
@@ -114,9 +118,10 @@ public class AutoCodes {
         MoveJewelArm movearmout = new MoveJewelArm(JewelArm.JewelArmPosition.OUT);
         PollColor pollColor = new PollColor();
         WackJewel wackjewel = new WackJewel(alliance);
+        TurnGyroPID reorient = new TurnGyroPID(0 - Hardware.instance.gyroWrapper.getHeading(), 3);
         MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
 
-        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin};
+        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, reorient};
         return new SequentialCommand(cmds);
     }
 
