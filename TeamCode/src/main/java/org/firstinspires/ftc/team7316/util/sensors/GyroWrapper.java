@@ -18,7 +18,12 @@ public class GyroWrapper {
         this.gyro = gyro;
     }
 
+    /**
+     * turning right is apparently negative so just multiply it by -1 lul
+     * @return
+     */
     public double getHeading() {
-        return gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
+//        return gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
+        return gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle * -1;
     }
 }

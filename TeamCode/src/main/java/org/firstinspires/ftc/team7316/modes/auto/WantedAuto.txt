@@ -1,1 +1,6 @@
-PUT YER AUTO PLANS HERE
+- FIX TURNINGG
+- replace straight driving with turning for hitting jewel
+- test for reliable vumark
+- does it go the right distances
+
+- get it working backwards too for close blue
