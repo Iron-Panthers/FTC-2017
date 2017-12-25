@@ -23,7 +23,7 @@ public abstract class AutoBaseOpMode extends OpMode {
 
     @Override
     public void loop() {
-//        Hardware.instance.vuforiaCameraWrapper.update();
+        Hardware.instance.vuforiaCameraWrapper.update();
         Scheduler.instance.loop();
         onLoop();
     }
