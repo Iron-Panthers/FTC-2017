@@ -8,15 +8,21 @@ import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.sensors.GyroWrapper;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
+import java.util.ArrayList;
+
 /**
  * Turn the robot a specific distance using PID. Stops when the correction speed is under a threshold and
  * the robot's distance from the correct angle is also under a threshold.
  */
 public class TurnGyroPID extends Command {
 
-    public static final double P = 0.008, I = 0.00064, D = 0.01024;
+    public static final double P = 0.008, I = 0.0016, D = 0.00008;
     public static final double ERROR_THRESHOLD = 2, DELTA_THRESHOLD = 2, MAX_POWER = 1;
     private double deltaAngle, targetAngle;
+
+    private ArrayList<Double> times = new ArrayList<>();
+    private ArrayList<Double> angles = new ArrayList<>();
+    private ArrayList<Double> targets = new ArrayList<>();
 
     private ElapsedTime timer = new ElapsedTime();
     private double timeout;
@@ -81,6 +87,10 @@ public class TurnGyroPID extends Command {
         Subsystems.instance.driveBase.turnMotors(power);
 
         lastError = error;
+
+        times.add(timer.seconds());
+        angles.add(gyro.getHeading());
+        targets.add(targetAngle);
     }
 
     @Override
@@ -92,6 +102,7 @@ public class TurnGyroPID extends Command {
     public void end() {
         Hardware.log("big man", "done");
         Subsystems.instance.driveBase.stopMotors();
+        Util.writeCSV(times, targets, angles);
     }
 
     /**
