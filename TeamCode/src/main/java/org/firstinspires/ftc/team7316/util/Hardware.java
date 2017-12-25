@@ -45,6 +45,7 @@ public class Hardware {
     private static final String RELIC_GRABBER_SERVO_NAME = "rgs";
 
     private static final String RIGHT_JEWEL_ARM_NAME = "rja";
+    private static final String WACKING_JEWEL_ARM_NAME = "bap";
     private static final String COLOR_SENSOR_NAME = "cs";
 
     private static final String GYRO_NAME = "gyro";
@@ -73,6 +74,7 @@ public class Hardware {
     public CRServo relicArmServo;
 
     public Servo rightJewelArm;
+    public Servo wackingJewelArm;
     public ColorSensor colorsensor;
     public ColorWrapper colorWrapper;
 
@@ -130,6 +132,7 @@ public class Hardware {
 
         //jewel arm hardware
         rightJewelArm = map.servo.get(RIGHT_JEWEL_ARM_NAME);
+        wackingJewelArm = map.servo.get(WACKING_JEWEL_ARM_NAME);
         try {
             colorsensor = map.colorSensor.get(COLOR_SENSOR_NAME);
             colorsensor.enableLed(true);
@@ -159,7 +162,7 @@ public class Hardware {
             gyro_offline = true;
         }
 
-        vuforiaCameraWrapper = new VuforiaCameraWrapper();
+//        vuforiaCameraWrapper = new VuforiaCameraWrapper();
 
         //Scheduler.instance.addTask(frontSideInfaredSensor);
     }

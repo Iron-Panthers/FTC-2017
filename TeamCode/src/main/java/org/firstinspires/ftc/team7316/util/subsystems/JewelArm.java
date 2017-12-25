@@ -3,7 +3,6 @@ package org.firstinspires.ftc.team7316.util.subsystems;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.BlankCommand;
 import org.firstinspires.ftc.team7316.util.commands.Command;
@@ -15,13 +14,19 @@ import org.firstinspires.ftc.team7316.util.commands.Command;
 public class JewelArm extends Subsystem {
 
     private ColorSensor sensor;
-    private Servo servo;
+    private Servo arm;
+    private Servo wacker;
 
-    public final double servoPositionIn = 0.05;
-    public final double servoPositionOut = 1;
+    public final double armPositionIn = 0.05;
+    public final double armPositionOut = 1;
+
+    public final double wackPositionNeutral = 0.5;
+    public final double wackPositionForward = 0;
+    public final double wackPositionBackward = 1;
 
     public JewelArm() {
-        servo = Hardware.instance.rightJewelArm;
+        arm = Hardware.instance.rightJewelArm;
+        wacker = Hardware.instance.wackingJewelArm;
         sensor = Hardware.instance.colorsensor;
     }
 
@@ -35,17 +40,37 @@ public class JewelArm extends Subsystem {
         return new BlankCommand(this);
     }
 
-    public void moveServo(JewelArmPosition position) {
+    public void moveArm(JewelArmPosition position) {
         if(position == JewelArmPosition.IN) {
-            servo.setPosition(servoPositionIn);
+            arm.setPosition(armPositionIn);
         }
         else {
-            servo.setPosition(servoPositionOut);
+            arm.setPosition(armPositionOut);
+        }
+    }
+
+    public void moveWacker(JewelWackPosition position) {
+        switch (position) {
+            case FORWARD:
+                wacker.setPosition(wackPositionForward);
+                break;
+            case BACKWARD:
+                wacker.setPosition(wackPositionBackward);
+                break;
+            case NEUTRAL:
+                wacker.setPosition(wackPositionNeutral);
+                break;
         }
     }
 
     public enum JewelArmPosition {
         IN,
         OUT
+    }
+
+    public enum JewelWackPosition {
+        FORWARD,
+        NEUTRAL,
+        BACKWARD
     }
 }

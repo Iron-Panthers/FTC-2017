@@ -19,9 +19,9 @@ public enum Alliance {
     public boolean shouldHitForward(double redsum, double bluesum) {
         switch (this) {
             case BLUE:
-                return bluesum - redsum >= Constants.COLOR_DIFFERENCE;
-            case RED:
                 return redsum - bluesum >= Constants.COLOR_DIFFERENCE;
+            case RED:
+                return bluesum - redsum >= Constants.COLOR_DIFFERENCE;
         }
         throw new IllegalArgumentException("Something wrong happened in enum Alliance even though nothing wrong should have happened");
     }

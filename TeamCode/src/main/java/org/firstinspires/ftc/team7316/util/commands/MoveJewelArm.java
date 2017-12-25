@@ -15,20 +15,29 @@ public class MoveJewelArm extends Command {
     private ElapsedTime travelTime;
     private JewelArm.JewelArmPosition direction;
 
+    private boolean movedWacker;
+
     public MoveJewelArm(JewelArm.JewelArmPosition direction) {
         //requires(Subsystems.instance.jewelArm);
         this.direction = direction;
         this.travelTime = new ElapsedTime();
+
+        movedWacker = false;
     }
 
     @Override
     public void init() {
         travelTime.reset();
-        Subsystems.instance.jewelArm.moveServo(direction);
+        Subsystems.instance.jewelArm.moveArm(direction);
     }
 
     @Override
     public void loop() {
+        //move the wacking arm mid-travel
+        if(travelTime.seconds() >= 0.2 && !movedWacker) {
+            movedWacker = true;
+            Subsystems.instance.jewelArm.moveWacker(JewelArm.JewelWackPosition.NEUTRAL);
+        }
         System.out.println("c===============================================arm moved");
     }
 

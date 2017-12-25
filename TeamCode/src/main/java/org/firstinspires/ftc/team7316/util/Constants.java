@@ -12,7 +12,7 @@ public class Constants {
     public static final int DRIVE_RPM_MAX = 280; // can change later actual max 320
     public static final double WHEEL_RADIUS = 2; // I THINK THIS IS IN INCHES
     public static final double WHEEL_CIRCUMFERENCE = WHEEL_RADIUS * 2 * Math.PI;
-    public static final double COLOR_DIFFERENCE = 5;
+    public static final double COLOR_DIFFERENCE = 200;
 
     public static final double DRIVE_SLOW_MULTIPLIER  = 0.7;
     public static final double DRIVE_VERY_SLOW_MULTIPLIER = 0.35;
@@ -43,7 +43,7 @@ public class Constants {
     public static final double MIDDLE_COLUMN_DISTANCE = 16.5;
     public static final double LEFT_COLUMN_DISTANCE = 24;
     //drive times(temporary) and their powers
-    public static final double RED_OFF_PAD_TIME = 1.15;
+    public static final double RED_OFF_PAD_TIME = 0.8;
     public static final double BLUE_OFF_PAD_TIME = 1.1;
     public static final double DRIVE_FORWARD_TIME = 1.6; //driving off the pad and to the parking also for now
     public static final double FORWARD_POWER_FOR_TIME = 0.15; //was 0.3 whne jewel waacked forward

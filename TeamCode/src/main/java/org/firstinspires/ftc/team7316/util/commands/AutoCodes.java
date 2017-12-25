@@ -104,7 +104,7 @@ public class AutoCodes {
         DriveDistanceCipher gotocrypto = new DriveDistanceCipher();
 
 //        TurnForTime turn = new TurnForTime(Constants.ROTATIONS_90_DEGREES);
-        TurnGyroPID turn = new TurnGyroPID(90, 3);
+        TurnGyroPID turn = new TurnGyroPID(90, 6);
         DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH, 10);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
@@ -118,10 +118,11 @@ public class AutoCodes {
         MoveJewelArm movearmout = new MoveJewelArm(JewelArm.JewelArmPosition.OUT);
         PollColor pollColor = new PollColor();
         WackJewel wackjewel = new WackJewel(alliance);
-        TurnGyroPID reorient = new TurnGyroPID(0 - Hardware.instance.gyroWrapper.getHeading(), 3);
         MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
+//        TurnGyroPID reorient = new TurnGyroPID(0 - Hardware.instance.gyroWrapper.getHeading(), 3);
 
-        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, reorient};
+        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin};
+//        Command[] cmds = {movearmout, movearmin};
         return new SequentialCommand(cmds);
     }
 
