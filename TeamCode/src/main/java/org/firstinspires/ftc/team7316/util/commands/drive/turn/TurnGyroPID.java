@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class TurnGyroPID extends Command {
 
-    public static final double P = 0.008, I = 0.0016, D = 0.00008;
+    public static final double P = 0.032, I = 0.0016, D = 0.00016;
     public static final double ERROR_THRESHOLD = 2, DELTA_THRESHOLD = 2, MAX_POWER = 1;
     private double deltaAngle, targetAngle;
 
