@@ -1,6 +1,10 @@
-- FIX TURNINGG
-- replace straight driving with turning for hitting jewel
-- test for reliable vumark
-- does it go the right distances
-
-- get it working backwards too for close blue
+todo
+1. new phone location
+    - front of robot
+    - tilted accordingly to see marks if possible
+2. unable to put phone in location?
+    - back up into balancing stone to see vumark on red side
+3. close red side distances should be cool and good after vision testing. switch to blue side
+4. variables for blue side should stay consistent
+5. if the phone was moved to front and can see vumark, then close blue side is cool and good
+    - if not, then shit, we'll have to drive fucking forwards and the back
