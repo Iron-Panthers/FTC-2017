@@ -11,6 +11,11 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
  */
 
 public abstract class AutoBaseOpMode extends OpMode {
+
+    public AutoBaseOpMode() {
+        msStuckDetectInit = 10000;
+    }
+
     @Override
     public void init() {
         Scheduler.inTeleop = false;
