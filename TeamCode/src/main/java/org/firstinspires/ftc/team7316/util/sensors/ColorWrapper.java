@@ -16,7 +16,7 @@ public class ColorWrapper {
     private Buffer greenSum;
     private Buffer blueSum;
 
-    private final int bufferSize = 20;
+    private final int bufferSize = 10;
 
     public boolean noColor = false;
 

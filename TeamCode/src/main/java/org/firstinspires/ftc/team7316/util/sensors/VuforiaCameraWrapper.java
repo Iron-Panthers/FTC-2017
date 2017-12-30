@@ -40,9 +40,10 @@ public class VuforiaCameraWrapper {
 
     public VuforiaCameraWrapper() {
         params = new VuforiaLocalizer.Parameters(R.id.cameraMonitorViewId);
+//        params = new VuforiaLocalizer.Parameters();
         params.vuforiaLicenseKey = Constants.vuforiaLicenseKey;
         params.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
-        params.useExtendedTracking = true;
+        params.useExtendedTracking = false;
 
         vuMark = RelicRecoveryVuMark.UNKNOWN;
     }

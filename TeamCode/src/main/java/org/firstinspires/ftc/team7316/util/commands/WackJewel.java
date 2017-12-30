@@ -19,7 +19,7 @@ public class WackJewel extends Command {
 
     private Alliance alliance;
     private ElapsedTime timer;
-    private double servoTravelTime = 2;
+    private double servoTravelTime = 1;
 //    private Command drivecommand;
 //    private Command turncommand;
     private ColorWrapper colorWrapper;
