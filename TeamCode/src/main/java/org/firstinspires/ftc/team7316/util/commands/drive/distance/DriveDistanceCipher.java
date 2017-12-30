@@ -13,20 +13,33 @@ public class DriveDistanceCipher extends Command {
     private DriveDistance drivecommand;
     private final double DRIVE_TIMEOUT = 4;
 
+    private int direction;
+
+    public DriveDistanceCipher(Direction d) {
+        switch (d) {
+            case FORWARD:
+                direction = 1;
+                break;
+            case BACKWARD:
+                direction = -1;
+                break;
+        }
+    }
+
     @Override
     public void init() {
         switch (Hardware.instance.vuforiaCameraWrapper.getVuMark()) {
             case LEFT:
-                drivecommand = new DriveDistance(Constants.LEFT_COLUMN_DISTANCE, DRIVE_TIMEOUT);
+                drivecommand = new DriveDistance(Constants.LEFT_COLUMN_DISTANCE * direction, DRIVE_TIMEOUT);
                 break;
             case CENTER:
-                drivecommand = new DriveDistance(Constants.MIDDLE_COLUMN_DISTANCE, DRIVE_TIMEOUT);
+                drivecommand = new DriveDistance(Constants.MIDDLE_COLUMN_DISTANCE * direction, DRIVE_TIMEOUT);
                 break;
             case RIGHT:
-                drivecommand = new DriveDistance(Constants.RIGHT_COLUMN_DISTANCE, DRIVE_TIMEOUT);
+                drivecommand = new DriveDistance(Constants.RIGHT_COLUMN_DISTANCE * direction, DRIVE_TIMEOUT);
                 break;
             default:
-                drivecommand = new DriveDistance(Constants.MIDDLE_COLUMN_DISTANCE, DRIVE_TIMEOUT);
+                drivecommand = new DriveDistance(Constants.MIDDLE_COLUMN_DISTANCE * direction, DRIVE_TIMEOUT);
                 break;
         }
         drivecommand.init();
@@ -45,5 +58,9 @@ public class DriveDistanceCipher extends Command {
     @Override
     protected void end() {
         drivecommand.end();
+    }
+
+    public enum Direction {
+        FORWARD, BACKWARD
     }
 }

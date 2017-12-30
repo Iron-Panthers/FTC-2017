@@ -71,22 +71,26 @@ public class AutoCodes {
     }
 
     public static SequentialCommand closeBlueJewel() {
-        MoveJewelArm movearmout = new MoveJewelArm(JewelArm.JewelArmPosition.OUT);
-        PollColor pollColor = new PollColor();
-        WackJewel wackjewel = new WackJewel(Alliance.BLUE);
-        MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
+//        MoveJewelArm movearmout = new MoveJewelArm(JewelArm.JewelArmPosition.OUT);
+//        PollColor pollColor = new PollColor();
+//        WackJewel wackjewel = new WackJewel(Alliance.BLUE);
+//        MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
+        Command wack = wackJewelBasic(Alliance.BLUE);
 
-        DriveForTime_PadModified offPad = new DriveForTime_PadModified(Constants.BLUE_OFF_PAD_TIME, Alliance.BLUE);
+//        DriveForTime_PadModified offPad = new DriveForTime_PadModified(Constants.BLUE_OFF_PAD_TIME, Alliance.BLUE);
+        DriveForTime offPad = new DriveForTime(Constants.BACKWARD_POWER_FOR_TIME, Math.PI, Constants.BLUE_OFF_PAD_TIME);
         Wait stop = new Wait(1);
-        DriveDistance backward = new DriveDistance(-Constants.CLOSE_CRYPTO_DISTANCE, 10);
+//        DriveDistance backward = new DriveDistance(-Constants.CLOSE_CRYPTO_DISTANCE, 10);
+        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(DriveDistanceCipher.Direction.BACKWARD);
 
-        TurnForTime turn = new TurnForTime(Constants.ROTATIONS_90_DEGREES);
+//        TurnForTime turn = new TurnForTime(Constants.ROTATIONS_90_DEGREES);
+        TurnGyroPID turn = new TurnGyroPID(90, 6);
         DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH, 10);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
         DriveDistance backup = new DriveDistance(-4, 10);
 
-        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, backward, turn, inchforward, outtake, backup};
+        Command[] cmds = {wack, offPad, stop, gotocrypto, turn, inchforward, outtake, backup};
         return new SequentialCommand(cmds);
     }
 
@@ -101,7 +105,7 @@ public class AutoCodes {
         DriveForTime offPad = new DriveForTime(Constants.FORWARD_POWER_FOR_TIME, 0, Constants.RED_OFF_PAD_TIME);
         Wait stop = new Wait(1);
         //DriveDistance backward = new DriveDistance(Constants.CLOSE_CRYPTO_DISTANCE, 10);
-        DriveDistanceCipher gotocrypto = new DriveDistanceCipher();
+        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(DriveDistanceCipher.Direction.FORWARD);
 
 //        TurnForTime turn = new TurnForTime(Constants.ROTATIONS_90_DEGREES);
         TurnGyroPID turn = new TurnGyroPID(90, 6);
