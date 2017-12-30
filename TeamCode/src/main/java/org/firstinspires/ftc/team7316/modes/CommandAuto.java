@@ -7,7 +7,7 @@ import org.firstinspires.ftc.team7316.util.commands.*;
  * Used for those autonomodes that have a single command (basically a lot of files)
  * It takes in a command in the constructor.
  */
-public abstract class CommandAuto extends TelopBaseOpMode {
+public abstract class CommandAuto extends TeleopBaseOpMode {
 
     protected abstract Command getTask();
 

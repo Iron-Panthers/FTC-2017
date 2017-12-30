@@ -4,18 +4,17 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.team7316.modes.TeleopBaseOpMode;
 import org.firstinspires.ftc.team7316.util.Scheduler;
-import org.firstinspires.ftc.team7316.util.commands.drive.DriveJoystickTesting;
+import org.firstinspires.ftc.team7316.util.commands.intake.IntakeServoTest;
 
 /**
- * Created by jerry on 11/3/17.
+ * Created by jerry on 12/30/17.
  */
 
-@TeleOp(name = "MotorTesting")
-public class MotorTesting extends TeleopBaseOpMode {
+@TeleOp(name = "intake servo testing")
+public class IntakeServoTesting extends TeleopBaseOpMode {
     @Override
     public void onInit() {
-        Scheduler.inTeleop = true;
-        Scheduler.instance.add(new DriveJoystickTesting());
+        Scheduler.instance.add(new IntakeServoTest());
     }
 
     @Override
