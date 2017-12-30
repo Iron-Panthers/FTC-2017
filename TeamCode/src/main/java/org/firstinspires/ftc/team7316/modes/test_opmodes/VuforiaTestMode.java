@@ -13,6 +13,7 @@ import org.firstinspires.ftc.team7316.util.Hardware;
 public class VuforiaTestMode extends AutoBaseOpMode {
     @Override
     public void onInit() {
+        Hardware.instance.vuforiaCameraWrapper.startTracking();
     }
 
     @Override

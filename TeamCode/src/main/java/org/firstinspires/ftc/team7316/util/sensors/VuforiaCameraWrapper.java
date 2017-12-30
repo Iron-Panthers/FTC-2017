@@ -44,17 +44,19 @@ public class VuforiaCameraWrapper {
         params.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
         params.useExtendedTracking = true;
 
+        vuMark = RelicRecoveryVuMark.UNKNOWN;
+    }
+
+    public void startTracking() {
         vuforia = ClassFactory.createVuforiaLocalizer(params);
         Vuforia.setHint(HINT.HINT_MAX_SIMULTANEOUS_IMAGE_TARGETS, 4);
 
         relicTrackables = this.vuforia.loadTrackablesFromAsset("RelicVuMark");
         relicTemplate = relicTrackables.get(0);
         relicTemplate.setName("relicVuMarkTemplate");
-        ((VuforiaTrackableDefaultListener)(relicTemplate.getListener())).setPhoneInformation(new OpenGLMatrix(), VuforiaLocalizer.CameraDirection.BACK);
+        ((VuforiaTrackableDefaultListener)relicTemplate.getListener()).setPhoneInformation(new OpenGLMatrix(), VuforiaLocalizer.CameraDirection.BACK);
 
         relicTrackables.activate();
-
-        vuMark = RelicRecoveryVuMark.UNKNOWN;
     }
 
     public RelicRecoveryVuMark getVuMark() {
