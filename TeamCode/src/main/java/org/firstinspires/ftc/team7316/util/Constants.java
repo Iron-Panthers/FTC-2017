@@ -44,10 +44,10 @@ public class Constants {
     public static final double LEFT_COLUMN_DISTANCE = 24;
     //drive times(temporary) and their powers
     public static final double RED_OFF_PAD_TIME = 2;
-    public static final double BLUE_OFF_PAD_TIME = 1.1;
+    public static final double BLUE_OFF_PAD_TIME = 2;
     public static final double DRIVE_FORWARD_TIME = 1.6; //driving off the pad and to the parking also for now
     public static final double FORWARD_POWER_FOR_TIME = 0.1; //was 0.3 whne jewel waacked forward
-    public static final double BACKWARD_POWER_FOR_TIME = 0.4; //when  jewel wacked backwards
+    public static final double BACKWARD_POWER_FOR_TIME = 0.15; //when  jewel wacked backwards
     public static final double STRAFE_LEFT_TIME = 0.85;
     public static final double LEFT_POWER_TIME = 0.8;
 
@@ -83,6 +83,11 @@ public class Constants {
     public static final double DRIVE_D = 0.00016; // DEAD
     public static final double DRIVE_F = 0.00042;
 
+    public static final double GYRO_P = 0.032;
+    public static final double GYRO_I = 0.0016;
+    public static final double GYRO_D = 0.00032;
+    public static final double GYRO_F = 0;
+
     public static final double VP_DRIVE_P = 0;
     public static final double VP_DRIVE_I = 0;
     public static final double VP_DRIVE_D = 0;
@@ -94,10 +99,6 @@ public class Constants {
     public static final double FORWARD_MOTOR_DEADZONE = 0.1;
     public static final double STRAFING_MOTOR_DEADZONE = 0.5;
     public static final double TURNING_MOTOR_DEADZONE = 0;
-
-    public static final double GYRO_P = 0.05;
-    public static final double GYRO_I = 0.1;
-    public static final double GYRO_D = 0.1;
 
     public static final double sqrt2 = Math.sqrt(2);
 

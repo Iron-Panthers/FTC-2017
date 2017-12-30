@@ -2,6 +2,7 @@ package org.firstinspires.ftc.team7316.util.commands.drive.turn;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Util;
 import org.firstinspires.ftc.team7316.util.commands.*;
 import org.firstinspires.ftc.team7316.util.Hardware;
@@ -16,7 +17,6 @@ import java.util.ArrayList;
  */
 public class TurnGyroPID extends Command {
 
-    public static final double P = 0.032, I = 0.0016, D = 0.00016;
     public static final double ERROR_THRESHOLD = 2, DELTA_THRESHOLD = 2, MAX_POWER = 1;
     private double deltaAngle, targetAngle;
 
@@ -43,7 +43,6 @@ public class TurnGyroPID extends Command {
         targetAngle = this.deltaAngle + gyro.getHeading();
         completedCount = 0;
         timeout = 10;
-        Hardware.log("big man", "alive");
     }
 
     public TurnGyroPID(double deltaAngle, double timeout) {
@@ -55,7 +54,6 @@ public class TurnGyroPID extends Command {
         targetAngle = this.deltaAngle + gyro.getHeading();
         completedCount = 0;
         this.timeout = timeout;
-        Hardware.log("big man", "alive");
     }
 
     @Override
@@ -76,7 +74,7 @@ public class TurnGyroPID extends Command {
         deltaError = error - lastError;
         sumError += error;
 
-        double power = P*error + I*sumError + D*deltaError;
+        double power = Constants.GYRO_P *error + Constants.GYRO_I *sumError + Constants.GYRO_D *deltaError;
         Hardware.log("current error", error);
         Hardware.log("turn_power", power);
 
@@ -100,7 +98,6 @@ public class TurnGyroPID extends Command {
 
     @Override
     public void end() {
-        Hardware.log("big man", "done");
         Subsystems.instance.driveBase.stopMotors();
         Util.writeCSV(times, targets, angles);
     }
@@ -111,8 +108,6 @@ public class TurnGyroPID extends Command {
      * @return the error
      */
     private double error() {
-        Hardware.log("deltaangle", deltaAngle);
-        Hardware.log("gyro friend", gyro.getHeading());
         return Util.wrap(targetAngle - gyro.getHeading());
     }
 }
