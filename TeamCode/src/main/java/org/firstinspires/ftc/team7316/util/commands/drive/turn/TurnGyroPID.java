@@ -3,6 +3,7 @@ package org.firstinspires.ftc.team7316.util.commands.drive.turn;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.team7316.util.Constants;
+import org.firstinspires.ftc.team7316.util.PID;
 import org.firstinspires.ftc.team7316.util.Util;
 import org.firstinspires.ftc.team7316.util.commands.*;
 import org.firstinspires.ftc.team7316.util.Hardware;
@@ -18,46 +19,51 @@ import java.util.ArrayList;
 public class TurnGyroPID extends Command {
 
     public static final double ERROR_THRESHOLD = 2, DELTA_THRESHOLD = 2, MAX_POWER = 1;
-    private double deltaAngle, targetAngle;
+    private double deltaAngle, startAngle, targetAngleCurrent, targetAngleFinal;
+
+    private Direction direction;
 
     private ArrayList<Double> times = new ArrayList<>();
     private ArrayList<Double> angles = new ArrayList<>();
     private ArrayList<Double> targets = new ArrayList<>();
 
     private ElapsedTime timer = new ElapsedTime();
+    private double previousTime = 0;
     private double timeout;
 
-    private int completedCount;
+    private int completedCount = 0;
     private final int countThreshold = 10;
 
-    private GyroWrapper gyro;
+    private GyroWrapper gyro = Hardware.instance.gyroWrapper;;
     public double sumError, lastError, deltaError;
 
     /** @param deltaAngle the amount to turn */
     public TurnGyroPID(double deltaAngle) {
 //        requires(Subsystems.instance.driveBase);
-
-        Subsystems.instance.driveBase.resetMotorModes();
-        gyro = Hardware.instance.gyroWrapper;
         this.deltaAngle = deltaAngle;
-        targetAngle = this.deltaAngle + gyro.getHeading();
-        completedCount = 0;
         timeout = 10;
     }
 
     public TurnGyroPID(double deltaAngle, double timeout) {
 //        requires(Subsystems.instance.driveBase);
-
-        Subsystems.instance.driveBase.resetMotorModes();
-        gyro = Hardware.instance.gyroWrapper;
         this.deltaAngle = deltaAngle;
-        targetAngle = this.deltaAngle + gyro.getHeading();
-        completedCount = 0;
         this.timeout = timeout;
     }
 
     @Override
     public void init() {
+        startAngle = gyro.getHeading();
+        targetAngleCurrent = gyro.getHeading();
+        targetAngleFinal = this.deltaAngle + gyro.getHeading();
+
+        if(targetAngleCurrent < targetAngleFinal) {
+            direction = Direction.RIGHT;
+        }
+        else {
+            direction = Direction.LEFT;
+        }
+
+        Subsystems.instance.driveBase.resetMotorModes();
         sumError = 0;
         deltaError = 0;
         lastError = error();
@@ -67,6 +73,8 @@ public class TurnGyroPID extends Command {
 
     @Override
     public void loop() {
+        updateCurrentTarget();
+
         double error = error();
         if(Math.abs(error) <= ERROR_THRESHOLD) {
             completedCount++;
@@ -74,9 +82,11 @@ public class TurnGyroPID extends Command {
         deltaError = error - lastError;
         sumError += error;
 
-        double power = Constants.GYRO_P *error + Constants.GYRO_I *sumError + Constants.GYRO_D *deltaError;
+        double power = Constants.GYRO_P *error + Constants.GYRO_I *sumError + Constants.GYRO_D*deltaError + Constants.GYRO_F*getPredictedSpeed(timer.seconds());
         Hardware.log("current error", error);
+        Hardware.log("current target", targetAngleCurrent);
         Hardware.log("turn_power", power);
+        Hardware.log("final target", targetAngleFinal);
 
         if (Math.abs(power) > MAX_POWER) {
             power = (power > 0) ? MAX_POWER : -MAX_POWER;
@@ -88,7 +98,7 @@ public class TurnGyroPID extends Command {
 
         times.add(timer.seconds());
         angles.add(gyro.getHeading());
-        targets.add(targetAngle);
+        targets.add(targetAngleCurrent);
     }
 
     @Override
@@ -102,12 +112,47 @@ public class TurnGyroPID extends Command {
         Util.writeCSV(times, targets, angles);
     }
 
+    private void updateCurrentTarget() {
+        double elapsedTime = timer.seconds() - previousTime;
+        double distance = Constants.DEGREES_PER_SECOND_COAST * elapsedTime;
+        switch (direction) {
+            case RIGHT:
+                if(targetAngleCurrent + distance > targetAngleFinal) {
+                    targetAngleCurrent = targetAngleFinal;
+                }
+                else {
+                    targetAngleCurrent += distance;
+                }
+                break;
+            case LEFT:
+                if(targetAngleCurrent - distance < targetAngleFinal) {
+                    targetAngleCurrent = targetAngleFinal;
+                }
+                else {
+                    targetAngleCurrent -= distance;
+                }
+                break;
+        }
+        previousTime = timer.seconds();
+    }
+
+    private double getPredictedSpeed(double time) {
+        if(time * Constants.DEGREES_PER_SECOND_COAST + startAngle > targetAngleFinal) {
+            return 0;
+        }
+        return Constants.ROTATIONS_PER_SECOND * 360.0;
+    }
+
     /**
      * The angle distance from the targeted heading.
      * Positive angles mean to the right, while negative angles mean to the left.
      * @return the error
      */
     private double error() {
-        return Util.wrap(targetAngle - gyro.getHeading());
+        return Util.wrap(targetAngleCurrent - gyro.getHeading());
+    }
+
+    enum Direction {
+        RIGHT, LEFT, STOPPED
     }
 }

@@ -2,7 +2,6 @@ package org.firstinspires.ftc.team7316.util.commands;
 
 import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Constants;
-import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistanceCipher;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
@@ -85,7 +84,7 @@ public class AutoCodes {
 
 //        TurnForTime turn = new TurnForTime(Constants.ROTATIONS_90_DEGREES);
         TurnGyroPID turn = new TurnGyroPID(90, 6);
-        DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH, 10);
+        DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_BLUE, 10);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
         DriveDistance backup = new DriveDistance(-4, 10);
@@ -109,7 +108,7 @@ public class AutoCodes {
 
 //        TurnForTime turn = new TurnForTime(Constants.ROTATIONS_90_DEGREES);
         TurnGyroPID turn = new TurnGyroPID(90, 6);
-        DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH, 10);
+        DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_RED, 10);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
         DriveDistance backup = new DriveDistance(-4, 10);

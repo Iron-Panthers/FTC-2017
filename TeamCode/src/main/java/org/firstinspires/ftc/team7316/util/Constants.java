@@ -12,7 +12,6 @@ public class Constants {
     public static final int DRIVE_RPM_MAX = 280; // can change later actual max 320
     public static final double WHEEL_RADIUS = 2; // I THINK THIS IS IN INCHES
     public static final double WHEEL_CIRCUMFERENCE = WHEEL_RADIUS * 2 * Math.PI;
-    public static final double COLOR_DIFFERENCE = 100;
 
     public static final double DRIVE_SLOW_MULTIPLIER  = 0.7;
     public static final double DRIVE_VERY_SLOW_MULTIPLIER = 0.35;
@@ -32,19 +31,23 @@ public class Constants {
     public static final double ROTATIONS_PER_SECOND = ROTATIONS_PERFIVESECONDS / 5;
     public static final double ROTATIONS_180_DEGREES = 0.8;
     public static final double ROTATIONS_90_DEGREES = 0.6;
+
+    //ROUGHLY ESTIMATED SINCE I DON'T FEEL LIKE TESTING XFAEFXCFNERACGRH
+    public static final double DEGREES_PER_SECOND_COAST = Constants.ROTATIONS_PER_SECOND * 360.0 * 0.7;
     //drive distances
     public static final double JEWEL_WHACK_DISTANCE = 3.5; //inches
     public static final double FAR_CRYPTO_DISTANCE = 9; //inches after driving for time after off the balancing pad
     public static final double CRYPTOBOX_STRAFE_DISTANCE = 11.25;//inches too
     public static final double CLOSE_CRYPTO_DISTANCE = 10;
-    public static final double CLOSE_CRYPTO_APPROACH = 7;
+    public static final double CLOSE_CRYPTO_APPROACH_RED = 7.5;
+    public static final double CLOSE_CRYPTO_APPROACH_BLUE = 8.5;
     //INCHES INCHESSSSS
     public static final double RIGHT_COLUMN_DISTANCE = 9;
     public static final double MIDDLE_COLUMN_DISTANCE = 16.5;
     public static final double LEFT_COLUMN_DISTANCE = 24;
     //drive times(temporary) and their powers
     public static final double RED_OFF_PAD_TIME = 2;
-    public static final double BLUE_OFF_PAD_TIME = 2;
+    public static final double BLUE_OFF_PAD_TIME = 1.7;
     public static final double DRIVE_FORWARD_TIME = 1.6; //driving off the pad and to the parking also for now
     public static final double FORWARD_POWER_FOR_TIME = 0.1; //was 0.3 whne jewel waacked forward
     public static final double BACKWARD_POWER_FOR_TIME = 0.15; //when  jewel wacked backwards
@@ -72,10 +75,16 @@ public class Constants {
     public static final int COLOROFFSET_G = 40;
     public static final int COLOROFFSET_B = 30;
 
-    public static final int MIN_COLOR_VALUE = 10;
-    public static final int COLOR_BUFFER_SIZE = 20;
+    public static final double COLOR_DIFFERENCE = 50;
+    public static final int NO_COLOR_RED = 10;
+    public static final int NO_COLOR_GREEN = 20;
+    public static final int NO_COLOR_BLUE = 20;
 
-    public static final int NO_COLOR_THRESHOLD = MIN_COLOR_VALUE * COLOR_BUFFER_SIZE;
+    public static final int MIN_COLOR_VALUE = 10;
+    public static final int COLOR_BUFFER_SIZE = 10;
+
+    public static final int NO_COLOR_THRESHOLD_RED = NO_COLOR_RED * COLOR_BUFFER_SIZE;
+    public static final int NO_COLOR_THRESHOLD_BLUE = NO_COLOR_BLUE * COLOR_BUFFER_SIZE;
 
     //Drive Base PIDPath Constants
     public static final double DRIVE_P = 0.01; // DEAD
@@ -83,9 +92,9 @@ public class Constants {
     public static final double DRIVE_D = 0.00016; // DEAD
     public static final double DRIVE_F = 0.00042;
 
-    public static final double GYRO_P = 0.032;
-    public static final double GYRO_I = 0.0016;
-    public static final double GYRO_D = 0.00032;
+    public static final double GYRO_P = 0.01;
+    public static final double GYRO_I = 0;
+    public static final double GYRO_D = 0;
     public static final double GYRO_F = 0;
 
     public static final double VP_DRIVE_P = 0;

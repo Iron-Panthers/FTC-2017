@@ -41,7 +41,7 @@ public class DriveDistance extends Command {
      */
     public DriveDistance(double inches, double timeout) {
         //requires(Subsystems.instance.driveBase);
-        this.distance = (int)Constants.inchesToTicks(inches);
+        this.distance = Constants.inchesToTicks(inches);
         this.timeout = timeout;
         timer = new ElapsedTime();
     }

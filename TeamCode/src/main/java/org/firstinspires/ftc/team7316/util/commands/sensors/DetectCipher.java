@@ -32,7 +32,7 @@ public class DetectCipher extends Command {
 
     @Override
     public boolean shouldRemove() {
-        return Hardware.instance.vuforiaCameraWrapper.getVuMark() != RelicRecoveryVuMark.UNKNOWN || timer.seconds() >= timeout;
+        return Hardware.instance.vuforiaCameraWrapper.vuMark != RelicRecoveryVuMark.UNKNOWN || timer.seconds() >= timeout;
     }
 
     @Override

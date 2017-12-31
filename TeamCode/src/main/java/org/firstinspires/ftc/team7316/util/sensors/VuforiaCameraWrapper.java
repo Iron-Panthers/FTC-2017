@@ -36,7 +36,7 @@ public class VuforiaCameraWrapper {
     public double itX, itY, itZ;    //initial translations of cipher
     public double irX, irY, irZ;    //initial angle of cipher
 
-    private RelicRecoveryVuMark vuMark;
+    public RelicRecoveryVuMark vuMark;
 
     public VuforiaCameraWrapper() {
         params = new VuforiaLocalizer.Parameters(R.id.cameraMonitorViewId);
@@ -58,10 +58,6 @@ public class VuforiaCameraWrapper {
         ((VuforiaTrackableDefaultListener)relicTemplate.getListener()).setPhoneInformation(new OpenGLMatrix(), VuforiaLocalizer.CameraDirection.BACK);
 
         relicTrackables.activate();
-    }
-
-    public RelicRecoveryVuMark getVuMark() {
-        return vuMark;
     }
 
     public void setCipherLocation() {

@@ -16,8 +16,6 @@ public class ColorWrapper {
     private Buffer greenSum;
     private Buffer blueSum;
 
-    private final int bufferSize = 10;
-
     public boolean noColor = false;
 
     public boolean drivenForward = true; //by default drives a shorter distance - less likely to crash?
@@ -26,13 +24,13 @@ public class ColorWrapper {
 
     public ColorWrapper(ColorSensor sensor) {
         this.sensor = sensor;
-        redSum = new Buffer(bufferSize);
-        greenSum = new Buffer(bufferSize);
-        blueSum = new Buffer(bufferSize);
+        redSum = new Buffer(Constants.COLOR_BUFFER_SIZE);
+        greenSum = new Buffer(Constants.COLOR_BUFFER_SIZE);
+        blueSum = new Buffer(Constants.COLOR_BUFFER_SIZE);
     }
 
     public void run() {
-        for(int i = 0; i < bufferSize; i++) {
+        for(int i = 0; i < Constants.COLOR_BUFFER_SIZE; i++) {
             push();
         }
     }
@@ -44,7 +42,7 @@ public class ColorWrapper {
     }
 
     public void setNoColor() {
-        noColor = redSum.sum <= Constants.NO_COLOR_THRESHOLD && blueSum.sum <= Constants.NO_COLOR_THRESHOLD;
+        noColor = redSum.sum <= Constants.NO_COLOR_THRESHOLD_RED && blueSum.sum <= Constants.NO_COLOR_THRESHOLD_BLUE;
     }
 
     public double sumR() {
@@ -57,5 +55,17 @@ public class ColorWrapper {
 
     public double sumB() {
         return blueSum.sum;
+    }
+
+    public void logSums() {
+        Hardware.log("redsum", redSum.sum);
+        Hardware.log("greensum", greenSum.sum);
+        Hardware.log("bluesum", blueSum.sum);
+    }
+
+    public void logColors() {
+        Hardware.log("red", Hardware.instance.colorsensor.red());
+        Hardware.log("green", Hardware.instance.colorsensor.green());
+        Hardware.log("blue", Hardware.instance.colorsensor.blue());
     }
 }

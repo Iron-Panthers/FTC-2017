@@ -28,7 +28,7 @@ public class DriveDistanceCipher extends Command {
 
     @Override
     public void init() {
-        switch (Hardware.instance.vuforiaCameraWrapper.getVuMark()) {
+        switch (Hardware.instance.vuforiaCameraWrapper.vuMark) {
             case LEFT:
                 drivecommand = new DriveDistance(Constants.LEFT_COLUMN_DISTANCE * direction, DRIVE_TIMEOUT);
                 break;
