@@ -192,6 +192,13 @@ public class MecanumDriveBase extends Subsystem {
 
     //driving
 
+    public void setMotorPowers(double power) {
+        Hardware.instance.backRightDriveMotor.setPower(power);
+        Hardware.instance.frontLeftDriveMotor.setPower(power);
+        Hardware.instance.frontRightDriveMotor.setPower(power);
+        Hardware.instance.backLeftDriveMotor.setPower(power);
+    }
+
     public void turnMotors(double power) {
         Hardware.instance.backRightDriveMotor.setPower(-power);
         Hardware.instance.frontLeftDriveMotor.setPower(power);
@@ -214,10 +221,7 @@ public class MecanumDriveBase extends Subsystem {
     }
 
     public void stopMotors() {
-        Hardware.instance.backRightDriveMotor.setPower(0);
-        Hardware.instance.frontLeftDriveMotor.setPower(0);
-        Hardware.instance.frontRightDriveMotor.setPower(0);
-        Hardware.instance.backLeftDriveMotor.setPower(0);
+        setMotorPowers(0);
     }
 
 }

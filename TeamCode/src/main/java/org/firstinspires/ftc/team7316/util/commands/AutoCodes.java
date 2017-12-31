@@ -2,6 +2,7 @@ package org.firstinspires.ftc.team7316.util.commands;
 
 import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Constants;
+import org.firstinspires.ftc.team7316.util.commands.drive.DriveOffPad;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistanceCipher;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
@@ -70,20 +71,16 @@ public class AutoCodes {
     }
 
     public static SequentialCommand closeBlueJewel() {
-//        MoveJewelArm movearmout = new MoveJewelArm(JewelArm.JewelArmPosition.OUT);
-//        PollColor pollColor = new PollColor();
-//        WackJewel wackjewel = new WackJewel(Alliance.BLUE);
-//        MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
         Command wack = wackJewelBasic(Alliance.BLUE);
 
 //        DriveForTime_PadModified offPad = new DriveForTime_PadModified(Constants.BLUE_OFF_PAD_TIME, Alliance.BLUE);
-        DriveForTime offPad = new DriveForTime(Constants.BACKWARD_POWER_FOR_TIME, Math.PI, Constants.BLUE_OFF_PAD_TIME);
+//        DriveForTime offPad = new DriveForTime(Constants.BACKWARD_POWER_FOR_TIME, Math.PI, Constants.BLUE_OFF_PAD_TIME);
+        DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
         Wait stop = new Wait(1);
 //        DriveDistance backward = new DriveDistance(-Constants.CLOSE_CRYPTO_DISTANCE, 10);
-        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(DriveDistanceCipher.Direction.BACKWARD);
+        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.RED);
 
-//        TurnForTime turn = new TurnForTime(Constants.ROTATIONS_90_DEGREES);
-        TurnGyroPID turn = new TurnGyroPID(90, 6);
+        TurnGyroPID turn = new TurnGyroPID(90, 4);
         DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_BLUE, 10);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
@@ -94,20 +91,16 @@ public class AutoCodes {
     }
 
     public static SequentialCommand closeRedJewel() {
-//        MoveJewelArm movearmout = new MoveJewelArm(JewelArm.JewelArmPosition.OUT);
-//        PollColor pollColor = new PollColor();
-//        WackJewel wackjewel = new WackJewel(Alliance.RED);
-//        MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
         Command wack = wackJewelBasic(Alliance.RED);
 
 //        DriveForTime_PadModified offPad = new DriveForTime_PadModified(Constants.RED_OFF_PAD_TIME, Alliance.RED);
-        DriveForTime offPad = new DriveForTime(Constants.FORWARD_POWER_FOR_TIME, 0, Constants.RED_OFF_PAD_TIME);
+//        DriveForTime offPad = new DriveForTime(Constants.FORWARD_POWER_FOR_TIME, 0, Constants.RED_OFF_PAD_TIME);
+        DriveOffPad offPad = new DriveOffPad(Alliance.RED);
         Wait stop = new Wait(1);
         //DriveDistance backward = new DriveDistance(Constants.CLOSE_CRYPTO_DISTANCE, 10);
-        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(DriveDistanceCipher.Direction.FORWARD);
+        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.BLUE);
 
-//        TurnForTime turn = new TurnForTime(Constants.ROTATIONS_90_DEGREES);
-        TurnGyroPID turn = new TurnGyroPID(90, 6);
+        TurnGyroPID turn = new TurnGyroPID(90, 4);
         DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_RED, 10);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
@@ -122,10 +115,8 @@ public class AutoCodes {
         PollColor pollColor = new PollColor();
         WackJewel wackjewel = new WackJewel(alliance);
         MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
-//        TurnGyroPID reorient = new TurnGyroPID(0 - Hardware.instance.gyroWrapper.getHeading(), 3);
 
         Command[] cmds = {movearmout, pollColor, wackjewel, movearmin};
-//        Command[] cmds = {movearmout, movearmin};
         return new SequentialCommand(cmds);
     }
 
