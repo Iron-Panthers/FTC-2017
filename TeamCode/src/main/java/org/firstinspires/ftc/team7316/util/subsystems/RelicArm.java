@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.team7316.util.subsystems;
 
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.team7316.util.Hardware;
@@ -14,8 +15,10 @@ import org.firstinspires.ftc.team7316.util.commands.relicarm.RelicArmJoystick;
 
 public class RelicArm extends Subsystem {
 
-    //private Servo relicGrabberServo = Hardware.instance.relicGrabberServo;
-    //private CRServo relicArmServo = Hardware.instance.relicArmServo;
+    private DcMotor relicArmMotor = Hardware.instance.relicArmMotor;
+    private CRServo relicShoulderServo = Hardware.instance.relicShoulderServo;
+    private Servo relicWristServo = Hardware.instance.relicWristServo;
+    private Servo relicHandServo = Hardware.instance.relicHandServo;
 
     @Override
     public Command defaultAutoCommand() {
@@ -27,7 +30,7 @@ public class RelicArm extends Subsystem {
         return new RelicArmJoystick();
     }
 
-    public void stopRelicArm(){
-        /*relicArmServo.setPower(0);*/
+    public void setArmPower(double power) {
+        relicArmMotor.setPower(power);
     }
 }
