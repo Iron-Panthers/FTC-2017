@@ -80,11 +80,11 @@ public class AutoCodes {
 //        DriveDistance backward = new DriveDistance(-Constants.CLOSE_CRYPTO_DISTANCE, 10);
         DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.BLUE);
 
-        TurnGyroPID turn = new TurnGyroPID(90, 4);
-        DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_BLUE, 10);
-        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
+        TurnGyroPID turn = new TurnGyroPID(90, 3);
 
-        DriveDistance backup = new DriveDistance(-4, 10);
+        DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_BLUE, 3);
+        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
+        DriveDistance backup = new DriveDistance(-4, 3);
 
         Command[] cmds = {wack, offPad, stop, gotocrypto, turn, inchforward, outtake, backup};
         return new SequentialCommand(cmds);
@@ -100,11 +100,11 @@ public class AutoCodes {
         //DriveDistance backward = new DriveDistance(Constants.CLOSE_CRYPTO_DISTANCE, 10);
         DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.RED);
 
-        TurnGyroPID turn = new TurnGyroPID(90, 4);
-        DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_RED, 4);
-        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
+        TurnGyroPID turn = new TurnGyroPID(90, 3);
 
-        DriveDistance backup = new DriveDistance(-4, 10);
+        DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_RED, 3);
+        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
+        DriveDistance backup = new DriveDistance(-4, 3);
 
         Command[] cmds = {wack, offPad, stop, gotocrypto, turn, inchforward, outtake, backup};
         return new SequentialCommand(cmds);

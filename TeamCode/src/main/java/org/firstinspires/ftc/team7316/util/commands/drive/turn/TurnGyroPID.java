@@ -44,7 +44,7 @@ public class TurnGyroPID extends Command {
     private GyroWrapper gyro = Hardware.instance.gyroWrapper;;
     public double sumError, lastError, deltaError;
 
-    /** @param deltaAngle the amount to turn */
+    /** @param deltaAngle the amount to turn in DEGREES */
     public TurnGyroPID(double deltaAngle) {
 //        requires(Subsystems.instance.driveBase);
         this.deltaAngle = deltaAngle;
