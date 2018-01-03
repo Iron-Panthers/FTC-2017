@@ -45,7 +45,7 @@ public class Hardware {
     private static final String GLYPH_FLAG_SERVO_NAME = "flag";
     private static final String GLYPH_TOUCH_SENSOR_NAME = "gt";
 
-    private static final String RELIC_ARM_MOTOR_NAME = "ram"
+    private static final String RELIC_ARM_MOTOR_NAME = "ram";
     private static final String RELIC_SHOULDER_SERVO_NAME = "rss";
     private static final String RELIC_WRIST_SERVO_NAME = "rws";
     private static final String RELIC_HAND_SERVO_NAME = "rhs";
