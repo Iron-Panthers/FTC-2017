@@ -78,7 +78,7 @@ public class AutoCodes {
         DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
         Wait stop = new Wait(1);
 //        DriveDistance backward = new DriveDistance(-Constants.CLOSE_CRYPTO_DISTANCE, 10);
-        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.RED);
+        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.BLUE);
 
         TurnGyroPID turn = new TurnGyroPID(90, 4);
         DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_BLUE, 10);
@@ -98,7 +98,7 @@ public class AutoCodes {
         DriveOffPad offPad = new DriveOffPad(Alliance.RED);
         Wait stop = new Wait(1);
         //DriveDistance backward = new DriveDistance(Constants.CLOSE_CRYPTO_DISTANCE, 10);
-        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.BLUE);
+        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.RED);
 
         TurnGyroPID turn = new TurnGyroPID(90, 4);
         DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_RED, 10);

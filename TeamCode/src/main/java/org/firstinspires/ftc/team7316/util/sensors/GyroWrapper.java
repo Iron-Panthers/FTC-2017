@@ -30,7 +30,6 @@ public class GyroWrapper {
     }
 
     public double getPitch() {
-        //probably not the right angle
         return gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).secondAngle;
     }
 
