@@ -101,7 +101,7 @@ public class AutoCodes {
         DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.RED);
 
         TurnGyroPID turn = new TurnGyroPID(90, 4);
-        DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_RED, 10);
+        DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_RED, 4);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
         DriveDistance backup = new DriveDistance(-4, 10);

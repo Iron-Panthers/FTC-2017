@@ -3,14 +3,20 @@ package org.firstinspires.ftc.team7316.util.commands.drive.turn;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.team7316.util.Constants;
-import org.firstinspires.ftc.team7316.util.PID;
 import org.firstinspires.ftc.team7316.util.Util;
 import org.firstinspires.ftc.team7316.util.commands.*;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.sensors.GyroWrapper;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Turn the robot a specific distance using PID. Stops when the correction speed is under a threshold and
@@ -25,7 +31,8 @@ public class TurnGyroPID extends Command {
 
     private ArrayList<Double> times = new ArrayList<>();
     private ArrayList<Double> angles = new ArrayList<>();
-    private ArrayList<Double> targets = new ArrayList<>();
+    private ArrayList<Double> currenttargets = new ArrayList<>();
+    private ArrayList<Double> finaltargets = new ArrayList<>();
 
     private ElapsedTime timer = new ElapsedTime();
     private double previousTime = 0;
@@ -98,7 +105,8 @@ public class TurnGyroPID extends Command {
 
         times.add(timer.seconds());
         angles.add(gyro.getHeading());
-        targets.add(targetAngleCurrent);
+        currenttargets.add(targetAngleCurrent);
+        finaltargets.add(targetAngleFinal);
     }
 
     @Override
@@ -109,7 +117,8 @@ public class TurnGyroPID extends Command {
     @Override
     public void end() {
         Subsystems.instance.driveBase.stopMotors();
-        Util.writeCSV(times, targets, angles);
+        writeCSVGyro(times, currenttargets, angles);
+        writeCSVGyro(times, finaltargets, angles);
     }
 
     private void updateCurrentTarget() {
@@ -150,6 +159,25 @@ public class TurnGyroPID extends Command {
      */
     private double error() {
         return Util.wrap(targetAngleCurrent - gyro.getHeading());
+    }
+
+    public static void writeCSVGyro(List<Double> times, List<Double> targets, List<Double> positions) {
+        BufferedWriter os;
+        Date date = new Date(System.currentTimeMillis());
+        String timestamp = new SimpleDateFormat("yyyyMMdd-HH:mm:ss").format(date);
+        try {
+            File dir = new File("/storage/emulated/0/gyropidoutput-" + timestamp + ".csv");
+            os = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dir)));
+            os.write("times,target,positions,p,i,d,f,velocityPrediction,tolerance\n");
+            os.write(String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n", times.get(0), targets.get(0), positions.get(0),
+                    Constants.DRIVE_P, Constants.DRIVE_I, Constants.DRIVE_D, Constants.DRIVE_F, Constants.COAST_TICKS_PER_SECOND, Constants.DISTANCE_ERROR_RANGE_TICKS));
+            for (int i=1; i < times.size(); i++) {
+                os.write(String.format("%s,%s,%s\n", times.get(i), targets.get(i), positions.get(i)));
+            }
+            os.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     enum Direction {

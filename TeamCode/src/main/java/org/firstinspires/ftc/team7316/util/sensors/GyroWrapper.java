@@ -33,6 +33,10 @@ public class GyroWrapper {
         return gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).secondAngle;
     }
 
+    public double getRoll() {
+        return gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).thirdAngle;
+    }
+
     public void logAngles() {
         Orientation o = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);
         Hardware.log("gyro x-axis", o.firstAngle);

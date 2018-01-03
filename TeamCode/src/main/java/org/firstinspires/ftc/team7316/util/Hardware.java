@@ -50,8 +50,8 @@ public class Hardware {
 
     private static final String GYRO_NAME = "gyro";
 
-    public static boolean colorsensor_offline = false;
-    public static boolean gyro_offline = false;
+    public static boolean colorsensor_offline;
+    public static boolean gyro_offline;
 
     public DcMotor frontLeftDriveMotor;
     public DcMotor frontRightDriveMotor;
