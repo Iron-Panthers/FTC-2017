@@ -1,8 +1,10 @@
-package org.firstinspires.ftc.team7316.util.commands;
+package org.firstinspires.ftc.team7316.util.commands.jewelarm;
 
 import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
+import org.firstinspires.ftc.team7316.util.commands.BlankCommand;
+import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveDistance;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
 import org.firstinspires.ftc.team7316.util.sensors.ColorWrapper;

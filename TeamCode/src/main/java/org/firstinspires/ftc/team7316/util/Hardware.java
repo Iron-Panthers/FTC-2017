@@ -45,8 +45,10 @@ public class Hardware {
     private static final String GLYPH_FLAG_SERVO_NAME = "flag";
     private static final String GLYPH_TOUCH_SENSOR_NAME = "gt";
 
-    private static final String RELIC_ARM_SERVO_NAME = "ras";
-    private static final String RELIC_GRABBER_SERVO_NAME = "rgs";
+    private static final String RELIC_ARM_MOTOR_NAME = "ram"
+    private static final String RELIC_SHOULDER_SERVO_NAME = "rss";
+    private static final String RELIC_WRIST_SERVO_NAME = "rws";
+    private static final String RELIC_HAND_SERVO_NAME = "rhs";
 
     private static final String RIGHT_JEWEL_ARM_NAME = "rja";
     private static final String COLOR_SENSOR_NAME = "cs";
@@ -76,8 +78,10 @@ public class Hardware {
     public Servo flagServo;
     public TouchSensor glyphTouchSensor;
 
-    public Servo relicGrabberServo;
-    public CRServo relicArmServo;
+    public DcMotor relicArmMotor;
+    public CRServo relicShoulderServo;
+    public Servo relicWristServo;
+    public Servo relicHandServo;
 
     public Servo rightJewelArm;
     public ColorSensor colorsensor;
@@ -132,11 +136,10 @@ public class Hardware {
         glyphTouchSensor = map.touchSensor.get(GLYPH_TOUCH_SENSOR_NAME);
 
 //        relic grabber hardware
-//        relicGrabberServo = map.servo.get(RELIC_GRABBER_SERVO_NAME);
-//        relicArmServo = map.crservo.get(RELIC_ARM_SERVO_NAME);
-//
-//        relicGrabberServo = map.servo.get(RELIC_GRABBER_SERVO_NAME);
-//        relicArmServo = map.crservo.get(RELIC_ARM_SERVO_NAME);
+        relicArmMotor = map.dcMotor.get(RELIC_ARM_MOTOR_NAME);
+        relicShoulderServo = map.crservo.get(RELIC_SHOULDER_SERVO_NAME);
+        relicWristServo = map.servo.get(RELIC_WRIST_SERVO_NAME);
+        relicHandServo = map.servo.get(RELIC_HAND_SERVO_NAME);
 
         //jewel arm hardware
         rightJewelArm = map.servo.get(RIGHT_JEWEL_ARM_NAME);
