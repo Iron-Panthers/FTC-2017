@@ -24,7 +24,7 @@ public class Constants {
     public static final double INTAKE_LIFT_POWER = 0.8;
     public static final double INTAKE_POWER_WEIGHTING = 0.6;
 
-    public static final double INTAKE_CLAMP_GLYPH_POSITION = 0.2;
+    public static final double INTAKE_CLAMP_GLYPH_POSITION = 0.1;
 
     //-----------Auto constants-----------//
     public static final double COAST_TICKS_PER_SECOND = 500;//rough estimate 1670
