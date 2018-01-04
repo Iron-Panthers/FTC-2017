@@ -19,6 +19,7 @@ public class Constants {
     //Intake shenanigans
     public static final double INTAKE_SERVO_MAX_POSITION = 0.8;
     public static final double INTAKE_SERVO_MIN_POSITION = 0.4;
+    public static final double INTAKE_CLAMP_GLYPH_POSITION = 0.3;
 
     public static final double INTAKE_LIFT_POWER = 0.65;
     public static final double INTAKE_POWER_WEIGHTING = 0.6;
@@ -42,9 +43,14 @@ public class Constants {
     public static final double CLOSE_CRYPTO_APPROACH_RED = 7.5;
     public static final double CLOSE_CRYPTO_APPROACH_BLUE = 8.5;
     //INCHES INCHESSSSS
-    public static final double RIGHT_COLUMN_DISTANCE = 9;
-    public static final double MIDDLE_COLUMN_DISTANCE = 16.5;
-    public static final double LEFT_COLUMN_DISTANCE = 24;
+    public static final double RIGHT_COLUMN_DISTANCE_CLOSE = 9;
+    public static final double MIDDLE_COLUMN_DISTANCE_CLOSE = 16.5;
+    public static final double LEFT_COLUMN_DISTANCE_CLOSE = 24;
+
+    public static final double RIGHT_COLUMN_DISTANCE_FAR = 8;
+    public static final double MIDDLE_COLUMN_DISTANCE_FAR = 15;
+    public static final double LEFT_COLUMN_DISTANCE_FAR = 23;
+
     //drive times(temporary) and their powers
     public static final double RED_OFF_PAD_TIME = 2;
     public static final double BLUE_OFF_PAD_TIME = 1.7;
@@ -54,7 +60,9 @@ public class Constants {
     public static final double FORWARD_POWER_FOR_TIME = 0.1; //was 0.3 whne jewel waacked forward
     public static final double BACKWARD_POWER_FOR_TIME = 0.15; //when  jewel wacked backwards
 
-    public static final double STRAFE_LEFT_TIME = 0.85;
+    public static final double STRAFE_CRYPTO_LEFT_TIME = 1;
+    public static final double STRAFE_CRYPTO_CENTER_TIME = 0.85;
+    public static final double STRAFE_CRYPTO_RIGHT_TIME = 0.7;
     public static final double LEFT_POWER_TIME = 0.8;
 
     public static final double OUTTAKE_POWER = -0.7;

@@ -61,7 +61,11 @@ public class TurnGyroPID extends Command {
     public void init() {
         startAngle = gyro.getHeading();
         targetAngleCurrent = gyro.getHeading();
-        targetAngleFinal = this.deltaAngle + gyro.getHeading();
+//        targetAngleFinal = this.deltaAngle + gyro.getHeading();
+        targetAngleFinal = this.deltaAngle; //TEMPORARY
+
+        System.out.println("start angle: " + startAngle);
+        System.out.println("final angle: " + targetAngleFinal);
 
         if(targetAngleCurrent < targetAngleFinal) {
             direction = Direction.RIGHT;
@@ -102,6 +106,9 @@ public class TurnGyroPID extends Command {
         Subsystems.instance.driveBase.turnMotors(power);
 
         lastError = error;
+
+        System.out.println("current target: " + targetAngleCurrent);
+        System.out.println("current heading: " + gyro.getHeading());
 
         times.add(timer.seconds());
         angles.add(gyro.getHeading());

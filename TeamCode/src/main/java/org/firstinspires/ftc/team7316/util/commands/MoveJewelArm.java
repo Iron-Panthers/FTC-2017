@@ -38,7 +38,6 @@ public class MoveJewelArm extends Command {
             movedWacker = true;
             Subsystems.instance.jewelArm.moveWacker(JewelArm.JewelWackPosition.NEUTRAL);
         }
-        System.out.println("c===============================================arm moved");
     }
 
     @Override

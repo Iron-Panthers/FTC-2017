@@ -17,7 +17,7 @@ public class ClampIntake extends Command {
 
     @Override
     public void init() {
-        Subsystems.instance.glyphIntake.setServoPosition(0);
+        Subsystems.instance.glyphIntake.setServoPosition(Constants.INTAKE_CLAMP_GLYPH_POSITION);
     }
 
     @Override

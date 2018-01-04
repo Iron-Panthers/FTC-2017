@@ -21,6 +21,8 @@ import org.firstinspires.ftc.teamcode.R;
 
 /**
  * Created by jerry on 9/27/17.
+ * In order to use vuforia in the opmodes,
+ * make the opmode init with startTracking() and add the UpdateVuforia command to scheduler
  */
 
 public class VuforiaCameraWrapper {
@@ -48,6 +50,9 @@ public class VuforiaCameraWrapper {
         vuMark = RelicRecoveryVuMark.UNKNOWN;
     }
 
+    /**
+     * put in the opmode init to activate vuforia tracking
+     */
     public void startTracking() {
         vuforia = ClassFactory.createVuforiaLocalizer(params);
         Vuforia.setHint(HINT.HINT_MAX_SIMULTANEOUS_IMAGE_TARGETS, 4);

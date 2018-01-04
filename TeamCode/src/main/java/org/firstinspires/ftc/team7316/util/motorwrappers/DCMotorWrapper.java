@@ -47,7 +47,6 @@ public class DCMotorWrapper {
         }
 
         double pow = pid.getPower(getError());
-        System.out.println("------------______------"+pow+"---__--__-_--______-");
 
         if (Math.abs(pow) > maxPower) {
             pow = (pow > 0) ? maxPower : -maxPower;
