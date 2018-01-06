@@ -61,16 +61,16 @@ public class DriveDistanceCipher extends Command {
                 switch (Hardware.instance.vuforiaCameraWrapper.vuMark) {
                     //yes it's confusing no im not going to fix it
                     case LEFT:
-                        drivecommand = new DriveDistance(RIGHT_DIST * -1, DRIVE_TIMEOUT);
+                        drivecommand = new DriveDistance(-RIGHT_DIST, DRIVE_TIMEOUT);
                         break;
                     case CENTER:
-                        drivecommand = new DriveDistance(CENTER_DIST * -1, DRIVE_TIMEOUT);
+                        drivecommand = new DriveDistance(-CENTER_DIST, DRIVE_TIMEOUT);
                         break;
                     case RIGHT:
-                        drivecommand = new DriveDistance(LEFT_DIST * -1, DRIVE_TIMEOUT);
+                        drivecommand = new DriveDistance(-LEFT_DIST , DRIVE_TIMEOUT);
                         break;
                     default:
-                        drivecommand = new DriveDistance(CENTER_DIST * -1, DRIVE_TIMEOUT);
+                        drivecommand = new DriveDistance(-CENTER_DIST, DRIVE_TIMEOUT);
                         break;
                 }
                 break;
