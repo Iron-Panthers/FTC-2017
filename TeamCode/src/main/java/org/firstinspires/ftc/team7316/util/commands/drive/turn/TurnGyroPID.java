@@ -126,7 +126,6 @@ public class TurnGyroPID extends Command {
     public void end() {
         Subsystems.instance.driveBase.stopMotors();
         writeCSVGyro(times, currenttargets, angles);
-        writeCSVGyro(times, finaltargets, angles);
     }
 
     private void updateCurrentTarget() {
@@ -154,7 +153,7 @@ public class TurnGyroPID extends Command {
     }
 
     private double getPredictedSpeed(double time) {
-        if(time * Constants.DEGREES_PER_SECOND_COAST + startAngle > targetAngleFinal) {
+        if(Math.abs(time * Constants.DEGREES_PER_SECOND_COAST) > Math.abs(this.deltaAngle)) {
             return 0;
         }
         return Constants.ROTATIONS_PER_SECOND * 360.0;
