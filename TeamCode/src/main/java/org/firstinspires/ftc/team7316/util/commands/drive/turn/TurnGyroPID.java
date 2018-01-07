@@ -24,7 +24,7 @@ import java.util.List;
  */
 public class TurnGyroPID extends Command {
 
-    public static final double ERROR_THRESHOLD = 2, DELTA_THRESHOLD = 2, MAX_POWER = 1;
+    public static final double ERROR_THRESHOLD = 1, DELTA_THRESHOLD = 2, MAX_POWER = 1;
     private double deltaAngle, startAngle, targetAngleCurrent, targetAngleFinal;
 
     private Direction direction;
@@ -96,6 +96,7 @@ public class TurnGyroPID extends Command {
         double power = Constants.GYRO_P *error + Constants.GYRO_I *sumError + Constants.GYRO_D*deltaError + Constants.GYRO_F*getPredictedSpeed(timer.seconds());
         Hardware.log("current error", error);
         Hardware.log("current target", targetAngleCurrent);
+        Hardware.log("delta error", deltaError);
         Hardware.log("turn_power", power);
         Hardware.log("final target", targetAngleFinal);
 
@@ -118,7 +119,7 @@ public class TurnGyroPID extends Command {
 
     @Override
     public boolean shouldRemove() {
-        return completedCount >= countThreshold || timer.seconds() > timeout;// && Math.abs(deltaError) <= DELTA_THRESHOLD;
+        return (Math.abs(deltaError) <= DELTA_THRESHOLD && Math.abs(error()) < ERROR_THRESHOLD) || timer.seconds() > timeout;
     }
 
     @Override
