@@ -34,7 +34,7 @@ public class Constants {
     public static final double ROTATIONS_90_DEGREES = 0.6;
 
     //ROUGHLY ESTIMATED SINCE I DON'T FEEL LIKE TESTING XFAEFXCFNERACGRH
-    public static final double DEGREES_PER_SECOND_COAST = Constants.ROTATIONS_PER_SECOND * 360.0 * 0.7;
+    public static final double DEGREES_PER_SECOND_COAST = 90;
     //drive distances
     public static final double JEWEL_WHACK_DISTANCE = 3.5; //inches
     public static final double FAR_CRYPTO_DISTANCE = 9; //inches after driving for time after off the balancing pad
@@ -103,10 +103,10 @@ public class Constants {
     public static final double DRIVE_D = 0.00016; // DEAD
     public static final double DRIVE_F = 0.00042;
 
-    public static final double GYRO_P = 0;
-    public static final double GYRO_I = 0;
-    public static final double GYRO_D = 0;
-    public static final double GYRO_F = 0.01;
+    public static final double GYRO_P = 0.02;
+    public static final double GYRO_I = 0.0025;
+    public static final double GYRO_D = 0.0004;
+    public static final double GYRO_F = 0.00397;
 
     public static final double VP_DRIVE_P = 0;
     public static final double VP_DRIVE_I = 0;

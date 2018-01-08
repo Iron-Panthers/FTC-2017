@@ -2,6 +2,7 @@ package org.firstinspires.ftc.team7316.util.commands.drive.turn;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.Const;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Util;
 import org.firstinspires.ftc.team7316.util.commands.*;
@@ -25,7 +26,7 @@ import java.util.List;
 public class TurnGyroPID extends Command {
 
     public static final double ERROR_THRESHOLD = 1, DELTA_THRESHOLD = 2, MAX_POWER = 1;
-    private double deltaAngle, startAngle, targetAngleCurrent, targetAngleFinal;
+    private double deltaAngle, startAngle, targetAngleCurrent, targetAngleFinal, TURN_TIME;
 
     private Direction direction;
 
@@ -47,14 +48,15 @@ public class TurnGyroPID extends Command {
     /** @param deltaAngle the amount to turn in DEGREES */
     public TurnGyroPID(double deltaAngle) {
 //        requires(Subsystems.instance.driveBase);
-        this.deltaAngle = deltaAngle;
-        timeout = 10;
+        this(deltaAngle, 10);
     }
 
     public TurnGyroPID(double deltaAngle, double timeout) {
 //        requires(Subsystems.instance.driveBase);
         this.deltaAngle = deltaAngle;
         this.timeout = timeout;
+
+        this.TURN_TIME = deltaAngle / Constants.DEGREES_PER_SECOND_COAST;
     }
 
     @Override
@@ -63,6 +65,7 @@ public class TurnGyroPID extends Command {
         targetAngleCurrent = gyro.getHeading();
 //        targetAngleFinal = this.deltaAngle + gyro.getHeading();
         targetAngleFinal = this.deltaAngle; //TEMPORARY
+        completedCount = 0;
 
         System.out.println("start angle: " + startAngle);
         System.out.println("final angle: " + targetAngleFinal);
@@ -86,10 +89,11 @@ public class TurnGyroPID extends Command {
     public void loop() {
         updateCurrentTarget();
 
-        double error = error();
-        if(Math.abs(error) <= ERROR_THRESHOLD) {
+        if(Math.abs(deltaAngle - gyro.getHeading()) <= ERROR_THRESHOLD) {
             completedCount++;
         }
+
+        double error = error();
         deltaError = error - lastError;
         sumError += error;
 
@@ -119,7 +123,7 @@ public class TurnGyroPID extends Command {
 
     @Override
     public boolean shouldRemove() {
-        return (Math.abs(deltaError) <= DELTA_THRESHOLD && Math.abs(error()) < ERROR_THRESHOLD) || timer.seconds() > timeout;
+        return completedCount >= countThreshold || timer.seconds() > timeout;
     }
 
     @Override
@@ -129,6 +133,28 @@ public class TurnGyroPID extends Command {
     }
 
     private void updateCurrentTarget() {
+        double time = timer.seconds();
+        switch (direction) {
+            case RIGHT:
+                if(time > this.TURN_TIME) {
+                    targetAngleCurrent = targetAngleFinal;
+                }
+                else {
+                    targetAngleCurrent = time * Constants.DEGREES_PER_SECOND_COAST;
+                }
+                break;
+            case LEFT:
+                if(time > this.TURN_TIME) {
+                    targetAngleCurrent = targetAngleFinal;
+                }
+                else {
+                    targetAngleCurrent = time * -Constants.DEGREES_PER_SECOND_COAST;
+                }
+                break;
+        }
+    }
+
+    /*private void updateCurrentTarget() {
         double elapsedTime = timer.seconds() - previousTime;
         double distance = Constants.DEGREES_PER_SECOND_COAST * elapsedTime;
         switch (direction) {
@@ -150,13 +176,20 @@ public class TurnGyroPID extends Command {
                 break;
         }
         previousTime = timer.seconds();
-    }
+    }*/
 
     private double getPredictedSpeed(double time) {
         if(Math.abs(time * Constants.DEGREES_PER_SECOND_COAST) > Math.abs(this.deltaAngle)) {
             return 0;
         }
-        return Constants.ROTATIONS_PER_SECOND * 360.0;
+        else {
+            if(direction == Direction.RIGHT) {
+                return Constants.DEGREES_PER_SECOND_COAST;
+            }
+            else {
+                return -Constants.DEGREES_PER_SECOND_COAST;
+            }
+        }
     }
 
     /**
