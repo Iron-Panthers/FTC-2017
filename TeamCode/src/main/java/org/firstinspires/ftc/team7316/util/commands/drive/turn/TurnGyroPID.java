@@ -25,8 +25,8 @@ import java.util.List;
  */
 public class TurnGyroPID extends Command {
 
-    public static final double ERROR_THRESHOLD = 1, DELTA_THRESHOLD = 2, MAX_POWER = 1;
-    private double deltaAngle, startAngle, targetAngleCurrent, targetAngleFinal, TURN_TIME;
+    public static final double ERROR_THRESHOLD = 1, DELTA_THRESHOLD = 2, MAX_POWER = 1, ACCEL_RATE = 210;
+    private double deltaAngle, startAngle, targetAngleCurrent, targetAngleFinal, TURN_TIME, ACCEL_TIME, COAST_TIME;
 
     private Direction direction;
 
@@ -56,7 +56,9 @@ public class TurnGyroPID extends Command {
         this.deltaAngle = deltaAngle;
         this.timeout = timeout;
 
-        this.TURN_TIME = deltaAngle / Constants.DEGREES_PER_SECOND_COAST;
+        this.ACCEL_TIME = Constants.DEGREES_PER_SECOND_COAST / ACCEL_RATE;
+        this.COAST_TIME = (deltaAngle - ACCEL_RATE * ACCEL_TIME * ACCEL_TIME) / Constants.DEGREES_PER_SECOND_COAST;
+        this.TURN_TIME = ACCEL_TIME * 2 + COAST_TIME;
     }
 
     @Override
@@ -136,20 +138,33 @@ public class TurnGyroPID extends Command {
         double time = timer.seconds();
         switch (direction) {
             case RIGHT:
-                if(time > this.TURN_TIME) {
+                if (time < ACCEL_TIME) {
+                    targetAngleCurrent = 0.5 * ACCEL_RATE * time * time;
+                } else if (time < COAST_TIME + ACCEL_TIME) {
+                    time -= ACCEL_TIME;
+                    targetAngleCurrent = 0.5 * ACCEL_RATE * ACCEL_TIME * ACCEL_TIME + time * Constants.DEGREES_PER_SECOND_COAST;
+                } else if (time < TURN_TIME) {
+                    double currentSpeed = getPredictedSpeed(time);
+                    time -= ACCEL_TIME + COAST_TIME;
+                    targetAngleCurrent = 0.5 * ACCEL_RATE * ACCEL_TIME * ACCEL_TIME + (COAST_TIME) * Constants.DEGREES_PER_SECOND_COAST + 0.5 * time * (currentSpeed + Constants.DEGREES_PER_SECOND_COAST);
+                } else {
                     targetAngleCurrent = targetAngleFinal;
-                }
-                else {
-                    targetAngleCurrent = time * Constants.DEGREES_PER_SECOND_COAST;
                 }
                 break;
             case LEFT:
-                if(time > this.TURN_TIME) {
-                    targetAngleCurrent = targetAngleFinal;
+                if (time < ACCEL_TIME) {
+                    targetAngleCurrent = 0.5 * ACCEL_RATE * time * time;
+                } else if (time < COAST_TIME + ACCEL_TIME) {
+                    time -= ACCEL_TIME;
+                    targetAngleCurrent = 0.5 * ACCEL_RATE * ACCEL_TIME * ACCEL_TIME + time * Constants.DEGREES_PER_SECOND_COAST;
+                } else if (time < TURN_TIME) {
+                    time -= ACCEL_TIME + COAST_TIME;
+                    double currentSpeed = Constants.DEGREES_PER_SECOND_COAST - ACCEL_RATE * time;
+                    targetAngleCurrent = 0.5 * ACCEL_RATE * ACCEL_TIME * ACCEL_TIME + (COAST_TIME) * Constants.DEGREES_PER_SECOND_COAST + 0.5 * time * (currentSpeed + Constants.DEGREES_PER_SECOND_COAST);
+                } else {
+                    targetAngleCurrent = -targetAngleFinal;
                 }
-                else {
-                    targetAngleCurrent = time * -Constants.DEGREES_PER_SECOND_COAST;
-                }
+                targetAngleCurrent *= -1;
                 break;
         }
     }
@@ -179,17 +194,24 @@ public class TurnGyroPID extends Command {
     }*/
 
     private double getPredictedSpeed(double time) {
-        if(Math.abs(time * Constants.DEGREES_PER_SECOND_COAST) > Math.abs(this.deltaAngle)) {
-            return 0;
+        double speed = 0;
+
+        if (time < ACCEL_TIME) {
+            speed = ACCEL_RATE * time;
+        } else if (time < ACCEL_TIME + COAST_TIME) {
+            speed = Constants.DEGREES_PER_SECOND_COAST;
+        } else if (time < TURN_TIME) {
+            time -= ACCEL_TIME + COAST_TIME;
+            speed = Constants.DEGREES_PER_SECOND_COAST - ACCEL_RATE * time;
         }
-        else {
-            if(direction == Direction.RIGHT) {
-                return Constants.DEGREES_PER_SECOND_COAST;
-            }
-            else {
-                return -Constants.DEGREES_PER_SECOND_COAST;
-            }
+
+        if (direction == Direction.LEFT) {
+            speed *= -1;
         }
+
+        Hardware.log("speed", speed);
+
+        return speed;
     }
 
     /**
