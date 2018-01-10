@@ -25,8 +25,8 @@ import java.util.List;
  */
 public class TurnGyroPID extends Command {
 
-    public static final double ERROR_THRESHOLD = 1, DELTA_THRESHOLD = 2, MAX_POWER = 1, ACCEL_RATE = 210;
-    private double deltaAngle, startAngle, targetAngleCurrent, targetAngleFinal, TURN_TIME, ACCEL_TIME, COAST_TIME;
+    public static final double ERROR_THRESHOLD = 1, DELTA_THRESHOLD = 2, MAX_POWER = 1, ACCEL_RATE = 240;
+    private double deltaAngle, startAngle, targetAngleCurrent, targetAngleFinal, TURN_TIME, ACCEL_TIME, COAST_TIME, MAX_SPEED;
 
     private Direction direction;
 
@@ -47,17 +47,21 @@ public class TurnGyroPID extends Command {
 
     /** @param deltaAngle the amount to turn in DEGREES */
     public TurnGyroPID(double deltaAngle) {
-//        requires(Subsystems.instance.driveBase);
-        this(deltaAngle, 10);
+        this(deltaAngle, 6);
     }
 
     public TurnGyroPID(double deltaAngle, double timeout) {
-//        requires(Subsystems.instance.driveBase);
+        this(deltaAngle, timeout, 90);
+    }
+
+    public TurnGyroPID(double deltaAngle, double timeout, double maxspeed) {
+        this.MAX_SPEED = maxspeed;
+
         this.deltaAngle = deltaAngle;
         this.timeout = timeout;
 
-        this.ACCEL_TIME = Constants.DEGREES_PER_SECOND_COAST / ACCEL_RATE;
-        this.COAST_TIME = (deltaAngle - ACCEL_RATE * ACCEL_TIME * ACCEL_TIME) / Constants.DEGREES_PER_SECOND_COAST;
+        this.ACCEL_TIME = this.MAX_SPEED / ACCEL_RATE;
+        this.COAST_TIME = (deltaAngle - ACCEL_RATE * ACCEL_TIME * ACCEL_TIME) / this.MAX_SPEED;
         this.TURN_TIME = ACCEL_TIME * 2 + COAST_TIME;
     }
 
@@ -142,11 +146,11 @@ public class TurnGyroPID extends Command {
                     targetAngleCurrent = 0.5 * ACCEL_RATE * time * time;
                 } else if (time < COAST_TIME + ACCEL_TIME) {
                     time -= ACCEL_TIME;
-                    targetAngleCurrent = 0.5 * ACCEL_RATE * ACCEL_TIME * ACCEL_TIME + time * Constants.DEGREES_PER_SECOND_COAST;
+                    targetAngleCurrent = 0.5 * ACCEL_RATE * ACCEL_TIME * ACCEL_TIME + time * this.MAX_SPEED;
                 } else if (time < TURN_TIME) {
                     double currentSpeed = getPredictedSpeed(time);
                     time -= ACCEL_TIME + COAST_TIME;
-                    targetAngleCurrent = 0.5 * ACCEL_RATE * ACCEL_TIME * ACCEL_TIME + (COAST_TIME) * Constants.DEGREES_PER_SECOND_COAST + 0.5 * time * (currentSpeed + Constants.DEGREES_PER_SECOND_COAST);
+                    targetAngleCurrent = 0.5 * ACCEL_RATE * ACCEL_TIME * ACCEL_TIME + (COAST_TIME) * this.MAX_SPEED + 0.5 * time * (currentSpeed + this.MAX_SPEED);
                 } else {
                     targetAngleCurrent = targetAngleFinal;
                 }
@@ -156,11 +160,11 @@ public class TurnGyroPID extends Command {
                     targetAngleCurrent = 0.5 * ACCEL_RATE * time * time;
                 } else if (time < COAST_TIME + ACCEL_TIME) {
                     time -= ACCEL_TIME;
-                    targetAngleCurrent = 0.5 * ACCEL_RATE * ACCEL_TIME * ACCEL_TIME + time * Constants.DEGREES_PER_SECOND_COAST;
+                    targetAngleCurrent = 0.5 * ACCEL_RATE * ACCEL_TIME * ACCEL_TIME + time * this.MAX_SPEED;
                 } else if (time < TURN_TIME) {
                     time -= ACCEL_TIME + COAST_TIME;
-                    double currentSpeed = Constants.DEGREES_PER_SECOND_COAST - ACCEL_RATE * time;
-                    targetAngleCurrent = 0.5 * ACCEL_RATE * ACCEL_TIME * ACCEL_TIME + (COAST_TIME) * Constants.DEGREES_PER_SECOND_COAST + 0.5 * time * (currentSpeed + Constants.DEGREES_PER_SECOND_COAST);
+                    double currentSpeed = this.MAX_SPEED - ACCEL_RATE * time;
+                    targetAngleCurrent = 0.5 * ACCEL_RATE * ACCEL_TIME * ACCEL_TIME + (COAST_TIME) * this.MAX_SPEED + 0.5 * time * (currentSpeed + this.MAX_SPEED);
                 } else {
                     targetAngleCurrent = -targetAngleFinal;
                 }
@@ -171,7 +175,7 @@ public class TurnGyroPID extends Command {
 
     /*private void updateCurrentTarget() {
         double elapsedTime = timer.seconds() - previousTime;
-        double distance = Constants.DEGREES_PER_SECOND_COAST * elapsedTime;
+        double distance = this.MAX_SPEED * elapsedTime;
         switch (direction) {
             case RIGHT:
                 if(targetAngleCurrent + distance > targetAngleFinal) {
@@ -199,10 +203,10 @@ public class TurnGyroPID extends Command {
         if (time < ACCEL_TIME) {
             speed = ACCEL_RATE * time;
         } else if (time < ACCEL_TIME + COAST_TIME) {
-            speed = Constants.DEGREES_PER_SECOND_COAST;
+            speed = this.MAX_SPEED;
         } else if (time < TURN_TIME) {
             time -= ACCEL_TIME + COAST_TIME;
-            speed = Constants.DEGREES_PER_SECOND_COAST - ACCEL_RATE * time;
+            speed = this.MAX_SPEED - ACCEL_RATE * time;
         }
 
         if (direction == Direction.LEFT) {
@@ -232,7 +236,7 @@ public class TurnGyroPID extends Command {
             os = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dir)));
             os.write("times,target,positions,p,i,d,f,velocityPrediction,tolerance\n");
             os.write(String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n", times.get(0), targets.get(0), positions.get(0),
-                    Constants.DRIVE_P, Constants.DRIVE_I, Constants.DRIVE_D, Constants.DRIVE_F, Constants.COAST_TICKS_PER_SECOND, Constants.DISTANCE_ERROR_RANGE_TICKS));
+                    Constants.GYRO_P, Constants.GYRO_I, Constants.GYRO_D, Constants.GYRO_F));
             for (int i=1; i < times.size(); i++) {
                 os.write(String.format("%s,%s,%s\n", times.get(i), targets.get(i), positions.get(i)));
             }
