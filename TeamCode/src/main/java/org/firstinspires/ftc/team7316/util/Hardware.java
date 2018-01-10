@@ -136,7 +136,7 @@ public class Hardware {
         glyphTouchSensor = map.touchSensor.get(GLYPH_TOUCH_SENSOR_NAME);
 
 //        relic grabber hardware
-//        relicArmMotor = map.dcMotor.get(RELIC_ARM_MOTOR_NAME);
+        relicArmMotor = map.dcMotor.get(RELIC_ARM_MOTOR_NAME);
 //        relicShoulderServo = map.crservo.get(RELIC_SHOULDER_SERVO_NAME);
 //        relicWristServo = map.servo.get(RELIC_WRIST_SERVO_NAME);
 //        relicHandServo = map.servo.get(RELIC_HAND_SERVO_NAME);

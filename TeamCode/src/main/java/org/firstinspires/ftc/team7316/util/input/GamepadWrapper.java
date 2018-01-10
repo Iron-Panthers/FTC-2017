@@ -18,7 +18,7 @@ public class GamepadWrapper {
     public AxisWrapper r_trigger;
 
     public ButtonWrapper a_button, b_button, x_button, y_button;
-    public ButtonWrapper dp_up, dp_down, dp_right;
+    public ButtonWrapper dp_up, dp_down, dp_right, dp_left;
     public ButtonWrapper left_bumper, right_bumper;
     public TriggerWrapper leftTriggerWrapper, rightTriggerWrapper;
     public ToggleButtonWrapper dpLeftWrapper;
@@ -38,7 +38,8 @@ public class GamepadWrapper {
         this.x_button = new ButtonWrapper(GamepadButton.X_BUTTON, this);
         this.y_button = new ButtonWrapper(GamepadButton.Y_BUTTON, this);
 
-        this.dpLeftWrapper = new ToggleButtonWrapper(GamepadButton.DPAD_LEFT, this);
+//        this.dpLeftWrapper = new ToggleButtonWrapper(GamepadButton.DPAD_LEFT, this);
+        this.dp_left = new ButtonWrapper(GamepadButton.DPAD_LEFT, this);
         this.dp_right = new ButtonWrapper(GamepadButton.DPAD_RIGHT, this);
         this.dp_down = new ButtonWrapper(GamepadButton.DPAD_DOWN, this);
         this.dp_up = new ButtonWrapper(GamepadButton.DPAD_UP, this);
@@ -55,7 +56,8 @@ public class GamepadWrapper {
         Scheduler.instance.add(b_button);
         Scheduler.instance.add(x_button);
         Scheduler.instance.add(y_button);
-        Scheduler.instance.add(dpLeftWrapper);
+//        Scheduler.instance.add(dpLeftWrapper);
+        Scheduler.instance.add(dp_left);
         Scheduler.instance.add(dp_right);
         Scheduler.instance.add(dp_down);
         Scheduler.instance.add(dp_up);
