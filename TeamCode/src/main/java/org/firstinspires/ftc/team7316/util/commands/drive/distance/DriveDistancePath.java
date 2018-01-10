@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.team7316.util.commands.drive.distance;
 
+import org.firstinspires.ftc.team7316.copypastaLib.MotionPath;
 import org.firstinspires.ftc.team7316.util.commands.Command;
-import org.firstinspires.ftc.team7316.util.path.MotionPath;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 /**

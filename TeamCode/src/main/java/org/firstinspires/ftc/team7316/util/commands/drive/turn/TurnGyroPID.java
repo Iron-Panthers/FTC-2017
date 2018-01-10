@@ -7,7 +7,6 @@ import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Util;
 import org.firstinspires.ftc.team7316.util.commands.*;
 import org.firstinspires.ftc.team7316.util.Hardware;
-import org.firstinspires.ftc.team7316.util.path.CombinedPath;
 import org.firstinspires.ftc.team7316.util.sensors.GyroWrapper;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 

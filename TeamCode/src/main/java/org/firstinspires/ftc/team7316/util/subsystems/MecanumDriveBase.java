@@ -12,7 +12,7 @@ import org.firstinspires.ftc.team7316.util.commands.BlankCommand;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveWithJoystick;
-import org.firstinspires.ftc.team7316.util.path.MotionPath;
+import org.firstinspires.ftc.team7316.copypastaLib.MotionPath;
 
 /**
  * Created by andrew on 9/12/17.

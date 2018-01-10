@@ -3,10 +3,10 @@ package org.firstinspires.ftc.team7316.util.motorwrappers;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.team7316.copypastaLib.MotionPath;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.PID;
 import org.firstinspires.ftc.team7316.util.PIDPath;
-import org.firstinspires.ftc.team7316.util.path.MotionPath;
 
 /**
  * Created by jerry on 11/15/17.
