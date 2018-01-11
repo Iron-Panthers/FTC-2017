@@ -41,12 +41,14 @@ public class TurnUntilKey extends Command {
 
     @Override
     public boolean shouldRemove() {
-        if(direction == 1) {
-            return Hardware.instance.gyroWrapper.getHeading() > angleTimeout && Hardware.instance.vuforiaCameraWrapper.vuMark != RelicRecoveryVuMark.UNKNOWN;
+        if(Hardware.instance.vuforiaCameraWrapper.vuMark != RelicRecoveryVuMark.UNKNOWN) {
+            if (direction == 1) {
+                return Hardware.instance.gyroWrapper.getHeading() > angleTimeout;
+            } else {
+                return Hardware.instance.gyroWrapper.getHeading() < angleTimeout;
+            }
         }
-        else {
-            return Hardware.instance.gyroWrapper.getHeading() < angleTimeout && Hardware.instance.vuforiaCameraWrapper.vuMark != RelicRecoveryVuMark.UNKNOWN;
-        }
+        return false;
     }
 
     @Override

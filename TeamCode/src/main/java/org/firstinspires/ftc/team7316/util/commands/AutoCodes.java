@@ -3,7 +3,6 @@ package org.firstinspires.ftc.team7316.util.commands;
 import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveOffPad;
-import org.firstinspires.ftc.team7316.util.commands.drive.StrafeCrypto;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistanceCipher;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
@@ -21,14 +20,16 @@ import org.firstinspires.ftc.team7316.util.subsystems.JewelArm;
  */
 public class AutoCodes {
 
-    /*public static SimultaneousCommands robotDriveDistanceAccurate(double distance, double power) {
+    /*
+    public static SimultaneousCommands robotDriveDistanceAccurate(double distance, double power) {
         DriveDistanceAccurate leftMotor = new DriveDistanceAccurate(Constants.inchesToTicks(distance), power, Hardware.instance.leftDriveMotor);
         DriveDistanceAccurate rightMotor = new DriveDistanceAccurate(Constants.inchesToTicks(distance), power, Hardware.instance.rightDriveMotor);
         Command[] both = {leftMotor, rightMotor};
 
         SimultaneousCommands bothDrive = new SimultaneousCommands(both);
         return bothDrive;
-    }*/
+    }
+    */
 
     public static SequentialCommand farBlueJewel() {
         Command wack = wackJewelBasic(Alliance.BLUE);
@@ -38,8 +39,6 @@ public class AutoCodes {
         TurnUntilKey detectkey = new TurnUntilKey(-1, -90);
         DriveDistance backward = new DriveDistance(-Constants.FAR_CRYPTO_DISTANCE, 4);
 
-//        DriveForTime strafeleft = new DriveForTime(Constants.LEFT_POWER_TIME, -Math.PI/2, Constants.STRAFE_CRYPTO_CENTER_TIME);
-//        StrafeCrypto strafeleft = new StrafeCrypto(Alliance.BLUE);
         TurnGyroPID turnleft = new TurnGyroPID(-90, 3);
         DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.BLUE, DriveDistanceCipher.Position.FAR);
         TurnGyroPID turnleft2 = new TurnGyroPID(-90, 3);
@@ -60,8 +59,6 @@ public class AutoCodes {
         TurnUntilKey detectkey = new TurnUntilKey(1, 90);
         DriveDistance forward = new DriveDistance(Constants.FAR_CRYPTO_DISTANCE, 4);
 
-//        DriveForTime strafeleft = new DriveForTime(Constants.LEFT_POWER_TIME, -Math.PI/2, Constants.STRAFE_CRYPTO_CENTER_TIME);
-//        StrafeCrypto strafeleft = new StrafeCrypto(Alliance.RED);
         TurnGyroPID turnleft = new TurnGyroPID(-90, 3);
         DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.RED, DriveDistanceCipher.Position.FAR);
         TurnGyroPID turnright = new TurnGyroPID(0, 3);
@@ -77,12 +74,9 @@ public class AutoCodes {
     public static SequentialCommand closeBlueJewel() {
         Command wack = wackJewelBasic(Alliance.BLUE);
 
-//        DriveForTime_PadModified offPad = new DriveForTime_PadModified(Constants.BLUE_OFF_PAD_TIME, Alliance.BLUE);
-//        DriveForTime offPad = new DriveForTime(Constants.BACKWARD_POWER_FOR_TIME, Math.PI, Constants.BLUE_OFF_PAD_TIME);
         DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
         Wait stop = new Wait(1);
         TurnUntilKey deteckkey = new TurnUntilKey(-1, -90);
-//        DriveDistance backward = new DriveDistance(-Constants.CLOSE_CRYPTO_DISTANCE, 10);
         DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.BLUE, DriveDistanceCipher.Position.CLOSE);
 
         TurnGyroPID turn = new TurnGyroPID(90, 3);
@@ -98,12 +92,9 @@ public class AutoCodes {
     public static SequentialCommand closeRedJewel() {
         Command wack = wackJewelBasic(Alliance.RED);
 
-//        DriveForTime_PadModified offPad = new DriveForTime_PadModified(Constants.RED_OFF_PAD_TIME, Alliance.RED);
-//        DriveForTime offPad = new DriveForTime(Constants.FORWARD_POWER_FOR_TIME, 0, Constants.RED_OFF_PAD_TIME);
         DriveOffPad offPad = new DriveOffPad(Alliance.RED);
         Wait stop = new Wait(1);
         TurnUntilKey detectkey = new TurnUntilKey(1, 90);
-        //DriveDistance backward = new DriveDistance(Constants.CLOSE_CRYPTO_DISTANCE, 10);
         DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.RED, DriveDistanceCipher.Position.CLOSE);
 
         TurnGyroPID turn = new TurnGyroPID(90, 3);
