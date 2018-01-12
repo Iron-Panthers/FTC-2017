@@ -132,14 +132,14 @@ public class Hardware {
         intakeServo.setDirection(Servo.Direction.REVERSE);
         //intakeServo.scaleRange(Constants.INTAKE_SERVO_MIN_POSITION, Constants.INTAKE_SERVO_MAX_POSITION);
 
-        flagServo = map.servo.get(GLYPH_FLAG_SERVO_NAME);
+//        flagServo = map.servo.get(GLYPH_FLAG_SERVO_NAME);
         glyphTouchSensor = map.touchSensor.get(GLYPH_TOUCH_SENSOR_NAME);
 
 //        relic grabber hardware
         relicArmMotor = map.dcMotor.get(RELIC_ARM_MOTOR_NAME);
-//        relicShoulderServo = map.crservo.get(RELIC_SHOULDER_SERVO_NAME);
-//        relicWristServo = map.servo.get(RELIC_WRIST_SERVO_NAME);
-//        relicHandServo = map.servo.get(RELIC_HAND_SERVO_NAME);
+        relicShoulderServo = map.crservo.get(RELIC_SHOULDER_SERVO_NAME);
+        relicWristServo = map.servo.get(RELIC_WRIST_SERVO_NAME);
+        relicHandServo = map.servo.get(RELIC_HAND_SERVO_NAME);
 
         //jewel arm hardware
         rightJewelArm = map.servo.get(RIGHT_JEWEL_ARM_NAME);

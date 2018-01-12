@@ -33,4 +33,22 @@ public class RelicArm extends Subsystem {
     public void setArmPower(double power) {
         relicArmMotor.setPower(power);
     }
+
+    public void extendShoulder() {
+        relicShoulderServo.getController().setServoPosition(relicShoulderServo.getPortNumber(), 1);
+        relicWristServo.setPosition(0);
+    }
+
+    public void retractShoulder() {
+        relicShoulderServo.getController().setServoPosition(relicShoulderServo.getPortNumber(), 0);
+        relicWristServo.setPosition(0.9);
+    }
+
+    public void openClaw() {
+        relicHandServo.setPosition(0.5);
+    }
+
+    public void closeClaw() {
+        relicHandServo.setPosition(0.6);
+    }
 }

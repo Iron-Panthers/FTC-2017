@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.input.OI;
+import org.firstinspires.ftc.team7316.util.subsystems.RelicArm;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 /**
@@ -12,22 +13,43 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
  */
 
 public class RelicArmJoystick extends Command {
+
+    private RelicArm relicArm = Subsystems.instance.relicArm;
+
     @Override
     public void init() {
-        Hardware.instance.relicArmMotor.setPower(0);
+        relicArm.setArmPower(0);
         Hardware.instance.relicArmMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
     @Override
     public void loop() {
         if(OI.instance.gp2.dp_left.state()) {
-            Subsystems.instance.relicArm.setArmPower(0.3);
+            relicArm.setArmPower(0.3);
         }
         else if(OI.instance.gp2.dp_right.state()) {
-            Subsystems.instance.relicArm.setArmPower(-0.3);
+            relicArm.setArmPower(-0.3);
         }
         else {
-            Subsystems.instance.relicArm.setArmPower(0);
+            relicArm.setArmPower(0);
+        }
+
+        if(OI.instance.gp2.aButtonWrapper.state()) {
+            relicArm.openClaw();
+            Hardware.log("claw", "opened");
+        }
+        else {
+            relicArm.closeClaw();
+            Hardware.log("claw", "closed");
+        }
+
+        if(OI.instance.gp2.bButtonWrapper.state()) {
+            relicArm.extendShoulder();
+            Hardware.log("shoulder", "extended");
+        }
+        else {
+            relicArm.retractShoulder();
+            Hardware.log("shoulder", "retracted");
         }
     }
 
@@ -38,6 +60,6 @@ public class RelicArmJoystick extends Command {
 
     @Override
     protected void end() {
-        Hardware.instance.relicArmMotor.setPower(0);
+        relicArm.setArmPower(0);
     }
 }
