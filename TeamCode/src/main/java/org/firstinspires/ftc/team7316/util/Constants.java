@@ -14,7 +14,7 @@ public class Constants {
     public static final double WHEEL_CIRCUMFERENCE = WHEEL_RADIUS * 2 * Math.PI;
     public static final double COLOR_DIFFERENCE = 5;
 
-    public static final double DRIVE_SLOW_MULTIPLIER  = 0.7;
+    public static final double DRIVE_SLOW_MULTIPLIER  = 0.75;
     public static final double DRIVE_VERY_SLOW_MULTIPLIER = 0.35;
 
     //Intake shenanigans
