@@ -162,8 +162,8 @@ public class TurnGyroPID extends Command {
                     time -= ACCEL_TIME;
                     targetAngleCurrent = 0.5 * ACCEL_RATE * ACCEL_TIME * ACCEL_TIME + time * this.MAX_SPEED;
                 } else if (time < TURN_TIME) {
+                    double currentSpeed = -getPredictedSpeed(time);
                     time -= ACCEL_TIME + COAST_TIME;
-                    double currentSpeed = this.MAX_SPEED - ACCEL_RATE * time;
                     targetAngleCurrent = 0.5 * ACCEL_RATE * ACCEL_TIME * ACCEL_TIME + (COAST_TIME) * this.MAX_SPEED + 0.5 * time * (currentSpeed + this.MAX_SPEED);
                 } else {
                     targetAngleCurrent = -targetAngleFinal;
@@ -235,7 +235,7 @@ public class TurnGyroPID extends Command {
             File dir = new File("/storage/emulated/0/gyropidoutput-" + timestamp + ".csv");
             os = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dir)));
             os.write("times,target,positions,p,i,d,f,velocityPrediction,tolerance\n");
-            os.write(String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n", times.get(0), targets.get(0), positions.get(0),
+            os.write(String.format("%s,%s,%s,%s,%s,%s,%s\n", times.get(0), targets.get(0), positions.get(0),
                     Constants.GYRO_P, Constants.GYRO_I, Constants.GYRO_D, Constants.GYRO_F));
             for (int i=1; i < times.size(); i++) {
                 os.write(String.format("%s,%s,%s\n", times.get(i), targets.get(i), positions.get(i)));

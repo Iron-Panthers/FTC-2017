@@ -36,7 +36,7 @@ public class AutoCodes {
 
         DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
         Wait stop = new Wait(1);
-        TurnUntilKey detectkey = new TurnUntilKey(-1, -90);
+//        TurnUntilKey detectkey = new TurnUntilKey(-1, -90);
         DriveDistance backward = new DriveDistance(-Constants.FAR_CRYPTO_DISTANCE, 4);
 
         TurnGyroPID turnleft = new TurnGyroPID(-90, 3);
@@ -47,7 +47,7 @@ public class AutoCodes {
         DriveDistance ram = new DriveDistance(4, 4);
         DriveDistance backup = new DriveDistance(-4, 4);
 
-        Command[] cmds = {wack, offPad, stop, detectkey, backward, turnleft, gotocrypto, turnleft2, outtake, ram, backup};
+        Command[] cmds = {wack, offPad, stop, backward, turnleft, gotocrypto, turnleft2, outtake, ram, backup};
         return new SequentialCommand(cmds);
     }
 
@@ -56,7 +56,7 @@ public class AutoCodes {
 
         DriveOffPad offPad = new DriveOffPad(Alliance.RED);
         Wait stop = new Wait(1);
-        TurnUntilKey detectkey = new TurnUntilKey(1, 90);
+//        TurnUntilKey detectkey = new TurnUntilKey(1, 90);
         DriveDistance forward = new DriveDistance(Constants.FAR_CRYPTO_DISTANCE, 4);
 
         TurnGyroPID turnleft = new TurnGyroPID(-90, 3);
@@ -67,7 +67,7 @@ public class AutoCodes {
         DriveDistance ram = new DriveDistance(4, 4);
         DriveDistance backup = new DriveDistance(-4, 4);
 
-        Command[] cmds = {wack, offPad, stop, detectkey, forward, turnleft, gotocrypto, turnright, outtake, ram, backup};
+        Command[] cmds = {wack, offPad, stop, forward, turnleft, gotocrypto, turnright, outtake, ram, backup};
         return new SequentialCommand(cmds);
     }
 
@@ -76,7 +76,7 @@ public class AutoCodes {
 
         DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
         Wait stop = new Wait(1);
-        TurnUntilKey deteckkey = new TurnUntilKey(-1, -90);
+//        TurnUntilKey deteckkey = new TurnUntilKey(-1, -90);
         DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.BLUE, DriveDistanceCipher.Position.CLOSE);
 
         TurnGyroPID turn = new TurnGyroPID(90, 3);
@@ -85,7 +85,7 @@ public class AutoCodes {
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
         DriveDistance backup = new DriveDistance(-4, 3);
 
-        Command[] cmds = {wack, offPad, stop, deteckkey, gotocrypto, turn, inchforward, outtake, backup};
+        Command[] cmds = {wack, offPad, stop, gotocrypto, turn, inchforward, outtake, backup};
         return new SequentialCommand(cmds);
     }
 
@@ -94,7 +94,7 @@ public class AutoCodes {
 
         DriveOffPad offPad = new DriveOffPad(Alliance.RED);
         Wait stop = new Wait(1);
-        TurnUntilKey detectkey = new TurnUntilKey(1, 90);
+//        TurnUntilKey detectkey = new TurnUntilKey(1, 90);
         DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.RED, DriveDistanceCipher.Position.CLOSE);
 
         TurnGyroPID turn = new TurnGyroPID(90, 3);
@@ -103,7 +103,7 @@ public class AutoCodes {
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
         DriveDistance backup = new DriveDistance(-4, 3);
 
-        Command[] cmds = {wack, offPad, stop, detectkey, gotocrypto, turn, inchforward, outtake, backup};
+        Command[] cmds = {wack, offPad, stop, gotocrypto, turn, inchforward, outtake, backup};
         return new SequentialCommand(cmds);
     }
 
