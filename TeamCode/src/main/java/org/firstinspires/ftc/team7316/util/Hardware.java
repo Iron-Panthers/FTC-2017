@@ -132,7 +132,7 @@ public class Hardware {
         intakeServo.setDirection(Servo.Direction.REVERSE);
         //intakeServo.scaleRange(Constants.INTAKE_SERVO_MIN_POSITION, Constants.INTAKE_SERVO_MAX_POSITION);
 
-//        flagServo = map.servo.get(GLYPH_FLAG_SERVO_NAME);
+        flagServo = map.servo.get(GLYPH_FLAG_SERVO_NAME);
         glyphTouchSensor = map.touchSensor.get(GLYPH_TOUCH_SENSOR_NAME);
 
 //        relic grabber hardware
