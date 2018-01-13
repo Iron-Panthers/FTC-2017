@@ -43,7 +43,7 @@ public class TurnGyroPID extends Command {
     private int completedCount = 0;
     private final int countThreshold = 10;
 
-    private MotionPath path1;
+    public MotionPath path1;
 
     private GyroWrapper gyro = Hardware.instance.gyroWrapper;
     public double sumError, lastError, deltaError;
@@ -98,7 +98,8 @@ public class TurnGyroPID extends Command {
 
     @Override
     public void loop() {
-        updateCurrentTarget();
+        double time = timer.seconds();
+        updateCurrentTarget(time);
 
         if(Math.abs(deltaAngle - gyro.getHeading()) <= ERROR_THRESHOLD) {
             completedCount++;
@@ -108,7 +109,7 @@ public class TurnGyroPID extends Command {
         deltaError = error - lastError;
         sumError += error;
 
-        double power = Constants.GYRO_P *error + Constants.GYRO_I *sumError + Constants.GYRO_D*deltaError + Constants.GYRO_F*getPredictedSpeed(timer.seconds());
+        double power = Constants.GYRO_P *error + Constants.GYRO_I *sumError + Constants.GYRO_D*deltaError + Constants.GYRO_F*getPredictedSpeed(time);
         Hardware.log("current error", error);
         Hardware.log("current target", targetAngleCurrent);
         Hardware.log("delta error", deltaError);
@@ -143,9 +144,7 @@ public class TurnGyroPID extends Command {
         writeCSVGyro(times, currenttargets, angles);
     }
 
-    private void updateCurrentTarget() {
-        double time = timer.seconds();
-
+    private void updateCurrentTarget(double time) {
 //        switch (direction) {
 //            case RIGHT:
 //                if (time < ACCEL_TIME) {
@@ -178,7 +177,7 @@ public class TurnGyroPID extends Command {
 //                targetAngleCurrent *= -1;
 //                break;
 //        }
-        path1.getPosition(time);
+        targetAngleCurrent = path1.getPosition(time);
     }
 
     /*private void updateCurrentTarget() {
@@ -252,6 +251,13 @@ public class TurnGyroPID extends Command {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void printPIDVal(double error, double sumError, double deltaError) {
+        System.out.println("P-value: " + Constants.GYRO_P * error);
+        System.out.println("I-value: " + Constants.GYRO_I * sumError);
+        System.out.println("D-value: " + Constants.GYRO_D * deltaError);
+        System.out.println("sum: " + (Constants.GYRO_P *error + Constants.GYRO_I *sumError + Constants.GYRO_D*deltaError));
     }
 
     enum Direction {

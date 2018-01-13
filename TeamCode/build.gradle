@@ -22,3 +22,13 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     implementation files('/Users/jerry/Documents/Programs/FTC-2017/libs/copypasta_lib_is_gay.jar')
 }
+
+buildscript {
+    repositories {
+        jcenter()
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+    }
+}

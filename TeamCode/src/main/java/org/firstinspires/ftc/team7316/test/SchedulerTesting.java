@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.team7316.test;
 
 import org.firstinspires.ftc.team7316.util.Scheduler;
+import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroPID;
 import org.firstinspires.ftc.team7316.util.commands.flow.SequentialCommand;
 import org.firstinspires.ftc.team7316.util.commands.flow.SimultaneousCommands;
 
@@ -63,10 +64,21 @@ public class SchedulerTesting {
     }
 
     public static void main(String[] args) {
-        basicTest();
-        sequentialTest();
-        simultaneousTest();
+//        basicTest();
+//        sequentialTest();
+//        simultaneousTest();
         //simpleOverwriteTest();
+        TurnGyroPID d = new TurnGyroPID(-90);
+        d.init();
+        double t = 0;
+        TurnGyroPID.printPIDVal(-10, 100, 55);
+        while(t < d.path1.getTotalTime()) {
+            System.out.println("+----------------------+");
+            System.out.println("time: " + t);
+            System.out.println("position: " + d.path1.getPosition(t));
+            System.out.println("speed: " + d.path1.getSpeed(t));
+            t += 0.01;
+        }
     }
 
 }
