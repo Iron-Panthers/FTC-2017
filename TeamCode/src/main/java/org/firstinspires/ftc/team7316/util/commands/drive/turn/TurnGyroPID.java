@@ -2,7 +2,8 @@ package org.firstinspires.ftc.team7316.util.commands.drive.turn;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.Const;
+import org.firstinspires.ftc.team7316.copypastaLib.CombinedPath;
+import org.firstinspires.ftc.team7316.copypastaLib.MotionPath;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Util;
 import org.firstinspires.ftc.team7316.util.commands.*;
@@ -42,7 +43,9 @@ public class TurnGyroPID extends Command {
     private int completedCount = 0;
     private final int countThreshold = 10;
 
-    private GyroWrapper gyro = Hardware.instance.gyroWrapper;;
+    private MotionPath path1;
+
+    private GyroWrapper gyro = Hardware.instance.gyroWrapper;
     public double sumError, lastError, deltaError;
 
     /** @param deltaAngle the amount to turn in DEGREES */
@@ -78,9 +81,11 @@ public class TurnGyroPID extends Command {
 
         if(targetAngleCurrent < targetAngleFinal) {
             direction = Direction.RIGHT;
+            path1 = new CombinedPath.LongitudalTrapezoid(0, targetAngleFinal, MAX_SPEED, ACCEL_RATE);
         }
         else {
             direction = Direction.LEFT;
+            path1 = new CombinedPath.LongitudalTrapezoid(0, targetAngleFinal, -MAX_SPEED, -ACCEL_RATE);
         }
 
         Subsystems.instance.driveBase.resetMotorModes();
@@ -140,37 +145,40 @@ public class TurnGyroPID extends Command {
 
     private void updateCurrentTarget() {
         double time = timer.seconds();
-        switch (direction) {
-            case RIGHT:
-                if (time < ACCEL_TIME) {
-                    targetAngleCurrent = 0.5 * ACCEL_RATE * time * time;
-                } else if (time < COAST_TIME + ACCEL_TIME) {
-                    time -= ACCEL_TIME;
-                    targetAngleCurrent = 0.5 * ACCEL_RATE * ACCEL_TIME * ACCEL_TIME + time * this.MAX_SPEED;
-                } else if (time < TURN_TIME) {
-                    double currentSpeed = getPredictedSpeed(time);
-                    time -= ACCEL_TIME + COAST_TIME;
-                    targetAngleCurrent = 0.5 * ACCEL_RATE * ACCEL_TIME * ACCEL_TIME + (COAST_TIME) * this.MAX_SPEED + 0.5 * time * (currentSpeed + this.MAX_SPEED);
-                } else {
-                    targetAngleCurrent = targetAngleFinal;
-                }
-                break;
-            case LEFT:
-                if (time < ACCEL_TIME) {
-                    targetAngleCurrent = 0.5 * ACCEL_RATE * time * time;
-                } else if (time < COAST_TIME + ACCEL_TIME) {
-                    time -= ACCEL_TIME;
-                    targetAngleCurrent = 0.5 * ACCEL_RATE * ACCEL_TIME * ACCEL_TIME + time * this.MAX_SPEED;
-                } else if (time < TURN_TIME) {
-                    double currentSpeed = -getPredictedSpeed(time);
-                    time -= ACCEL_TIME + COAST_TIME;
-                    targetAngleCurrent = 0.5 * ACCEL_RATE * ACCEL_TIME * ACCEL_TIME + (COAST_TIME) * this.MAX_SPEED + 0.5 * time * (currentSpeed + this.MAX_SPEED);
-                } else {
-                    targetAngleCurrent = -targetAngleFinal;
-                }
-                targetAngleCurrent *= -1;
-                break;
-        }
+
+//        switch (direction) {
+//            case RIGHT:
+//                if (time < ACCEL_TIME) {
+//                    targetAngleCurrent = 0.5 * ACCEL_RATE * time * time;
+//                } else if (time < COAST_TIME + ACCEL_TIME) {
+//                    time -= ACCEL_TIME;
+//                    targetAngleCurrent = 0.5 * ACCEL_RATE * ACCEL_TIME * ACCEL_TIME + time * this.MAX_SPEED;
+//                } else if (time < TURN_TIME) {
+//                    double currentSpeed = getPredictedSpeed(time);
+//                    time -= ACCEL_TIME + COAST_TIME;
+//                    targetAngleCurrent = 0.5 * ACCEL_RATE * ACCEL_TIME * ACCEL_TIME + (COAST_TIME) * this.MAX_SPEED + 0.5 * time * (currentSpeed + this.MAX_SPEED);
+//                } else {
+//                    targetAngleCurrent = targetAngleFinal;
+//                }
+//                break;
+//            case LEFT:
+//
+//                if (time < ACCEL_TIME) {
+//                    targetAngleCurrent = 0.5 * ACCEL_RATE * time * time;
+//                } else if (time < COAST_TIME + ACCEL_TIME) {
+//                    time -= ACCEL_TIME;
+//                    targetAngleCurrent = 0.5 * ACCEL_RATE * ACCEL_TIME * ACCEL_TIME + time * this.MAX_SPEED;
+//                } else if (time < TURN_TIME) {
+//                    double currentSpeed = -getPredictedSpeed(time);
+//                    time -= ACCEL_TIME + COAST_TIME;
+//                    targetAngleCurrent = 0.5 * ACCEL_RATE * ACCEL_TIME * ACCEL_TIME + (COAST_TIME) * this.MAX_SPEED + 0.5 * time * (currentSpeed + this.MAX_SPEED);
+//                } else {
+//                    targetAngleCurrent = -targetAngleFinal;
+//                }
+//                targetAngleCurrent *= -1;
+//                break;
+//        }
+        path1.getPosition(time);
     }
 
     /*private void updateCurrentTarget() {
@@ -198,24 +206,24 @@ public class TurnGyroPID extends Command {
     }*/
 
     private double getPredictedSpeed(double time) {
-        double speed = 0;
+//        double speed = 0;
+//
+//        if (time < ACCEL_TIME) {
+//            speed = ACCEL_RATE * time;
+//        } else if (time < ACCEL_TIME + COAST_TIME) {
+//            speed = this.MAX_SPEED;
+//        } else if (time < TURN_TIME) {
+//            time -= ACCEL_TIME + COAST_TIME;
+//            speed = this.MAX_SPEED - ACCEL_RATE * time;
+//        }
+//
+//        if (direction == Direction.LEFT) {
+//            speed *= -1;
+//        }
+//
+//        Hardware.log("speed", speed);
 
-        if (time < ACCEL_TIME) {
-            speed = ACCEL_RATE * time;
-        } else if (time < ACCEL_TIME + COAST_TIME) {
-            speed = this.MAX_SPEED;
-        } else if (time < TURN_TIME) {
-            time -= ACCEL_TIME + COAST_TIME;
-            speed = this.MAX_SPEED - ACCEL_RATE * time;
-        }
-
-        if (direction == Direction.LEFT) {
-            speed *= -1;
-        }
-
-        Hardware.log("speed", speed);
-
-        return speed;
+        return path1.getSpeed(time);
     }
 
     /**
