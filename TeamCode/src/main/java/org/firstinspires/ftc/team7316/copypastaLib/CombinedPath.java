@@ -67,7 +67,7 @@ public class CombinedPath implements MotionPath {
                 }
             }
 
-            return time - maxSum;
+            return 0;
         }
     }
 
@@ -145,7 +145,7 @@ public class CombinedPath implements MotionPath {
             super(start);
             MotionPath[] p = new MotionPath[]{new LinearDerivativePath(0.0D, maxV, a), null, new LinearDerivativePath(maxV, 0.0D, -a)};
             p[1] = new LinearDerivativePath(distance - 2.0D * p[0].getTotalDistance(), maxV);
-            if(p[0].getTotalDistance() > distance / 2.0D) {
+            if(Math.abs(p[0].getTotalDistance()) > Math.abs(distance / 2.0D)) {
                 double newTime = Math.sqrt(distance / a);
                 p[0] = new LinearDerivativePath(0.0D, newTime * a, a);
                 p[1] = new Hold(0.0D);
