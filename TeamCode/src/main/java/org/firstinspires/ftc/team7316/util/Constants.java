@@ -103,8 +103,8 @@ public class Constants {
     public static final double DRIVE_F = 0.00042;
 
     public static final double GYRO_P = 0.02;
-    public static final double GYRO_I = 0.005;
-    public static final double GYRO_D = 0;
+    public static final double GYRO_I = 0.003; //original 0.005
+    public static final double GYRO_D = 0.0004; //original 0.0002
     public static final double GYRO_F = 0.00397;
 
     public static final double VP_DRIVE_P = 0;

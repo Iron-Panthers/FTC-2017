@@ -35,6 +35,7 @@ public class TurnGyroPID extends Command {
     private ArrayList<Double> angles = new ArrayList<>();
     private ArrayList<Double> currenttargets = new ArrayList<>();
     private ArrayList<Double> finaltargets = new ArrayList<>();
+    private ArrayList<Double> errors = new ArrayList<>();
 
     private ElapsedTime timer = new ElapsedTime();
     private double previousTime = 0;
@@ -81,11 +82,11 @@ public class TurnGyroPID extends Command {
 
         if(targetAngleCurrent < targetAngleFinal) {
             direction = Direction.RIGHT;
-            path1 = new CombinedPath.LongitudalTrapezoid(0, targetAngleFinal, MAX_SPEED, ACCEL_RATE);
+            path1 = new CombinedPath.LongitudalTrapezoid(startAngle, targetAngleFinal - startAngle, MAX_SPEED, ACCEL_RATE);
         }
         else {
             direction = Direction.LEFT;
-            path1 = new CombinedPath.LongitudalTrapezoid(0, targetAngleFinal, -MAX_SPEED, -ACCEL_RATE);
+            path1 = new CombinedPath.LongitudalTrapezoid(startAngle, targetAngleFinal - startAngle, -MAX_SPEED, -ACCEL_RATE);
         }
 
         Subsystems.instance.driveBase.resetMotorModes();
@@ -106,7 +107,8 @@ public class TurnGyroPID extends Command {
         }
 
         double error = error();
-        deltaError = error - lastError;
+        double deltaTime = time - previousTime;
+        deltaError = (error - lastError) * deltaTime;
         sumError += error;
 
         double power = Constants.GYRO_P *error + Constants.GYRO_I *sumError + Constants.GYRO_D*deltaError + Constants.GYRO_F*getPredictedSpeed(time);
@@ -123,6 +125,7 @@ public class TurnGyroPID extends Command {
         Subsystems.instance.driveBase.turnMotors(power);
 
         lastError = error;
+        previousTime = time;
 
         System.out.println("current target: " + targetAngleCurrent);
         System.out.println("current heading: " + gyro.getHeading());
@@ -131,6 +134,7 @@ public class TurnGyroPID extends Command {
         angles.add(gyro.getHeading());
         currenttargets.add(targetAngleCurrent);
         finaltargets.add(targetAngleFinal);
+        errors.add(error);
     }
 
     @Override
@@ -141,7 +145,7 @@ public class TurnGyroPID extends Command {
     @Override
     public void end() {
         Subsystems.instance.driveBase.stopMotors();
-        writeCSVGyro(times, currenttargets, angles);
+        writeCSVGyro(times, currenttargets, angles, errors);
     }
 
     private void updateCurrentTarget(double time) {
@@ -234,18 +238,18 @@ public class TurnGyroPID extends Command {
         return Util.wrap(targetAngleCurrent - gyro.getHeading());
     }
 
-    public static void writeCSVGyro(List<Double> times, List<Double> targets, List<Double> positions) {
+    public static void writeCSVGyro(List<Double> times, List<Double> targets, List<Double> positions, List<Double> errors) {
         BufferedWriter os;
         Date date = new Date(System.currentTimeMillis());
         String timestamp = new SimpleDateFormat("yyyyMMdd-HH:mm:ss").format(date);
         try {
             File dir = new File("/storage/emulated/0/gyropidoutput-" + timestamp + ".csv");
             os = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dir)));
-            os.write("times,target,positions,p,i,d,f,velocityPrediction,tolerance\n");
-            os.write(String.format("%s,%s,%s,%s,%s,%s,%s\n", times.get(0), targets.get(0), positions.get(0),
+            os.write("times,target,positions,errors,p,i,d,f,velocityPrediction,tolerance\n");
+            os.write(String.format("%s,%s,%s,%s,%s,%s,%s,%s\n", times.get(0), targets.get(0), positions.get(0), errors.get(0),
                     Constants.GYRO_P, Constants.GYRO_I, Constants.GYRO_D, Constants.GYRO_F));
             for (int i=1; i < times.size(); i++) {
-                os.write(String.format("%s,%s,%s\n", times.get(i), targets.get(i), positions.get(i)));
+                os.write(String.format("%s,%s,%s,%s\n", times.get(i), targets.get(i), positions.get(i), errors.get(i)));
             }
             os.close();
         } catch (Exception e) {
