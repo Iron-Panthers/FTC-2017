@@ -123,6 +123,21 @@ public class AutoCodes {
         Command[] cmds = {d, w};
         return new SequentialCommand(cmds);
     }
+
+    public static SequentialCommand phase2Test() {
+        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.BLUE, DriveDistanceCipher.Position.CLOSE);
+
+        TurnGyroPID turn = new TurnGyroPID(90, 3);
+
+        DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_BLUE, 3);
+        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
+        DriveDistance backup = new DriveDistance(-4, 3);
+
+        Command[] cmds = {gotocrypto, turn, inchforward, outtake, backup};
+        return new SequentialCommand(cmds);
+    }
+
+
 //
 //    public static SequentialCommand driveStraight(double distance) {
 //        DriveDistance drive = new DriveDistance(distance);
