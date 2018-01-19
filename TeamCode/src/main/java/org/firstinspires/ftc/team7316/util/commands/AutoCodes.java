@@ -75,7 +75,9 @@ public class AutoCodes {
         Command wack = wackJewelBasic(Alliance.BLUE);
 
         DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
-        Wait stop = new Wait(1);
+        Wait stop = new Wait(0.5);
+        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, 0, 1);
+        Wait stop2 = new Wait(0.5);
 //        TurnUntilKey deteckkey = new TurnUntilKey(-1, -90);
         DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.BLUE, DriveDistanceCipher.Position.CLOSE);
 
@@ -85,7 +87,7 @@ public class AutoCodes {
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
         DriveDistance backup = new DriveDistance(-4, 3);
 
-        Command[] cmds = {wack, offPad, stop, gotocrypto, turn, inchforward, outtake, backup};
+        Command[] cmds = {wack, offPad, stop, align, stop2, gotocrypto, turn, inchforward, outtake, backup};
         return new SequentialCommand(cmds);
     }
 
@@ -93,7 +95,9 @@ public class AutoCodes {
         Command wack = wackJewelBasic(Alliance.RED);
 
         DriveOffPad offPad = new DriveOffPad(Alliance.RED);
-        Wait stop = new Wait(1);
+        Wait stop = new Wait(0.5);
+        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, Math.PI, 1);
+        Wait stop2 = new Wait(0.5);
 //        TurnUntilKey detectkey = new TurnUntilKey(1, 90);
         DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.RED, DriveDistanceCipher.Position.CLOSE);
 
@@ -103,7 +107,7 @@ public class AutoCodes {
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
         DriveDistance backup = new DriveDistance(-4, 3);
 
-        Command[] cmds = {wack, offPad, stop, gotocrypto, turn, inchforward, outtake, backup};
+        Command[] cmds = {wack, offPad, stop, align, stop2, gotocrypto, turn, inchforward, outtake, backup};
         return new SequentialCommand(cmds);
     }
 
