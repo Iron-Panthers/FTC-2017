@@ -33,6 +33,7 @@ public abstract class AutoBaseOpMode extends OpMode {
     public void loop() {
         Scheduler.instance.loop();
         onLoop();
+        Hardware.log("gyro heading", Hardware.instance.gyroWrapper.getHeading());
     }
 
     /**
