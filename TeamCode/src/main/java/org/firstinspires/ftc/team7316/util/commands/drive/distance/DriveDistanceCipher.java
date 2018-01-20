@@ -14,6 +14,7 @@ public class DriveDistanceCipher extends Command {
     private DriveDistance drivecommand;
     private final double DRIVE_TIMEOUT = 4;
     private final double closeOffset = 1;
+    private final double farOffset = -2;
 
     private Alliance alliance;
     private Position position;
@@ -32,9 +33,9 @@ public class DriveDistanceCipher extends Command {
             RIGHT_DIST = Constants.RIGHT_COLUMN_DISTANCE_CLOSE + closeOffset;
         }
         else {
-            LEFT_DIST = Constants.LEFT_COLUMN_DISTANCE_FAR;
-            CENTER_DIST = Constants.MIDDLE_COLUMN_DISTANCE_FAR;
-            RIGHT_DIST = Constants.RIGHT_COLUMN_DISTANCE_FAR;
+            LEFT_DIST = Constants.LEFT_COLUMN_DISTANCE_FAR + farOffset;
+            CENTER_DIST = Constants.MIDDLE_COLUMN_DISTANCE_FAR + farOffset;
+            RIGHT_DIST = Constants.RIGHT_COLUMN_DISTANCE_FAR + farOffset;
         }
     }
 

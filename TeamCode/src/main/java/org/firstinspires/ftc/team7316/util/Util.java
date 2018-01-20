@@ -49,18 +49,18 @@ public class Util {
         return num;
     }
 
-    public static void writeCSV(List<Double> times, List<Double> targets, List<Double> positions) {
+    public static void writeCSV(List<Double> times, List<Double> targets, List<Double> positions, List<Double> errors) {
         BufferedWriter os;
         Date date = new Date(System.currentTimeMillis());
         String timestamp = new SimpleDateFormat("yyyyMMdd-HH:mm:ss").format(date);
         try {
             File dir = new File("/storage/emulated/0/pidoutput-" + timestamp + ".csv");
             os = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dir)));
-            os.write("times,target,positions,p,i,d,f,velocityPrediction,tolerance\n");
-            os.write(String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n", times.get(0), targets.get(0), positions.get(0),
+            os.write("times,target,positions,errors,p,i,d,f,velocityPrediction,tolerance\n");
+            os.write(String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n", times.get(0), targets.get(0), positions.get(0), errors.get(0),
                     Constants.DRIVE_P, Constants.DRIVE_I, Constants.DRIVE_D, Constants.DRIVE_F, Constants.COAST_TICKS_PER_SECOND, Constants.DISTANCE_ERROR_RANGE_TICKS));
             for (int i=1; i < times.size(); i++) {
-                os.write(String.format("%s,%s,%s\n", times.get(i), targets.get(i), positions.get(i)));
+                os.write(String.format("%s,%s,%s,%s\n", times.get(i), targets.get(i), positions.get(i), errors.get(i)));
             }
             os.close();
         } catch (Exception e) {

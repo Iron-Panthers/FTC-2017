@@ -14,6 +14,8 @@ public class PID {
     public double p, i, d, f;
     private double previous, sum;
 
+    public double out; //FOR TESTING
+
     private ElapsedTime timer;
 
     private boolean usePath;
@@ -31,6 +33,8 @@ public class PID {
         this.i = i;
         this.d = d;
         this.f = f;
+
+        out = 0;
 
         previousTime = 0;
         timer = new ElapsedTime();
@@ -106,7 +110,7 @@ public class PID {
         double delta = error - this.previous;
         this.previous = error;
 
-        double out = p * error + i * sum + d * delta + f * getPredictedSpeed(timer.seconds());
+        out = p * error + i * sum + d * delta + f * getPredictedSpeed(timer.seconds());
 
         return out;
     }
