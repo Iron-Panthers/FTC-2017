@@ -11,6 +11,8 @@ import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnUntilKey;
 import org.firstinspires.ftc.team7316.util.commands.flow.SequentialCommand;
 import org.firstinspires.ftc.team7316.util.commands.flow.Wait;
 import org.firstinspires.ftc.team7316.util.commands.intake.IntakeForTime;
+import org.firstinspires.ftc.team7316.util.commands.jewelarm.MoveJewelArm;
+import org.firstinspires.ftc.team7316.util.commands.jewelarm.WackJewel;
 import org.firstinspires.ftc.team7316.util.commands.sensors.PollColor;
 import org.firstinspires.ftc.team7316.util.subsystems.JewelArm;
 

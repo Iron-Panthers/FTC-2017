@@ -35,23 +35,9 @@ public class GlyphIntakeJoystick extends Command {
         }
 
         if(OI.instance.gp2.dp_up.state()) {
-
-//            if(Hardware.instance.intakeLiftMotor.getCurrentPosition() > this.intake.liftUpperLimit) {
-//                this.intake.setLiftPower(-Constants.INTAKE_LIFT_POWER);
-//            }
-//            else {
-//                this.intake.setLiftPower(0);
-//            }
             this.intake.setLiftPower(-Constants.INTAKE_LIFT_POWER);
         }
         else if(OI.instance.gp2.dp_down.state()) {
-            /*
-            if(Hardware.instance.intakeLiftMotor.getCurrentPosition() < this.intake.liftLowerLimit) {
-                this.intake.setLiftPower(Constants.INTAKE_LIFT_POWER);
-            }
-            else {
-                this.intake.setLiftPower(0);
-            }*/
             this.intake.setLiftPower(Constants.INTAKE_LIFT_POWER);
         }
         else {
@@ -59,12 +45,34 @@ public class GlyphIntakeJoystick extends Command {
         }
 
         if(OI.instance.gp2.right_bumper.state()) {
-            this.intake.setServoPosition(1);
+            this.intake.setServoPosition(Constants.INTAKE_CLAMP_GLYPH_POSITION);
         }
-        else {
-            this.intake.setServoPositionScaled(OI.instance.gp2.right_stick.getX());
+        else if(OI.instance.gp2.right_stick.getX() >= 0){
+            this.intake.setServoPositionScaled(1 - OI.instance.gp2.right_stick.getX());
         }
+
+        if(Hardware.instance.glyphTouchSensor.isPressed()) {
+            Hardware.instance.flagServo.setPosition(0.5);
+        }
+        Hardware.log("butt pressed", Hardware.instance.glyphTouchSensor.isPressed());
         Hardware.log("lift position", Hardware.instance.intakeLiftMotor.getCurrentPosition());
+
+
+//------------------testing servos------------------------//
+//        if(OI.instance.gp2.right_bumper.state()) {
+//            intake.setServoPosition(1);
+//            Hardware.log("not using joystick", "cool");
+//        }
+//        else if(OI.instance.gp2.left_bumper.state()) {
+//            intake.setServoPosition(0);
+//            Hardware.log("not using joystick", "cool");
+//        }
+        //0 is inwards, 1 is outwards (i think)
+//        else if(OI.instance.gp2.right_stick.getX() >= 0){
+//            intake.setServoPosition(OI.instance.gp2.right_stick.getX());
+//            Hardware.log("using joystick", "cool");
+//        }
+//        Hardware.log("joystick x", OI.instance.gp2.right_stick.getX());
     }
 
     @Override

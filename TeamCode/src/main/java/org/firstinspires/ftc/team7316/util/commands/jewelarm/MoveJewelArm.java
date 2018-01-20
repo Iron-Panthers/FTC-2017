@@ -1,8 +1,9 @@
-package org.firstinspires.ftc.team7316.util.commands;
+package org.firstinspires.ftc.team7316.util.commands.jewelarm;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.team7316.util.Constants;
+import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.subsystems.JewelArm;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 

@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.team7316.util.motorwrappers.DCMotorWrapper;
@@ -41,8 +42,13 @@ public class Hardware {
 
     private static final String INTAKE_SERVO_NAME = "is";
 
-    private static final String RELIC_ARM_SERVO_NAME = "ras";
-    private static final String RELIC_GRABBER_SERVO_NAME = "rgs";
+    private static final String GLYPH_FLAG_SERVO_NAME = "flag";
+    private static final String GLYPH_TOUCH_SENSOR_NAME = "gt";
+
+    private static final String RELIC_ARM_MOTOR_NAME = "ram";
+    private static final String RELIC_SHOULDER_SERVO_NAME = "rss";
+    private static final String RELIC_WRIST_SERVO_NAME = "rws";
+    private static final String RELIC_HAND_SERVO_NAME = "rhs";
 
     private static final String RIGHT_JEWEL_ARM_NAME = "rja";
     private static final String WACKING_JEWEL_ARM_NAME = "bap";
@@ -70,8 +76,13 @@ public class Hardware {
 
     public Servo intakeServo;
 
-    public Servo relicGrabberServo;
-    public CRServo relicArmServo;
+    public Servo flagServo;
+    public TouchSensor glyphTouchSensor;
+
+    public DcMotor relicArmMotor;
+    public CRServo relicShoulderServo;
+    public Servo relicWristServo;
+    public Servo relicHandServo;
 
     public Servo rightJewelArm;
     public Servo wackingJewelArm;
@@ -123,12 +134,14 @@ public class Hardware {
         intakeServo.setDirection(Servo.Direction.REVERSE);
         //intakeServo.scaleRange(Constants.INTAKE_SERVO_MIN_POSITION, Constants.INTAKE_SERVO_MAX_POSITION);
 
+        flagServo = map.servo.get(GLYPH_FLAG_SERVO_NAME);
+        glyphTouchSensor = map.touchSensor.get(GLYPH_TOUCH_SENSOR_NAME);
+
 //        relic grabber hardware
-//        relicGrabberServo = map.servo.get(RELIC_GRABBER_SERVO_NAME);
-//        relicArmServo = map.crservo.get(RELIC_ARM_SERVO_NAME);
-//
-//        relicGrabberServo = map.servo.get(RELIC_GRABBER_SERVO_NAME);
-//        relicArmServo = map.crservo.get(RELIC_ARM_SERVO_NAME);
+        relicArmMotor = map.dcMotor.get(RELIC_ARM_MOTOR_NAME);
+        relicShoulderServo = map.crservo.get(RELIC_SHOULDER_SERVO_NAME);
+        relicWristServo = map.servo.get(RELIC_WRIST_SERVO_NAME);
+        relicHandServo = map.servo.get(RELIC_HAND_SERVO_NAME);
 
         //jewel arm hardware
         rightJewelArm = map.servo.get(RIGHT_JEWEL_ARM_NAME);
@@ -162,7 +175,7 @@ public class Hardware {
             gyro_offline = true;
         }
 
-        vuforiaCameraWrapper = new VuforiaCameraWrapper();
+        //vuforiaCameraWrapper = new VuforiaCameraWrapper();
 
         //Scheduler.instance.addTask(frontSideInfaredSensor);
     }

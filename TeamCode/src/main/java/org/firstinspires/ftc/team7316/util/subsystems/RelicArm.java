@@ -1,10 +1,13 @@
 package org.firstinspires.ftc.team7316.util.subsystems;
 
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.team7316.util.Hardware;
+import org.firstinspires.ftc.team7316.util.commands.BlankCommand;
 import org.firstinspires.ftc.team7316.util.commands.Command;
+import org.firstinspires.ftc.team7316.util.commands.relicarm.RelicArmJoystick;
 
 /**
  * Created by jerry on 10/25/17.
@@ -12,20 +15,40 @@ import org.firstinspires.ftc.team7316.util.commands.Command;
 
 public class RelicArm extends Subsystem {
 
-    //private Servo relicGrabberServo = Hardware.instance.relicGrabberServo;
-    //private CRServo relicArmServo = Hardware.instance.relicArmServo;
+    private DcMotor relicArmMotor = Hardware.instance.relicArmMotor;
+    private CRServo relicShoulderServo = Hardware.instance.relicShoulderServo;
+    private Servo relicWristServo = Hardware.instance.relicWristServo;
+    private Servo relicHandServo = Hardware.instance.relicHandServo;
 
     @Override
     public Command defaultAutoCommand() {
-        return null;
+        return new BlankCommand(this);
     }
 
     @Override
     public Command defaultTeleopCommand() {
-        return null;
+        return new RelicArmJoystick();
     }
 
-    public void stopRelicArm(){
-        /*relicArmServo.setPower(0);*/
+    public void setArmPower(double power) {
+        relicArmMotor.setPower(power);
+    }
+
+    public void extendShoulder() {
+        relicShoulderServo.getController().setServoPosition(relicShoulderServo.getPortNumber(), 1);
+        relicWristServo.setPosition(0);
+    }
+
+    public void retractShoulder() {
+        relicShoulderServo.getController().setServoPosition(relicShoulderServo.getPortNumber(), 0);
+        relicWristServo.setPosition(0.9);
+    }
+
+    public void openClaw() {
+        relicHandServo.setPosition(0.5);
+    }
+
+    public void closeClaw() {
+        relicHandServo.setPosition(0.6);
     }
 }
