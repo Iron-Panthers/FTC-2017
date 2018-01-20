@@ -175,7 +175,7 @@ public class Hardware {
             gyro_offline = true;
         }
 
-        //vuforiaCameraWrapper = new VuforiaCameraWrapper();
+        vuforiaCameraWrapper = new VuforiaCameraWrapper();
 
         //Scheduler.instance.addTask(frontSideInfaredSensor);
     }
