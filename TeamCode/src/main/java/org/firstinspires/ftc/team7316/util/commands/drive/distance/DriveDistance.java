@@ -113,6 +113,9 @@ public class DriveDistance extends Command {
         writeCSV(times, targets, positionsFL, positionsFR, positionsBL, positionsBR, errorsFL, errorsFR, errorsBL, errorsBR, powerFL, powerFR, powerBL, powerBR);
     }
 
+    /**
+     * this kind of logging was a mistake
+     */
     public static void writeCSV(List<Double> times, List<Double> targets,
                                 List<Double> positionsFL, List<Double> positionsFR, List<Double> positionsBL, List<Double> positionsBR,
                                 List<Double> errorsFL, List<Double> errorsFR, List<Double> errorsBL, List<Double> errorsBR,
