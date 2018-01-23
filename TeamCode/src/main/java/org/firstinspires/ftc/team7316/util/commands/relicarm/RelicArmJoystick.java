@@ -34,7 +34,7 @@ public class RelicArmJoystick extends Command {
             relicArm.setArmPower(0);
         }
 
-        if(OI.instance.gp2.aButtonWrapper.state()) {
+        if(OI.instance.gp2.a_button.state()) {
             relicArm.openClaw();
             Hardware.log("claw", "opened");
         }
@@ -43,7 +43,7 @@ public class RelicArmJoystick extends Command {
             Hardware.log("claw", "closed");
         }
 
-        if(OI.instance.gp2.bButtonWrapper.state()) {
+        if(OI.instance.gp2.b_button.state()) {
             relicArm.extendShoulder();
             Hardware.log("shoulder", "extended");
         }

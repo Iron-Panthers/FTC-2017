@@ -83,6 +83,7 @@ public class DriveDistance extends Command {
         Hardware.log("flError", Hardware.instance.frontLeftDriveMotorWrapper.getError());
         Hardware.log("frError", Hardware.instance.frontRightDriveMotorWrapper.getError());
         Hardware.log("current target", Hardware.instance.frontLeftDriveMotorWrapper.pid.getTargetTicksCurrent());
+
         times.add(Hardware.instance.backRightDriveMotorWrapper.pid.getElapsedSeconds());
         targets.add((double)Hardware.instance.backRightDriveMotorWrapper.pid.getTargetTicksCurrent());
 

@@ -96,6 +96,13 @@ public class MecanumDriveBase extends Subsystem {
         wantedFlBrSpeed = fL_bRpower;
     }
 
+    public void setMotorPID(double p, double i, double d, double f) {
+        Hardware.instance.frontLeftDriveMotorWrapper.pid.setPID(p, i, d, f);
+        Hardware.instance.frontRightDriveMotorWrapper.pid.setPID(p, i, d, f);
+        Hardware.instance.backLeftDriveMotorWrapper.pid.setPID(p, i, d, f);
+        Hardware.instance.backRightDriveMotorWrapper.pid.setPID(p, i, d, f);
+    }
+
     public void setMotorTargets(int ticks) {
         Hardware.instance.frontLeftDriveMotorWrapper.setTargetTicks(ticks);
         Hardware.instance.frontRightDriveMotorWrapper.setTargetTicks(ticks);

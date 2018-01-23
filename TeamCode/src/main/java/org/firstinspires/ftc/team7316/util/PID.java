@@ -44,6 +44,13 @@ public class PID {
         reset();
     }
 
+    public void setPID(double p, double i, double d, double f) {
+        this.p = p;
+        this.i = i;
+        this.d = d;
+        this.f = f;
+    }
+
     public void setPath(MotionPath path) {
         usePath = true;
         this.path = path;
