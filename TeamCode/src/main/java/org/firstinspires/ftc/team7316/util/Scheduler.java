@@ -22,6 +22,10 @@ public class Scheduler {
         return commands;
     }
 
+    public ArrayList<Command> getBuffer() {
+        return newCommandBuffer;
+    }
+
     public void add(Command newCommand) {
         newCommandBuffer.add(newCommand);
     }
@@ -74,6 +78,14 @@ public class Scheduler {
 
     public void clear() {
         this.commands.clear();
+    }
+
+    public void clearBuffer() {
+        newCommandBuffer.clear();
+    }
+
+    public void removeFromBuffer(Command in) {
+        newCommandBuffer.remove(in);
     }
 
     public static void main(String[] args) {

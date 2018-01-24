@@ -36,6 +36,10 @@ public class GamepadWrapper {
         this.b_button = new ToggleButtonWrapper(GamepadButton.B_BUTTON, this);
         this.x_button = new ButtonWrapper(GamepadButton.X_BUTTON, this);
         this.y_button = new ButtonWrapper(GamepadButton.Y_BUTTON, this);
+//        this.a_button = new SingleButtonPressWrapper(GamepadButton.A_BUTTON, this);
+//        this.b_button = new SingleButtonPressWrapper(GamepadButton.B_BUTTON, this);
+//        this.x_button = new SingleButtonPressWrapper(GamepadButton.X_BUTTON, this);
+//        this.y_button = new SingleButtonPressWrapper(GamepadButton.Y_BUTTON, this);
 
         this.dp_left = new ButtonWrapper(GamepadButton.DPAD_LEFT, this);
         this.dp_right = new ButtonWrapper(GamepadButton.DPAD_RIGHT, this);
@@ -69,7 +73,7 @@ public class GamepadWrapper {
     }
 
     public void modifyButton(ButtonWrapper button, ButtonWrapper newButton) {
-        Scheduler.instance.getCommands().remove(button);
+        Scheduler.instance.removeFromBuffer(button);
         button = newButton;
         Scheduler.instance.add(button);
     }
