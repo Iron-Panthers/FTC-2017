@@ -43,9 +43,6 @@ public class ButtonTunePID extends OpMode {
 
         gp = OI.instance.gp1;
 
-        gp.modifyButton(gp.a_button, new ButtonWrapper(GamepadButton.A_BUTTON, gp));
-        gp.modifyButton(gp.b_button, new ButtonWrapper(GamepadButton.B_BUTTON, gp));
-
         timer.reset();
     }
 

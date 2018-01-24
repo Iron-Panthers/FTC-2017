@@ -51,7 +51,7 @@ public class DriveDistance extends Command {
 
     public DriveDistance(double inches) {
         //requires(Subsystems.instance.driveBase);
-        this(inches, 10);
+        this(inches, 6);
     }
 
     /**
@@ -87,7 +87,7 @@ public class DriveDistance extends Command {
         times.add(Hardware.instance.backRightDriveMotorWrapper.pid.getElapsedSeconds());
         targets.add((double)Hardware.instance.backRightDriveMotorWrapper.pid.getTargetTicksCurrent());
 
-        positionsFL.add((double)Hardware.instance.frontRightDriveMotor.getCurrentPosition());
+        positionsFL.add((double)Hardware.instance.frontLeftDriveMotor.getCurrentPosition());
         positionsFR.add((double)Hardware.instance.frontRightDriveMotor.getCurrentPosition());
         positionsBL.add((double)Hardware.instance.backLeftDriveMotor.getCurrentPosition());
         positionsBR.add((double)Hardware.instance.backRightDriveMotor.getCurrentPosition());
