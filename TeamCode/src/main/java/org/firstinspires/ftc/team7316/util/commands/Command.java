@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.team7316.util.commands;
 
+import org.firstinspires.ftc.team7316.util.Scheduler;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
 
 import java.util.ArrayList;
@@ -34,4 +35,18 @@ public abstract class Command {
         this.end();
     }
 
+    public static void run(Command c) {
+        c.init();
+        while(!c.shouldRemove()) {
+            Scheduler.instance.loop();
+            c.loop();
+        }
+        c.end();
+    }
+
+    public static void run(Command[] cmds) {
+        for(Command c : cmds) {
+            run(c);
+        }
+    }
 }
