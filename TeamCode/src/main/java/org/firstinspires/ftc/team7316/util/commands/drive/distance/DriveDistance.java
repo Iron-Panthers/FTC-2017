@@ -50,7 +50,6 @@ public class DriveDistance extends Command {
     private ArrayList<Double> powerBR = new ArrayList<>();
 
     public DriveDistance(double inches) {
-        requires(Subsystems.instance.driveBase);
         this(inches, 10);
     }
 
