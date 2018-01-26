@@ -27,6 +27,8 @@ public class SequentialCommand extends Command implements TerminatedListener {
 
     @Override
     public void init() {
+        Hardware.log("command num", 77);
+
         for (Subsystem subsystem : this.requiredSubsystems) {
             subsystem.needsDefault = false;
         }
@@ -41,14 +43,13 @@ public class SequentialCommand extends Command implements TerminatedListener {
 
     @Override
     public void loop() {
-
-        Hardware.log("commnd num", this.index);
-
+        Hardware.log("command num", this.index);
     }
 
     @Override
     public boolean shouldRemove() {
-        return index >= cmds.length;
+        return false;
+        //return index >= cmds.length;
     }
 
     @Override
