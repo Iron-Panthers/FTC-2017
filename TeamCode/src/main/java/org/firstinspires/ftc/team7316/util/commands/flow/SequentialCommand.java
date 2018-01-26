@@ -52,7 +52,7 @@ public class SequentialCommand extends Command implements TerminatedListener {
 
     @Override
     public void interrupt() {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 5; i++) {
             System.out.println("AHHHHAHH INTERRRUPTED");
         }
     }

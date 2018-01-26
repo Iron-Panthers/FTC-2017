@@ -18,9 +18,6 @@ public abstract class Command {
         return shouldReplace;
     }
     public void setShouldReplace(boolean shouldReplace) {
-        for (int i = 0; i < 10; i++) {
-            System.out.println("AHHHHHH CHANGED REPLACE to" + shouldReplace);
-        }
         this.shouldReplace = shouldReplace;
     }
 
