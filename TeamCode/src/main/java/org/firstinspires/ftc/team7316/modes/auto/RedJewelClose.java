@@ -69,6 +69,7 @@ public class RedJewelClose extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
+        Scheduler.inTeleop = false;
         Scheduler.instance.clear();
         Hardware.setHardwareMap(hardwareMap);
         Hardware.setTelemetry(telemetry);
