@@ -27,7 +27,7 @@ public class Scheduler {
     }
 
     public void add(Command newCommand) {
-        newCommandBuffer.add(newCommand);
+        newCommandBuffer.add(0, newCommand);
     }
 
     public void loop() {

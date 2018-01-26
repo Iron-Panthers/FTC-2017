@@ -19,7 +19,7 @@ public class MoveJewelArm extends Command {
     private boolean movedWacker;
 
     public MoveJewelArm(JewelArm.JewelArmPosition direction) {
-        //requires(Subsystems.instance.jewelArm);
+        requires(Subsystems.instance.jewelArm);
         this.direction = direction;
         this.travelTime = new ElapsedTime();
 

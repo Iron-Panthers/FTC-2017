@@ -14,6 +14,7 @@ public abstract class Command {
     public TerminatedListener terminatedListener = null;
     public ArrayList<Subsystem> requiredSubsystems = new ArrayList<>();
     public boolean shouldReplace = true;
+
     public void requires(Subsystem subsystem) {
         if (!requiredSubsystems.contains(subsystem)) { // just to be sure duplicates don't happen
             requiredSubsystems.add(subsystem);

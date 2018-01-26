@@ -11,7 +11,7 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 public class PollColor extends Command {
 
     public PollColor() {
-        //requires(Subsystems.instance.jewelArm);
+        requires(Subsystems.instance.jewelArm);
     }
 
     @Override
