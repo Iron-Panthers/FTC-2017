@@ -12,7 +12,7 @@ import org.firstinspires.ftc.team7316.util.commands.AutoCodes;
  * Created by jerry on 11/19/17.
  */
 
-@Autonomous(name = "sequence test ")
+@Autonomous(name = "blue jewel basic")
 public class BlueJewelBasic extends AutoBaseOpMode {
     @Override
     public void onInit() {
