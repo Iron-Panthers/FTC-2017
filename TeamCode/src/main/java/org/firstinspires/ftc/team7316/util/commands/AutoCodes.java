@@ -32,6 +32,15 @@ public class AutoCodes {
     }
     */
 
+    public static SequentialCommand sequenceTest() {
+        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
+        DriveDistance ram = new DriveDistance(4, 4);
+        DriveDistance backup = new DriveDistance(-4, 4);
+
+        Command[] cmds = {outtake, ram, backup};
+        return new SequentialCommand(cmds);
+    }
+
     public static SequentialCommand farBlueJewel() {
         Command wack = wackJewelBasic(Alliance.BLUE);
 

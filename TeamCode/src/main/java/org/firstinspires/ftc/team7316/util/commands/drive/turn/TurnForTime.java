@@ -19,7 +19,7 @@ public class TurnForTime extends Command {
     private ElapsedTime timer;
 
     public TurnForTime(double rotations) {
-        //requires(Subsystems.instance.driveBase);
+        requires(Subsystems.instance.driveBase);
         this.rotations = rotations;
         duration = this.rotations * Constants.ROTATIONS_PER_SECOND;
         timer = new ElapsedTime();

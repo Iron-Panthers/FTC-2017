@@ -17,7 +17,7 @@ public class IntakeForTime extends Command {
     private ElapsedTime timer;
 
     public IntakeForTime(double power, double duration) {
-//        requires(Subsystems.instance.glyphIntake);
+        requires(Subsystems.instance.glyphIntake);
         this.power = power * -1;
         this.duration = duration;
         timer = new ElapsedTime();

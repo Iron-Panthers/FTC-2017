@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.team7316.util.commands.flow;
 
+import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.Scheduler;
 import org.firstinspires.ftc.team7316.util.commands.*;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
@@ -40,6 +41,9 @@ public class SequentialCommand extends Command implements TerminatedListener {
 
     @Override
     public void loop() {
+
+        Hardware.log("commnd num", this.index);
+
     }
 
     @Override

@@ -50,7 +50,7 @@ public class DriveDistance extends Command {
     private ArrayList<Double> powerBR = new ArrayList<>();
 
     public DriveDistance(double inches) {
-        //requires(Subsystems.instance.driveBase);
+        requires(Subsystems.instance.driveBase);
         this(inches, 10);
     }
 
@@ -59,7 +59,7 @@ public class DriveDistance extends Command {
      * @param timeout the time before the command will stop
      */
     public DriveDistance(double inches, double timeout) {
-        //requires(Subsystems.instance.driveBase);
+        requires(Subsystems.instance.driveBase);
         this.distance = Constants.inchesToTicks(inches);
         this.timeout = timeout;
         timer = new ElapsedTime();
