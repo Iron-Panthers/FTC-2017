@@ -52,7 +52,7 @@ public class SequentialCommand extends Command implements TerminatedListener {
 
     @Override
     public void interrupt() {
-        for (int i = 0; i < 150; i++) {
+        for (int i = 0; i < 50; i++) {
             System.out.println("AHHHHHH");
         }
     }
@@ -70,7 +70,7 @@ public class SequentialCommand extends Command implements TerminatedListener {
 
     @Override
     public void onTerminated(Command terminated) {
-        for (int i = 0; i < 150; i++) {
+        for (int i = 0; i < 50; i++) {
             System.out.println("TERMINATED AHHHHHH");
         }
 
