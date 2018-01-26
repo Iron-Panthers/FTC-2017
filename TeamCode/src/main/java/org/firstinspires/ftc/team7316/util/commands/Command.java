@@ -12,7 +12,18 @@ public abstract class Command {
 
     public TerminatedListener terminatedListener = null;
     public ArrayList<Subsystem> requiredSubsystems = new ArrayList<>();
-    public boolean shouldReplace = true;
+
+    private boolean shouldReplace = true;
+    public boolean isShouldReplace() {
+        return shouldReplace;
+    }
+    public void setShouldReplace(boolean shouldReplace) {
+        for (int i = 0; i < 10; i++) {
+            System.out.println("AHHHHHH CHANGED REPLACE to" + shouldReplace);
+        }
+        this.shouldReplace = shouldReplace;
+    }
+
     public void requires(Subsystem subsystem) {
         if (!requiredSubsystems.contains(subsystem)) { // just to be sure duplicates don't happen
             requiredSubsystems.add(subsystem);
