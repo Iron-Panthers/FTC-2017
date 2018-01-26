@@ -57,11 +57,6 @@ public class Scheduler {
             newCommandBuffer.remove(i);
             commands.add(newCmd);
 
-            for (int j = 0; j < 5; j++) {
-                System.out.println(newCmd.isShouldReplace());
-                System.out.println(newCmd.getClass());
-            }
-
             if (newCmd.isShouldReplace()) {
                 for (Subsystem subsystem : newCmd.requiredSubsystems) {
                     if (subsystem.currentCmd != null) {

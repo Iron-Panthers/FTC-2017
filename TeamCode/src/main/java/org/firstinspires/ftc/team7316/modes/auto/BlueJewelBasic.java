@@ -16,8 +16,7 @@ import org.firstinspires.ftc.team7316.util.commands.AutoCodes;
 public class BlueJewelBasic extends AutoBaseOpMode {
     @Override
     public void onInit() {
-//        Scheduler.instance.add(AutoCodes.wackJewelBasic(Alliance.BLUE));
-        Scheduler.instance.add(AutoCodes.sequenceTest());
+        Scheduler.instance.add(AutoCodes.wackJewelBasic(Alliance.BLUE));
     }
 
     @Override

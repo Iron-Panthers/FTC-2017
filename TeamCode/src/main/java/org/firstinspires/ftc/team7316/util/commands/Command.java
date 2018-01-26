@@ -12,14 +12,7 @@ public abstract class Command {
 
     public TerminatedListener terminatedListener = null;
     public ArrayList<Subsystem> requiredSubsystems = new ArrayList<>();
-
-    private boolean shouldReplace = true;
-    public boolean isShouldReplace() {
-        return shouldReplace;
-    }
-    public void setShouldReplace(boolean shouldReplace) {
-        this.shouldReplace = shouldReplace;
-    }
+    public boolean shouldReplace = true;
 
     public void requires(Subsystem subsystem) {
         if (!requiredSubsystems.contains(subsystem)) { // just to be sure duplicates don't happen

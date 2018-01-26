@@ -34,7 +34,7 @@ public class SequentialCommand extends Command implements TerminatedListener {
 
         if (index < cmds.length) {
             Command cmd = cmds[index];
-            cmd.setShouldReplace(false);
+            cmd.shouldReplace = false;
             Scheduler.instance.add(cmd);
         }
     }
@@ -46,15 +46,7 @@ public class SequentialCommand extends Command implements TerminatedListener {
 
     @Override
     public boolean shouldRemove() {
-        return false;
-        //return index >= cmds.length;
-    }
-
-    @Override
-    public void interrupt() {
-        for (int i = 0; i < 5; i++) {
-            System.out.println("AHHHHAHH INTERRRUPTED");
-        }
+        return index >= cmds.length;
     }
 
     @Override
@@ -65,7 +57,7 @@ public class SequentialCommand extends Command implements TerminatedListener {
         }
         for (Command cmd : this.cmds) {
             cmd.terminatedListener = null;
-            cmd.setShouldReplace(true);
+            cmd.shouldReplace = true;
         }
     }
 
@@ -75,7 +67,7 @@ public class SequentialCommand extends Command implements TerminatedListener {
         index++;
         if (index < cmds.length) {
             Command cmd = cmds[index];
-            cmd.setShouldReplace(false);
+            cmd.shouldReplace = false;
             Scheduler.instance.add(cmd);
         }
     }
