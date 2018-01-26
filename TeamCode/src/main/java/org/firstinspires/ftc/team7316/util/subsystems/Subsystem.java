@@ -17,6 +17,10 @@ public abstract class Subsystem {
     public abstract Command defaultAutoCommand();
     public abstract Command defaultTeleopCommand();
 
+    public boolean hasDefault() {
+        return (getDefaultCommand() != null);
+    }
+
     public Command getDefaultCommand() {
         if (Scheduler.inTeleop) {
             return defaultTeleopCommand();

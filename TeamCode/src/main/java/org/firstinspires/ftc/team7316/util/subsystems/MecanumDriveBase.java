@@ -2,13 +2,7 @@ package org.firstinspires.ftc.team7316.util.subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.team7316.util.Constants;
-import org.firstinspires.ftc.team7316.util.PID;
-import org.firstinspires.ftc.team7316.util.Util;
-import org.firstinspires.ftc.team7316.util.commands.BlankCommand;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveWithJoystick;
@@ -40,7 +34,7 @@ public class MecanumDriveBase extends Subsystem {
 
     @Override
     public Command defaultAutoCommand() {
-        return new BlankCommand(this);
+        return null;
     }
 
     @Override

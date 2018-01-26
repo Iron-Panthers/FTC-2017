@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.team7316.util.Hardware;
-import org.firstinspires.ftc.team7316.util.commands.BlankCommand;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.commands.relicarm.RelicArmJoystick;
 
@@ -22,7 +21,7 @@ public class RelicArm extends Subsystem {
 
     @Override
     public Command defaultAutoCommand() {
-        return new BlankCommand(this);
+        return null;
     }
 
     @Override

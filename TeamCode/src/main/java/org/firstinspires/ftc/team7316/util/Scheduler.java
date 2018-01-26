@@ -38,7 +38,7 @@ public class Scheduler {
                 cmd._end();
 
                 for (Subsystem subsystem : cmd.requiredSubsystems) {
-                    if (subsystem.needsDefault) {
+                    if (subsystem.needsDefault && subsystem.hasDefault()) {
                         // we set the command to null so that it isn't interrupted.
                         // If we didn't do this, the command we receive "end" and also "interrupt"
                         subsystem.currentCmd = null;
@@ -74,12 +74,6 @@ public class Scheduler {
 
     public void clear() {
         this.commands.clear();
-    }
-
-    public static void main(String[] args) {
-        //chris was here :::))))))) in me ass heHAA
-
-        
     }
 
 }
