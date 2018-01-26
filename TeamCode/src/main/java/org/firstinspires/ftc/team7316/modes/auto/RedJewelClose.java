@@ -29,74 +29,49 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
  */
 
 @Autonomous(name = "red team jewel close")
-public class RedJewelClose extends LinearOpMode {
-
-//    private boolean ran = false;
-//    @Override
-//    public void onInit() {
-//        Hardware.instance.vuforiaCameraWrapper.startTracking();
-////        Scheduler.instance.add(AutoCodes.closeRedJewel());
-//        Scheduler.instance.add(new UpdateVuforia());
-//    }
-//
-//    @Override
-//    public void onLoop() {
-//        if(!ran) {
-//            MoveJewelArm movearmout = new MoveJewelArm(JewelArm.JewelArmPosition.OUT);
-//            PollColor pollColor = new PollColor();
-//            WackJewel wackjewel = new WackJewel(Alliance.RED);
-//            MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
-//
-//            DriveOffPad offPad = new DriveOffPad(Alliance.RED);
-//            Wait stop = new Wait(0.5);
-//            DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, Math.PI, 1);
-//            Wait stop2 = new Wait(0.5);
-////        TurnUntilKey detectkey = new TurnUntilKey(1, 90);
-//            DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.RED, DriveDistanceCipher.Position.CLOSE);
-//
-//            TurnGyroPID turn = new TurnGyroPID(90, 3);
-//
-//            DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_RED, 3);
-//            IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
-//            DriveDistance backup = new DriveDistance(-4, 3);
-//
-//            Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, align, stop2, gotocrypto, turn, inchforward, outtake, backup};
-//            Command.run(cmds);
-//
-//            ran = true;
-//        }
-//    }
+public class RedJewelClose extends AutoBaseOpMode {
 
     @Override
-    public void runOpMode() throws InterruptedException {
-        Scheduler.inTeleop = false;
-        Scheduler.instance.clear();
-        Hardware.setHardwareMap(hardwareMap);
-        Hardware.setTelemetry(telemetry);
-        Subsystems.createSubsystems();
+    public void onInit() {
         Hardware.instance.vuforiaCameraWrapper.startTracking();
+        Scheduler.instance.add(AutoCodes.closeRedJewel());
         Scheduler.instance.add(new UpdateVuforia());
-        waitForStart();
-
-        MoveJewelArm movearmout = new MoveJewelArm(JewelArm.JewelArmPosition.OUT);
-        PollColor pollColor = new PollColor();
-        WackJewel wackjewel = new WackJewel(Alliance.RED);
-        MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
-
-        DriveOffPad offPad = new DriveOffPad(Alliance.RED);
-        Wait stop = new Wait(0.5);
-        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, Math.PI, 1);
-        Wait stop2 = new Wait(0.5);
-//        TurnUntilKey detectkey = new TurnUntilKey(1, 90);
-        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.RED, DriveDistanceCipher.Position.CLOSE);
-
-        TurnGyroPID turn = new TurnGyroPID(90, 3);
-
-        DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_RED, 3);
-        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
-        DriveDistance backup = new DriveDistance(-4, 3);
-
-        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, align, stop2, gotocrypto, turn, inchforward, outtake, backup};
-        Command.run(cmds);
     }
+
+    @Override
+    public void onLoop() {
+    }
+//
+//    @Override
+//    public void runOpMode() throws InterruptedException {
+//        Scheduler.inTeleop = false;
+//        Scheduler.instance.clear();
+//        Hardware.setHardwareMap(hardwareMap);
+//        Hardware.setTelemetry(telemetry);
+//        Subsystems.createSubsystems();
+//        Hardware.instance.vuforiaCameraWrapper.startTracking();
+//        Scheduler.instance.add(new UpdateVuforia());
+//        waitForStart();
+//
+//        MoveJewelArm movearmout = new MoveJewelArm(JewelArm.JewelArmPosition.OUT);
+//        PollColor pollColor = new PollColor();
+//        WackJewel wackjewel = new WackJewel(Alliance.RED);
+//        MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
+//
+//        DriveOffPad offPad = new DriveOffPad(Alliance.RED);
+//        Wait stop = new Wait(0.5);
+//        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, Math.PI, 1);
+//        Wait stop2 = new Wait(0.5);
+////        TurnUntilKey detectkey = new TurnUntilKey(1, 90);
+//        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.RED, DriveDistanceCipher.Position.CLOSE);
+//
+//        TurnGyroPID turn = new TurnGyroPID(90, 3);
+//
+//        DriveDistance inchforward = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_RED, 3);
+//        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
+//        DriveDistance backup = new DriveDistance(-4, 3);
+//
+//        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, align, stop2, gotocrypto, turn, inchforward, outtake, backup};
+//        Command.run(cmds);
+//    }
 }

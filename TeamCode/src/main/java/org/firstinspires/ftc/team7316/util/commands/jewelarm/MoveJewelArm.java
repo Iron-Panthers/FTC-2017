@@ -35,7 +35,7 @@ public class MoveJewelArm extends Command {
     @Override
     public void loop() {
         //move the wacking arm mid-travel
-        if(travelTime.seconds() >= 0.5 && !movedWacker) {
+        if(travelTime.seconds() >= 0.4 && !movedWacker) {
             movedWacker = true;
             Subsystems.instance.jewelArm.moveWacker(JewelArm.JewelWackPosition.NEUTRAL);
             if(direction == JewelArm.JewelArmPosition.IN) {

@@ -42,9 +42,9 @@ public class AutoCodes {
 //        TurnUntilKey detectkey = new TurnUntilKey(-1, -90);
         DriveDistance backward = new DriveDistance(-Constants.FAR_CRYPTO_DISTANCE, 4);
 
-        TurnGyroPID turnleft = new TurnGyroPID(-90, 3);
+        TurnGyroPID turnleft = new TurnGyroPID(90, 3);
         DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.BLUE, DriveDistanceCipher.Position.FAR);
-        TurnGyroPID turnleft2 = new TurnGyroPID(-90, 3);
+        TurnGyroPID turnleft2 = new TurnGyroPID(180, 3);
 
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
         DriveDistance ram = new DriveDistance(4, 4);
