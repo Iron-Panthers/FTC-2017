@@ -27,8 +27,6 @@ public class SequentialCommand extends Command implements TerminatedListener {
 
     @Override
     public void init() {
-        Hardware.log("command num", 77);
-
         for (Subsystem subsystem : this.requiredSubsystems) {
             subsystem.needsDefault = false;
         }
@@ -53,6 +51,13 @@ public class SequentialCommand extends Command implements TerminatedListener {
     }
 
     @Override
+    public void interrupt() {
+        for (int i = 0; i < 150; i++) {
+            System.out.println("AHHHHHH");
+        }
+    }
+
+    @Override
     public void end() {
         for (Subsystem subsystem : this.requiredSubsystems) {
             subsystem.needsDefault = true;
@@ -65,6 +70,10 @@ public class SequentialCommand extends Command implements TerminatedListener {
 
     @Override
     public void onTerminated(Command terminated) {
+        for (int i = 0; i < 150; i++) {
+            System.out.println("TERMINATED AHHHHHH");
+        }
+
         index++;
         if (index < cmds.length) {
             Command cmd = cmds[index];
