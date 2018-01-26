@@ -23,6 +23,9 @@ public class Scheduler {
     }
 
     public void add(Command newCommand) {
+        for (int i = 0; i < 20; i++) {
+            System.out.println(newCommand.getClass());
+        }
         newCommandBuffer.add(newCommand);
     }
 
@@ -57,7 +60,7 @@ public class Scheduler {
             newCommandBuffer.remove(i);
             commands.add(newCmd);
 
-            for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
                 System.out.println(newCmd.isShouldReplace());
             }
 
