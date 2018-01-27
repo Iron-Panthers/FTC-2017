@@ -40,6 +40,8 @@ public class Constants {
     public static final double CLOSE_CRYPTO_DISTANCE = 10;
     public static final double CLOSE_CRYPTO_APPROACH_RED = 7.5;
     public static final double CLOSE_CRYPTO_APPROACH_BLUE = 8.5;
+    public static final double FAR_CRYPTO_APPROACH_RED = 5;
+    public static final double FAR_CRYPTO_APPROACH_BLUE = 5;
     //INCHES INCHESSSSS
     public static final double RIGHT_COLUMN_DISTANCE_CLOSE = 9;
     public static final double MIDDLE_COLUMN_DISTANCE_CLOSE = 16.5;

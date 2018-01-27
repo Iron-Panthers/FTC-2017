@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.team7316.util.commands;
 
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
+import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.Scheduler;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
 
@@ -36,18 +39,26 @@ public abstract class Command {
         this.end();
     }
 
-    public static void run(Command c) {
+    public static void run(Command c, LinearOpMode opMode) {
         c.init();
         while(!c.shouldRemove()) {
+            if(opMode.isStopRequested()) {
+                c.interrupt();
+                break;
+            }
             Scheduler.instance.loop();
             c.loop();
+            Hardware.telemetry.update();
         }
         c.end();
     }
 
-    public static void run(Command[] cmds) {
+    public static void run(Command[] cmds, LinearOpMode opMode) {
         for(Command c : cmds) {
-            run(c);
+            if(opMode.isStopRequested()) {
+                break;
+            }
+            run(c, opMode);
         }
     }
 }

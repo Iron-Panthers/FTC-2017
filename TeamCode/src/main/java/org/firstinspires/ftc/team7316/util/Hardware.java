@@ -29,7 +29,7 @@ public class Hardware {
 
     public static final String tag = "IronPanthers";
 
-    private static Telemetry telemetry;
+    public static Telemetry telemetry;
 
     private static final String LEFT_FRONT_DRIVE_MOTOR_NAME = "mdfl";
     private static final String RIGHT_FRONT_DRIVE_MOTOR_NAME = "mdfr";

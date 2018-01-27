@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.team7316.modes.AutoBaseOpMode;
+import org.firstinspires.ftc.team7316.modes.LinearAutoOpMode;
 import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
@@ -29,7 +30,7 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
  */
 
 @Autonomous(name = "blue team jewel far")
-public class BlueWackJewelFar extends LinearOpMode {
+public class BlueWackJewelFar extends LinearAutoOpMode {
 
 //    @Override
 //    public void onInit() {
@@ -44,16 +45,7 @@ public class BlueWackJewelFar extends LinearOpMode {
 //    }
 
     @Override
-    public void runOpMode() throws InterruptedException {
-        Scheduler.inTeleop = false;
-        Scheduler.instance.clear();
-        Hardware.setHardwareMap(hardwareMap);
-        Hardware.setTelemetry(telemetry);
-        Subsystems.createSubsystems();
-        Hardware.instance.vuforiaCameraWrapper.startTracking();
-        Scheduler.instance.add(new UpdateVuforia());
-        waitForStart();
-
+    public Command[] createCommands() {
         MoveJewelArm movearmout = new MoveJewelArm(JewelArm.JewelArmPosition.OUT);
         PollColor pollColor = new PollColor();
         WackJewel wackjewel = new WackJewel(Alliance.BLUE);
@@ -70,11 +62,12 @@ public class BlueWackJewelFar extends LinearOpMode {
         DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.BLUE, DriveDistanceCipher.Position.FAR);
         TurnGyroPID turnleft2 = new TurnGyroPID(180, 3);
 
-        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
-        DriveDistance ram = new DriveDistance(4, 4);
-        DriveDistance backup = new DriveDistance(-4, 4);
+        DriveDistance approach = new DriveDistance(Constants.FAR_CRYPTO_APPROACH_BLUE, 2);
+        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME); //add to constants later
+        DriveForTime ram = new DriveForTime(0.3, 0, 1);
+        DriveDistance backup = new DriveDistance(-Constants.FAR_CRYPTO_APPROACH_BLUE, 2);
 
-        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, align, stop2, backward, turnleft, gotocrypto, turnleft2, outtake, ram, backup};
-        Command.run(cmds);
+        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, align, stop2, backward, turnleft, gotocrypto, turnleft2, approach, outtake, ram, backup};
+        return cmds;
     }
 }
