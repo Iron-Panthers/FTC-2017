@@ -2,6 +2,7 @@ package org.firstinspires.ftc.team7316.util.commands;
 
 import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Constants;
+import org.firstinspires.ftc.team7316.util.commands.drive.BackupAndRam;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveOffPad;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistanceCipher;
@@ -10,6 +11,7 @@ import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroPID;
 import org.firstinspires.ftc.team7316.util.commands.flow.SequentialCommand;
 import org.firstinspires.ftc.team7316.util.commands.flow.Wait;
 import org.firstinspires.ftc.team7316.util.commands.intake.IntakeForTime;
+import org.firstinspires.ftc.team7316.util.commands.intake.MoveIntakeArm;
 import org.firstinspires.ftc.team7316.util.commands.jewelarm.MoveJewelArm;
 import org.firstinspires.ftc.team7316.util.commands.jewelarm.WackJewel;
 import org.firstinspires.ftc.team7316.util.commands.sensors.PollColor;
@@ -33,6 +35,8 @@ public class AutoCodes {
     */
 
     public static SequentialCommand farBlueJewel() {
+        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+
         Command wack = wackJewelBasic(Alliance.BLUE);
 
         DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
@@ -47,15 +51,16 @@ public class AutoCodes {
         TurnGyroPID turnleft2 = new TurnGyroPID(180, 3);
 
         DriveDistance approach = new DriveDistance(Constants.FAR_CRYPTO_APPROACH_BLUE, 2);
-        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME); //add to constants later
-        DriveForTime ram = new DriveForTime(0.3, 0, 1);
-        DriveDistance backup = new DriveDistance(-Constants.FAR_CRYPTO_APPROACH_BLUE, 2);
+        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
+        BackupAndRam bAndR = new BackupAndRam();
 
-        Command[] cmds = {wack, offPad, stop, align, stop2, backward, turnleft, gotocrypto, turnleft2, approach, outtake, ram, backup};
+        Command[] cmds = {clamp, wack, offPad, stop, align, stop2, backward, turnleft, gotocrypto, turnleft2, approach, outtake, bAndR};
         return new SequentialCommand(cmds);
     }
 
     public static SequentialCommand farRedJewel() {
+        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+
         Command wack = wackJewelBasic(Alliance.RED);
 
         DriveOffPad offPad = new DriveOffPad(Alliance.RED);
@@ -70,15 +75,16 @@ public class AutoCodes {
         TurnGyroPID turnright = new TurnGyroPID(0, 3);
 
         DriveDistance approach = new DriveDistance(Constants.FAR_CRYPTO_APPROACH_RED, 2);
-        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME); //add to constants later
-        DriveForTime ram = new DriveForTime(0.3, 0, 1);
-        DriveDistance backup = new DriveDistance(-Constants.FAR_CRYPTO_APPROACH_RED, 2);
+        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
+        BackupAndRam bAndR = new BackupAndRam();
 
-        Command[] cmds = {wack, offPad, stop, align, stop2, forward, turnleft, gotocrypto, turnright, approach, outtake, ram, backup};
+        Command[] cmds = {clamp, wack, offPad, stop, align, stop2, forward, turnleft, gotocrypto, turnright, approach, outtake, bAndR};
         return new SequentialCommand(cmds);
     }
 
     public static SequentialCommand closeBlueJewel() {
+        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+
         Command wack = wackJewelBasic(Alliance.BLUE);
 
         DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
@@ -92,14 +98,15 @@ public class AutoCodes {
 
         DriveDistance approach = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_BLUE, 2);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
-        DriveForTime ram = new DriveForTime(0.3, 0, 1);
-        DriveDistance backup = new DriveDistance(-Constants.CLOSE_CRYPTO_APPROACH_BLUE, 2);
+        BackupAndRam bAndR = new BackupAndRam();
 
-        Command[] cmds = {wack, offPad, stop, align, stop2, gotocrypto, turn, approach, outtake, ram, backup};
+        Command[] cmds = {clamp, wack, offPad, stop, align, stop2, gotocrypto, turn, approach, outtake, bAndR};
         return new SequentialCommand(cmds);
     }
 
     public static SequentialCommand closeRedJewel() {
+        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+
         Command wack = wackJewelBasic(Alliance.RED);
 
         DriveOffPad offPad = new DriveOffPad(Alliance.RED);
@@ -113,10 +120,9 @@ public class AutoCodes {
 
         DriveDistance approach = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_RED, 2);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
-        DriveForTime ram = new DriveForTime(0.3, 0, 1);
-        DriveDistance backup = new DriveDistance(-Constants.CLOSE_CRYPTO_APPROACH_RED, 2);
+        BackupAndRam bAndR = new BackupAndRam();
 
-        Command[] cmds = {wack, offPad, stop, align, stop2, gotocrypto, turn, approach, outtake, ram, backup};
+        Command[] cmds = {clamp, wack, offPad, stop, align, stop2, gotocrypto, turn, approach, outtake, bAndR};
         return new SequentialCommand(cmds);
     }
 

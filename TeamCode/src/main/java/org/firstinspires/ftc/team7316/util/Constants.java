@@ -40,8 +40,8 @@ public class Constants {
     public static final double CLOSE_CRYPTO_DISTANCE = 10;
     public static final double CLOSE_CRYPTO_APPROACH_RED = 7.5;
     public static final double CLOSE_CRYPTO_APPROACH_BLUE = 8.5;
-    public static final double FAR_CRYPTO_APPROACH_RED = 5;
-    public static final double FAR_CRYPTO_APPROACH_BLUE = 5;
+    public static final double FAR_CRYPTO_APPROACH_RED = 4;
+    public static final double FAR_CRYPTO_APPROACH_BLUE = 4;
     //INCHES INCHESSSSS
     public static final double RIGHT_COLUMN_DISTANCE_CLOSE = 9;
     public static final double MIDDLE_COLUMN_DISTANCE_CLOSE = 16.5;
@@ -66,7 +66,7 @@ public class Constants {
     public static final double LEFT_POWER_TIME = 0.8;
 
     public static final double OUTTAKE_POWER = -0.7;
-    public static final double OUTTAKE_TIME = 1;
+    public static final double OUTTAKE_TIME = 0.5;
 
     //balancing pad offsets after whacking jewel
     public static final double JEWEL_WACK_DELTA = 30;

@@ -202,18 +202,19 @@ public class MecanumDriveBase extends Subsystem {
 
     //driving
 
+    public void setMotors(double flPower, double frPower, double blPower, double brPower) {
+        Hardware.instance.backRightDriveMotor.setPower(flPower);
+        Hardware.instance.frontLeftDriveMotor.setPower(frPower);
+        Hardware.instance.frontRightDriveMotor.setPower(blPower);
+        Hardware.instance.backLeftDriveMotor.setPower(brPower);
+    }
+
     public void setMotorPowers(double power) {
-        Hardware.instance.backRightDriveMotor.setPower(power);
-        Hardware.instance.frontLeftDriveMotor.setPower(power);
-        Hardware.instance.frontRightDriveMotor.setPower(power);
-        Hardware.instance.backLeftDriveMotor.setPower(power);
+        setMotors(power, power, power, power);
     }
 
     public void turnMotors(double power) {
-        Hardware.instance.backRightDriveMotor.setPower(-power);
-        Hardware.instance.frontLeftDriveMotor.setPower(power);
-        Hardware.instance.frontRightDriveMotor.setPower(-power);
-        Hardware.instance.backLeftDriveMotor.setPower(power);
+        setMotors(power, -power, power, -power);
     }
 
     public void driveWithSpeedsPID() {
@@ -224,10 +225,10 @@ public class MecanumDriveBase extends Subsystem {
     }
 
     public void driveWithSpeeds() {
-        Hardware.instance.backRightDriveMotor.setPower(weighting * (wantedFlBrSpeed - wantedTurnSpeed));
-        Hardware.instance.frontLeftDriveMotor.setPower(weighting * (wantedFlBrSpeed + wantedTurnSpeed));
-        Hardware.instance.frontRightDriveMotor.setPower(weighting * (wantedFrBlSpeed - wantedTurnSpeed));
-        Hardware.instance.backLeftDriveMotor.setPower(weighting * (wantedFrBlSpeed + wantedTurnSpeed));
+        setMotors(weighting * (wantedFlBrSpeed + wantedTurnSpeed),
+                weighting * (wantedFrBlSpeed - wantedTurnSpeed),
+                weighting * (wantedFrBlSpeed + wantedTurnSpeed),
+                weighting * (wantedFlBrSpeed - wantedTurnSpeed));
     }
 
     public void stopMotors() {

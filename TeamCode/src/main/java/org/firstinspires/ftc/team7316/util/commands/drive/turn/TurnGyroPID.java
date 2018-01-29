@@ -49,7 +49,12 @@ public class TurnGyroPID extends Command {
     private GyroWrapper gyro = Hardware.instance.gyroWrapper;
     public double sumError, lastError, deltaError;
 
-    /** @param deltaAngle the amount to turn in DEGREES */
+    /**
+     * DISCLAIMER: right now it's not delta angle, but the actual target angle
+     * this will be fixed later
+     * and by later i mean never
+     * @param deltaAngle the amount to turn in DEGREES
+     */
     public TurnGyroPID(double deltaAngle) {
         this(deltaAngle, 6);
     }

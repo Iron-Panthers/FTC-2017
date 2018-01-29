@@ -11,6 +11,7 @@ import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.Scheduler;
 import org.firstinspires.ftc.team7316.util.commands.AutoCodes;
 import org.firstinspires.ftc.team7316.util.commands.Command;
+import org.firstinspires.ftc.team7316.util.commands.drive.BackupAndRam;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveOffPad;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance;
@@ -18,6 +19,7 @@ import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroPID;
 import org.firstinspires.ftc.team7316.util.commands.flow.Wait;
 import org.firstinspires.ftc.team7316.util.commands.intake.IntakeForTime;
+import org.firstinspires.ftc.team7316.util.commands.intake.MoveIntakeArm;
 import org.firstinspires.ftc.team7316.util.commands.jewelarm.MoveJewelArm;
 import org.firstinspires.ftc.team7316.util.commands.jewelarm.WackJewel;
 import org.firstinspires.ftc.team7316.util.commands.sensors.PollColor;
@@ -29,8 +31,8 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
  * Created by jerry on 11/19/17.
  */
 
-@Autonomous(name = "red team jewel close")
-public class RedJewelClose extends LinearAutoOpMode {
+@Autonomous(name = "red close", group = "game autos")
+public class RedClose extends LinearAutoOpMode {
 
 //    @Override
 //    public void onInit() {
@@ -45,6 +47,8 @@ public class RedJewelClose extends LinearAutoOpMode {
 
     @Override
     public Command[] createCommands() {
+        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+
         MoveJewelArm movearmout = new MoveJewelArm(JewelArm.JewelArmPosition.OUT);
         PollColor pollColor = new PollColor();
         WackJewel wackjewel = new WackJewel(Alliance.RED);
@@ -61,10 +65,9 @@ public class RedJewelClose extends LinearAutoOpMode {
 
         DriveDistance approach = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_RED, 2);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
-        DriveForTime ram = new DriveForTime(0.3, 0, 1);
-        DriveDistance backup = new DriveDistance(-Constants.CLOSE_CRYPTO_APPROACH_RED, 2);
+        BackupAndRam bAndR = new BackupAndRam();
 
-        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, align, stop2, gotocrypto, turn, approach, outtake, ram, backup};
+        Command[] cmds = {clamp, movearmout, pollColor, wackjewel, movearmin, offPad, stop, align, stop2, gotocrypto, turn, approach, outtake, bAndR};
         return cmds;
     }
 }

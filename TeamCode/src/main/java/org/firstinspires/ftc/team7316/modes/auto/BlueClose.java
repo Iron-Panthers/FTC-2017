@@ -11,6 +11,7 @@ import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.Scheduler;
 import org.firstinspires.ftc.team7316.util.commands.AutoCodes;
 import org.firstinspires.ftc.team7316.util.commands.Command;
+import org.firstinspires.ftc.team7316.util.commands.drive.BackupAndRam;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveOffPad;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance;
@@ -18,6 +19,7 @@ import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroPID;
 import org.firstinspires.ftc.team7316.util.commands.flow.Wait;
 import org.firstinspires.ftc.team7316.util.commands.intake.IntakeForTime;
+import org.firstinspires.ftc.team7316.util.commands.intake.MoveIntakeArm;
 import org.firstinspires.ftc.team7316.util.commands.jewelarm.MoveJewelArm;
 import org.firstinspires.ftc.team7316.util.commands.jewelarm.WackJewel;
 import org.firstinspires.ftc.team7316.util.commands.sensors.PollColor;
@@ -26,16 +28,16 @@ import org.firstinspires.ftc.team7316.util.subsystems.JewelArm;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 /**
- * Created by jerry on 10/28/17.
+ * Created by jerry on 11/19/17.
  */
 
-@Autonomous(name = "blue team jewel far")
-public class BlueWackJewelFar extends LinearAutoOpMode {
+@Autonomous(name = "blue close", group = "game autos")
+public class BlueClose extends LinearAutoOpMode {
 
 //    @Override
 //    public void onInit() {
 //        Hardware.instance.vuforiaCameraWrapper.startTracking();
-//        Scheduler.instance.add(AutoCodes.farBlueJewel());
+//        Scheduler.instance.add(AutoCodes.closeBlueJewel());
 //        Scheduler.instance.add(new UpdateVuforia());
 //    }
 //
@@ -46,6 +48,8 @@ public class BlueWackJewelFar extends LinearAutoOpMode {
 
     @Override
     public Command[] createCommands() {
+        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+
         MoveJewelArm movearmout = new MoveJewelArm(JewelArm.JewelArmPosition.OUT);
         PollColor pollColor = new PollColor();
         WackJewel wackjewel = new WackJewel(Alliance.BLUE);
@@ -55,19 +59,16 @@ public class BlueWackJewelFar extends LinearAutoOpMode {
         Wait stop = new Wait(0.5);
         DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, 0, 1);
         Wait stop2 = new Wait(0.5);
-//        TurnUntilKey detectkey = new TurnUntilKey(-1, -90);
-        DriveDistance backward = new DriveDistance(-Constants.FAR_CRYPTO_DISTANCE, 4);
+//        TurnUntilKey deteckkey = new TurnUntilKey(-1, -90);
+        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.BLUE, DriveDistanceCipher.Position.CLOSE);
 
-        TurnGyroPID turnleft = new TurnGyroPID(90, 3);
-        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.BLUE, DriveDistanceCipher.Position.FAR);
-        TurnGyroPID turnleft2 = new TurnGyroPID(180, 3);
+        TurnGyroPID turn = new TurnGyroPID(90, 3);
 
-        DriveDistance approach = new DriveDistance(Constants.FAR_CRYPTO_APPROACH_BLUE, 2);
-        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME); //add to constants later
-        DriveForTime ram = new DriveForTime(0.3, 0, 1);
-        DriveDistance backup = new DriveDistance(-Constants.FAR_CRYPTO_APPROACH_BLUE, 2);
+        DriveDistance approach = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_BLUE, 2);
+        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
+        BackupAndRam bAndR = new BackupAndRam();
 
-        Command[] cmds = {movearmout, pollColor, wackjewel, movearmin, offPad, stop, align, stop2, backward, turnleft, gotocrypto, turnleft2, approach, outtake, ram, backup};
+        Command[] cmds = {clamp, movearmout, pollColor, wackjewel, movearmin, offPad, stop, align, stop2, gotocrypto, turn, approach, outtake, bAndR};
         return cmds;
     }
 }

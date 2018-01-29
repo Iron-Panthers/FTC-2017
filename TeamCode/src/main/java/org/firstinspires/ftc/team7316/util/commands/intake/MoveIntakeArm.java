@@ -9,15 +9,18 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
  * Created by jerry on 11/18/17. sawn by chris
  */
 
-public class ClampIntake extends Command {
+public class MoveIntakeArm extends Command {
 
-    public ClampIntake() {
+    private double position;
 
+    public MoveIntakeArm(double position) {
+        requires(Subsystems.instance.glyphIntake);
+        this.position = position;
     }
 
     @Override
     public void init() {
-        Subsystems.instance.glyphIntake.setServoPosition(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+        Subsystems.instance.glyphIntake.setServoPosition(position);
     }
 
     @Override
