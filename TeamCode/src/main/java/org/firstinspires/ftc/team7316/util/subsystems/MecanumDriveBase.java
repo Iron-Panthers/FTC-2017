@@ -203,10 +203,10 @@ public class MecanumDriveBase extends Subsystem {
     //driving
 
     public void setMotors(double flPower, double frPower, double blPower, double brPower) {
-        Hardware.instance.backRightDriveMotor.setPower(flPower);
-        Hardware.instance.frontLeftDriveMotor.setPower(frPower);
-        Hardware.instance.frontRightDriveMotor.setPower(blPower);
-        Hardware.instance.backLeftDriveMotor.setPower(brPower);
+        Hardware.instance.frontLeftDriveMotor.setPower(flPower);
+        Hardware.instance.frontRightDriveMotor.setPower(frPower);
+        Hardware.instance.backLeftDriveMotor.setPower(blPower);
+        Hardware.instance.backRightDriveMotor.setPower(brPower);
     }
 
     public void setMotorPowers(double power) {

@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.team7316.util.commands.intake;
 
+import com.qualcomm.robotcore.util.ElapsedTime;
+
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.Command;
@@ -12,6 +14,9 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 public class MoveIntakeArm extends Command {
 
     private double position;
+    private final double SERVO_TRAVEL_TIME = 0.5;
+
+    private ElapsedTime timer = new ElapsedTime();
 
     public MoveIntakeArm(double position) {
         requires(Subsystems.instance.glyphIntake);
@@ -21,6 +26,7 @@ public class MoveIntakeArm extends Command {
     @Override
     public void init() {
         Subsystems.instance.glyphIntake.setServoPosition(position);
+        timer.reset();
     }
 
     @Override
@@ -30,7 +36,7 @@ public class MoveIntakeArm extends Command {
 
     @Override
     public boolean shouldRemove() {
-        return false;
+        return timer.seconds() > SERVO_TRAVEL_TIME;
     }
 
     @Override

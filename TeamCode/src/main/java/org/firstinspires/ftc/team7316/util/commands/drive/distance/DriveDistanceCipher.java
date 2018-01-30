@@ -13,8 +13,8 @@ public class DriveDistanceCipher extends Command {
 
     private DriveDistance drivecommand;
     private final double DRIVE_TIMEOUT = 4;
-    private final double closeOffset = 1;
-    private final double farOffset = -4;
+    private final double closeOffset = 0;
+    private final double farOffset = -3;
 
     private Alliance alliance;
     private Position position;
