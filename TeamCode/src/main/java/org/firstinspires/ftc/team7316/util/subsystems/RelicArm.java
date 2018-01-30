@@ -14,6 +14,8 @@ import org.firstinspires.ftc.team7316.util.commands.relicarm.RelicArmJoystick;
 
 public class RelicArm extends Subsystem {
 
+    private RelicArmJoystick relicArmJoystick = new RelicArmJoystick();
+
     private DcMotor relicArmMotor = Hardware.instance.relicArmMotor;
     private CRServo relicShoulderServo = Hardware.instance.relicShoulderServo;
     private Servo relicWristServo = Hardware.instance.relicWristServo;
@@ -26,7 +28,7 @@ public class RelicArm extends Subsystem {
 
     @Override
     public Command defaultTeleopCommand() {
-        return new RelicArmJoystick();
+        return relicArmJoystick;
     }
 
     public void setArmPower(double power) {
