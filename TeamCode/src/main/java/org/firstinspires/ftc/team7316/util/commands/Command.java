@@ -39,6 +39,8 @@ public abstract class Command {
         this.end();
     }
 
+    //  static methods
+
     public static void run(Command c, LinearOpMode opMode) {
         c.init();
         while(!c.shouldRemove()) {
