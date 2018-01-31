@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.team7316.util.input;
 
 import org.firstinspires.ftc.team7316.util.Hardware;
+import org.firstinspires.ftc.team7316.util.Scheduler;
+import org.firstinspires.ftc.team7316.util.commands.BlankCommand;
 
 /**
  * Created by jerry on 1/23/18.
@@ -21,17 +23,13 @@ public class SingleButtonPressWrapper extends ButtonWrapper {
 
     @Override
     public void loop() {
-        if(super.state() && !lastValue) {
-            pressed = true;
-            lastValue = true;
+
+        boolean currentValue = super.state();
+        if (currentValue && !lastValue) {
+            pid____+++ //dongus
         }
-        else if(super.state() && lastValue) {
-            pressed = false;
-        }
-        else {
-            pressed = false;
-            lastValue = false;
-        }
+        lastValue = currentValue;
+
         Hardware.log("this button", pressed);
     }
 
