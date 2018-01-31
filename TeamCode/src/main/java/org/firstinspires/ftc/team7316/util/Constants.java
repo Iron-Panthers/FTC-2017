@@ -98,7 +98,7 @@ public class Constants {
     public static final int NO_COLOR_THRESHOLD_BLUE = NO_COLOR_BLUE * COLOR_BUFFER_SIZE;
 
     //Drive Base PIDPath Constants
-    public static final double DRIVE_P = 0.005; // DEAD
+    public static final double DRIVE_P = 0.008; // DEAD
     public static final double DRIVE_I = 0.00026; // 0.0002
     public static final double DRIVE_D = 0.0000; // 0.00008
     public static final double DRIVE_F = 0.00007;
