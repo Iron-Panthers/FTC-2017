@@ -21,9 +21,9 @@ public class BackupAndRam extends Command {
     public void init() {
         Command[] cmds = {
                 new MoveIntakeArm(0.8),
-                new DriveForTime(0.5, Math.PI, 0.5),
+                new DriveDistance(-4, 1.5),
                 new MoveIntakeArm(0),
-                new DriveForTime(0.5, 0, 0.5),
+                new DriveForTime(0.5, 0, 0.75),
                 new DriveDistance(-Constants.FAR_CRYPTO_APPROACH_RED, 2)
         };
         for(Command c : cmds) {
