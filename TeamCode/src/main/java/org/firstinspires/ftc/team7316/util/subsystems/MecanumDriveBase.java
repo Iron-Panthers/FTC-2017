@@ -14,7 +14,7 @@ import org.firstinspires.ftc.team7316.copypastaLib.MotionPath;
 
 public class MecanumDriveBase extends Subsystem {
 
-    private Command driveWithJoystick = new DriveWithJoystick();
+    private Command driveWithJoystick;
 
     //all speed in ticks per second
 
@@ -41,6 +41,9 @@ public class MecanumDriveBase extends Subsystem {
 
     @Override
     public Command defaultTeleopCommand() {
+        if(driveWithJoystick == null) {
+            driveWithJoystick = new DriveWithJoystick();
+        }
         return driveWithJoystick;
     }
 

@@ -15,8 +15,8 @@ import org.firstinspires.ftc.team7316.util.commands.intake.GlyphIntakeJoystick;
 
 public class GlyphIntake extends Subsystem {
 
-    private Command clampIntake = new ClampIntake();
-    private Command glyphIntakeJoystick = new GlyphIntakeJoystick();
+    private Command clampIntake;
+    private Command glyphIntakeJoystick;
 
     private Servo servo;
     private DcMotor rightIntakeMotor;
@@ -63,11 +63,17 @@ public class GlyphIntake extends Subsystem {
 
     @Override
     public Command defaultAutoCommand() {
+        if(clampIntake == null) {
+            clampIntake = new ClampIntake();
+        }
         return clampIntake;
     }
 
     @Override
     public Command defaultTeleopCommand() {
+        if(glyphIntakeJoystick == null) {
+            glyphIntakeJoystick = new GlyphIntakeJoystick();
+        }
         return glyphIntakeJoystick;
     }
 }
