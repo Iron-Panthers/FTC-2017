@@ -23,30 +23,30 @@ import org.firstinspires.ftc.team7316.util.commands.sensors.PollColor;
 import org.firstinspires.ftc.team7316.util.subsystems.JewelArm;
 
 /**
- * Created by jerry on 1/29/18.
+ * Created by jerry on 1/30/18.
  */
 
-@Autonomous(name = "red close multiglyph", group = "game autos")
-public class RedCloseMultiglyph extends LinearAutoOpMode {
+@Autonomous(name = "blue close multiglyph", group = "game autos")
+public class BlueCloseMutliglyph extends LinearAutoOpMode {
     @Override
     public Command[] createCommands() {
         MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
 
         MoveJewelArm movearmout = new MoveJewelArm(JewelArm.JewelArmPosition.OUT);
         PollColor pollColor = new PollColor();
-        WackJewel wackjewel = new WackJewel(Alliance.RED);
+        WackJewel wackjewel = new WackJewel(Alliance.BLUE);
         MoveJewelArm movearmin = new MoveJewelArm(JewelArm.JewelArmPosition.IN);
 
-        DriveOffPad offPad = new DriveOffPad(Alliance.RED);
+        DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
         Wait stop = new Wait(0.5);
-        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, Math.PI, 1);
+        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, 0, 1);
         Wait stop2 = new Wait(0.5);
-//        TurnUntilKey detectkey = new TurnUntilKey(1, 90);
-        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.RED, DriveDistanceCipher.Position.CLOSE);
+//        TurnUntilKey deteckkey = new TurnUntilKey(-1, -90);
+        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.BLUE, DriveDistanceCipher.Position.CLOSE);
 
         TurnGyroPID turn = new TurnGyroPID(90, 3);
 
-        DriveDistance approach = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_RED, 2);
+        DriveDistance approach = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_BLUE, 2);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
         BackupAndRam bAndR = new BackupAndRam();
 

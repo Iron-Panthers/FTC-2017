@@ -2,6 +2,7 @@ package org.firstinspires.ftc.team7316.util.commands.drive;
 
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
+import org.firstinspires.ftc.team7316.util.Util;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
@@ -37,7 +38,7 @@ public class StraightTurn extends Command {
     @Override
     public void loop() {
         //ripped from MecanumDriveBase
-        double wantedMovementAngle = targetAngle - (Hardware.instance.gyroWrapper.getHeading() - startAngle);
+        double wantedMovementAngle = Util.wrap(targetAngle - startAngle + (Hardware.instance.gyroWrapper.getHeading() - startAngle));
         wantedMovementAngle *= Math.PI / 180;
 
         double y = driveRate * Math.cos(wantedMovementAngle);
