@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.team7316.util.input;
 
+import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.Scheduler;
 import org.firstinspires.ftc.team7316.util.commands.BlankCommand;
@@ -11,9 +12,11 @@ import org.firstinspires.ftc.team7316.util.commands.BlankCommand;
 public class SingleButtonPressWrapper extends ButtonWrapper {
 
     private boolean pressed = false;
+    private int index;
 
-    public SingleButtonPressWrapper(GamepadButton gamepadInput, GamepadWrapper gpSource) {
+    public SingleButtonPressWrapper(GamepadButton gamepadInput, GamepadWrapper gpSource, int index) {
         super(gamepadInput, gpSource);
+        this.index = index;
     }
 
     @Override
@@ -26,7 +29,7 @@ public class SingleButtonPressWrapper extends ButtonWrapper {
 
         boolean currentValue = super.state();
         if (currentValue && !lastValue) {
-            //pid____+++ //dongus
+            Constants.tuneConstants(index);
         }
         lastValue = currentValue;
 

@@ -5,6 +5,8 @@ package org.firstinspires.ftc.team7316.util;
  */
 public class Constants {
 
+    public static boolean halve;
+
     public static final double JOYSTICK_DRIVE_DEADZONE = 0.03;
     public static final double DRIVER_MOTOR_DEADZONE = 0.1;
     public static final int ENCODER_TICK_PER_REV = 1120; //halved due to gear ratio
@@ -98,15 +100,39 @@ public class Constants {
     public static final int NO_COLOR_THRESHOLD_BLUE = NO_COLOR_BLUE * COLOR_BUFFER_SIZE;
 
     //Drive Base PIDPath Constants
-    public static final double DRIVE_P = 0.008; // DEAD
-    public static final double DRIVE_I = 0.00026; // 0.0002
-    public static final double DRIVE_D = 0.0000; // 0.00008
-    public static final double DRIVE_F = 0.00007;
+    public static double DRIVE_P = 0.008; // DEAD
+    public static double DRIVE_I = 0.00026; // 0.0002
+    public static double DRIVE_D = 0.0000; // 0.00008
+    public static double DRIVE_F = 0.00007;
 
-    public static final double GYRO_P = 0.025;
-    public static final double GYRO_I = 0.003; //original 0.005
-    public static final double GYRO_D = 0.0004; //original 0.0002
-    public static final double GYRO_F = 0.00397;
+    public static void tuneDriveConstants(int index) {
+        if (index == 0) {
+            Constants.GYRO_P = (halve) ? Constants.DRIVE_P / 1.5: Constants.DRIVE_P * 1.5;
+        } else if (index == 1) {
+            Constants.GYRO_I = (halve) ? Constants.DRIVE_I / 1.5 : Constants.DRIVE_I * 1.5;
+        } else if (index == 2) {
+            Constants.GYRO_D = (halve) ? Constants.DRIVE_D / 1.5 : Constants.DRIVE_D * 1.5;
+        } else if (index == 3) {
+            Constants.GYRO_F = (halve) ? Constants.DRIVE_F / 1.5 : Constants.DRIVE_F * 1.5;
+        }
+    }
+
+    public static double GYRO_P = 0.025; //RE ADD FINAL
+    public static double GYRO_I = 0.003; //original 0.005
+    public static double GYRO_D = 0.0004; //original 0.0002
+    public static double GYRO_F = 0.00397;
+
+    public static void tuneConstants(int index) {
+        if (index == 0) {
+            Constants.GYRO_P = (halve) ? Constants.GYRO_P / 1.5: Constants.GYRO_P * 1.5;
+        } else if (index == 1) {
+            Constants.GYRO_I = (halve) ? Constants.GYRO_I / 1.5 : Constants.GYRO_I * 1.5;
+        } else if (index == 2) {
+            Constants.GYRO_D = (halve) ? Constants.GYRO_D / 1.5 : Constants.GYRO_D * 1.5;
+        } else if (index == 3) {
+            Constants.GYRO_F = (halve) ? Constants.GYRO_F / 1.5 : Constants.GYRO_F * 1.5;
+        }
+    }
 
     public static final double VP_DRIVE_P = 0;
     public static final double VP_DRIVE_I = 0;

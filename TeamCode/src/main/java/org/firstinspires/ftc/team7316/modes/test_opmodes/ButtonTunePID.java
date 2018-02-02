@@ -4,9 +4,11 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.Scheduler;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistanceInput;
+import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroInput;
 import org.firstinspires.ftc.team7316.util.input.ButtonWrapper;
 import org.firstinspires.ftc.team7316.util.input.GamepadButton;
 import org.firstinspires.ftc.team7316.util.input.GamepadWrapper;
@@ -20,11 +22,6 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 @TeleOp(name = "button tune pid")
 public class ButtonTunePID extends OpMode {
-
-    private double p = 0.015;
-    private double i = 0.0002;
-    private double d = 0.00008;
-    private double f = 0.00007;
 
     private ElapsedTime timer = new ElapsedTime();
     private double previousTime = 0;
@@ -49,54 +46,34 @@ public class ButtonTunePID extends OpMode {
     @Override
     public void loop() {
         Scheduler.instance.loop();
-        boolean triggerpressed = gp.right_bumper.state();
-        if(gp.left_bumper.state()) {
-            DriveDistanceInput drv = new DriveDistanceInput(p,i,d,f);
-            drv.init();
-            while (!drv.shouldRemove()) {
-                drv.loop();
-            }
-            drv.interrupt();
-        }
-        else if(gp.a_button.state()) {
-            if(deltaTime() > timeThreshold) {
-                p = (triggerpressed) ? p / 2: p * 2;
-            }
-            else {
-                previousTime = timer.seconds();
-            }
-        }
-        else if(gp.b_button.state()) {
-            if(deltaTime() > timeThreshold) {
-                i = (triggerpressed) ? i / 2 : i * 2;
-            }
-            else {
-                previousTime = timer.seconds();
+        Constants.halve = gp.right_bumper.state();
+
+        if (gp.left_bumper.state()) {
+            if (Constants.halve) {
+                TurnGyroInput turn = new TurnGyroInput(Constants.GYRO_P,Constants.GYRO_I,Constants.GYRO_D,Constants.GYRO_F);
+                turn.init();
+                while (!turn.shouldRemove()) {
+                    turn.loop();
+                }
+                turn._end();
+            } else {
+                DriveDistanceInput drv = new DriveDistanceInput(Constants.DRIVE_P,Constants.DRIVE_I,Constants.DRIVE_D,Constants.DRIVE_F);
+                drv.init();
+                while (!drv.shouldRemove()) {
+                    drv.loop();
+                }
+                drv._end();
             }
         }
-        else if(gp.x_button.state()) {
-            if(deltaTime() > timeThreshold) {
-                d = (triggerpressed) ? d / 2 : d * 2;
-            }
-            else {
-                previousTime = timer.seconds();
-            }
-        }
-        else if(gp.y_button.state()) {
-            if(deltaTime() > timeThreshold) {
-                f = (triggerpressed) ? f / 2 : f * 2;
-            }
-            else {
-                previousTime = timer.seconds();
-            }
-        }
-        Hardware.log("p value", p);
-        Hardware.log("i value", i);
-        Hardware.log("d value", d);
-        Hardware.log("f value", f);
+
+        Hardware.log("gryo p value", Constants.GYRO_P);
+        Hardware.log("gryo i value", Constants.GYRO_I);
+        Hardware.log("gryo d value", Constants.GYRO_D);
+        Hardware.log("gryo f value", Constants.GYRO_F);
+        Hardware.log("drive p value", Constants.DRIVE_P);
+        Hardware.log("drive i value", Constants.DRIVE_I);
+        Hardware.log("drive d value", Constants.DRIVE_D);
+        Hardware.log("drive f value", Constants.DRIVE_F);
     }
 
-    private double deltaTime() {
-        return timer.seconds() - previousTime;
-    }
 }
