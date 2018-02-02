@@ -14,6 +14,7 @@ import java.util.Collections;
 public class SimultaneousCommands extends Command implements TerminatedListener {
 
     private ArrayList<Command> cmds = new ArrayList<>();
+    private boolean done = false;
 
     public SimultaneousCommands(Command... cmds) {
         Collections.addAll(this.cmds, cmds);
@@ -50,6 +51,8 @@ public class SimultaneousCommands extends Command implements TerminatedListener 
 
     @Override
     public void end() {
+        this.done = true;
+
         for (Subsystem subsystem : this.requiredSubsystems) {
             subsystem.needsDefault = true;
         }
@@ -62,5 +65,10 @@ public class SimultaneousCommands extends Command implements TerminatedListener 
     @Override
     public void onTerminated(Command terminated) {
         this.cmds.remove(terminated);
+    }
+
+    @Override
+    public boolean isDone() {
+        return done;
     }
 }

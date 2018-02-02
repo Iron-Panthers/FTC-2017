@@ -45,7 +45,7 @@ public class Scheduler {
             Command cmd = commands.get(i);
             cmd.loop();
 
-            if (cmd.shouldRemove()) {
+            if (cmd.shouldRemove() || (cmd.terminatedListener != null && cmd.terminatedListener.isDone())) {
                 commands.remove(i);
 
                 for (int j = 0; j < 10; j++) {
