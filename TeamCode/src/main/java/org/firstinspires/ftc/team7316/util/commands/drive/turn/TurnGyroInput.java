@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.team7316.util.commands.drive.turn;
 
 import org.firstinspires.ftc.team7316.util.Constants;
+import org.firstinspires.ftc.team7316.util.Util;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
@@ -32,6 +33,7 @@ public class TurnGyroInput extends Command {
 
         turn = new TurnGyroPID(deltaAngle);
         deltaAngle += 90;
+        Util.wrap(deltaAngle);
         turn.init();
     }
 

@@ -51,18 +51,10 @@ public class ButtonTunePID extends OpMode {
         if (gp.left_bumper.state()) {
             if (Constants.halve) {
                 TurnGyroInput turn = new TurnGyroInput(Constants.GYRO_P,Constants.GYRO_I,Constants.GYRO_D,Constants.GYRO_F);
-                turn.init();
-                while (!turn.shouldRemove()) {
-                    turn.loop();
-                }
-                turn._end();
+                Scheduler.instance.add(turn);
             } else {
                 DriveDistanceInput drv = new DriveDistanceInput(Constants.DRIVE_P,Constants.DRIVE_I,Constants.DRIVE_D,Constants.DRIVE_F);
-                drv.init();
-                while (!drv.shouldRemove()) {
-                    drv.loop();
-                }
-                drv._end();
+                Scheduler.instance.add(drv);
             }
         }
 
