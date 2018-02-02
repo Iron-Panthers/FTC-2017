@@ -47,6 +47,11 @@ public class Scheduler {
 
             if (cmd.shouldRemove()) {
                 commands.remove(i);
+
+                for (int j = 0; j < 10; j++) {
+                    System.out.println(cmd.getClass() + " removed.");
+                }
+
                 cmd._end();
 
                 for (Subsystem subsystem : cmd.requiredSubsystems) {
