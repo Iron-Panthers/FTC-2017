@@ -19,7 +19,7 @@ public class RedCloseLeft extends AutoBaseOpMode {
     public void onInit() {
         Hardware.instance.vuforiaCameraWrapper.vuMark = RelicRecoveryVuMark.LEFT;
         Hardware.instance.vuforiaCameraWrapper.startTracking();
-        Scheduler.instance.add(AutoCodes.closeBlueJewel());
+        Scheduler.instance.add(AutoCodes.blueClose());
         Scheduler.instance.add(new UpdateVuforia());
     }
 

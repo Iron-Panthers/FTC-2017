@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.team7316.util.commands.sensors;
 
+import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 
@@ -20,7 +21,7 @@ public class UpdateVuforia extends Command {
 
     @Override
     public boolean shouldRemove() {
-        return false;
+        return Hardware.instance.vuforiaCameraWrapper.vuMark != RelicRecoveryVuMark.UNKNOWN;
     }
 
     @Override
