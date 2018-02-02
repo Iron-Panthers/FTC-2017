@@ -95,6 +95,13 @@ public class MecanumDriveBase extends Subsystem {
         wantedFlBrSpeed = fL_bRpower;
     }
 
+    public void setMotorPID(double p, double i, double d, double f) {
+        Hardware.instance.frontLeftDriveMotorWrapper.pid.setPID(p, i, d, f);
+        Hardware.instance.frontRightDriveMotorWrapper.pid.setPID(p, i, d, f);
+        Hardware.instance.backLeftDriveMotorWrapper.pid.setPID(p, i, d, f);
+        Hardware.instance.backRightDriveMotorWrapper.pid.setPID(p, i, d, f);
+    }
+
     public void setMotorTargets(int ticks) {
         Hardware.instance.frontLeftDriveMotorWrapper.setTargetTicks(ticks);
         Hardware.instance.frontRightDriveMotorWrapper.setTargetTicks(ticks);
@@ -194,18 +201,19 @@ public class MecanumDriveBase extends Subsystem {
 
     //driving
 
+    public void setMotors(double flPower, double frPower, double blPower, double brPower) {
+        Hardware.instance.frontLeftDriveMotor.setPower(flPower);
+        Hardware.instance.frontRightDriveMotor.setPower(frPower);
+        Hardware.instance.backLeftDriveMotor.setPower(blPower);
+        Hardware.instance.backRightDriveMotor.setPower(brPower);
+    }
+
     public void setMotorPowers(double power) {
-        Hardware.instance.backRightDriveMotor.setPower(power);
-        Hardware.instance.frontLeftDriveMotor.setPower(power);
-        Hardware.instance.frontRightDriveMotor.setPower(power);
-        Hardware.instance.backLeftDriveMotor.setPower(power);
+        setMotors(power, power, power, power);
     }
 
     public void turnMotors(double power) {
-        Hardware.instance.backRightDriveMotor.setPower(-power);
-        Hardware.instance.frontLeftDriveMotor.setPower(power);
-        Hardware.instance.frontRightDriveMotor.setPower(-power);
-        Hardware.instance.backLeftDriveMotor.setPower(power);
+        setMotors(power, -power, power, -power);
     }
 
     public void driveWithSpeedsPID() {
@@ -216,10 +224,10 @@ public class MecanumDriveBase extends Subsystem {
     }
 
     public void driveWithSpeeds() {
-        Hardware.instance.backRightDriveMotor.setPower(weighting * (wantedFlBrSpeed - wantedTurnSpeed));
-        Hardware.instance.frontLeftDriveMotor.setPower(weighting * (wantedFlBrSpeed + wantedTurnSpeed));
-        Hardware.instance.frontRightDriveMotor.setPower(weighting * (wantedFrBlSpeed - wantedTurnSpeed));
-        Hardware.instance.backLeftDriveMotor.setPower(weighting * (wantedFrBlSpeed + wantedTurnSpeed));
+        setMotors(weighting * (wantedFlBrSpeed + wantedTurnSpeed),
+                weighting * (wantedFrBlSpeed - wantedTurnSpeed),
+                weighting * (wantedFrBlSpeed + wantedTurnSpeed),
+                weighting * (wantedFlBrSpeed - wantedTurnSpeed));
     }
 
     public void stopMotors() {

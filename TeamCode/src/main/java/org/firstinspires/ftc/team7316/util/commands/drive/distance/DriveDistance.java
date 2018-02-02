@@ -50,7 +50,7 @@ public class DriveDistance extends Command {
     private ArrayList<Double> powerBR = new ArrayList<>();
 
     public DriveDistance(double inches) {
-        this(inches, 10);
+        this(inches, 6);
     }
 
     /**
@@ -82,10 +82,11 @@ public class DriveDistance extends Command {
         Hardware.log("flError", Hardware.instance.frontLeftDriveMotorWrapper.getError());
         Hardware.log("frError", Hardware.instance.frontRightDriveMotorWrapper.getError());
         Hardware.log("current target", Hardware.instance.frontLeftDriveMotorWrapper.pid.getTargetTicksCurrent());
+
         times.add(Hardware.instance.backRightDriveMotorWrapper.pid.getElapsedSeconds());
         targets.add((double)Hardware.instance.backRightDriveMotorWrapper.pid.getTargetTicksCurrent());
 
-        positionsFL.add((double)Hardware.instance.frontRightDriveMotor.getCurrentPosition());
+        positionsFL.add((double)Hardware.instance.frontLeftDriveMotor.getCurrentPosition());
         positionsFR.add((double)Hardware.instance.frontRightDriveMotor.getCurrentPosition());
         positionsBL.add((double)Hardware.instance.backLeftDriveMotor.getCurrentPosition());
         positionsBR.add((double)Hardware.instance.backRightDriveMotor.getCurrentPosition());

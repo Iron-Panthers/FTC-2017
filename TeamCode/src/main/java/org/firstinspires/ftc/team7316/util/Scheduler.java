@@ -22,6 +22,10 @@ public class Scheduler {
         return commands;
     }
 
+    public ArrayList<Command> getBuffer() {
+        return newCommandBuffer;
+    }
+
     public void add(Command newCommand) {
         if(newCommand != null) {
             newCommandBuffer.add(0, newCommand);

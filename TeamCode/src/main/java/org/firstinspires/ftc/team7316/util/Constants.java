@@ -35,11 +35,13 @@ public class Constants {
     public static final double DEGREES_PER_SECOND_COAST = 180;
     //drive distances
     public static final double JEWEL_WHACK_DISTANCE = 3.5; //inches
-    public static final double FAR_CRYPTO_DISTANCE = 9; //inches after driving for time after off the balancing pad
+    public static final double FAR_CRYPTO_DISTANCE = 9+1; //inches after driving for time after off the balancing pad
     public static final double CRYPTOBOX_STRAFE_DISTANCE = 11.25;//inches too
     public static final double CLOSE_CRYPTO_DISTANCE = 10;
     public static final double CLOSE_CRYPTO_APPROACH_RED = 7.5;
     public static final double CLOSE_CRYPTO_APPROACH_BLUE = 8.5;
+    public static final double FAR_CRYPTO_APPROACH_RED = 4;
+    public static final double FAR_CRYPTO_APPROACH_BLUE = 4;
     //INCHES INCHESSSSS
     public static final double RIGHT_COLUMN_DISTANCE_CLOSE = 9;
     public static final double MIDDLE_COLUMN_DISTANCE_CLOSE = 16.5;
@@ -64,7 +66,7 @@ public class Constants {
     public static final double LEFT_POWER_TIME = 0.8;
 
     public static final double OUTTAKE_POWER = -0.7;
-    public static final double OUTTAKE_TIME = 1;
+    public static final double OUTTAKE_TIME = 0.5;
 
     //balancing pad offsets after whacking jewel
     public static final double JEWEL_WACK_DELTA = 30;
@@ -96,12 +98,12 @@ public class Constants {
     public static final int NO_COLOR_THRESHOLD_BLUE = NO_COLOR_BLUE * COLOR_BUFFER_SIZE;
 
     //Drive Base PIDPath Constants
-    public static final double DRIVE_P = 0.01; // DEAD
-    public static final double DRIVE_I = 0.0002; // DEAD
-    public static final double DRIVE_D = 0.00016; // DEAD
-    public static final double DRIVE_F = 0.00042;
+    public static final double DRIVE_P = 0.008; // DEAD
+    public static final double DRIVE_I = 0.00026; // 0.0002
+    public static final double DRIVE_D = 0.0000; // 0.00008
+    public static final double DRIVE_F = 0.00007;
 
-    public static final double GYRO_P = 0.02;
+    public static final double GYRO_P = 0.025;
     public static final double GYRO_I = 0.003; //original 0.005
     public static final double GYRO_D = 0.0004; //original 0.0002
     public static final double GYRO_F = 0.00397;
@@ -111,7 +113,7 @@ public class Constants {
     public static final double VP_DRIVE_D = 0;
     public static final double VP_DRIVE_F = 0;
 
-    public static final double DISTANCE_ERROR_RANGE = 0.4; //inches
+    public static final double DISTANCE_ERROR_RANGE = 0.6; //inches
     public static final int DISTANCE_ERROR_RANGE_TICKS = inchesToTicks(DISTANCE_ERROR_RANGE);
 
     public static final double FORWARD_MOTOR_DEADZONE = 0.1;

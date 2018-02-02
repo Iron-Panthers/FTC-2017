@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class TurnGyroPID extends Command {
 
-    public static final double ERROR_THRESHOLD = 1, DELTA_THRESHOLD = 2, MAX_POWER = 1, ACCEL_RATE = 240;
+    public static final double ERROR_THRESHOLD = 2, DELTA_THRESHOLD = 2, MAX_POWER = 1, ACCEL_RATE = 240;
     private double deltaAngle, startAngle, targetAngleCurrent, targetAngleFinal, TURN_TIME, ACCEL_TIME, COAST_TIME, MAX_SPEED;
 
     private Direction direction;
@@ -49,7 +49,12 @@ public class TurnGyroPID extends Command {
     private GyroWrapper gyro = Hardware.instance.gyroWrapper;
     public double sumError, lastError, deltaError;
 
-    /** @param deltaAngle the amount to turn in DEGREES */
+    /**
+     * DISCLAIMER: right now it's not delta angle, but the actual target angle
+     * this will be fixed later
+     * and by later i mean never
+     * @param deltaAngle the amount to turn in DEGREES
+     */
     public TurnGyroPID(double deltaAngle) {
         this(deltaAngle, 6);
     }
