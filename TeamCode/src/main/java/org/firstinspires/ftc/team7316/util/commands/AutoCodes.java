@@ -147,12 +147,12 @@ public class AutoCodes {
 
     public static SequentialCommand closeMultiglyph() {
 //        StraightTurn moveToPit = new StraightTurn(-90, 0.7, 0.45);
-        TurnGyroPID turn180 = new TurnGyroPID(-90, 3, 100);
-        DriveDistance driveToPit = new DriveDistance(60);
-        DriveWhileIntake collectGlyphs = new DriveWhileIntake(0.7, 0.35, 3);
-        TurnGyroPID turn180_2 = new TurnGyroPID(90, 3, 100);
+        TurnGyroPID turn180 = new TurnGyroPID(-90, 4, 100);
+        DriveDistance driveToPit = new DriveDistance(25);
+        DriveWhileIntake collectGlyphs = new DriveWhileIntake(-0.7, 0.4, 5);
+        TurnGyroPID turn180_2 = new TurnGyroPID(90, 4, 100);
 
-        DriveDistance backToCrypto = new DriveDistance(60);
+        DriveDistance backToCrypto = new DriveDistance(35);
         IntakeForTime outtake2 = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
         SequentialCommand bAndR2 = backUpAndRam();
 
@@ -165,8 +165,8 @@ public class AutoCodes {
                 new MoveIntakeArm(0.8),
                 new DriveDistance(-4, 1.5),
                 new MoveIntakeArm(0),
-                new DriveForTime(0.5, 0, 0.75),
-                new DriveDistance(-Constants.FAR_CRYPTO_APPROACH_RED, 2)
+                new DriveForTime(0.5, 0, 0.55),
+                new DriveDistance(-Constants.FAR_CRYPTO_APPROACH_RED - 14, 2)
         };
         return new SequentialCommand(cmds);
     }

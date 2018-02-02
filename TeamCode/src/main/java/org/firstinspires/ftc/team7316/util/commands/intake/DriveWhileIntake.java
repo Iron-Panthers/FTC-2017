@@ -29,7 +29,7 @@ public class DriveWhileIntake extends Command {
 
     @Override
     public void init() {
-        Subsystems.instance.glyphIntake.setServoPositionScaled(0.2);
+        Subsystems.instance.glyphIntake.setServoPositionScaled(0.1);
         timer.reset();
     }
 
