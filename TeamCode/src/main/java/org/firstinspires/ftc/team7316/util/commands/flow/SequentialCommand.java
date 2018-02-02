@@ -17,6 +17,7 @@ public class SequentialCommand extends Command implements TerminatedListener {
     public SequentialCommand(Command... commands) {
         this.cmds = commands;
 
+        this.shouldBeReplaced = false;
         for (Command cmd : commands) {
             cmd.terminatedListener = this;
             for (Subsystem sub : cmd.requiredSubsystems) {
@@ -34,7 +35,7 @@ public class SequentialCommand extends Command implements TerminatedListener {
 
         if (index < cmds.length) {
             Command cmd = cmds[index];
-            cmd.shouldReplace = false;
+            cmd.shouldBeReplaced = false;
             Scheduler.instance.add(cmd);
         }
     }
@@ -57,7 +58,7 @@ public class SequentialCommand extends Command implements TerminatedListener {
         }
         for (Command cmd : this.cmds) {
             cmd.terminatedListener = null;
-            cmd.shouldReplace = true;
+            cmd.shouldBeReplaced = true;
         }
     }
 
@@ -67,7 +68,7 @@ public class SequentialCommand extends Command implements TerminatedListener {
         index++;
         if (index < cmds.length) {
             Command cmd = cmds[index];
-            cmd.shouldReplace = false;
+            cmd.shouldBeReplaced = false;
             Scheduler.instance.add(cmd);
         }
     }
