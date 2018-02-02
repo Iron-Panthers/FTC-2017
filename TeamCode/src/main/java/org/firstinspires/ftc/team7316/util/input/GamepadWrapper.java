@@ -33,9 +33,9 @@ public class GamepadWrapper {
         this.right_axis_y = new AxisWrapper(GamepadAxis.R_STICK_Y, this);
 
         this.a_button = new SingleButtonPressWrapper(GamepadButton.A_BUTTON, this, 3);
-        this.b_button = new SingleButtonPressWrapper(GamepadButton.A_BUTTON, this, 0);
-        this.x_button = new SingleButtonPressWrapper(GamepadButton.A_BUTTON, this, 2);
-        this.y_button = new SingleButtonPressWrapper(GamepadButton.A_BUTTON, this, 1);
+        this.b_button = new SingleButtonPressWrapper(GamepadButton.B_BUTTON, this, 0);
+        this.x_button = new SingleButtonPressWrapper(GamepadButton.X_BUTTON, this, 2);
+        this.y_button = new SingleButtonPressWrapper(GamepadButton.Y_BUTTON, this, 1);
 //        this.a_button = new SingleButtonPressWrapper(GamepadButton.A_BUTTON, this);
 //        this.b_button = new SingleButtonPressWrapper(GamepadButton.B_BUTTON, this);
 //        this.x_button = new SingleButtonPressWrapper(GamepadButton.X_BUTTON, this);
