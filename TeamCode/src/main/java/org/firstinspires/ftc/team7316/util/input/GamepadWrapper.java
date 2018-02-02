@@ -72,12 +72,6 @@ public class GamepadWrapper {
         Scheduler.instance.add(rightTriggerWrapper);
     }
 
-    public void modifyButton(ButtonWrapper button, ButtonWrapper newButton) {
-        Scheduler.instance.removeFromBuffer(button);
-        button = newButton;
-        Scheduler.instance.add(button);
-    }
-
     public boolean buttonState(GamepadButton buttonIndex) {
         switch (buttonIndex) {
             case A_BUTTON: return gamepad.a;

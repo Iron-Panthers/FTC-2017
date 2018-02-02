@@ -2,7 +2,6 @@ package org.firstinspires.ftc.team7316.util.input;
 
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.Scheduler;
-import org.firstinspires.ftc.team7316.util.commands.BlankCommand;
 
 /**
  * Created by jerry on 1/23/18.

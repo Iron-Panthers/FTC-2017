@@ -37,7 +37,6 @@ public class ButtonTunePID extends OpMode {
         Hardware.setHardwareMap(hardwareMap);
         Hardware.setTelemetry(telemetry);
         Subsystems.createSubsystems();
-        Scheduler.instance.clearBuffer();
         Scheduler.instance.clear();
         OI.createInputs(gamepad1, gamepad2);
 

@@ -64,7 +64,7 @@ public class GlyphIntake extends Subsystem {
     @Override
     public Command defaultAutoCommand() {
         if(clampIntake == null) {
-            clampIntake = new ClampIntake();
+            clampIntake = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
         }
         return clampIntake;
     }
