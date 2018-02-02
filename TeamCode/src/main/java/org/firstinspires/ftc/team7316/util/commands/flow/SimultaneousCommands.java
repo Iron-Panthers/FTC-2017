@@ -18,7 +18,7 @@ public class SimultaneousCommands extends Command implements TerminatedListener 
     public SimultaneousCommands(Command... cmds) {
         Collections.addAll(this.cmds, cmds);
 
-        this.shouldBeReplaced = false;
+     //   this.shouldBeReplaced = false;
         for (Command cmd : this.cmds) {
             cmd.terminatedListener = this;
             for (Subsystem subsystem : cmd.requiredSubsystems) {

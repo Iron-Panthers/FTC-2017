@@ -17,7 +17,7 @@ public class SequentialCommand extends Command implements TerminatedListener {
     public SequentialCommand(Command... commands) {
         this.cmds = commands;
 
-        this.shouldBeReplaced = false;
+    //    this.shouldBeReplaced = false;
         for (Command cmd : commands) {
             cmd.terminatedListener = this;
             for (Subsystem sub : cmd.requiredSubsystems) {
