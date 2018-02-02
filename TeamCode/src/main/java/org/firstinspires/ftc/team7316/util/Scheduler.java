@@ -74,12 +74,16 @@ public class Scheduler {
             newCommandBuffer.remove(i);
             commands.add(newCmd);
 
-            if (newCmd.shouldBeReplaced) {
-                for (Subsystem subsystem : newCmd.requiredSubsystems) {
-                    if (subsystem.currentCmd != null) {
-                        subsystem.currentCmd.interrupt();
-                        this.commands.remove(subsystem.currentCmd);
-                    }
+            for (Subsystem subsystem : newCmd.requiredSubsystems) {
+                if (subsystem.currentCmd != null && subsystem.currentCmd.shouldBeReplaced) {
+                    subsystem.currentCmd.interrupt();
+                    this.commands.remove(subsystem.currentCmd);
+
+                    subsystem.currentCmd = newCmd;
+                }
+
+                if (subsystem.currentCmd == null) {
+                    subsystem.currentCmd = newCmd;
                 }
             }
 
