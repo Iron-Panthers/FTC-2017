@@ -40,7 +40,7 @@ public class DriveDistanceCipher extends Command {
                     CENTER_DIST = Constants.MIDDLE_COLUMN_DISTANCE_CLOSE + redCloseOffset;
                     RIGHT_DIST = Constants.RIGHT_COLUMN_DISTANCE_CLOSE + redCloseOffset;
                 case BLUE:
-                    LEFT_DIST = Constants.LEFT_COLUMN_DISTANCE_CLOSE + blueCloseOffset;
+                    LEFT_DIST = Constants.LEFT_COLUMN_DISTANCE_CLOSE + blueCloseOffset - 1;
                     CENTER_DIST = Constants.MIDDLE_COLUMN_DISTANCE_CLOSE + blueCloseOffset;
                     RIGHT_DIST = Constants.RIGHT_COLUMN_DISTANCE_CLOSE + blueCloseOffset;
 
@@ -53,7 +53,7 @@ public class DriveDistanceCipher extends Command {
                     CENTER_DIST = Constants.MIDDLE_COLUMN_DISTANCE_FAR + redFarOffset;
                     RIGHT_DIST = Constants.RIGHT_COLUMN_DISTANCE_FAR + redFarOffset;
                 case BLUE:
-                    LEFT_DIST = Constants.LEFT_COLUMN_DISTANCE_FAR + blueFarOffset - 1;
+                    LEFT_DIST = Constants.LEFT_COLUMN_DISTANCE_FAR + blueFarOffset;
                     CENTER_DIST = Constants.MIDDLE_COLUMN_DISTANCE_FAR + blueFarOffset;
                     RIGHT_DIST = Constants.RIGHT_COLUMN_DISTANCE_FAR + blueFarOffset;
 
