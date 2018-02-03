@@ -6,7 +6,7 @@ import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 
 /**
- * This class is purely for the close side autos, along with those constants
+ * Works for all positions now
  */
 
 public class DriveDistanceCipher extends Command {
