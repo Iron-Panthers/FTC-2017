@@ -35,7 +35,7 @@ public class Constants {
     public static final double DEGREES_PER_SECOND_COAST = 180;
     //drive distances
     public static final double JEWEL_WHACK_DISTANCE = 3.5; //inches
-    public static final double FAR_CRYPTO_DISTANCE = 9+1; //inches after driving for time after off the balancing pad
+    public static final double FAR_CRYPTO_DISTANCE = 8; //inches after driving for time after off the balancing pad
     public static final double CRYPTOBOX_STRAFE_DISTANCE = 11.25;//inches too
     public static final double CLOSE_CRYPTO_DISTANCE = 10;
     public static final double CLOSE_CRYPTO_APPROACH_RED = 7.5;
