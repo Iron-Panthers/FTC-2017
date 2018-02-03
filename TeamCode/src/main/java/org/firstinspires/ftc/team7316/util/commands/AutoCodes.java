@@ -169,7 +169,7 @@ public class AutoCodes {
                 new DriveDistance(-4, 1.5),
                 new MoveIntakeArm(0),
                 new DriveForTime(0.5, 0, 0.55),
-                new DriveDistance(-Constants.FAR_CRYPTO_APPROACH_RED - 6, 2)
+                new DriveDistance(-9, 2)
         };
         return new SequentialCommand(cmds);
     }
