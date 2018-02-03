@@ -13,24 +13,36 @@ public class DriveDistanceCipher extends Command {
 
     private DriveDistance drivecommand;
     private final double DRIVE_TIMEOUT = 4;
+
+    private final double blueCloseOffset = 4;
+    private final double redCloseOffset = 0;
     private final double closeOffset = 2;
+
     private final double farOffset = -3;
 
     private Alliance alliance;
     private Position position;
 
-    private final double LEFT_DIST;
-    private final double CENTER_DIST;
-    private final double RIGHT_DIST;
+    private double LEFT_DIST;
+    private double CENTER_DIST;
+    private double RIGHT_DIST;
 
     public DriveDistanceCipher(Alliance a, Position p) {
         alliance = a;
         position = p;
 
         if(position == Position.CLOSE) {
-            LEFT_DIST = Constants.LEFT_COLUMN_DISTANCE_CLOSE + closeOffset;
-            CENTER_DIST = Constants.MIDDLE_COLUMN_DISTANCE_CLOSE + closeOffset;
-            RIGHT_DIST = Constants.RIGHT_COLUMN_DISTANCE_CLOSE + closeOffset;
+            switch (alliance) {
+                case RED:
+                    LEFT_DIST = Constants.LEFT_COLUMN_DISTANCE_CLOSE + redCloseOffset;
+                    CENTER_DIST = Constants.MIDDLE_COLUMN_DISTANCE_CLOSE + redCloseOffset;
+                    RIGHT_DIST = Constants.RIGHT_COLUMN_DISTANCE_CLOSE + redCloseOffset;
+                case BLUE:
+                    LEFT_DIST = Constants.LEFT_COLUMN_DISTANCE_CLOSE + blueCloseOffset;
+                    CENTER_DIST = Constants.MIDDLE_COLUMN_DISTANCE_CLOSE + blueCloseOffset;
+                    RIGHT_DIST = Constants.RIGHT_COLUMN_DISTANCE_CLOSE + blueCloseOffset;
+
+            }
         }
         else {
             LEFT_DIST = Constants.LEFT_COLUMN_DISTANCE_FAR + farOffset;

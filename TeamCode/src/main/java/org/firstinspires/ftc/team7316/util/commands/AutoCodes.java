@@ -160,13 +160,16 @@ public class AutoCodes {
         return new SequentialCommand(cmds);
     }
 
+    /**
+     * not used for multiglyph for now
+     */
     public static SequentialCommand backUpAndRam() {
         Command[] cmds = {
                 new MoveIntakeArm(0.8),
                 new DriveDistance(-4, 1.5),
                 new MoveIntakeArm(0),
                 new DriveForTime(0.5, 0, 0.55),
-                new DriveDistance(-Constants.FAR_CRYPTO_APPROACH_RED - 14, 2)
+                new DriveDistance(-Constants.FAR_CRYPTO_APPROACH_RED - 6, 2)
         };
         return new SequentialCommand(cmds);
     }
