@@ -35,7 +35,7 @@ public class Constants {
     public static final double DEGREES_PER_SECOND_COAST = 180;
     //drive distances
     public static final double JEWEL_WHACK_DISTANCE = 3.5; //inches
-    public static final double FAR_CRYPTO_DISTANCE = 9+1; //inches after driving for time after off the balancing pad
+    public static final double FAR_CRYPTO_DISTANCE = 8; //inches after driving for time after off the balancing pad
     public static final double CRYPTOBOX_STRAFE_DISTANCE = 11.25;//inches too
     public static final double CLOSE_CRYPTO_DISTANCE = 10;
     public static final double CLOSE_CRYPTO_APPROACH_RED = 7.5;
@@ -92,7 +92,7 @@ public class Constants {
     public static final int NO_COLOR_BLUE = 20;
 
     public static final int MIN_COLOR_VALUE = 10;
-    public static final int COLOR_BUFFER_SIZE = 10;
+    public static final int COLOR_BUFFER_SIZE = 5;
 
     public static final int NO_COLOR_THRESHOLD_RED = NO_COLOR_RED * COLOR_BUFFER_SIZE;
     public static final int NO_COLOR_THRESHOLD_BLUE = NO_COLOR_BLUE * COLOR_BUFFER_SIZE;
@@ -104,7 +104,7 @@ public class Constants {
     public static final double DRIVE_F = 0.00007;
 
     public static final double GYRO_P = 0.025;
-    public static final double GYRO_I = 0.003; //original 0.005
+    public static final double GYRO_I = 0.002; //original 0.005
     public static final double GYRO_D = 0.0004; //original 0.0002
     public static final double GYRO_F = 0.00397;
 

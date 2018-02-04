@@ -36,6 +36,12 @@ public class TurnGyroPID extends Command {
     private ArrayList<Double> currenttargets = new ArrayList<>();
     private ArrayList<Double> finaltargets = new ArrayList<>();
     private ArrayList<Double> errors = new ArrayList<>();
+    private ArrayList<Double> powers = new ArrayList<>();
+
+    private ArrayList<Double> p_vals = new ArrayList<>();
+    private ArrayList<Double> i_vals = new ArrayList<>();
+    private ArrayList<Double> d_vals = new ArrayList<>();
+    private ArrayList<Double> f_vals = new ArrayList<>();
 
     private ElapsedTime timer = new ElapsedTime();
     private double previousTime = 0;
@@ -117,6 +123,7 @@ public class TurnGyroPID extends Command {
         sumError += error;
 
         double power = Constants.GYRO_P *error + Constants.GYRO_I *sumError + Constants.GYRO_D*deltaError + Constants.GYRO_F*getPredictedSpeed(time);
+
         Hardware.log("current error", error);
         Hardware.log("current target", targetAngleCurrent);
         Hardware.log("delta error", deltaError);
@@ -129,9 +136,6 @@ public class TurnGyroPID extends Command {
 
         Subsystems.instance.driveBase.turnMotors(power);
 
-        lastError = error;
-        previousTime = time;
-
         System.out.println("current target: " + targetAngleCurrent);
         System.out.println("current heading: " + gyro.getHeading());
 
@@ -140,6 +144,15 @@ public class TurnGyroPID extends Command {
         currenttargets.add(targetAngleCurrent);
         finaltargets.add(targetAngleFinal);
         errors.add(error);
+        powers.add(power);
+
+        p_vals.add(Constants.GYRO_P *error);
+        i_vals.add(Constants.GYRO_I *sumError);
+        d_vals.add(Constants.GYRO_D*deltaError);
+        f_vals.add(Constants.GYRO_F*getPredictedSpeed(time));
+
+        lastError = error;
+        previousTime = time;
     }
 
     @Override
@@ -150,7 +163,7 @@ public class TurnGyroPID extends Command {
     @Override
     public void end() {
         Subsystems.instance.driveBase.stopMotors();
-        writeCSVGyro(times, currenttargets, angles, errors);
+        writeCSVGyro(times, currenttargets, angles, errors, powers, p_vals, i_vals, d_vals, f_vals);
     }
 
     private void updateCurrentTarget(double time) {
@@ -243,18 +256,21 @@ public class TurnGyroPID extends Command {
         return Util.wrap(targetAngleCurrent - gyro.getHeading());
     }
 
-    public static void writeCSVGyro(List<Double> times, List<Double> targets, List<Double> positions, List<Double> errors) {
+    public static void writeCSVGyro(List<Double> times, List<Double> targets, List<Double> positions, List<Double> errors, List<Double> powers,
+                                    List<Double> p_vals, List<Double> i_vals, List<Double> d_vals, List<Double> f_vals) {
         BufferedWriter os;
         Date date = new Date(System.currentTimeMillis());
         String timestamp = new SimpleDateFormat("yyyyMMdd-HH:mm:ss").format(date);
         try {
             File dir = new File("/storage/emulated/0/gyropidoutput-" + timestamp + ".csv");
             os = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dir)));
-            os.write("times,target,positions,errors,p,i,d,f,velocityPrediction,tolerance\n");
-            os.write(String.format("%s,%s,%s,%s,%s,%s,%s,%s\n", times.get(0), targets.get(0), positions.get(0), errors.get(0),
+            os.write("times,target,positions,errors,powers,p_vals,i_vals,d_vals,f_vals,p,i,d,f\n");
+            os.write(String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n", times.get(0), targets.get(0), positions.get(0), errors.get(0), powers.get(0),
+                    p_vals.get(0), i_vals.get(0), d_vals.get(0), f_vals.get(0),
                     Constants.GYRO_P, Constants.GYRO_I, Constants.GYRO_D, Constants.GYRO_F));
             for (int i=1; i < times.size(); i++) {
-                os.write(String.format("%s,%s,%s,%s\n", times.get(i), targets.get(i), positions.get(i), errors.get(i)));
+                os.write(String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n", times.get(i), targets.get(i), positions.get(i), errors.get(i), powers.get(i),
+                        p_vals.get(0), i_vals.get(0), d_vals.get(0), f_vals.get(0)));
             }
             os.close();
         } catch (Exception e) {
