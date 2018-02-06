@@ -29,9 +29,9 @@ public class GlyphIntakeJoystick extends Command {
     @Override
     public void loop() {
         if(OI.instance.gp2.left_stick.getY() > 0) {
-            this.intake.setIntakePower(OI.instance.gp2.left_stick.getY()); //faster outtaking
+            this.intake.setIntakePower(OI.instance.gp2.left_stick.getY(), OI.instance.gp2.left_stick.getY()); //faster outtaking
         } else {
-            this.intake.setIntakePower(OI.instance.gp2.left_stick.getY() * Constants.INTAKE_POWER_WEIGHTING);
+            this.intake.setIntakePower(OI.instance.gp2.left_stick.getY() * Constants.INTAKE_LEFT_POWER_WEIGHTING, OI.instance.gp2.left_stick.getY() * Constants.INTAKE_RIGHT_POWER_WEIGHTING);
         }
 
         if(OI.instance.gp2.dp_up.state()) {
@@ -85,7 +85,7 @@ public class GlyphIntakeJoystick extends Command {
 
     @Override
     public void end() {
-        this.intake.setIntakePower(0);
+        this.intake.setIntakePower(0, 0);
         Hardware.instance.intakeLiftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 

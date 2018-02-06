@@ -49,9 +49,9 @@ public class GlyphIntake extends Subsystem {
         this.servo.setPosition(position);
     }
 
-    public void setIntakePower(double power) {
-        this.rightIntakeMotor.setPower(-power);
-        this.leftIntakeMotor.setPower(power);
+    public void setIntakePower(double leftPower, double rightPower) {
+        this.rightIntakeMotor.setPower(-rightPower);
+        this.leftIntakeMotor.setPower(leftPower);
     }
 
     public void setLiftPower(double power) {
