@@ -33,6 +33,11 @@ public class Constants {
     public static final double ROTATIONS_90_DEGREES = 0.6;
 
     public static final double DEGREES_PER_SECOND_COAST = 180;
+
+    //in degrees (rudimentary values for now)
+    public static final double FAR_CRYPTO_CLOSE_COLUMN_ANGLE = 15;
+    public static final double FAR_CRYPTO_CENTER_COLUMN_ANGLE = 30;
+    public static final double FAR_CRYPTO_FAR_COLUMN_ANGLE = 45;
     //drive distances
     public static final double JEWEL_WHACK_DISTANCE = 3.5; //inches
     public static final double FAR_CRYPTO_DISTANCE = 8; //inches after driving for time after off the balancing pad

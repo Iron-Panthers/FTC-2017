@@ -3,6 +3,7 @@ package org.firstinspires.ftc.team7316.util.commands;
 import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveOffPad;
+import org.firstinspires.ftc.team7316.util.commands.drive.StrafeTimeCipher;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistanceCipher;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
@@ -79,6 +80,25 @@ public class AutoCodes {
         SequentialCommand bAndR = backUpAndRam();
 
         Command[] cmds = {clamp, wack, offPad, stop, align, stop2, forward, turnleft, gotocrypto, turnright, approach, outtake, bAndR};
+        return new SequentialCommand(cmds);
+    }
+
+    public static SequentialCommand redFarFast() {
+        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+
+        Command wack = wackJewelBasic(Alliance.RED);
+
+        DriveOffPad offPad = new DriveOffPad(Alliance.RED);
+        Wait stop = new Wait(0.5);
+        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, Math.PI, 1);
+        Wait stop2 = new Wait(0.5);
+
+        StrafeTimeCipher gotocrypto = new StrafeTimeCipher(Alliance.RED);
+
+        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
+        SequentialCommand bAndR = backUpAndRam();
+
+        Command[] cmds = {clamp, wack, offPad, stop, align, stop2, gotocrypto, outtake, bAndR};
         return new SequentialCommand(cmds);
     }
 
