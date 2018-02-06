@@ -27,6 +27,13 @@ public class ColorWrapper {
         redSum = new Buffer(Constants.COLOR_BUFFER_SIZE);
         greenSum = new Buffer(Constants.COLOR_BUFFER_SIZE);
         blueSum = new Buffer(Constants.COLOR_BUFFER_SIZE);
+        reset();
+    }
+
+    public void reset() {
+        redSum.clear();
+        greenSum.clear();
+        blueSum.clear();
     }
 
     public void run() {
