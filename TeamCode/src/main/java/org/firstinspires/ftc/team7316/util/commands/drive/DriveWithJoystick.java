@@ -66,6 +66,14 @@ public class DriveWithJoystick extends Command {
             turnSpeed *= strafe_speed_multiplier;
         }
 
+        //release tail hook
+        if(OI.instance.gp1.left_bumper.state() && OI.instance.gp1.leftTriggerWrapper.state()) {
+            Hardware.instance.tailHookServo.setPosition(0);
+        }
+        else {
+            Hardware.instance.tailHookServo.setPosition(0.5);
+        }
+
         Subsystems.instance.driveBase.setWantedTurnSpeed(turnSpeed);
         Subsystems.instance.driveBase.setWantedSpeedAndMovementAngle(moveSpeed, moveDir);
         Subsystems.instance.driveBase.driveWithSpeeds();
