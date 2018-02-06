@@ -147,8 +147,7 @@ public class AutoCodes {
     }
 
     public static SequentialCommand redCloseMutliglyph() {
-//        return new SequentialCommand(redClose(), closeMultiglyph());
-        return new SequentialCommand(redClose());
+        return new SequentialCommand(redClose(), closeMultiglyph());
     }
 
     public static SequentialCommand blueCloseMultiglyph() {
