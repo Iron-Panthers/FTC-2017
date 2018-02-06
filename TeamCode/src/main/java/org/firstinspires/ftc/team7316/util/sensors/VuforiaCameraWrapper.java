@@ -60,7 +60,7 @@ public class VuforiaCameraWrapper {
         relicTrackables = this.vuforia.loadTrackablesFromAsset("RelicVuMark");
         relicTemplate = relicTrackables.get(0);
         relicTemplate.setName("relicVuMarkTemplate");
-        ((VuforiaTrackableDefaultListener)relicTemplate.getListener()).setPhoneInformation(new OpenGLMatrix(), VuforiaLocalizer.CameraDirection.BACK);
+        ((VuforiaTrackableDefaultListener)relicTemplate.getListener()).setPhoneInformation(new OpenGLMatrix(), VuforiaLocalizer.CameraDirection.FRONT);
 
         relicTrackables.activate();
     }
