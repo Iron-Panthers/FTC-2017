@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
+ * Simultaneous command where it terminates after keyCommand finishes
  * Created by andrew on 2/1/18.
  */
 

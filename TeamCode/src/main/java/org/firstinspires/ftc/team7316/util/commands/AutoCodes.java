@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.team7316.util.commands;
 
+import org.firstinspires.ftc.robotcore.external.Const;
 import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveOffPad;
@@ -9,14 +10,17 @@ import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroPID;
 import org.firstinspires.ftc.team7316.util.commands.flow.SequentialCommand;
+import org.firstinspires.ftc.team7316.util.commands.flow.SimultaneousKeyCommand;
 import org.firstinspires.ftc.team7316.util.commands.flow.Wait;
 import org.firstinspires.ftc.team7316.util.commands.intake.DriveWhileIntake;
 import org.firstinspires.ftc.team7316.util.commands.intake.IntakeForTime;
 import org.firstinspires.ftc.team7316.util.commands.intake.MoveIntakeArm;
+import org.firstinspires.ftc.team7316.util.commands.intake.RunIntake;
 import org.firstinspires.ftc.team7316.util.commands.jewelarm.MoveJewelArm;
 import org.firstinspires.ftc.team7316.util.commands.jewelarm.WackJewel;
 import org.firstinspires.ftc.team7316.util.commands.sensors.PollColor;
 import org.firstinspires.ftc.team7316.util.subsystems.JewelArm;
+import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 /**
  * Created by andrew on 11/2/16.
@@ -166,16 +170,20 @@ public class AutoCodes {
 
     public static SequentialCommand closeMultiglyph() {
 //        StraightTurn moveToPit = new StraightTurn(-90, 0.7, 0.45);
+        final double backupdistance = 5;
+        final double distancetopit = 25;
+        MoveIntakeArm openIntake = new MoveIntakeArm(0.8);
+        DriveDistance backUp = new DriveDistance(-backupdistance, 1);
         TurnGyroPID turn180 = new TurnGyroPID(-90, 4, 100);
-        DriveDistance driveToPit = new DriveDistance(25);
-        DriveWhileIntake collectGlyphs = new DriveWhileIntake(-0.7, 0.4, 5);
+        SimultaneousKeyCommand mowDownGlyphs = new SimultaneousKeyCommand(new DriveDistance(distancetopit), new RunIntake(-0.7));
+        MoveIntakeArm closeIntake = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
         TurnGyroPID turn180_2 = new TurnGyroPID(90, 4, 100);
 
-        DriveDistance backToCrypto = new DriveDistance(35);
+        DriveDistance backToCrypto = new DriveDistance(distancetopit + backupdistance);
         IntakeForTime outtake2 = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
         SequentialCommand bAndR2 = backUpAndRam();
 
-        Command[] cmds = {turn180, driveToPit, collectGlyphs, turn180_2, backToCrypto, outtake2, bAndR2};
+        Command[] cmds = {openIntake, backUp, turn180, mowDownGlyphs, closeIntake, turn180_2, backToCrypto, outtake2, bAndR2};
         return new SequentialCommand(cmds);
     }
 
