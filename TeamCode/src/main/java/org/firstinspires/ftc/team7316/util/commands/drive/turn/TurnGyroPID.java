@@ -270,7 +270,7 @@ public class TurnGyroPID extends Command {
                     Constants.GYRO_P, Constants.GYRO_I, Constants.GYRO_D, Constants.GYRO_F));
             for (int i=1; i < times.size(); i++) {
                 os.write(String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n", times.get(i), targets.get(i), positions.get(i), errors.get(i), powers.get(i),
-                        p_vals.get(0), i_vals.get(0), d_vals.get(0), f_vals.get(0)));
+                        p_vals.get(i), i_vals.get(i), d_vals.get(i), f_vals.get(i)));
             }
             os.close();
         } catch (Exception e) {
