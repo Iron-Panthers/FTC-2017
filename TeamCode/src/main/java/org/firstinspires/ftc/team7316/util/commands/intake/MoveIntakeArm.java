@@ -31,7 +31,8 @@ public class MoveIntakeArm extends Command {
 
     @Override
     public void loop() {
-
+        //this shouldn't be necessary but the servo is being a little shit right now
+        Subsystems.instance.glyphIntake.setServoPosition(position);
     }
 
     @Override

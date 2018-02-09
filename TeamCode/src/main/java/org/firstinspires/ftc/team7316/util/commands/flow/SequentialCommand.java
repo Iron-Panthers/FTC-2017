@@ -32,6 +32,9 @@ public class SequentialCommand extends Command implements TerminatedListener {
         for (Subsystem subsystem : this.requiredSubsystems) {
             subsystem.needsDefault = false;
         }
+        for (Command cmd : this.cmds) {
+            cmd.terminatedListener = this;
+        }
         index = 0;
 
         if (index < cmds.length) {
@@ -60,7 +63,6 @@ public class SequentialCommand extends Command implements TerminatedListener {
             subsystem.needsDefault = true;
         }
         for (Command cmd : this.cmds) {
-            cmd.terminatedListener = null;
             cmd.shouldBeReplaced = true;
         }
     }

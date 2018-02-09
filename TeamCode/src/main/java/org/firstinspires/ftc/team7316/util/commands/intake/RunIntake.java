@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.team7316.util.commands.intake;
 
-import com.qualcomm.robotcore.util.ElapsedTime;
-
 import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 

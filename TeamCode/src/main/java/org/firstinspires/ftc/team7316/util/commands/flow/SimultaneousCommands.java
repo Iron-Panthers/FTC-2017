@@ -35,6 +35,7 @@ public class SimultaneousCommands extends Command implements TerminatedListener 
         }
 
         for (Command cmd : this.cmds) {
+            cmd.terminatedListener = this;
             cmd.shouldBeReplaced = false;
             Scheduler.instance.add(cmd);
         }
@@ -58,7 +59,6 @@ public class SimultaneousCommands extends Command implements TerminatedListener 
         }
         for (Command cmd : this.cmds) {
             cmd.shouldBeReplaced = true;
-            cmd.terminatedListener = null;
         }
     }
 

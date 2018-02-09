@@ -40,6 +40,7 @@ public class SimultaneousKeyCommand extends Command implements TerminatedListene
         }
 
         for (Command cmd : this.cmds) {
+            cmd.terminatedListener = this;
             cmd.shouldBeReplaced = false;
             Scheduler.instance.add(cmd);
         }
@@ -63,7 +64,6 @@ public class SimultaneousKeyCommand extends Command implements TerminatedListene
         }
         for (Command cmd : this.cmds) {
             cmd.shouldBeReplaced = true;
-            cmd.terminatedListener = null;
         }
     }
 
