@@ -47,13 +47,13 @@ public class Scheduler {
 
             if (cmd.shouldRemove() || (cmd.terminatedListener != null && cmd.terminatedListener.isDone())) {
                 commands.remove(i);
-                cmd.terminatedListener = null;
 
                 for (int j = 0; j < 10; j++) {
                     System.out.println(cmd.getClass() + " removed.");
                 }
 
                 cmd._end();
+                cmd.terminatedListener = null;  
 
                 for (Subsystem subsystem : cmd.requiredSubsystems) {
                     if (subsystem.needsDefault && subsystem.hasDefault()) {
