@@ -7,8 +7,8 @@ public class Constants {
 
     public static final double JOYSTICK_DRIVE_DEADZONE = 0.03;
     public static final double DRIVER_MOTOR_DEADZONE = 0.1;
-    public static final int ENCODER_TICK_PER_REV = 1120; //halved due to gear ratio
-    public static final int ENCODER_REV_PER_WHEEL_REV = 2;
+    public static final double ENCODER_TICK_PER_REV = 1120; //halved due to gear ratio
+    public static final double ENCODER_REV_PER_WHEEL_REV = 0.5;
     public static final int DRIVE_RPM_MAX = 280; // can change later actual max 320
     public static final double WHEEL_RADIUS = 2; // I THINK THIS IS IN INCHES
     public static final double WHEEL_CIRCUMFERENCE = WHEEL_RADIUS * 2 * Math.PI;
@@ -26,7 +26,7 @@ public class Constants {
 
     //-----------Auto constants-----------//
     public static final double COAST_TICKS_PER_SECOND = 500;//rough estimate 1670
-    public static final double TICKS_PER_SECOND_HALFPOWER = 1500;
+    public static final double TICKS_PER_SECOND_HALFPOWER = 1400;
 
     public static final double ROTATIONS_PERFIVESECONDS = 3.5; //all full speedy
     public static final double ROTATIONS_PER_SECOND = ROTATIONS_PERFIVESECONDS / 5;
@@ -105,14 +105,14 @@ public class Constants {
     public static final int NO_COLOR_THRESHOLD_BLUE = NO_COLOR_BLUE * COLOR_BUFFER_SIZE;
 
     //Drive Base PIDPath Constants
-    public static final double DRIVE_P = 0.008; // DEAD
-    public static final double DRIVE_I = 0.00026; // 0.0002
-    public static final double DRIVE_D = 0.0000; // 0.00008
+    public static final double DRIVE_P = 0.006;
+    public static final double DRIVE_I = 0.0003;
+    public static final double DRIVE_D = 0; // 0.0
     public static final double DRIVE_F = 0.5/TICKS_PER_SECOND_HALFPOWER;   //originally 0.00007
 
-    public static final double GYRO_P = 0.025;
-    public static final double GYRO_I = 0.002; //original 0.005
-    public static final double GYRO_D = 0.0004; //original 0.0002
+    public static final double GYRO_P = 0.02;
+    public static final double GYRO_I = 0; //original 0.002
+    public static final double GYRO_D = 0; //original 0.0004
     public static final double GYRO_F = 0.5/DEGREES_PER_SECOND_HALFPOWER; //original 0.00397
 
     public static final double VP_DRIVE_P = 0;
@@ -133,10 +133,11 @@ public class Constants {
     public static final String vuforiaLicenseKey = "AX5kYPX/////AAAAGU3PfsyXBULLmvcBPSA/sq8MU9VRtH0JkRzhv6Gggr2CpIl9G4uMhuk/GpUW7pgNKluG8PpL85nQo2AakItuDJUgOkCwK6w0YHQPx6+rf8jZM98Fp1lcmH85r/w2JyjVZB43mQAGuyrlJMi24YR9n6m93YNrtv710/h8DuurXnKBtn2ucrsyUjAVfKJzlIXrAB7sZ8MZDqA1rWD+GqoO5pWAW2sobpl64F4A1Fzf+Zzn340wOoH6UEHTyRb1clkSezxvc129fij+4Ev5jOJioiFJyCcF7YXY9zczVpyByqad0w+HqAR2VXj8hKBgL6SRZ6yQ5GmrUY1/5JUQXiMwdRfT5RKjHMlqKP9f9J1x/V7l";
     //distance in inches
     public static int inchesToTicks(double dist) {
-        return (int)((double)ENCODER_TICK_PER_REV / ENCODER_REV_PER_WHEEL_REV / WHEEL_CIRCUMFERENCE * dist);
+        return (int)(ENCODER_TICK_PER_REV * ENCODER_REV_PER_WHEEL_REV / WHEEL_CIRCUMFERENCE * dist);
     }
     public static int millimetersToTicks(double dist) {
         //lol
         return (int)((double)ENCODER_TICK_PER_REV / ENCODER_TICK_PER_REV / (WHEEL_CIRCUMFERENCE * 25.4) * dist);
     }
+
 }

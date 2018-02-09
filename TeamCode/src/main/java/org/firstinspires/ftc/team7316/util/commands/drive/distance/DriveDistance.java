@@ -2,6 +2,7 @@ package org.firstinspires.ftc.team7316.util.commands.drive.distance;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.team7316.copypastaLib.CombinedPath;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.Util;
@@ -69,7 +70,8 @@ public class DriveDistance extends Command {
         timer.reset();
         completedCount = 0;
         Subsystems.instance.driveBase.resetMotors();
-        Subsystems.instance.driveBase.setMotorTargets(distance);
+//        Subsystems.instance.driveBase.setMotorTargets(distance);
+        Subsystems.instance.driveBase.setMotorPaths(new CombinedPath.LongitudalTrapezoid(0, distance, Constants.TICKS_PER_SECOND_HALFPOWER * 0.75, 1500));
     }
 
     @Override
