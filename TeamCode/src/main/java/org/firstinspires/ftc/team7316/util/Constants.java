@@ -26,6 +26,7 @@ public class Constants {
 
     //-----------Auto constants-----------//
     public static final double COAST_TICKS_PER_SECOND = 500;//rough estimate 1670
+    public static final double TICKS_PER_SECOND_HALFPOWER = 1500;
 
     public static final double ROTATIONS_PERFIVESECONDS = 3.5; //all full speedy
     public static final double ROTATIONS_PER_SECOND = ROTATIONS_PERFIVESECONDS / 5;
@@ -33,6 +34,7 @@ public class Constants {
     public static final double ROTATIONS_90_DEGREES = 0.6;
 
     public static final double DEGREES_PER_SECOND_COAST = 180;
+    public static final double DEGREES_PER_SECOND_HALFPOWER = 95;
 
     //in degrees (rudimentary values for now)
     public static final double FAR_CRYPTO_CLOSE_COLUMN_ANGLE = 15;
@@ -106,12 +108,12 @@ public class Constants {
     public static final double DRIVE_P = 0.008; // DEAD
     public static final double DRIVE_I = 0.00026; // 0.0002
     public static final double DRIVE_D = 0.0000; // 0.00008
-    public static final double DRIVE_F = 0.00007;
+    public static final double DRIVE_F = 0.5/TICKS_PER_SECOND_HALFPOWER;   //originally 0.00007
 
     public static final double GYRO_P = 0.025;
     public static final double GYRO_I = 0.002; //original 0.005
     public static final double GYRO_D = 0.0004; //original 0.0002
-    public static final double GYRO_F = 0.00397;
+    public static final double GYRO_F = 0.5/DEGREES_PER_SECOND_HALFPOWER; //original 0.00397
 
     public static final double VP_DRIVE_P = 0;
     public static final double VP_DRIVE_I = 0;
