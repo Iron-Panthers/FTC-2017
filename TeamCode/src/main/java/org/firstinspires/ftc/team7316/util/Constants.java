@@ -112,7 +112,7 @@ public class Constants {
 
     public static final double AUTO_DEADZONE = 0.15;
 
-    public static final double GYRO_P = 0.02;
+    public static final double GYRO_P = 0.025;
     public static final double GYRO_I = 0; //original 0.002
     public static final double GYRO_D = 0; //original 0.0004
     public static final double GYRO_F = Util.map(0.5, AUTO_DEADZONE, 1, 0, 1)/DEGREES_PER_SECOND_HALFPOWER; //original 0.00397
