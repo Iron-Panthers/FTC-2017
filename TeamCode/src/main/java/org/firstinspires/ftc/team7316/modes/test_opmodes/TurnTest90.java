@@ -15,7 +15,7 @@ public class TurnTest90 extends AutoBaseOpMode {
 
     @Override
     public void onInit() {
-        Scheduler.instance.add(new TurnGyroPID(90));
+        Scheduler.instance.add(new TurnGyroPID(90, 10, 111));
     }
 
     @Override
