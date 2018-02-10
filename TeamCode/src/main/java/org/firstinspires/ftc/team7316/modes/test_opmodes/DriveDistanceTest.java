@@ -17,7 +17,7 @@ public class DriveDistanceTest extends AutoBaseOpMode {
     @Override
     public void onInit() {
         Scheduler.inTeleop = false;
-        Scheduler.instance.add(new DriveDistance(10));
+        Scheduler.instance.add(new DriveDistance(30));
     }
 
     @Override

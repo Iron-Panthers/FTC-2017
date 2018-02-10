@@ -3,6 +3,8 @@ package org.firstinspires.ftc.team7316.util;
 import android.content.Context;
 import android.os.Environment;
 
+import org.firstinspires.ftc.robotcore.external.Const;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,6 +30,14 @@ public class Util {
      */
     public static double map(double x, double a1, double b1, double a2, double b2) {
         return (b2 - a2) * (x - a1) / (b1 - a1) + a2;
+    }
+
+    public static double deadzoneChange(double x) {
+        if (x < 0) {
+            return map(x, -1, 0, -1, -Constants.AUTO_DEADZONE);
+        } else {
+            return map(x, 0, 1, Constants.AUTO_DEADZONE, 1);
+        }
     }
 
     public static double modBueno(double a, double b) {
