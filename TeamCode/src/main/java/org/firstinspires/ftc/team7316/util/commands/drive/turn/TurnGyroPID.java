@@ -134,7 +134,7 @@ public class TurnGyroPID extends Command {
             power = (power > 0) ? MAX_POWER : -MAX_POWER;
         }
 
-        Subsystems.instance.driveBase.turnMotors(power);
+        Subsystems.instance.driveBase.turnMotors(Util.deadzoneChange(power));
 
         System.out.println("current target: " + targetAngleCurrent);
         System.out.println("current heading: " + gyro.getHeading());

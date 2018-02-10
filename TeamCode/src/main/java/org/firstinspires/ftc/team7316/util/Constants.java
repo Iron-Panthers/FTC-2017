@@ -110,11 +110,12 @@ public class Constants {
     public static final double DRIVE_D = 0; // 0.0
     public static final double DRIVE_F = 0.5/TICKS_PER_SECOND_HALFPOWER;   //originally 0.00007
 
-    public static final double GYRO_P = 0.04;
-    public static final double GYRO_I = 0.0007; //original 0.002
+    public static final double AUTO_DEADZONE = 0.15;
+
+    public static final double GYRO_P = 0.02;
+    public static final double GYRO_I = 0; //original 0.002
     public static final double GYRO_D = 0; //original 0.0004
-    public static final double GYRO_F = 0.5/DEGREES_PER_SECOND_HALFPOWER; //original 0.00397
-    public static final double AUTO_DEADZONE = 0.1;
+    public static final double GYRO_F = Util.map(0.5, AUTO_DEADZONE, 1, 0, 1)/DEGREES_PER_SECOND_HALFPOWER; //original 0.00397
 
     public static final double VP_DRIVE_P = 0;
     public static final double VP_DRIVE_I = 0;
