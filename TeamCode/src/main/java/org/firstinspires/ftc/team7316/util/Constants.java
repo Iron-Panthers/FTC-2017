@@ -108,7 +108,7 @@ public class Constants {
     public static final double DRIVE_P = 0.01;
     public static final double DRIVE_I = 0.0005;
     public static final double DRIVE_D = 0; // 0.0
-    public static final double DRIVE_F = Util.deadzoneChange(0.5)/TICKS_PER_SECOND_HALFPOWER;   //originally 0.00007
+    public static final double DRIVE_F = 0.5/TICKS_PER_SECOND_HALFPOWER;   //originally 0.00007
 
     public static final double GYRO_P = 0.04;
     public static final double GYRO_I = 0.0007; //original 0.002
