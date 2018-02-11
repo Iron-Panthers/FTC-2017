@@ -44,7 +44,7 @@ public class VuforiaCameraWrapper {
         params = new VuforiaLocalizer.Parameters(R.id.cameraMonitorViewId);
 //        params = new VuforiaLocalizer.Parameters();
         params.vuforiaLicenseKey = Constants.vuforiaLicenseKey;
-        params.cameraDirection = VuforiaLocalizer.CameraDirection.FRONT;
+        params.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
         params.useExtendedTracking = false;
 
         vuMark = RelicRecoveryVuMark.UNKNOWN;
@@ -60,7 +60,7 @@ public class VuforiaCameraWrapper {
         relicTrackables = this.vuforia.loadTrackablesFromAsset("RelicVuMark");
         relicTemplate = relicTrackables.get(0);
         relicTemplate.setName("relicVuMarkTemplate");
-        ((VuforiaTrackableDefaultListener)relicTemplate.getListener()).setPhoneInformation(new OpenGLMatrix(), VuforiaLocalizer.CameraDirection.FRONT);
+        ((VuforiaTrackableDefaultListener)relicTemplate.getListener()).setPhoneInformation(new OpenGLMatrix(), VuforiaLocalizer.CameraDirection.BACK);
 
         relicTrackables.activate();
     }
@@ -88,8 +88,8 @@ public class VuforiaCameraWrapper {
                 /* For fun, we also exhibit the navigational pose. In the Relic Recovery game,
                  * it is perhaps unlikely that you will actually need to act on this pose information, but
                  * we illustrate it nevertheless, for completeness. */
-            OpenGLMatrix pose = ((VuforiaTrackableDefaultListener)relicTemplate.getListener()).getPose();
-            Hardware.log("Pose", format(pose));
+            OpenGLMatrix pose = ((VuforiaTrackableDefaultListener)relicTemplate.getListener()).getRawPose();
+//            Hardware.log("Pose", format(pose));
 
                 /* We further illustrate how to decompose the pose into useful rotational and
                  * translational components */
@@ -101,11 +101,17 @@ public class VuforiaCameraWrapper {
                 tX = trans.get(0);
                 tY = trans.get(1);
                 tZ = trans.get(2);
+                Hardware.log("tx", tX);
+                Hardware.log("tY", tY);
+                Hardware.log("tZ", tZ);
 
                 // Extract the rotational components of the target relative to the robot
                 rX = rot.firstAngle;
                 rY = rot.secondAngle;
                 rZ = rot.thirdAngle;
+                Hardware.log("rx", rX);
+                Hardware.log("ry", rY);
+                Hardware.log("rz", rZ);
             }
         }
         else {
