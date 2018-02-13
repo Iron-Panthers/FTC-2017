@@ -151,11 +151,47 @@ public class AutoCodes {
     }
 
     public static SequentialCommand redCloseMutliglyph() {
-        return new SequentialCommand(redClose(), closeMultiglyph());
+//        return new SequentialCommand(redClose(), closeMultiglyph());
+        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+
+        Command wack = wackJewelBasic(Alliance.RED);
+
+        DriveOffPad offPad = new DriveOffPad(Alliance.RED);
+        Wait stop = new Wait(0.5);
+        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, Math.PI, 1);
+        Wait stop2 = new Wait(0.5);
+        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.RED, DriveDistanceCipher.Position.CLOSE);
+
+        TurnGyroPID turn = new TurnGyroPID(90, 3);
+
+        DriveDistance approach = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_RED, 2);
+        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
+        SequentialCommand bAndR = releaseAndBackUp();
+
+        Command[] cmds = {clamp, wack, offPad, stop, align, stop2, gotocrypto, turn, approach, outtake, bAndR, closeMultiglyph()};
+        return new SequentialCommand(cmds);
     }
 
     public static SequentialCommand blueCloseMultiglyph() {
-        return new SequentialCommand(blueClose(), closeMultiglyph());
+//        return new SequentialCommand(blueClose(), closeMultiglyph());
+        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+
+        Command wack = wackJewelBasic(Alliance.BLUE);
+
+        DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
+        Wait stop = new Wait(0.5);
+        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, 0, 1);
+        Wait stop2 = new Wait(0.5);
+        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.BLUE, DriveDistanceCipher.Position.CLOSE);
+
+        TurnGyroPID turn = new TurnGyroPID(90, 3);
+
+        DriveDistance approach = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_BLUE, 2);
+        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
+        SequentialCommand bAndR = releaseAndBackUp();
+
+        Command[] cmds = {clamp, wack, offPad, stop, align, stop2, gotocrypto, turn, approach, outtake, bAndR, closeMultiglyph()};
+        return new SequentialCommand(cmds);
     }
 
     public static SequentialCommand wackJewelBasic(Alliance alliance) {
@@ -171,11 +207,13 @@ public class AutoCodes {
     public static SequentialCommand closeMultiglyph() {
 //        StraightTurn moveToPit = new StraightTurn(-90, 0.7, 0.45);
         final double backupdistance = 5;
-        final double distancetopit = 25;
+        final double distancetopit = 20;
         MoveIntakeArm openIntake = new MoveIntakeArm(0.8);
         DriveDistance backUp = new DriveDistance(-backupdistance, 1);
         TurnGyroPID turn180 = new TurnGyroPID(-90, 4, 100);
-        SimultaneousKeyCommand mowDownGlyphs = new SimultaneousKeyCommand(new DriveDistance(distancetopit), new RunIntake(-0.7));
+//        SimultaneousKeyCommand mowDownGlyphs = new SimultaneousKeyCommand(new DriveDistance(distancetopit), new RunIntake(-0.7));
+        DriveDistance driveToPit = new DriveDistance(distancetopit);
+        DriveWhileIntake mowDownGlyphs = new DriveWhileIntake(-0.7, 0.4, 1.5);
         MoveIntakeArm closeIntake = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
         TurnGyroPID turn180_2 = new TurnGyroPID(90, 4, 100);
 
@@ -183,21 +221,27 @@ public class AutoCodes {
         IntakeForTime outtake2 = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
         SequentialCommand bAndR2 = backUpAndRam();
 
-        Command[] cmds = {openIntake, backUp, turn180, mowDownGlyphs, closeIntake, turn180_2, backToCrypto, outtake2, bAndR2};
+        Command[] cmds = {openIntake, backUp, turn180, driveToPit, mowDownGlyphs, closeIntake, turn180_2, backToCrypto, outtake2, bAndR2};
         return new SequentialCommand(cmds);
     }
 
-    /**
-     * not used for multiglyph for now
-     */
     public static SequentialCommand backUpAndRam() {
         Command[] cmds = {
                 new MoveIntakeArm(0.8),
-                new DriveDistance(-4, 1.5),
+                new DriveDistance(-4, 1),
                 new MoveIntakeArm(0),
                 new DriveForTime(0.5, 0, 0.55),
-                new DriveDistance(-6, 2)
+                new DriveDistance(-6, 1)
         };
+        return new SequentialCommand(cmds);
+    }
+
+    public static SequentialCommand releaseAndBackUp() {
+        Command[] cmds = {
+                new MoveIntakeArm(0.8),
+                new DriveDistance(-6, 1)
+        };
+
         return new SequentialCommand(cmds);
     }
 

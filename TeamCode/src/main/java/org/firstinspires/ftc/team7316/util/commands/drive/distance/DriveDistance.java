@@ -71,7 +71,12 @@ public class DriveDistance extends Command {
         completedCount = 0;
         Subsystems.instance.driveBase.resetMotors();
 //        Subsystems.instance.driveBase.setMotorTargets(distance);
-        Subsystems.instance.driveBase.setMotorPaths(new CombinedPath.LongitudalTrapezoid(0, distance, Constants.TICKS_PER_SECOND_HALFPOWER * 0.75, 1500));
+        if(distance > 0) {
+            Subsystems.instance.driveBase.setMotorPaths(new CombinedPath.LongitudalTrapezoid(0, distance, Constants.TICKS_PER_SECOND_HALFPOWER * 0.75, 1500));
+        }
+        else {
+            Subsystems.instance.driveBase.setMotorPaths(new CombinedPath.LongitudalTrapezoid(0, distance, -Constants.TICKS_PER_SECOND_HALFPOWER * 0.75, -1500));
+        }
     }
 
     @Override
