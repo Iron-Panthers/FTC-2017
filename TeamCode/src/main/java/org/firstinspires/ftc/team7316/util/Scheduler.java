@@ -76,10 +76,8 @@ public class Scheduler {
     }
 
     private void addFromBuffer() {
-        int size = newCommandBuffer.size();
-        for (int i = size - 1; i >= 0; i--) {
-            Command newCmd = newCommandBuffer.get(i);
-            newCommandBuffer.remove(i);
+        while (newCommandBuffer.size() > 0) {
+            Command newCmd = newCommandBuffer.remove(0);
             commands.add(newCmd);
             Log.i(Hardware.tag, "Scheduler adding command " + newCmd.toString());
 
