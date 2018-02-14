@@ -28,9 +28,11 @@ public class Scheduler {
         return newCommandBuffer;
     }
 
+    private int offset = 0; // need to counter act issues if a command is added during addFromBuffer
     public void add(Command newCommand) {
         if(newCommand != null) {
-            newCommandBuffer.add(newCommand);
+            offset++; // if a command is added increase offset (this will be reset at the beginning of addFromBuffer
+            newCommandBuffer.add(0, newCommand);
         }
     }
 
@@ -76,16 +78,18 @@ public class Scheduler {
     }
 
     private void addFromBuffer() {
-        while (newCommandBuffer.size() > 0) {
-            Command newCmd = newCommandBuffer.remove(0);
+        offset = 0; // reset offset, so that the only offset is due to commands added during addFromBuffer
+        int size = newCommandBuffer.size();
+        for (int i = size - 1; i >= offset; i--) { // make sure we end at the most recent command
+                                                   // that was added BEFORE this method began
+            Command newCmd = newCommandBuffer.get(i);
+            newCommandBuffer.remove(i);
             commands.add(newCmd);
-            Log.i(Hardware.tag, "Scheduler adding command " + newCmd.toString());
 
             for (Subsystem subsystem : newCmd.requiredSubsystems) {
                 if (subsystem.currentCmd != null && subsystem.currentCmd.shouldBeReplaced) {
                     subsystem.currentCmd.interrupt();
                     this.commands.remove(subsystem.currentCmd);
-                    Log.i(Hardware.tag, "Scheduler removing command " + subsystem.currentCmd.toString() + " from subsystem " + subsystem.toString());
 
                     subsystem.currentCmd = newCmd;
                 }
