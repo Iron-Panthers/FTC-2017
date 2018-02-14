@@ -4,6 +4,8 @@ import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.Command;
+import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
+import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 /**
  * Works for all positions now
@@ -30,6 +32,8 @@ public class DriveDistanceCipher extends Command {
     private double RIGHT_DIST;
 
     public DriveDistanceCipher(Alliance a, Position p) {
+        requires(Subsystems.instance.driveBase);
+
         alliance = a;
         position = p;
 

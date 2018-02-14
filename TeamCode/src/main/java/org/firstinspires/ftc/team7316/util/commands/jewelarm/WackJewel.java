@@ -27,7 +27,6 @@ public class WackJewel extends Command {
 
     public WackJewel(Alliance alliance) {
         requires(Subsystems.instance.jewelArm);
-        requires(Subsystems.instance.driveBase);
         this.alliance = alliance;
         timer = new ElapsedTime();
         colorWrapper = Hardware.instance.colorWrapper;

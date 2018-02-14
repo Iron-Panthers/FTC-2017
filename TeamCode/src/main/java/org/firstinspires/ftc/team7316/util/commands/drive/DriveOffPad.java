@@ -20,6 +20,7 @@ public class DriveOffPad extends Command {
     private int direction;
 
     public DriveOffPad(Alliance a) {
+        requires(Subsystems.instance.driveBase);
         switch (a) {
             case RED:
                 direction = 1;
