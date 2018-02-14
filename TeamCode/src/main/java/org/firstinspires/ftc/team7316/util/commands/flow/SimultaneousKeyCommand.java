@@ -17,7 +17,7 @@ public class SimultaneousKeyCommand extends Command implements TerminatedListene
 
     private ArrayList<Command> cmds = new ArrayList<>();
     private Command keyCommand;
-    private boolean done = false;
+    private boolean done;
 
     public SimultaneousKeyCommand(Command keyCommand, Command... cmds) {
         Collections.addAll(this.cmds, cmds);
@@ -35,6 +35,7 @@ public class SimultaneousKeyCommand extends Command implements TerminatedListene
 
     @Override
     public void init() {
+        done = false;
         for (Subsystem subsystem : this.requiredSubsystems) {
             subsystem.needsDefault = false;
         }

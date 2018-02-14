@@ -29,7 +29,7 @@ public class DriveWhileIntake extends Command {
 
     @Override
     public void init() {
-        Subsystems.instance.glyphIntake.setServoPositionScaled(0.1);
+        Subsystems.instance.glyphIntake.setServoPosition(0.8);
         timer.reset();
     }
 
@@ -47,7 +47,7 @@ public class DriveWhileIntake extends Command {
     @Override
     protected void end() {
         Subsystems.instance.glyphIntake.setServoPosition(Constants.INTAKE_CLAMP_GLYPH_POSITION);
-        Subsystems.instance.driveBase.stopMotors();
         Subsystems.instance.glyphIntake.setIntakePower(0);
+        Subsystems.instance.driveBase.stopMotors();
     }
 }

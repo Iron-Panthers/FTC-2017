@@ -157,18 +157,18 @@ public class AutoCodes {
         Command wack = wackJewelBasic(Alliance.RED);
 
         DriveOffPad offPad = new DriveOffPad(Alliance.RED);
-        Wait stop = new Wait(0.5);
-        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, Math.PI, 1);
-        Wait stop2 = new Wait(0.5);
+        Wait stop = new Wait(0.1);
+        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, Math.PI, 0.3);
         DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.RED, DriveDistanceCipher.Position.CLOSE);
 
-        TurnGyroPID turn = new TurnGyroPID(90, 3);
+        TurnGyroPID turn = new TurnGyroPID(90, 2);
 
-        DriveDistance approach = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_RED, 2);
+//        DriveDistance approach = new DriveDistance(Constants.CLOSE_CRYPTO_APPROACH_RED, 2);
+        DriveForTime approach = new DriveForTime(0.6, 0, 0.4);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
         SequentialCommand bAndR = releaseAndBackUp();
 
-        Command[] cmds = {clamp, wack, offPad, stop, align, stop2, gotocrypto, turn, approach, outtake, bAndR, closeMultiglyph()};
+        Command[] cmds = {clamp, wack, offPad, stop, align, gotocrypto, turn, approach, outtake, bAndR, closeMultiglyph()};
         return new SequentialCommand(cmds);
     }
 
@@ -210,14 +210,15 @@ public class AutoCodes {
         final double distancetopit = 20;
         MoveIntakeArm openIntake = new MoveIntakeArm(0.8);
         DriveDistance backUp = new DriveDistance(-backupdistance, 1);
-        TurnGyroPID turn180 = new TurnGyroPID(-90, 4, 100);
+        TurnGyroPID turn180 = new TurnGyroPID(-90, 3, 120);
 //        SimultaneousKeyCommand mowDownGlyphs = new SimultaneousKeyCommand(new DriveDistance(distancetopit), new RunIntake(-0.7));
         DriveDistance driveToPit = new DriveDistance(distancetopit);
         DriveWhileIntake mowDownGlyphs = new DriveWhileIntake(-0.7, 0.4, 1.5);
         MoveIntakeArm closeIntake = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
-        TurnGyroPID turn180_2 = new TurnGyroPID(90, 4, 100);
+        SimultaneousKeyCommand turn180_2 = new SimultaneousKeyCommand(new TurnGyroPID(90, 3, 120), new RunIntake(-0.7));
+//        TurnGyroPID turn180_2 = new TurnGyroPID(90, 3, 120);
 
-        DriveDistance backToCrypto = new DriveDistance(distancetopit + backupdistance);
+        DriveDistance backToCrypto = new DriveDistance(distancetopit * 2 + backupdistance);
         IntakeForTime outtake2 = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
         SequentialCommand bAndR2 = backUpAndRam();
 

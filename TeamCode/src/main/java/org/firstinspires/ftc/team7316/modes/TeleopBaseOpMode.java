@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.team7316.modes;
 
+import android.util.Log;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.team7316.util.Scheduler;
@@ -14,6 +16,7 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 public abstract class TeleopBaseOpMode extends OpMode {
     @Override
     public void init() {
+        Log.i(Hardware.tag, "======================================= STARTING TELEOP ===================================================");
         Scheduler.inTeleop = true;
         Scheduler.instance.clear();
         Hardware.setHardwareMap(hardwareMap);

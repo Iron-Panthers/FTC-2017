@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.team7316.modes;
 
+import android.util.Log;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.team7316.util.Hardware;
@@ -13,7 +15,7 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 public abstract class AutoBaseOpMode extends OpMode {
 
     /**
-     * vuforia takes forever to init so DON'T REMOVE THIS
+     * Vuforia takes forever to init so DON'T REMOVE THIS
      */
     public AutoBaseOpMode() {
         msStuckDetectInit = 10000;
@@ -21,6 +23,7 @@ public abstract class AutoBaseOpMode extends OpMode {
 
     @Override
     public void init() {
+        Log.i(Hardware.tag, "=========================== STARTING AUTO ================================");
         Scheduler.inTeleop = false;
         Scheduler.instance.clear();
         Hardware.setHardwareMap(hardwareMap);

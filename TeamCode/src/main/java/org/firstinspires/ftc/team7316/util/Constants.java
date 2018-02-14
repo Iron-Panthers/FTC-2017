@@ -73,7 +73,7 @@ public class Constants {
     public static final double LEFT_POWER_TIME = 0.8;
 
     public static final double OUTTAKE_POWER = -0.7;
-    public static final double OUTTAKE_TIME = 0.5;
+    public static final double OUTTAKE_TIME = 0.2;
 
     //balancing pad offsets after whacking jewel
     public static final double JEWEL_WACK_DELTA = 30;
@@ -99,7 +99,7 @@ public class Constants {
     public static final int NO_COLOR_BLUE = 20;
 
     public static final int MIN_COLOR_VALUE = 10;
-    public static final int COLOR_BUFFER_SIZE = 5;
+    public static final int COLOR_BUFFER_SIZE = 1;
 
     public static final int NO_COLOR_THRESHOLD_RED = NO_COLOR_RED * COLOR_BUFFER_SIZE;
     public static final int NO_COLOR_THRESHOLD_BLUE = NO_COLOR_BLUE * COLOR_BUFFER_SIZE;

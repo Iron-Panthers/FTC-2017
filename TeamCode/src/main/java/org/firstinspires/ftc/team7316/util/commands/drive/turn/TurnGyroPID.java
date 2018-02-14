@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.team7316.util.commands.drive.turn;
 
+import android.util.Log;
+
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.team7316.copypastaLib.CombinedPath;
@@ -89,8 +91,7 @@ public class TurnGyroPID extends Command {
         targetAngleFinal = this.deltaAngle; //TEMPORARY
         completedCount = 0;
 
-        System.out.println("start angle: " + startAngle);
-        System.out.println("final angle: " + targetAngleFinal);
+        Log.i(Hardware.tag, "TurnGyroPID start angle = " + startAngle + "; final angle = " + targetAngleFinal);
 
         if(targetAngleCurrent < targetAngleFinal) {
             direction = Direction.RIGHT;
@@ -101,7 +102,7 @@ public class TurnGyroPID extends Command {
             path1 = new CombinedPath.LongitudalTrapezoid(startAngle, targetAngleFinal - startAngle, -MAX_SPEED, -ACCEL_RATE);
         }
 
-        Subsystems.instance.driveBase.resetMotorModes();
+        Subsystems.instance.driveBase.resetMotors();
         sumError = 0;
         deltaError = 0;
         lastError = error();
@@ -137,8 +138,7 @@ public class TurnGyroPID extends Command {
 
         Subsystems.instance.driveBase.turnMotors(Util.deadzoneChange(power));
 
-        System.out.println("current target: " + targetAngleCurrent);
-        System.out.println("current heading: " + gyro.getHeading());
+        Log.d(Hardware.tag, "TurnGyroPID target = " + targetAngleCurrent + "; heading = " + gyro.getHeading());
 
         times.add(timer.seconds());
         angles.add(gyro.getHeading());

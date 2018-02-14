@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.team7316.util;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.firstinspires.ftc.team7316.util.commands.*;
@@ -45,10 +47,16 @@ public class Scheduler {
             Command cmd = commands.get(i);
             cmd.loop();
 
-            if (cmd.shouldRemove() || (cmd.terminatedListener != null && cmd.terminatedListener.isDone())) {
+            boolean shouldRemove = cmd.shouldRemove();
+            boolean isNotNull = cmd.terminatedListener != null;
+            boolean listener = (isNotNull && cmd.terminatedListener.isDone());
+            Log.d(Hardware.tag, String.format("Scheduler remove conditions for command %s: %s %s %s", cmd.toString(), shouldRemove, isNotNull, listener));
+
+            if (shouldRemove || listener) {
                 commands.remove(i);
 
-                System.out.println(cmd.getClass() + " removed.");
+                //System.out.println(cmd.getClass() + " removed.");
+                Log.i(Hardware.tag, "Scheduler removing command " + cmd.toString());
 
                 cmd._end();
                 cmd.terminatedListener = null;  
@@ -59,6 +67,7 @@ public class Scheduler {
                         // If we didn't do this, the command we receive "end" and also "interrupt"
                         subsystem.currentCmd = null;
 
+                        Log.i(Hardware.tag, "Scheduler adding default command to subsystem " + subsystem.toString());
                         this.add(subsystem.getDefaultCommand());
                     }
                 }
@@ -72,11 +81,13 @@ public class Scheduler {
             Command newCmd = newCommandBuffer.get(i);
             newCommandBuffer.remove(i);
             commands.add(newCmd);
+            Log.i(Hardware.tag, "Scheduler adding command " + newCmd.toString());
 
             for (Subsystem subsystem : newCmd.requiredSubsystems) {
                 if (subsystem.currentCmd != null && subsystem.currentCmd.shouldBeReplaced) {
                     subsystem.currentCmd.interrupt();
                     this.commands.remove(subsystem.currentCmd);
+                    Log.i(Hardware.tag, "Scheduler removing command " + subsystem.currentCmd.toString() + " from subsystem " + subsystem.toString());
 
                     subsystem.currentCmd = newCmd;
                 }
