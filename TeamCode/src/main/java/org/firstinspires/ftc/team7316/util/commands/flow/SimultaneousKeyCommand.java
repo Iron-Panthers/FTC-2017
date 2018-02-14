@@ -53,13 +53,11 @@ public class SimultaneousKeyCommand extends Command implements TerminatedListene
 
     @Override
     public boolean shouldRemove() {
-        return this.keyCommand.shouldRemove();
+        return done;
     }
 
     @Override
     public void end() {
-        this.done = true;
-
         for (Subsystem subsystem : this.requiredSubsystems) {
             subsystem.needsDefault = true;
         }
@@ -70,6 +68,9 @@ public class SimultaneousKeyCommand extends Command implements TerminatedListene
 
     @Override
     public void onTerminated(Command terminated) {
+        if (terminated == this.keyCommand) {
+            this.done = true;
+        }
     }
 
     @Override
