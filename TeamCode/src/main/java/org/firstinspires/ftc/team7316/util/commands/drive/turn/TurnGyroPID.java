@@ -70,6 +70,7 @@ public class TurnGyroPID extends Command {
     }
 
     public TurnGyroPID(double deltaAngle, double timeout, double maxspeed) {
+        requires(Subsystems.instance.driveBase);
         this.MAX_SPEED = maxspeed;
 
         this.deltaAngle = deltaAngle;
