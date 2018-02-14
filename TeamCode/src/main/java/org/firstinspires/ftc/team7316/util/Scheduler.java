@@ -48,9 +48,7 @@ public class Scheduler {
             if (cmd.shouldRemove() || (cmd.terminatedListener != null && cmd.terminatedListener.isDone())) {
                 commands.remove(i);
 
-                for (int j = 0; j < 10; j++) {
-                    System.out.println(cmd.getClass() + " removed.");
-                }
+                System.out.println(cmd.getClass() + " removed.");
 
                 cmd._end();
                 cmd.terminatedListener = null;  
