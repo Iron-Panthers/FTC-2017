@@ -45,6 +45,8 @@ public class Hardware {
     private static final String GLYPH_FLAG_SERVO_NAME = "flag";
     private static final String GLYPH_TOUCH_SENSOR_NAME = "gt";
 
+    private static final String TAIL_HOOK_SERVO_NAME = "ths";
+
     private static final String RELIC_ARM_MOTOR_NAME = "ram";
     private static final String RELIC_SHOULDER_SERVO_NAME = "rss";
     private static final String RELIC_WRIST_SERVO_NAME = "rws";
@@ -78,6 +80,8 @@ public class Hardware {
 
     public Servo flagServo;
     public TouchSensor glyphTouchSensor;
+
+    public Servo tailHookServo;
 
     public DcMotor relicArmMotor;
     public CRServo relicShoulderServo;
@@ -136,6 +140,8 @@ public class Hardware {
 
         flagServo = map.servo.get(GLYPH_FLAG_SERVO_NAME);
         glyphTouchSensor = map.touchSensor.get(GLYPH_TOUCH_SENSOR_NAME);
+
+        tailHookServo = map.servo.get(TAIL_HOOK_SERVO_NAME);
 
 //        relic grabber hardware
         relicArmMotor = map.dcMotor.get(RELIC_ARM_MOTOR_NAME);

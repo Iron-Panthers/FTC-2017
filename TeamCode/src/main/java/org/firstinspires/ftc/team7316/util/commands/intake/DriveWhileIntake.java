@@ -36,7 +36,7 @@ public class DriveWhileIntake extends Command {
     @Override
     public void loop() {
         Subsystems.instance.driveBase.setMotorPowers(drivePower);
-        Subsystems.instance.glyphIntake.setIntakePower(intakePower);
+        Subsystems.instance.glyphIntake.setIntakePower(intakePower, intakePower);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class DriveWhileIntake extends Command {
     @Override
     protected void end() {
         Subsystems.instance.glyphIntake.setServoPosition(Constants.INTAKE_CLAMP_GLYPH_POSITION);
-        Subsystems.instance.glyphIntake.setIntakePower(0);
         Subsystems.instance.driveBase.stopMotors();
+        Subsystems.instance.glyphIntake.setIntakePower(0, 0);
     }
 }

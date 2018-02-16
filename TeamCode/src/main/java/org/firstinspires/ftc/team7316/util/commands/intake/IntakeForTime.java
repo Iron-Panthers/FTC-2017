@@ -26,12 +26,12 @@ public class IntakeForTime extends Command {
     @Override
     public void init() {
         timer.reset();
-        Subsystems.instance.glyphIntake.setIntakePower(0);
+        Subsystems.instance.glyphIntake.setIntakePower(0, 0);
     }
 
     @Override
     public void loop() {
-        Subsystems.instance.glyphIntake.setIntakePower(power);
+        Subsystems.instance.glyphIntake.setIntakePower(power, power);
     }
 
     @Override
@@ -41,6 +41,6 @@ public class IntakeForTime extends Command {
 
     @Override
     protected void end() {
-        Subsystems.instance.glyphIntake.setIntakePower(0);
+        Subsystems.instance.glyphIntake.setIntakePower(0, 0);
     }
 }
