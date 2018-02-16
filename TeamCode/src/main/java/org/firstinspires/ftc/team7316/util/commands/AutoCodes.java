@@ -207,13 +207,14 @@ public class AutoCodes {
     public static SequentialCommand closeMultiglyph() {
 //        StraightTurn moveToPit = new StraightTurn(-90, 0.7, 0.45);
         final double backupdistance = 5;
-        final double distancetopit = 20;
+        final double distancetopit = 15;
         MoveIntakeArm openIntake = new MoveIntakeArm(0.8);
         TurnGyroPID turn180 = new TurnGyroPID(-90, 3, 120);
 //        SimultaneousKeyCommand mowDownGlyphs = new SimultaneousKeyCommand(new DriveDistance(distancetopit), new RunIntake(-0.7));
         DriveDistance driveToPit = new DriveDistance(Constants.inchesToTicks(distancetopit), 1800, 4);
         DriveWhileIntake mowDownGlyphs = new DriveWhileIntake(-0.7, 0.4, 1.5);
-        MoveIntakeArm closeIntake = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+//        MoveIntakeArm closeIntake = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+        SimultaneousKeyCommand closeIntake = new SimultaneousKeyCommand(new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION), new RunIntake(-0.7));
         SimultaneousKeyCommand turn180_2 = new SimultaneousKeyCommand(new TurnGyroPID(90, 3, 120), new RunIntake(-0.7));
 //        TurnGyroPID turn180_2 = new TurnGyroPID(90, 3, 120);
 

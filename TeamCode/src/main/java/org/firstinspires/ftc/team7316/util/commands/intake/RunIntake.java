@@ -12,7 +12,7 @@ public class RunIntake extends Command {
 
     public RunIntake(double power) {
         requires(Subsystems.instance.glyphIntake);
-        this.power = power * -1;
+        this.power = power;
     }
 
     @Override

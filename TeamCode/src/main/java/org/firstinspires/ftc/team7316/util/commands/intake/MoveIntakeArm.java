@@ -14,7 +14,7 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 public class MoveIntakeArm extends Command {
 
     private double position;
-    private final double SERVO_TRAVEL_TIME = 0.1;
+    private final double SERVO_TRAVEL_TIME = 0.2;
 
     private ElapsedTime timer = new ElapsedTime();
 

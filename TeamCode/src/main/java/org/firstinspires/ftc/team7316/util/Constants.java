@@ -74,7 +74,7 @@ public class Constants {
     public static final double LEFT_POWER_TIME = 0.8;
 
     public static final double OUTTAKE_POWER = -0.7;
-    public static final double OUTTAKE_TIME = 0.2;
+    public static final double OUTTAKE_TIME = 0.4;
 
     //balancing pad offsets after whacking jewel
     public static final double JEWEL_WACK_DELTA = 30;

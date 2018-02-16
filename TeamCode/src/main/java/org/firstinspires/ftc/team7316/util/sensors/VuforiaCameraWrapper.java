@@ -27,6 +27,8 @@ import org.firstinspires.ftc.teamcode.R;
 
 public class VuforiaCameraWrapper {
 
+    private final VuforiaLocalizer.CameraDirection CAMERA_DIRECTION= VuforiaLocalizer.CameraDirection.FRONT;
+
     private VuforiaLocalizer.Parameters params;
     private VuforiaLocalizer vuforia;
     private VuforiaTrackables relicTrackables;
@@ -44,7 +46,7 @@ public class VuforiaCameraWrapper {
         params = new VuforiaLocalizer.Parameters(R.id.cameraMonitorViewId);
 //        params = new VuforiaLocalizer.Parameters();
         params.vuforiaLicenseKey = Constants.vuforiaLicenseKey;
-        params.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
+        params.cameraDirection = CAMERA_DIRECTION;
         params.useExtendedTracking = false;
 
         vuMark = RelicRecoveryVuMark.UNKNOWN;
@@ -60,7 +62,7 @@ public class VuforiaCameraWrapper {
         relicTrackables = this.vuforia.loadTrackablesFromAsset("RelicVuMark");
         relicTemplate = relicTrackables.get(0);
         relicTemplate.setName("relicVuMarkTemplate");
-        ((VuforiaTrackableDefaultListener)relicTemplate.getListener()).setPhoneInformation(new OpenGLMatrix(), VuforiaLocalizer.CameraDirection.BACK);
+        ((VuforiaTrackableDefaultListener)relicTemplate.getListener()).setPhoneInformation(new OpenGLMatrix(), CAMERA_DIRECTION);
 
         relicTrackables.activate();
     }

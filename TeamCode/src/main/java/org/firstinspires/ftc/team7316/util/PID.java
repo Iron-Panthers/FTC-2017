@@ -150,7 +150,7 @@ public class PID {
     }
 
     /**
-     * won't be needed for path
+     * Will not be used when using a motion path
      */
     enum Direction {
         FORWARD, BACKWARD, STOPPED
