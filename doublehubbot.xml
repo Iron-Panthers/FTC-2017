@@ -9,8 +9,8 @@
             <Servo name="is" port="0" />
             <Servo name="rja" port="1" />
             <ContinuousRotationServo name="rss" port="2" />
-            <Servo name="rws" port="3" />
-            <Servo name="rhs" port="4" />
+            <Servo name="rhsr" port="3" />
+            <Servo name="rhsl" port="4" />
             <Servo name="bap" port="5" />
             <ModernRoboticsAnalogTouchSensor name="gt" port="3" />
             <AdafruitColorSensor name="cs" port="0" bus="2" />

@@ -18,8 +18,9 @@ public class RelicArm extends Subsystem {
 
     private DcMotor relicArmMotor = Hardware.instance.relicArmMotor;
     private CRServo relicShoulderServo = Hardware.instance.relicShoulderServo;
-    private Servo relicWristServo = Hardware.instance.relicWristServo;
-    private Servo relicHandServo = Hardware.instance.relicHandServo;
+//    private Servo relicWristServo = Hardware.instance.relicWristServo;
+    private Servo relicHandServoLeft = Hardware.instance.relicHandServoLeft;
+    private Servo relicHandServoRight = Hardware.instance.relicHandServoRight;
 
     @Override
     public Command defaultAutoCommand() {
@@ -40,19 +41,21 @@ public class RelicArm extends Subsystem {
 
     public void extendShoulder() {
         relicShoulderServo.getController().setServoPosition(relicShoulderServo.getPortNumber(), 1);
-        relicWristServo.setPosition(0);
+//        relicWristServo.setPosition(0);
     }
 
     public void retractShoulder() {
         relicShoulderServo.getController().setServoPosition(relicShoulderServo.getPortNumber(), 0);
-        relicWristServo.setPosition(0.9);
+//        relicWristServo.setPosition(0.9);
     }
 
     public void openClaw() {
-        relicHandServo.setPosition(0.9);
+        relicHandServoLeft.setPosition(0.9);
+        relicHandServoRight.setPosition(0.9);
     }
 
     public void closeClaw() {
-        relicHandServo.setPosition(0.5);
+        relicHandServoLeft.setPosition(0.5);
+        relicHandServoRight.setPosition(0.5);
     }
 }

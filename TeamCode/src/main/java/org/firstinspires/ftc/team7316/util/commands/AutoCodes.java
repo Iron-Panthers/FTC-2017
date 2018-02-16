@@ -258,15 +258,11 @@ public class AutoCodes {
     }
 
     public static SequentialCommand phase2Test() {
-        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.BLUE, DriveDistanceCipher.Position.CLOSE);
+        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.RED, DriveDistanceCipher.Position.CLOSE);
 
         TurnGyroPID turn = new TurnGyroPID(90, 3);
 
-        DriveDistance inchforward = new DriveDistance(Constants.inchesToTicks(Constants.CLOSE_CRYPTO_APPROACH_BLUE), 3);
-        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
-        DriveDistance backup = new DriveDistance(Constants.inchesToTicks(-4), 3);
-
-        Command[] cmds = {gotocrypto, turn, inchforward, outtake, backup};
+        Command[] cmds = {gotocrypto, turn};
         return new SequentialCommand(cmds);
     }
 

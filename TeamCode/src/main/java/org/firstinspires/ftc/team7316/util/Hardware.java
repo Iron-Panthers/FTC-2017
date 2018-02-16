@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.team7316.util;
 
-import android.content.Context;
-
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.hardware.bosch.BNO055IMU;
@@ -9,7 +7,6 @@ import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
@@ -50,7 +47,8 @@ public class Hardware {
     private static final String RELIC_ARM_MOTOR_NAME = "ram";
     private static final String RELIC_SHOULDER_SERVO_NAME = "rss";
     private static final String RELIC_WRIST_SERVO_NAME = "rws";
-    private static final String RELIC_HAND_SERVO_NAME = "rhs";
+    private static final String RELIC_HAND_SERVO_LEFT_NAME = "rhsl";
+    private static final String RELIC_HAND_SERVO_RIGHT_NAME = "rhsr";
 
     private static final String RIGHT_JEWEL_ARM_NAME = "rja";
     private static final String WACKING_JEWEL_ARM_NAME = "bap";
@@ -85,8 +83,9 @@ public class Hardware {
 
     public DcMotor relicArmMotor;
     public CRServo relicShoulderServo;
-    public Servo relicWristServo;
-    public Servo relicHandServo;
+//    public Servo relicWristServo;
+    public Servo relicHandServoLeft;
+    public Servo relicHandServoRight;
 
     public Servo rightJewelArm;
     public Servo wackingJewelArm;
@@ -136,7 +135,6 @@ public class Hardware {
 
         intakeServo = map.servo.get(INTAKE_SERVO_NAME);
         intakeServo.setDirection(Servo.Direction.REVERSE);
-        //intakeServo.scaleRange(Constants.INTAKE_SERVO_MIN_POSITION, Constants.INTAKE_SERVO_MAX_POSITION);
 
         flagServo = map.servo.get(GLYPH_FLAG_SERVO_NAME);
         glyphTouchSensor = map.touchSensor.get(GLYPH_TOUCH_SENSOR_NAME);
@@ -146,8 +144,9 @@ public class Hardware {
 //        relic grabber hardware
         relicArmMotor = map.dcMotor.get(RELIC_ARM_MOTOR_NAME);
         relicShoulderServo = map.crservo.get(RELIC_SHOULDER_SERVO_NAME);
-        relicWristServo = map.servo.get(RELIC_WRIST_SERVO_NAME);
-        relicHandServo = map.servo.get(RELIC_HAND_SERVO_NAME);
+//        relicWristServo = map.servo.get(RELIC_WRIST_SERVO_NAME);
+        relicHandServoLeft = map.servo.get(RELIC_HAND_SERVO_LEFT_NAME);
+        relicHandServoRight = map.servo.get(RELIC_HAND_SERVO_RIGHT_NAME);
 
         //jewel arm hardware
         rightJewelArm = map.servo.get(RIGHT_JEWEL_ARM_NAME);
