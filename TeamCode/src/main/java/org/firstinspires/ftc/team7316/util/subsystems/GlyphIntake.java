@@ -49,6 +49,11 @@ public class GlyphIntake extends Subsystem {
         this.servo.setPosition(position);
     }
 
+    /**
+     * Positive powers (presumably) set the intake to actually... well... intake
+     * @param leftPower The left intake wheel power
+     * @param rightPower The right intake wheel power
+     */
     public void setIntakePower(double leftPower, double rightPower) {
         this.rightIntakeMotor.setPower(-rightPower);
         this.leftIntakeMotor.setPower(leftPower);
