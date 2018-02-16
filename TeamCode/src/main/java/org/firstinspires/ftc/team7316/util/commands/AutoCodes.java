@@ -179,18 +179,18 @@ public class AutoCodes {
         Command wack = wackJewelBasic(Alliance.BLUE);
 
         DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
-        Wait stop = new Wait(0.5);
-        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, 0, 1);
-        Wait stop2 = new Wait(0.5);
+        Wait stop = new Wait(0.1);
+        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, 0, 0.4);
         DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.BLUE, DriveDistanceCipher.Position.CLOSE);
 
-        TurnGyroPID turn = new TurnGyroPID(90, 3);
+        TurnGyroPID turn = new TurnGyroPID(90, 2);
 
-        DriveDistance approach = new DriveDistance(Constants.inchesToTicks(Constants.CLOSE_CRYPTO_APPROACH_BLUE), 2);
+//        DriveDistance approach = new DriveDistance(Constants.inchesToTicks(Constants.CLOSE_CRYPTO_APPROACH_BLUE), 2);
+        DriveForTime approach = new DriveForTime(0.6, 0, 0.4);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
         SequentialCommand bAndR = releaseAndBackUp();
 
-        Command[] cmds = {clamp, wack, offPad, stop, align, stop2, gotocrypto, turn, approach, outtake, bAndR, closeMultiglyph()};
+        Command[] cmds = {clamp, wack, offPad, stop, align, gotocrypto, turn, approach, outtake, bAndR, closeMultiglyph()};
         return new SequentialCommand(cmds);
     }
 
