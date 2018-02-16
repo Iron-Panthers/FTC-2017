@@ -49,10 +49,10 @@ public class RelicArm extends Subsystem {
     }
 
     public void openClaw() {
-        relicHandServo.setPosition(0.5);
+        relicHandServo.setPosition(0.9);
     }
 
     public void closeClaw() {
-        relicHandServo.setPosition(0.6);
+        relicHandServo.setPosition(0.5);
     }
 }
