@@ -72,16 +72,16 @@ public class DriveDistanceCipher extends Command {
             case RED:
                 switch (Hardware.instance.vuforiaCameraWrapper.vuMark) {
                     case LEFT:
-                        drivecommand = new DriveDistance(LEFT_DIST, DRIVE_TIMEOUT);
+                        drivecommand = new DriveDistance(Constants.inchesToTicks(LEFT_DIST), DRIVE_TIMEOUT);
                         break;
                     case CENTER:
-                        drivecommand = new DriveDistance(CENTER_DIST, DRIVE_TIMEOUT);
+                        drivecommand = new DriveDistance(Constants.inchesToTicks(CENTER_DIST), DRIVE_TIMEOUT);
                         break;
                     case RIGHT:
-                        drivecommand = new DriveDistance(RIGHT_DIST, DRIVE_TIMEOUT);
+                        drivecommand = new DriveDistance(Constants.inchesToTicks(RIGHT_DIST), DRIVE_TIMEOUT);
                         break;
                     default:
-                        drivecommand = new DriveDistance(CENTER_DIST, DRIVE_TIMEOUT);
+                        drivecommand = new DriveDistance(Constants.inchesToTicks(CENTER_DIST), DRIVE_TIMEOUT);
                         break;
                 }
                 break;
@@ -89,16 +89,16 @@ public class DriveDistanceCipher extends Command {
                 switch (Hardware.instance.vuforiaCameraWrapper.vuMark) {
                     //yes it's confusing no im not going to fix it
                     case LEFT:
-                        drivecommand = new DriveDistance(-RIGHT_DIST, DRIVE_TIMEOUT);
+                        drivecommand = new DriveDistance(Constants.inchesToTicks(-RIGHT_DIST), DRIVE_TIMEOUT);
                         break;
                     case CENTER:
-                        drivecommand = new DriveDistance(-CENTER_DIST, DRIVE_TIMEOUT);
+                        drivecommand = new DriveDistance(Constants.inchesToTicks(-CENTER_DIST), DRIVE_TIMEOUT);
                         break;
                     case RIGHT:
-                        drivecommand = new DriveDistance(-LEFT_DIST , DRIVE_TIMEOUT);
+                        drivecommand = new DriveDistance(Constants.inchesToTicks(-LEFT_DIST) , DRIVE_TIMEOUT);
                         break;
                     default:
-                        drivecommand = new DriveDistance(-CENTER_DIST, DRIVE_TIMEOUT);
+                        drivecommand = new DriveDistance(Constants.inchesToTicks(-CENTER_DIST), DRIVE_TIMEOUT);
                         break;
                 }
                 break;

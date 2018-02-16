@@ -41,7 +41,7 @@ public class REdJewelshit extends LinearOpMode {
         DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, Math.PI, 1);
         Wait stop2 = new Wait(0.5);
 //        TurnUntilKey detectkey = new TurnUntilKey(1, 90);
-        DriveDistance forward = new DriveDistance(Constants.FAR_CRYPTO_DISTANCE, 4);
+        DriveDistance forward = new DriveDistance(Constants.inchesToTicks(Constants.FAR_CRYPTO_DISTANCE), 4);
 
         TurnGyroPID turnleft = new TurnGyroPID(-90, 3);
         DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.RED, DriveDistanceCipher.Position.FAR);

@@ -25,6 +25,8 @@ import java.util.List;
 public class DriveDistance extends Command {
 
     private int distance; // in ticks
+    private int maxVelocity; // in ticks per second
+    private final int MAXACCEL = 1500; //ticks per second per second
 
     private double timeout;
     private ElapsedTime timer;
@@ -50,19 +52,25 @@ public class DriveDistance extends Command {
     private ArrayList<Double> powerBL = new ArrayList<>();
     private ArrayList<Double> powerBR = new ArrayList<>();
 
-    public DriveDistance(double inches) {
-        this(inches, 6);
-    }
-
     /**
-     * @param inches desired distance
-     * @param timeout the time before the command will stop
+     * @param ticks desired distance in ticks
+     * @param maxVelocity maximum velocity the robot will run at
+     * @param timeout the time before the command will force stop
      */
-    public DriveDistance(double inches, double timeout) {
+    public DriveDistance(int ticks, int maxVelocity, double timeout) {
         requires(Subsystems.instance.driveBase);
-        this.distance = Constants.inchesToTicks(inches);
+        this.distance = ticks;
+        this.maxVelocity = maxVelocity;
         this.timeout = timeout;
         timer = new ElapsedTime();
+    }
+
+    public DriveDistance(int ticks, double timeout) {
+        this(ticks, (int) (Constants.TICKS_PER_SECOND_HALFPOWER * 0.75), timeout);
+    }
+
+    public DriveDistance(int ticks) {
+        this(ticks, 6);
     }
 
     @Override
@@ -72,10 +80,10 @@ public class DriveDistance extends Command {
         Subsystems.instance.driveBase.resetMotors();
 //        Subsystems.instance.driveBase.setMotorTargets(distance);
         if(distance > 0) {
-            Subsystems.instance.driveBase.setMotorPaths(new CombinedPath.LongitudalTrapezoid(0, distance, Constants.TICKS_PER_SECOND_HALFPOWER * 0.75, 1500));
+            Subsystems.instance.driveBase.setMotorPaths(new CombinedPath.LongitudalTrapezoid(0, distance, maxVelocity, MAXACCEL));
         }
         else {
-            Subsystems.instance.driveBase.setMotorPaths(new CombinedPath.LongitudalTrapezoid(0, distance, -Constants.TICKS_PER_SECOND_HALFPOWER * 0.75, -1500));
+            Subsystems.instance.driveBase.setMotorPaths(new CombinedPath.LongitudalTrapezoid(0, distance, -maxVelocity, -MAXACCEL));
         }
     }
 
