@@ -25,10 +25,10 @@ public class RelicArmJoystick extends Command {
     @Override
     public void loop() {
         if(OI.instance.gp2.dp_left.state()) {
-            relicArm.setArmPower(0.3);
+            relicArm.setArmPower(1);
         }
         else if(OI.instance.gp2.dp_right.state()) {
-            relicArm.setArmPower(-0.3);
+            relicArm.setArmPower(-1);
         }
         else {
             relicArm.setArmPower(0);
