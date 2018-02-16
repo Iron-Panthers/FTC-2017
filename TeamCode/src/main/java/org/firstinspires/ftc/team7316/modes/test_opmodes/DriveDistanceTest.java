@@ -3,6 +3,7 @@ package org.firstinspires.ftc.team7316.modes.test_opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.team7316.modes.AutoBaseOpMode;
+import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.Scheduler;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance;
@@ -17,7 +18,7 @@ public class DriveDistanceTest extends AutoBaseOpMode {
     @Override
     public void onInit() {
         Scheduler.inTeleop = false;
-        Scheduler.instance.add(new DriveDistance(30));
+        Scheduler.instance.add(new DriveDistance(Constants.inchesToTicks(30)));
     }
 
     @Override
