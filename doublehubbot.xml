@@ -22,7 +22,7 @@
             <NeveRest40Gearmotor name="mdfl" port="2" />
             <NeveRest40Gearmotor name="mdbl" port="3" />
             <Servo name="flag" port="2" />
-            <Servo name="ths" port="3" />
+            <Servo name="ths" port="4" />
             <LynxEmbeddedIMU name="gyro" port="0" bus="0" />
         </LynxModule>
     </LynxUsbDevice>

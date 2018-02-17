@@ -22,6 +22,8 @@ public class RelicArm extends Subsystem {
     private Servo relicHandServoLeft = Hardware.instance.relicHandServoLeft;
     private Servo relicHandServoRight = Hardware.instance.relicHandServoRight;
 
+    public double clawServoTarget = 0.7;
+
     @Override
     public Command defaultAutoCommand() {
         return null;
@@ -49,6 +51,11 @@ public class RelicArm extends Subsystem {
 //        relicWristServo.setPosition(0.9);
     }
 
+    public void setClawPosition(double position) {
+        relicHandServoLeft.setPosition(position);
+        relicHandServoRight.setPosition(position);
+    }
+
     public void openClaw() {
         relicHandServoLeft.setPosition(0.9);
         relicHandServoRight.setPosition(0.9);
@@ -57,5 +64,9 @@ public class RelicArm extends Subsystem {
     public void closeClaw() {
         relicHandServoLeft.setPosition(0.5);
         relicHandServoRight.setPosition(0.5);
+    }
+
+    public void setClawServoTarget(double position) {
+
     }
 }

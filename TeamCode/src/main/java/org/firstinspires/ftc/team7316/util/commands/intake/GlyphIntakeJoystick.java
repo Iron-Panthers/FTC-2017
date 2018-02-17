@@ -28,12 +28,36 @@ public class GlyphIntakeJoystick extends Command {
 
     @Override
     public void loop() {
-        if(OI.instance.gp2.left_stick.getY() > 0) {
-            this.intake.setIntakePower(OI.instance.gp2.left_stick.getY(), OI.instance.gp2.left_stick.getY()); //faster outtaking
-        } else {
-            this.intake.setIntakePower(OI.instance.gp2.left_stick.getY() * Constants.INTAKE_LEFT_POWER_WEIGHTING, OI.instance.gp2.left_stick.getY() * Constants.INTAKE_RIGHT_POWER_WEIGHTING);
+
+        //  corresponds with relic arm commands, should probably be made more clear, but oh well
+        //  remaps the joysticks to the relic arm
+        if(!OI.instance.gp2.leftTriggerWrapper.state()) {
+            if (OI.instance.gp2.left_stick.getY() > 0) {
+                this.intake.setIntakePower(OI.instance.gp2.left_stick.getY(), OI.instance.gp2.left_stick.getY()); //faster outtaking
+            } else {
+                this.intake.setIntakePower(OI.instance.gp2.left_stick.getY() * Constants.INTAKE_LEFT_POWER_WEIGHTING, OI.instance.gp2.left_stick.getY() * Constants.INTAKE_RIGHT_POWER_WEIGHTING);
+            }
+
+            //  the intake clamp button
+            if(OI.instance.gp2.right_bumper.state()) {
+                Hardware.log("ist good", "ya");
+                this.intake.setServoPosition(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+            }
+            else if(OI.instance.gp2.right_stick.getX() >= 0){
+                this.intake.setServoPositionScaled(1 - OI.instance.gp2.right_stick.getX());
+            }
+        }
+        else {
+            //  stop intake motors when trying to use relic arm
+            this.intake.setIntakePower(0, 0);
+
+            //  the intake clamp button
+            if(OI.instance.gp2.right_bumper.state()) {
+                this.intake.setServoPosition(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+            }
         }
 
+        //  the lift button mappings
         if(OI.instance.gp2.dp_up.state()) {
             this.intake.setLiftPower(-Constants.INTAKE_LIFT_POWER);
         }
@@ -44,13 +68,7 @@ public class GlyphIntakeJoystick extends Command {
             this.intake.setLiftPower(0);
         }
 
-        if(OI.instance.gp2.right_bumper.state()) {
-            this.intake.setServoPosition(Constants.INTAKE_CLAMP_GLYPH_POSITION);
-        }
-        else if(OI.instance.gp2.right_stick.getX() >= 0){
-            this.intake.setServoPositionScaled(1 - OI.instance.gp2.right_stick.getX());
-        }
-
+        //  flag servo stuff
         if(Hardware.instance.glyphTouchSensor.isPressed()) {
             Hardware.instance.flagServo.setPosition(0.5);
         }

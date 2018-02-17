@@ -59,6 +59,23 @@ public class Util {
         return num;
     }
 
+    /**
+     * Clamps value within the values lo and hi
+     * @param value
+     * @param lo
+     * @param hi
+     * @return a value between lo and hi
+     */
+    public static double clamp(double value, double lo, double hi) {
+        if(value < lo) {
+            return lo;
+        }
+        if(value > hi) {
+            return hi;
+        }
+        return value;
+    }
+
     public static void writeCSV(List<Double> times, List<Double> targets, List<Double> positions, List<Double> errors) {
         BufferedWriter os;
         Date date = new Date(System.currentTimeMillis());
