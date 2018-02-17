@@ -68,7 +68,7 @@ public class DriveWithJoystick extends Command {
 
         //release tail hook
         if(OI.instance.gp1.left_bumper.state() && OI.instance.gp1.leftTriggerWrapper.state()) {
-            Hardware.instance.tailHookServo.setPosition(0);
+            Hardware.instance.tailHookServo.setPosition(1);
         }
         else {
             Hardware.instance.tailHookServo.setPosition(0.5);

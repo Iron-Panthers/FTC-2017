@@ -37,11 +37,6 @@ public class Scheduler {
     }
 
     public void loop() {
-        String cmdsString = "";
-        for (Command cmd : commands) {
-            cmdsString += cmd.getClass();
-        }
-        Hardware.log("Commands", cmdsString);
 
         addFromBuffer();
 
