@@ -17,7 +17,7 @@ public class DriveDistanceCipher extends Command {
     private final double DRIVE_TIMEOUT = 4;
 
     private final double blueCloseOffset = 4;
-    private final double redCloseOffset = 0;
+    private final double redCloseOffset = -1;
 //    private final double closeOffset = 2;
 
     private final double redFarOffset = -5;

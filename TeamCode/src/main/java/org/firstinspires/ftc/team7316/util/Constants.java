@@ -153,7 +153,7 @@ public class Constants {
     public enum MultiglyphRotate {
         LEFT(Math.atan(COLUMN_SEPARATION / PIT_TO_CRYPTO) * RADIAN_TO_DEGREES),
         CENTER(Math.atan(COLUMN_SEPARATION / PIT_TO_CRYPTO) * RADIAN_TO_DEGREES),
-        RIGHT(-Math.atan(COLUMN_SEPARATION / PIT_TO_CRYPTO) * RADIAN_TO_DEGREES);
+        RIGHT(Math.atan(COLUMN_SEPARATION / PIT_TO_CRYPTO) * RADIAN_TO_DEGREES);
 
         public final double degrees;
 

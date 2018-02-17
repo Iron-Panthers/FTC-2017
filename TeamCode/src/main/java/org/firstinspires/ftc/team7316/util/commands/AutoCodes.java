@@ -222,7 +222,7 @@ public class AutoCodes {
             case LEFT:
                 targetangle += Constants.MultiglyphRotate.LEFT.degrees;
             case RIGHT:
-                targetangle += Constants.MultiglyphRotate.RIGHT.degrees;
+                targetangle -= Constants.MultiglyphRotate.RIGHT.degrees;
             default:
                 targetangle += Constants.MultiglyphRotate.CENTER.degrees;
         }
