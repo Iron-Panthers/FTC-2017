@@ -75,14 +75,14 @@ public class MecanumDriveBase extends Subsystem {
         Hardware.log("wantedSpeed", wantedSpeed);
 
         double strafingDeadzone = strafingDeadzone(wantedMovementAngle);
-        wantedSpeed = (Constants.sqrt2 - strafingDeadzone) * wantedSpeed + strafingDeadzone;
+        wantedSpeed = (Constants.SQRT2 - strafingDeadzone) * wantedSpeed + strafingDeadzone;
 
         // this  T I D B I T  is for strafing
         double y = wantedSpeed * Math.cos(wantedMovementAngle);
         double x = wantedSpeed * Math.sin(wantedMovementAngle);
 
-        double fL_bRpower = Constants.sqrt2 * (y + (x-y)/2); //length of the vector
-        double fR_bLpower = -Constants.sqrt2 * ((x-y)/2); //again
+        double fL_bRpower = Constants.SQRT2 * (y + (x-y)/2); //length of the vector
+        double fR_bLpower = -Constants.SQRT2 * ((x-y)/2); //again
 
         Hardware.log("front left back right", fL_bRpower);
         Hardware.log("front right back left", fR_bLpower);

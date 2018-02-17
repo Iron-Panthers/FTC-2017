@@ -59,6 +59,9 @@ public class Constants {
     public static final double MIDDLE_COLUMN_DISTANCE_FAR = 15;
     public static final double LEFT_COLUMN_DISTANCE_FAR = 23;
 
+    public static final double PIT_TO_CRYPTO = 60;  //inches
+    public static final double COLUMN_SEPARATION = 8;
+
     //drive times(temporary) and their powers
     public static final double RED_OFF_PAD_TIME = 2;
     public static final double BLUE_OFF_PAD_TIME = 1.7;
@@ -130,7 +133,8 @@ public class Constants {
     public static final double STRAFING_MOTOR_DEADZONE = 0.5;
     public static final double TURNING_MOTOR_DEADZONE = 0;
 
-    public static final double sqrt2 = Math.sqrt(2);
+    public static final double SQRT2 = Math.sqrt(2);
+    public static final double RADIAN_TO_DEGREES = 180 / Math.PI;
 
     //Key is from Jerry's Vuforia dev account
     public static final String vuforiaLicenseKey = "AX5kYPX/////AAAAGU3PfsyXBULLmvcBPSA/sq8MU9VRtH0JkRzhv6Gggr2CpIl9G4uMhuk/GpUW7pgNKluG8PpL85nQo2AakItuDJUgOkCwK6w0YHQPx6+rf8jZM98Fp1lcmH85r/w2JyjVZB43mQAGuyrlJMi24YR9n6m93YNrtv710/h8DuurXnKBtn2ucrsyUjAVfKJzlIXrAB7sZ8MZDqA1rWD+GqoO5pWAW2sobpl64F4A1Fzf+Zzn340wOoH6UEHTyRb1clkSezxvc129fij+4Ev5jOJioiFJyCcF7YXY9zczVpyByqad0w+HqAR2VXj8hKBgL6SRZ6yQ5GmrUY1/5JUQXiMwdRfT5RKjHMlqKP9f9J1x/V7l";
@@ -143,4 +147,18 @@ public class Constants {
         return (int)((double)ENCODER_TICK_PER_REV / ENCODER_TICK_PER_REV / (WHEEL_CIRCUMFERENCE * 25.4) * dist);
     }
 
+    /**
+     * The offset from 180 degree turn to go to a different column
+     */
+    public enum MultiglyphRotate {
+        LEFT(Math.atan(COLUMN_SEPARATION / PIT_TO_CRYPTO) * RADIAN_TO_DEGREES),
+        CENTER(Math.atan(COLUMN_SEPARATION / PIT_TO_CRYPTO) * RADIAN_TO_DEGREES),
+        RIGHT(-Math.atan(COLUMN_SEPARATION / PIT_TO_CRYPTO) * RADIAN_TO_DEGREES);
+
+        public final double degrees;
+
+        MultiglyphRotate(double degrees) {
+            this.degrees = degrees;
+        }
+    }
 }

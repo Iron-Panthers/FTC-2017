@@ -27,7 +27,7 @@ import org.firstinspires.ftc.teamcode.R;
 
 public class VuforiaCameraWrapper {
 
-    private final VuforiaLocalizer.CameraDirection CAMERA_DIRECTION= VuforiaLocalizer.CameraDirection.FRONT;
+    private final VuforiaLocalizer.CameraDirection CAMERA_DIRECTION= VuforiaLocalizer.CameraDirection.BACK;
 
     private VuforiaLocalizer.Parameters params;
     private VuforiaLocalizer vuforia;

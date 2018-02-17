@@ -3,6 +3,7 @@ package org.firstinspires.ftc.team7316.util.commands;
 import org.firstinspires.ftc.robotcore.external.Const;
 import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Constants;
+import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveOffPad;
 import org.firstinspires.ftc.team7316.util.commands.drive.StrafeTimeCipher;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance;
@@ -215,7 +216,17 @@ public class AutoCodes {
         DriveWhileIntake mowDownGlyphs = new DriveWhileIntake(-0.7, 0.4, 1.5);
 //        MoveIntakeArm closeIntake = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
         SimultaneousKeyCommand closeIntake = new SimultaneousKeyCommand(new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION), new RunIntake(-0.7));
-        SimultaneousKeyCommand turn180_2 = new SimultaneousKeyCommand(new TurnGyroPID(90, 3, 120), new RunIntake(-0.7));
+
+        double targetangle = 90;
+        switch (Hardware.instance.vuforiaCameraWrapper.vuMark) {
+            case LEFT:
+                targetangle += Constants.MultiglyphRotate.LEFT.degrees;
+            case RIGHT:
+                targetangle += Constants.MultiglyphRotate.RIGHT.degrees;
+            default:
+                targetangle += Constants.MultiglyphRotate.CENTER.degrees;
+        }
+        SimultaneousKeyCommand turn180_2 = new SimultaneousKeyCommand(new TurnGyroPID(targetangle, 3, 120), new RunIntake(-0.7));
 //        TurnGyroPID turn180_2 = new TurnGyroPID(90, 3, 120);
 
         DriveDistance backToCrypto = new DriveDistance(Constants.inchesToTicks(distancetopit * 2 + backupdistance), 1800, 4);

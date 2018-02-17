@@ -44,8 +44,8 @@ public class StraightTurn extends Command {
         double y = driveRate * Math.cos(wantedMovementAngle);
         double x = driveRate * Math.sin(wantedMovementAngle);
 
-        double fL_bRpower = Constants.sqrt2 * (y + (x-y)/2); //length of the vector
-        double fR_bLpower = -Constants.sqrt2 * ((x-y)/2); //again
+        double fL_bRpower = Constants.SQRT2 * (y + (x-y)/2); //length of the vector
+        double fR_bLpower = -Constants.SQRT2 * ((x-y)/2); //again
 
         Subsystems.instance.driveBase.setMotors(fL_bRpower + turnRate, fR_bLpower - turnRate, fR_bLpower + turnRate, fL_bRpower - turnRate);
     }

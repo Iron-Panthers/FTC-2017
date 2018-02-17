@@ -142,6 +142,7 @@ public class PID {
         sum = 0;
 
         path = null;
+        usePath = false;
 
         previousTime = 0;
         direction = Direction.STOPPED;
