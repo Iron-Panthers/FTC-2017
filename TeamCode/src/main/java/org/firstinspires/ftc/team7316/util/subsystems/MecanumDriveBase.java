@@ -3,6 +3,7 @@ package org.firstinspires.ftc.team7316.util.subsystems;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.team7316.util.Constants;
+import org.firstinspires.ftc.team7316.util.Util;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveWithJoystick;
@@ -19,10 +20,11 @@ public class MecanumDriveBase extends Subsystem {
     //all speed in ticks per second
 
     private double wantedFrBlSpeed = 0; // encoder ticks per second
-
     private double wantedFlBrSpeed = 0; // encoder ticks per second
 
-    private double targetAngle = 0;
+    private double prevTurnSpeed = 0;
+    private double targetHeading = 0;
+    private final double GYRO_FEEDBACK_POWER_RATIO = 0.04;  // preliminary value
 
     private double wantedTurnSpeed = 0;
 
@@ -30,9 +32,7 @@ public class MecanumDriveBase extends Subsystem {
 
     private double weighting = 0.9;
 
-    public MecanumDriveBase() {
-
-    }
+    public MecanumDriveBase() {}
 
     @Override
     public Command defaultAutoCommand() {
@@ -53,8 +53,16 @@ public class MecanumDriveBase extends Subsystem {
         this.wantedOmega = wantedOmega; // degrees per second
     }
 
-    //something something no pid here
+    public void updateTargetHeading() {
+        targetHeading = Hardware.instance.gyroWrapper.getHeading();
+    }
+
     public void setWantedTurnSpeed(double wantedTurnSpeed) {
+        if(wantedTurnSpeed == 0) {
+            this.wantedTurnSpeed = 0;
+            return;
+        }
+
         if (wantedTurnSpeed > 0) {
             wantedTurnSpeed = (1 - Constants.TURNING_MOTOR_DEADZONE) * wantedTurnSpeed + Constants.TURNING_MOTOR_DEADZONE;
         } else {
@@ -224,6 +232,17 @@ public class MecanumDriveBase extends Subsystem {
     }
 
     public void driveWithSpeeds() {
+        if(wantedTurnSpeed == 0) {
+            if(prevTurnSpeed != 0) {
+                updateTargetHeading();
+            }
+            //  it's {target - current} instead of {current - target} for error since it needs to be inverted
+            wantedTurnSpeed += Util.wrap(targetHeading - Hardware.instance.gyroWrapper.getHeading()) * GYRO_FEEDBACK_POWER_RATIO;
+        }
+        else {
+            updateTargetHeading();
+        }
+        prevTurnSpeed = wantedTurnSpeed;
         setMotors(weighting * (wantedFlBrSpeed + wantedTurnSpeed),
                 weighting * (wantedFrBlSpeed - wantedTurnSpeed),
                 weighting * (wantedFrBlSpeed + wantedTurnSpeed),
