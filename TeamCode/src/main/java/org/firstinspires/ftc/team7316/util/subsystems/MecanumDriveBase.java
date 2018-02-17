@@ -235,6 +235,9 @@ public class MecanumDriveBase extends Subsystem {
             //  it's {target - current} instead of {current - target} for error since it needs to be inverted
             wantedTurnSpeed += Util.wrap(targetHeading - Hardware.instance.gyroWrapper.getHeading()) * GYRO_FEEDBACK_POWER_RATIO;
         }
+        else {
+            updateTargetHeading();
+        }
         setMotors(weighting * (wantedFlBrSpeed + wantedTurnSpeed),
                 weighting * (wantedFrBlSpeed - wantedTurnSpeed),
                 weighting * (wantedFrBlSpeed + wantedTurnSpeed),
