@@ -22,8 +22,9 @@ public class MecanumDriveBase extends Subsystem {
     private double wantedFrBlSpeed = 0; // encoder ticks per second
     private double wantedFlBrSpeed = 0; // encoder ticks per second
 
+    private double prevTurnSpeed = 0;
     private double targetHeading = 0;
-    private final double GYRO_FEEDBACK_POWER_RATIO = 0.03;  // preliminary value
+    private final double GYRO_FEEDBACK_POWER_RATIO = 0.04;  // preliminary value
 
     private double wantedTurnSpeed = 0;
 
@@ -232,12 +233,16 @@ public class MecanumDriveBase extends Subsystem {
 
     public void driveWithSpeeds() {
         if(wantedTurnSpeed == 0) {
+            if(prevTurnSpeed != 0) {
+                updateTargetHeading();
+            }
             //  it's {target - current} instead of {current - target} for error since it needs to be inverted
             wantedTurnSpeed += Util.wrap(targetHeading - Hardware.instance.gyroWrapper.getHeading()) * GYRO_FEEDBACK_POWER_RATIO;
         }
         else {
             updateTargetHeading();
         }
+        prevTurnSpeed = wantedTurnSpeed;
         setMotors(weighting * (wantedFlBrSpeed + wantedTurnSpeed),
                 weighting * (wantedFrBlSpeed - wantedTurnSpeed),
                 weighting * (wantedFrBlSpeed + wantedTurnSpeed),
