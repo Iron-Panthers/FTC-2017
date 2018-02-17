@@ -216,7 +216,7 @@ public class MecanumDriveBase extends Subsystem {
         setMotors(power, -power, power, -power);
     }
 
-    public void driveWithSpeedsPID() {
+    public void driveWithPID() {
         Hardware.instance.frontLeftDriveMotorWrapper.setPowerPID();
         Hardware.instance.frontRightDriveMotorWrapper.setPowerPID();
         Hardware.instance.backLeftDriveMotorWrapper.setPowerPID();

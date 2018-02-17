@@ -36,7 +36,7 @@ public class Strafe extends Command {
         Hardware.log("strafing", "very nice move man");
         Hardware.log("flError", Hardware.instance.frontLeftDriveMotorWrapper.getError());
         Hardware.log("frError", Hardware.instance.frontRightDriveMotorWrapper.getError());
-        Subsystems.instance.driveBase.driveWithSpeedsPID();
+        Subsystems.instance.driveBase.driveWithPID();
     }
 
     @Override

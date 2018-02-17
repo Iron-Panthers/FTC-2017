@@ -23,7 +23,7 @@ public class DriveDistancePath extends Command {
 
     @Override
     public void loop() {
-        Subsystems.instance.driveBase.driveWithSpeedsPID();
+        Subsystems.instance.driveBase.driveWithPID();
     }
 
     @Override

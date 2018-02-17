@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.team7316.copypastaLib.CombinedPath;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
-import org.firstinspires.ftc.team7316.util.Util;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
@@ -92,7 +91,7 @@ public class DriveDistance extends Command {
         if(Subsystems.instance.driveBase.completedDistance()) {
             completedCount ++;
         }
-        Subsystems.instance.driveBase.driveWithSpeedsPID();
+        Subsystems.instance.driveBase.driveWithPID();
         Hardware.log("driving distance", "cool and good");
         Hardware.log("flError", Hardware.instance.frontLeftDriveMotorWrapper.getError());
         Hardware.log("frError", Hardware.instance.frontRightDriveMotorWrapper.getError());
