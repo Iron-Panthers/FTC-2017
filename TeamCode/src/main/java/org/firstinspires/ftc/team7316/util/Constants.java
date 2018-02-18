@@ -19,7 +19,7 @@ public class Constants {
     //Intake shenanigans
     public static final double INTAKE_SERVO_MIN_POSITION = 0.4;
     public static final double INTAKE_SERVO_MAX_POSITION = 1;
-    public static final double INTAKE_CLAMP_GLYPH_POSITION = 0.3;
+    public static final double INTAKE_CLAMP_GLYPH_POSITION = 0.2;
 
     public static final double INTAKE_LIFT_POWER = 0.9;
     public static final double INTAKE_LEFT_POWER_WEIGHTING = 0.65;
