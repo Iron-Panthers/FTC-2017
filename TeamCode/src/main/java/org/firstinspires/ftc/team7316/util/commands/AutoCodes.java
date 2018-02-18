@@ -207,17 +207,17 @@ public class AutoCodes {
 
     public static SequentialCommand closeMultiglyph() {
 //        StraightTurn moveToPit = new StraightTurn(-90, 0.7, 0.45);
-        final double distancetopit = 15;
         MoveIntakeArm openIntake = new MoveIntakeArm(0.8);
         TurnGyroPID turn180 = new TurnGyroPID(-90, 3, 120);
 //        SimultaneousKeyCommand mowDownGlyphs = new SimultaneousKeyCommand(new DriveDistance(distancetopit), new RunIntake(-0.7));
-        DriveDistance driveToPit = new DriveDistance(Constants.inchesToTicks(distancetopit), 1800, 4);
-        DriveWhileIntake mowDownGlyphs = new DriveWhileIntake(-0.7, 0.4, 1.5);
+//        DriveDistance driveToPit = new DriveDistance(Constants.inchesToTicks(distancetopit), 1800, 4);
+//        DriveWhileIntake mowDownGlyphs = new DriveWhileIntake(-0.7, 0.4, 1.5);
+        SimultaneousKeyCommand mowDownGlyphs = new SimultaneousKeyCommand(new DriveDistance(Constants.inchesToTicks(Constants.MULTIGLYPH_DIST_TO_PIT + Constants.MULTIGLYPH_DIST_TO_COLLECT), 1800, 5), new RunIntake(-0.7));
 //        MoveIntakeArm closeIntake = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
         SimultaneousKeyCommand closeIntake = new SimultaneousKeyCommand(new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION), new RunIntake(-0.7));
 
         double targetangle = 90;
-        double cryptoDist = Constants.PIT_TO_CRYPTO * 0.75;
+        double cryptoDist = Constants.MULTIGLYPH_DIST_TO_PIT + Constants.MULTIGLYPH_DIST_TO_COLLECT + Constants.MULTIGLYPH_BACKUP_DISTANCE;
         switch (Hardware.instance.vuforiaCameraWrapper.vuMark) {
             case LEFT:
                 targetangle += Constants.MultiglyphRotate.LEFT.degrees;
@@ -235,7 +235,7 @@ public class AutoCodes {
         IntakeForTime outtake2 = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
         SequentialCommand bAndR2 = backUpAndRam();
 
-        Command[] cmds = {openIntake, turn180, driveToPit, mowDownGlyphs, closeIntake, turn180_2, backToCrypto, outtake2, bAndR2};
+        Command[] cmds = {openIntake, turn180, mowDownGlyphs, closeIntake, turn180_2, backToCrypto, outtake2, bAndR2};
         return new SequentialCommand(cmds);
     }
 
@@ -257,7 +257,7 @@ public class AutoCodes {
     public static SequentialCommand releaseAndBackUp() {
         Command[] cmds = {
                 new MoveIntakeArm(0.8),
-                new DriveDistance(Constants.inchesToTicks(-10), 1)
+                new DriveDistance(Constants.inchesToTicks(-Constants.MULTIGLYPH_BACKUP_DISTANCE), 1)
         };
 
         return new SequentialCommand(cmds);
