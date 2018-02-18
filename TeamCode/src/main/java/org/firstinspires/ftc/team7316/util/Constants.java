@@ -59,8 +59,8 @@ public class Constants {
     public static final double MIDDLE_COLUMN_DISTANCE_FAR = 15;
     public static final double LEFT_COLUMN_DISTANCE_FAR = 23;
 
-    public static final double PIT_TO_CRYPTO = 60;  //inches
-    public static final double COLUMN_SEPARATION = 8;
+    public static final double PIT_TO_CRYPTO = 66;  //inches
+    public static final double COLUMN_SEPARATION = 6;
 
     //drive times(temporary) and their powers
     public static final double RED_OFF_PAD_TIME = 2;
@@ -97,7 +97,7 @@ public class Constants {
     public static final int COLOROFFSET_G = 40;
     public static final int COLOROFFSET_B = 30;
 
-    public static final double COLOR_DIFFERENCE = 50;
+    public static final double COLOR_DIFFERENCE = 15;
     public static final int NO_COLOR_RED = 10;
     public static final int NO_COLOR_GREEN = 20;
     public static final int NO_COLOR_BLUE = 20;

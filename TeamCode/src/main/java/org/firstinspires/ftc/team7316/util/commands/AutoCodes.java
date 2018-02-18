@@ -207,7 +207,6 @@ public class AutoCodes {
 
     public static SequentialCommand closeMultiglyph() {
 //        StraightTurn moveToPit = new StraightTurn(-90, 0.7, 0.45);
-        final double backupdistance = 5;
         final double distancetopit = 15;
         MoveIntakeArm openIntake = new MoveIntakeArm(0.8);
         TurnGyroPID turn180 = new TurnGyroPID(-90, 3, 120);
@@ -218,18 +217,21 @@ public class AutoCodes {
         SimultaneousKeyCommand closeIntake = new SimultaneousKeyCommand(new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION), new RunIntake(-0.7));
 
         double targetangle = 90;
+        double cryptoDist = Constants.PIT_TO_CRYPTO * 0.75;
         switch (Hardware.instance.vuforiaCameraWrapper.vuMark) {
             case LEFT:
                 targetangle += Constants.MultiglyphRotate.LEFT.degrees;
+                cryptoDist = Constants.PIT_TO_CRYPTO / Math.cos(Constants.MultiglyphRotate.LEFT.degrees);
             case RIGHT:
                 targetangle -= Constants.MultiglyphRotate.RIGHT.degrees;
+                cryptoDist = Constants.PIT_TO_CRYPTO / Math.cos(Constants.MultiglyphRotate.RIGHT.degrees);
             default:
                 targetangle += Constants.MultiglyphRotate.CENTER.degrees;
         }
         SimultaneousKeyCommand turn180_2 = new SimultaneousKeyCommand(new TurnGyroPID(targetangle, 3, 120), new RunIntake(-0.7));
 //        TurnGyroPID turn180_2 = new TurnGyroPID(90, 3, 120);
 
-        DriveDistance backToCrypto = new DriveDistance(Constants.inchesToTicks(distancetopit * 2 + backupdistance), 1800, 4);
+        DriveDistance backToCrypto = new DriveDistance(Constants.inchesToTicks(cryptoDist), 1800, 4);
         IntakeForTime outtake2 = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
         SequentialCommand bAndR2 = backUpAndRam();
 
