@@ -22,7 +22,7 @@ public class RelicArm extends Subsystem {
     private Servo relicHandServoLeft = Hardware.instance.relicHandServoLeft;
     private Servo relicHandServoRight = Hardware.instance.relicHandServoRight;
 
-    public double clawServoTarget = 0.7;
+    public double clawServoTarget = 0.8;
 
     @Override
     public Command defaultAutoCommand() {
