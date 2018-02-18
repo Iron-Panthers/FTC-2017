@@ -10,7 +10,6 @@ import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance
 /**
  * Created by jerry on 12/12/17.
  */
-@Autonomous(name = "trapdude")
 public class TrapPathTest extends AutoBaseOpMode {
     @Override
     public void onInit() {

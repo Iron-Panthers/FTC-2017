@@ -18,7 +18,6 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
  * Created by jerry on 1/23/18.
  */
 
-@TeleOp(name = "button tune pid")
 public class ButtonTunePID extends OpMode {
 
     private double p = 0.015;

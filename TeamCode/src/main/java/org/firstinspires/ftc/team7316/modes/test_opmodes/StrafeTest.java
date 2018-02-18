@@ -11,7 +11,6 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
  * Created by jerry on 11/18/17.
  */
 
-@Autonomous(name = "monkey")
 public class StrafeTest extends AutoBaseOpMode {
     @Override
     public void onInit() {

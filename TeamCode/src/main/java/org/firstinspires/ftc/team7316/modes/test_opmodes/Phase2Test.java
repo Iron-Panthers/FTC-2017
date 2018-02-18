@@ -12,7 +12,6 @@ import org.firstinspires.ftc.team7316.util.commands.sensors.UpdateVuforia;
  * Created by jerry on 1/18/18.
  */
 
-@Autonomous(name = "phase 2 test")
 public class Phase2Test extends AutoBaseOpMode {
     @Override
     public void onInit() {

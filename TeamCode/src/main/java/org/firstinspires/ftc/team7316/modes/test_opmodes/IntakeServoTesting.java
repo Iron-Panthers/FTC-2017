@@ -10,7 +10,6 @@ import org.firstinspires.ftc.team7316.util.commands.intake.IntakeServoTest;
  * Created by jerry on 12/30/17.
  */
 
-@TeleOp(name = "intake servo testing")
 public class IntakeServoTesting extends TeleopBaseOpMode {
     @Override
     public void onInit() {

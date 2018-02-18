@@ -13,7 +13,6 @@ import org.firstinspires.ftc.team7316.util.commands.intake.MoveIntakeArm;
  * Created by jerry on 2/15/18.
  */
 
-@Autonomous
 public class IntakeArmTesting extends AutoBaseOpMode {
     @Override
     public void onInit() {

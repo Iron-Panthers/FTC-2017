@@ -10,7 +10,6 @@ import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroPID;
  * Created by andrew on 12/12/17.
  */
 
-@Autonomous(name = "TurnTest180")
 public class TurnTest180 extends AutoBaseOpMode {
 
     @Override

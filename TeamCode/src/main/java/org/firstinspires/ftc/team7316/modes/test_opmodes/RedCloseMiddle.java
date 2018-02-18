@@ -13,7 +13,6 @@ import org.firstinspires.ftc.team7316.util.commands.sensors.UpdateVuforia;
  * Created by jerry on 12/30/17.
  */
 
-@Autonomous(name = "redclosemiddle")
 public class RedCloseMiddle extends AutoBaseOpMode {
     @Override
     public void onInit() {

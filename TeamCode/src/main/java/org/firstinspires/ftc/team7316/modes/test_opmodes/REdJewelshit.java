@@ -24,7 +24,6 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
  * Created by jerry on 1/23/18.
  */
 
-@Autonomous(name = "i regert everything")
 public class REdJewelshit extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {

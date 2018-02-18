@@ -11,7 +11,6 @@ import org.firstinspires.ftc.team7316.util.commands.flow.SequentialCommand;
  * Created by jerry on 1/16/18.
  */
 
-@Autonomous(name = "double turn")
 public class Doubleturn extends AutoBaseOpMode {
     @Override
     public void onInit() {

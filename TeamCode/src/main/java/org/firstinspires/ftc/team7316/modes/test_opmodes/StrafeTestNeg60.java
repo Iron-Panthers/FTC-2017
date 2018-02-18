@@ -10,7 +10,6 @@ import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
  * Created by jerry on 2/10/18.
  */
 
-@Autonomous
 public class StrafeTestNeg60 extends AutoBaseOpMode {
     @Override
     public void onInit() {

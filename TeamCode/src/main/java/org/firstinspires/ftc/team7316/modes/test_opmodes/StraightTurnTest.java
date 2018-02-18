@@ -10,7 +10,6 @@ import org.firstinspires.ftc.team7316.util.commands.drive.StraightTurn;
  * Created by jerry on 1/28/18.
  */
 
-@Autonomous(name = "straight turn test")
 public class StraightTurnTest extends AutoBaseOpMode {
     @Override
     public void onInit() {

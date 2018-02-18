@@ -9,7 +9,6 @@ import org.firstinspires.ftc.team7316.util.Hardware;
  * Created by jerry on 12/30/17.
  */
 
-@Autonomous(name = "gyro testing")
 public class GyroTesting extends AutoBaseOpMode {
     @Override
     public void onInit() {

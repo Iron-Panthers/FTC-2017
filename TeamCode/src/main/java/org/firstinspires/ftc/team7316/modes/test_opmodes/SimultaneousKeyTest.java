@@ -18,7 +18,6 @@ import org.firstinspires.ftc.team7316.util.commands.intake.RunIntake;
  * Created by jerry on 2/8/18.
  */
 
-@Autonomous(name = "simul key test")
 public class SimultaneousKeyTest extends AutoBaseOpMode {
     @Override
     public void onInit() {

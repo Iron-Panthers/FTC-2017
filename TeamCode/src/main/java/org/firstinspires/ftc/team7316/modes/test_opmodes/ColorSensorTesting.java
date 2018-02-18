@@ -13,7 +13,6 @@ import org.firstinspires.ftc.team7316.util.Constants;
  * Created by jerry on 11/7/17.
  */
 
-@TeleOp(name = "colorsensor")
 public class ColorSensorTesting extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
