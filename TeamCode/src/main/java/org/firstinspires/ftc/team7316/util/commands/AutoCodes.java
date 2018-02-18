@@ -10,6 +10,7 @@ import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistanceCipher;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroPID;
+import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnReturnClose;
 import org.firstinspires.ftc.team7316.util.commands.flow.SequentialCommand;
 import org.firstinspires.ftc.team7316.util.commands.flow.SimultaneousKeyCommand;
 import org.firstinspires.ftc.team7316.util.commands.flow.Wait;
@@ -216,22 +217,12 @@ public class AutoCodes {
 //        MoveIntakeArm closeIntake = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
         SimultaneousKeyCommand closeIntake = new SimultaneousKeyCommand(new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION), new RunIntake(-0.7));
 
-        double targetangle = 90;
         double cryptoDist = Constants.MULTIGLYPH_DIST_TO_PIT + Constants.MULTIGLYPH_DIST_TO_COLLECT + Constants.MULTIGLYPH_BACKUP_DISTANCE;
-        switch (Hardware.instance.vuforiaCameraWrapper.vuMark) {
-            case LEFT:
-                targetangle += Constants.MultiglyphRotate.LEFT.degrees;
-                cryptoDist = Constants.PIT_TO_CRYPTO / Math.cos(Constants.MultiglyphRotate.LEFT.degrees);
-            case RIGHT:
-                targetangle -= Constants.MultiglyphRotate.RIGHT.degrees;
-                cryptoDist = Constants.PIT_TO_CRYPTO / Math.cos(Constants.MultiglyphRotate.RIGHT.degrees);
-            default:
-                targetangle += Constants.MultiglyphRotate.CENTER.degrees;
-        }
-        SimultaneousKeyCommand turn180_2 = new SimultaneousKeyCommand(new TurnGyroPID(targetangle, 3, 120), new RunIntake(-0.7));
+
+        TurnReturnClose turn180_2 = new TurnReturnClose();
 //        TurnGyroPID turn180_2 = new TurnGyroPID(90, 3, 120);
 
-        DriveDistance backToCrypto = new DriveDistance(Constants.inchesToTicks(cryptoDist), 1800, 4);
+        DriveDistance backToCrypto = new DriveDistance(Constants.inchesToTicks(cryptoDist / Math.cos(Constants.MultiglyphRotate.LEFT.degrees)), 1800, 4);
         IntakeForTime outtake2 = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
         SequentialCommand bAndR2 = backUpAndRam();
 
