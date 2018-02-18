@@ -15,8 +15,9 @@ public class Subsystems {
     public JewelArm jewelArm;
     public RelicArm relicArm;
 
-    private Subsystems () {
+    public Subsystem[] subsystems;
 
+    private Subsystems () {
         driveBase = new MecanumDriveBase();
 
         glyphIntake = new GlyphIntake();
@@ -24,6 +25,8 @@ public class Subsystems {
         jewelArm = new JewelArm();
 
         relicArm = new RelicArm();
+
+        subsystems = new Subsystem[]{driveBase, glyphIntake, jewelArm, relicArm};
     }
 
     public static void createSubsystems() {
@@ -33,6 +36,13 @@ public class Subsystems {
         Scheduler.instance.add(instance.glyphIntake.getDefaultCommand());
         Scheduler.instance.add(instance.jewelArm.getDefaultCommand());
         Scheduler.instance.add(instance.relicArm.getDefaultCommand());
+
+        instance.resetSubsystems();
     }
 
+    public void resetSubsystems() {
+        for(Subsystem s : subsystems) {
+            s.reset();
+        }
+    }
 }

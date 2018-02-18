@@ -40,6 +40,12 @@ public class JewelArm extends Subsystem {
         return null;
     }
 
+    @Override
+    public void reset() {
+        moveArm(JewelArmPosition.IN);
+        moveWacker(JewelWackPosition.INITIAL);
+    }
+
     public void moveArm(JewelArmPosition position) {
         if(position == JewelArmPosition.IN) {
             arm.setPosition(armPositionIn);

@@ -47,6 +47,11 @@ public class MecanumDriveBase extends Subsystem {
         return driveWithJoystick;
     }
 
+    @Override
+    public void reset() {
+        resetMotors();
+    }
+
     //setters
     public void setWantedOmega(double wantedOmega) {
         // something something wanted speed
@@ -252,5 +257,4 @@ public class MecanumDriveBase extends Subsystem {
     public void stopMotors() {
         setMotorPowers(0);
     }
-
 }

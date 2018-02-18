@@ -37,6 +37,12 @@ public class RelicArm extends Subsystem {
         return relicArmJoystick;
     }
 
+    @Override
+    public void reset() {
+        setArmPower(0);
+        closeClaw();
+    }
+
     public void setArmPower(double power) {
         relicArmMotor.setPower(power);
     }
@@ -64,9 +70,5 @@ public class RelicArm extends Subsystem {
     public void closeClaw() {
         relicHandServoLeft.setPosition(0.5);
         relicHandServoRight.setPosition(0.5);
-    }
-
-    public void setClawServoTarget(double position) {
-
     }
 }

@@ -14,6 +14,11 @@ public abstract class Subsystem {
     public Command currentCmd;
     public boolean needsDefault = true;
 
+    /**
+     * Ensures no voltage or commands from previous runs will run again
+     */
+    public abstract void reset();
+
     public abstract Command defaultAutoCommand();
     public abstract Command defaultTeleopCommand();
 

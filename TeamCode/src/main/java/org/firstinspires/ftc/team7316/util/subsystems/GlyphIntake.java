@@ -38,6 +38,27 @@ public class GlyphIntake extends Subsystem {
         liftStopped = false;
     }
 
+    @Override
+    public Command defaultAutoCommand() {
+        if(clampIntake == null) {
+            clampIntake = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+        }
+        return clampIntake;
+    }
+
+    @Override
+    public Command defaultTeleopCommand() {
+        if(glyphIntakeJoystick == null) {
+            glyphIntakeJoystick = new GlyphIntakeJoystick();
+        }
+        return glyphIntakeJoystick;
+    }
+
+    @Override
+    public void reset() {
+        setIntakePower(0, 0);
+    }
+
     public void setServoPosition(double position) {
         servo.scaleRange(0, 1);
         this.servo.setPosition(position);
@@ -66,20 +87,4 @@ public class GlyphIntake extends Subsystem {
 
     public boolean getLiftStopped() { return liftStopped; }
     public void setLiftStopped(boolean stopped) { liftStopped = stopped; }
-
-    @Override
-    public Command defaultAutoCommand() {
-        if(clampIntake == null) {
-            clampIntake = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
-        }
-        return clampIntake;
-    }
-
-    @Override
-    public Command defaultTeleopCommand() {
-        if(glyphIntakeJoystick == null) {
-            glyphIntakeJoystick = new GlyphIntakeJoystick();
-        }
-        return glyphIntakeJoystick;
-    }
 }
