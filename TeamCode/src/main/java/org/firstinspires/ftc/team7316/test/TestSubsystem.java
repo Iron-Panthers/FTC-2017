@@ -10,6 +10,11 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
 public class TestSubsystem extends Subsystem {
 
     @Override
+    public void reset() {
+
+    }
+
+    @Override
     public Command defaultAutoCommand() {
         return new TestDefaultCommand(this);
     }
