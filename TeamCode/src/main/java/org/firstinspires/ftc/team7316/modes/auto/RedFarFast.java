@@ -12,7 +12,7 @@ import org.firstinspires.ftc.team7316.util.commands.sensors.UpdateVuforia;
  * Created by jerry on 2/6/18.
  */
 
-@Autonomous(name = "red far fast", group = "game autos")
+//@Autonomous(name = "red far fast", group = "game autos")
 public class RedFarFast extends AutoBaseOpMode {
     @Override
     public void onInit() {
