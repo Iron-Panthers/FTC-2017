@@ -97,10 +97,12 @@ public class AutoCodes {
 
         TurnGyroCipher turntocrypto = new TurnGyroCipher(Alliance.RED);
 
+
+
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
         SequentialCommand bAndR = releaseAndBackUp();
 
-        Command[] cmds = {clamp, wack, offPad, stop, align, turntocrypto, gotocrypto, outtake, bAndR, farMultiglyph()};
+        Command[] cmds = {clamp, wack, offPad, stop, align, turntocrypto, outtake, bAndR, farMultiglyph()};
         return new SequentialCommand(cmds);
     }
 
