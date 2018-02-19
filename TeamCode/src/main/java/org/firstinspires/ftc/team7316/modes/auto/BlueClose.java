@@ -41,7 +41,7 @@ public class BlueClose extends AutoBaseOpMode {
 //        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, 0, 1);
 //        Wait stop2 = new Wait(0.5);
 ////        TurnUntilKey deteckkey = new TurnUntilKey(-1, -90);
-//        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.BLUE, DriveDistanceCipher.Position.CLOSE);
+//        DriveDistanceCipherClose gotocrypto = new DriveDistanceCipherClose(Alliance.BLUE, DriveDistanceCipherClose.Position.CLOSE);
 //
 //        TurnGyroPID turn = new TurnGyroPID(90, 3);
 //

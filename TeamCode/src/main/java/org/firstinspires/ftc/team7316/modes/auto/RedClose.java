@@ -41,7 +41,7 @@ public class RedClose extends AutoBaseOpMode {
 //        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, Math.PI, 1);
 //        Wait stop2 = new Wait(0.5);
 ////        TurnUntilKey detectkey = new TurnUntilKey(1, 90);
-//        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.RED, DriveDistanceCipher.Position.CLOSE);
+//        DriveDistanceCipherClose gotocrypto = new DriveDistanceCipherClose(Alliance.RED, DriveDistanceCipherClose.Position.CLOSE);
 //
 //        TurnGyroPID turn = new TurnGyroPID(90, 3);
 //

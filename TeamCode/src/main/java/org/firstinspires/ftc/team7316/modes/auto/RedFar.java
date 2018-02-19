@@ -44,7 +44,7 @@ public class RedFar extends AutoBaseOpMode {
 //        DriveDistance forward = new DriveDistance(Constants.FAR_CRYPTO_DISTANCE, 4);
 //
 //        TurnGyroPID turnleft = new TurnGyroPID(-90, 3);
-//        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.RED, DriveDistanceCipher.Position.FAR);
+//        DriveDistanceCipherClose gotocrypto = new DriveDistanceCipherClose(Alliance.RED, DriveDistanceCipherClose.Position.FAR);
 //        TurnGyroPID turnright = new TurnGyroPID(0, 3);
 //
 //        DriveDistance approach = new DriveDistance(Constants.FAR_CRYPTO_APPROACH_RED, 2);

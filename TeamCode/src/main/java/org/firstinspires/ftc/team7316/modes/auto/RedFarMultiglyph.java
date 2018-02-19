@@ -12,12 +12,12 @@ import org.firstinspires.ftc.team7316.util.commands.sensors.UpdateVuforia;
  * Created by jerry on 2/6/18.
  */
 
-//@Autonomous(name = "red far fast", group = "game autos")
-public class RedFarFast extends AutoBaseOpMode {
+//@Autonomous(name = "red far multiglyph", group = "game autos")
+public class RedFarMultiglyph extends AutoBaseOpMode {
     @Override
     public void onInit() {
         Hardware.instance.vuforiaCameraWrapper.startTracking();
-        Scheduler.instance.add(AutoCodes.redFarFast());
+        Scheduler.instance.add(AutoCodes.redFarMultiglyph());
         Scheduler.instance.add(new UpdateVuforia());
     }
 

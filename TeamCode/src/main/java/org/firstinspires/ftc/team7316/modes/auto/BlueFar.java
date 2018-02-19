@@ -44,7 +44,7 @@ public class BlueFar extends AutoBaseOpMode {
 //        DriveDistance backward = new DriveDistance(-Constants.FAR_CRYPTO_DISTANCE, 4);
 //
 //        TurnGyroPID turnleft = new TurnGyroPID(90, 3);
-//        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.BLUE, DriveDistanceCipher.Position.FAR);
+//        DriveDistanceCipherClose gotocrypto = new DriveDistanceCipherClose(Alliance.BLUE, DriveDistanceCipherClose.Position.FAR);
 //        TurnGyroPID turnleft2 = new TurnGyroPID(180, 3);
 //
 //        DriveDistance approach = new DriveDistance(Constants.FAR_CRYPTO_APPROACH_BLUE, 2);

@@ -25,24 +25,24 @@ public class StrafeTimeCipher extends Command {
             case RED:
                 switch (Hardware.instance.vuforiaCameraWrapper.vuMark) {
                     case LEFT:
-                        cmd = new DriveForTime(0.6, Constants.FAR_CRYPTO_FAR_COLUMN_ANGLE * piOver180, 2);
+                        cmd = new DriveForTime(0.6, Constants.FAR_COLUMN_ANGLE_FAR * piOver180, 2);
                     case CENTER:
-                        cmd = new DriveForTime(0.6, Constants.FAR_CRYPTO_CENTER_COLUMN_ANGLE * piOver180, 2);
+                        cmd = new DriveForTime(0.6, Constants.MIDDLE_COLUMN_ANGLE_FAR * piOver180, 2);
                     case RIGHT:
-                        cmd = new DriveForTime(0.6, Constants.FAR_CRYPTO_CLOSE_COLUMN_ANGLE * piOver180, 2);
+                        cmd = new DriveForTime(0.6, Constants.CLOSE_COLUMN_ANGLE_FAR * piOver180, 2);
                     case UNKNOWN:
-                        cmd = new DriveForTime(0.6, Constants.FAR_CRYPTO_CENTER_COLUMN_ANGLE * piOver180, 2);
+                        cmd = new DriveForTime(0.6, Constants.MIDDLE_COLUMN_ANGLE_FAR * piOver180, 2);
                 }
             case BLUE:
                 switch (Hardware.instance.vuforiaCameraWrapper.vuMark) {
                     case LEFT:
-                        cmd = new DriveForTime(0.6, Constants.FAR_CRYPTO_CLOSE_COLUMN_ANGLE * piOver180, 2);
+                        cmd = new DriveForTime(0.6, Constants.CLOSE_COLUMN_ANGLE_FAR * piOver180, 2);
                     case CENTER:
-                        cmd = new DriveForTime(0.6, Constants.FAR_CRYPTO_CENTER_COLUMN_ANGLE * piOver180, 2);
+                        cmd = new DriveForTime(0.6, Constants.MIDDLE_COLUMN_ANGLE_FAR * piOver180, 2);
                     case RIGHT:
-                        cmd = new DriveForTime(0.6, Constants.FAR_CRYPTO_FAR_COLUMN_ANGLE * piOver180, 2);
+                        cmd = new DriveForTime(0.6, Constants.FAR_COLUMN_ANGLE_FAR * piOver180, 2);
                     case UNKNOWN:
-                        cmd = new DriveForTime(0.6, Constants.FAR_CRYPTO_CENTER_COLUMN_ANGLE * piOver180, 2);
+                        cmd = new DriveForTime(0.6, Constants.MIDDLE_COLUMN_ANGLE_FAR * piOver180, 2);
                 }
         }
 
