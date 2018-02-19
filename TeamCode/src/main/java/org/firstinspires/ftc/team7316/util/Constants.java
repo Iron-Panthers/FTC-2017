@@ -63,8 +63,10 @@ public class Constants {
     public static final double MULTIGLYPH_DIST_TO_PIT = 15;
     public static final double MULTIGLYPH_DIST_TO_COLLECT = 10;
 
-    public static final double PIT_TO_CRYPTO = 66;  //inches
+    public static final double PIT_TO_CRYPTO_CLOSE = 66;  //inches
     public static final double COLUMN_SEPARATION = 6;
+
+    public static final double PLATE_TO_CRYPTO_FAR = 18;
 
     //drive times(temporary) and their powers
     public static final double RED_OFF_PAD_TIME = 2;
@@ -155,9 +157,9 @@ public class Constants {
      * The offset from 180 degree turn to go to a different column
      */
     public enum MultiglyphRotate {
-        LEFT(Math.atan(COLUMN_SEPARATION / PIT_TO_CRYPTO) * RADIAN_TO_DEGREES),
-        CENTER(Math.atan(COLUMN_SEPARATION / PIT_TO_CRYPTO) * RADIAN_TO_DEGREES),
-        RIGHT(Math.atan(COLUMN_SEPARATION / PIT_TO_CRYPTO) * RADIAN_TO_DEGREES);
+        LEFT(Math.atan(COLUMN_SEPARATION / PIT_TO_CRYPTO_CLOSE) * RADIAN_TO_DEGREES),
+        CENTER(Math.atan(COLUMN_SEPARATION / PIT_TO_CRYPTO_CLOSE) * RADIAN_TO_DEGREES),
+        RIGHT(Math.atan(COLUMN_SEPARATION / PIT_TO_CRYPTO_CLOSE) * RADIAN_TO_DEGREES);
 
         public final double degrees;
 

@@ -1,20 +1,18 @@
 package org.firstinspires.ftc.team7316.util.commands;
 
-import org.firstinspires.ftc.robotcore.external.Const;
 import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveOffPad;
-import org.firstinspires.ftc.team7316.util.commands.drive.StrafeTimeCipher;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistanceCipher;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
+import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroCipher;
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroPID;
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnReturnClose;
 import org.firstinspires.ftc.team7316.util.commands.flow.SequentialCommand;
 import org.firstinspires.ftc.team7316.util.commands.flow.SimultaneousKeyCommand;
 import org.firstinspires.ftc.team7316.util.commands.flow.Wait;
-import org.firstinspires.ftc.team7316.util.commands.intake.DriveWhileIntake;
 import org.firstinspires.ftc.team7316.util.commands.intake.IntakeForTime;
 import org.firstinspires.ftc.team7316.util.commands.intake.MoveIntakeArm;
 import org.firstinspires.ftc.team7316.util.commands.intake.RunIntake;
@@ -22,7 +20,6 @@ import org.firstinspires.ftc.team7316.util.commands.jewelarm.MoveJewelArm;
 import org.firstinspires.ftc.team7316.util.commands.jewelarm.WackJewel;
 import org.firstinspires.ftc.team7316.util.commands.sensors.PollColor;
 import org.firstinspires.ftc.team7316.util.subsystems.JewelArm;
-import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 /**
  * Created by andrew on 11/2/16.
@@ -89,22 +86,21 @@ public class AutoCodes {
         return new SequentialCommand(cmds);
     }
 
-    public static SequentialCommand redFarFast() {
+    public static SequentialCommand redFarMultiglyph() {
         MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
 
         Command wack = wackJewelBasic(Alliance.RED);
 
         DriveOffPad offPad = new DriveOffPad(Alliance.RED);
-        Wait stop = new Wait(0.5);
-        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, Math.PI, 1);
-        Wait stop2 = new Wait(0.5);
+        Wait stop = new Wait(0.1);
+        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, Math.PI, 0.4);
 
-        StrafeTimeCipher gotocrypto = new StrafeTimeCipher(Alliance.RED);
+        TurnGyroCipher turntocrypto = new TurnGyroCipher(Alliance.RED);
 
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
-        SequentialCommand bAndR = backUpAndRam();
+        SequentialCommand bAndR = releaseAndBackUp();
 
-        Command[] cmds = {clamp, wack, offPad, stop, align, stop2, gotocrypto, outtake, bAndR};
+        Command[] cmds = {clamp, wack, offPad, stop, align, turntocrypto, gotocrypto, outtake, bAndR, farMultiglyph()};
         return new SequentialCommand(cmds);
     }
 
@@ -224,9 +220,14 @@ public class AutoCodes {
 
         DriveDistance backToCrypto = new DriveDistance(Constants.inchesToTicks(cryptoDist / Math.cos(Constants.MultiglyphRotate.LEFT.degrees)), 1800, 4);
         IntakeForTime outtake2 = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
-        SequentialCommand bAndR2 = backUpAndRam();
+        SimultaneousKeyCommand bAndR2 = new SimultaneousKeyCommand(backUpAndRam(), new RunIntake(0.6));
 
         Command[] cmds = {openIntake, turn180, mowDownGlyphs, closeIntake, turn180_2, backToCrypto, outtake2, bAndR2};
+        return new SequentialCommand(cmds);
+    }
+
+    public static SequentialCommand farMultiglyph() {
+        Command[] cmds = {};
         return new SequentialCommand(cmds);
     }
 
