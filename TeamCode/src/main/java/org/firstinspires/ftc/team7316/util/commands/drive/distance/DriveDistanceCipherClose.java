@@ -4,14 +4,16 @@ import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.Command;
-import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 /**
- * Works for all positions now
+ * The robot is parallel with the cryptobox in this scenario, starting from just off the
+ * balancing stone.
+ *
+ * Currently has conditions for far auto but they will be removed later
  */
 
-public class DriveDistanceCipher extends Command {
+public class DriveDistanceCipherClose extends Command {
 
     private DriveDistance drivecommand;
     private final double DRIVE_TIMEOUT = 4;
@@ -31,7 +33,7 @@ public class DriveDistanceCipher extends Command {
     private double CENTER_DIST;
     private double RIGHT_DIST;
 
-    public DriveDistanceCipher(Alliance a, Position p) {
+    public DriveDistanceCipherClose(Alliance a, Position p) {
         requires(Subsystems.instance.driveBase);
 
         alliance = a;
@@ -53,13 +55,13 @@ public class DriveDistanceCipher extends Command {
         else {
             switch (alliance) {
                 case RED:
-                    LEFT_DIST = Constants.LEFT_COLUMN_DISTANCE_FAR + redFarOffset;
+                    LEFT_DIST = Constants.FAR_COLUMN_DISTANCE_FAR + redFarOffset;
                     CENTER_DIST = Constants.MIDDLE_COLUMN_DISTANCE_FAR + redFarOffset;
-                    RIGHT_DIST = Constants.RIGHT_COLUMN_DISTANCE_FAR + redFarOffset;
+                    RIGHT_DIST = Constants.CLOSE_COLUMN_DISTANCE_FAR + redFarOffset;
                 case BLUE:
-                    LEFT_DIST = Constants.LEFT_COLUMN_DISTANCE_FAR + blueFarOffset;
+                    LEFT_DIST = Constants.FAR_COLUMN_DISTANCE_FAR + blueFarOffset;
                     CENTER_DIST = Constants.MIDDLE_COLUMN_DISTANCE_FAR + blueFarOffset;
-                    RIGHT_DIST = Constants.RIGHT_COLUMN_DISTANCE_FAR + blueFarOffset;
+                    RIGHT_DIST = Constants.CLOSE_COLUMN_DISTANCE_FAR + blueFarOffset;
 
             }
         }

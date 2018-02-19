@@ -22,10 +22,13 @@ public class TurnReturnClose extends Command {
         switch (Hardware.instance.vuforiaCameraWrapper.vuMark) {
             case LEFT:
                 targetangle += Constants.MultiglyphRotate.LEFT.degrees;
+                break;
             case RIGHT:
                 targetangle -= Constants.MultiglyphRotate.RIGHT.degrees;
+                break;
             default:
                 targetangle += Constants.MultiglyphRotate.CENTER.degrees;
+                break;
         }
 
         cmd = new TurnGyroPID(targetangle, 3, 120);

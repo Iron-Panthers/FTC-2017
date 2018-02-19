@@ -2,12 +2,12 @@ package org.firstinspires.ftc.team7316.util.commands;
 
 import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Constants;
-import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveOffPad;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance;
-import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistanceCipher;
+import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistanceCipherClose;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
-import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroCipher;
+import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistanceCipherFar;
+import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroCipherFar;
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroPID;
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnReturnClose;
 import org.firstinspires.ftc.team7316.util.commands.flow.SequentialCommand;
@@ -51,7 +51,7 @@ public class AutoCodes {
         DriveDistance backward = new DriveDistance(Constants.inchesToTicks(-Constants.FAR_CRYPTO_DISTANCE), 4);
 
         TurnGyroPID turnleft = new TurnGyroPID(90, 3);
-        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.BLUE, DriveDistanceCipher.Position.FAR);
+        DriveDistanceCipherClose gotocrypto = new DriveDistanceCipherClose(Alliance.BLUE, DriveDistanceCipherClose.Position.FAR);
         TurnGyroPID turnleft2 = new TurnGyroPID(180, 3);
 
         DriveDistance approach = new DriveDistance(Constants.inchesToTicks(Constants.FAR_CRYPTO_APPROACH_BLUE), 2);
@@ -75,7 +75,7 @@ public class AutoCodes {
         DriveDistance forward = new DriveDistance(Constants.inchesToTicks(Constants.FAR_CRYPTO_DISTANCE), 4);
 
         TurnGyroPID turnleft = new TurnGyroPID(-90, 3);
-        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.RED, DriveDistanceCipher.Position.FAR);
+        DriveDistanceCipherClose gotocrypto = new DriveDistanceCipherClose(Alliance.RED, DriveDistanceCipherClose.Position.FAR);
         TurnGyroPID turnright = new TurnGyroPID(0, 3);
 
         DriveDistance approach = new DriveDistance(Constants.inchesToTicks(Constants.FAR_CRYPTO_APPROACH_RED), 2);
@@ -95,14 +95,13 @@ public class AutoCodes {
         Wait stop = new Wait(0.1);
         DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, Math.PI, 0.4);
 
-        TurnGyroCipher turntocrypto = new TurnGyroCipher(Alliance.RED);
+        TurnGyroCipherFar turntocrypto = new TurnGyroCipherFar(Alliance.RED);
 
-
+        DriveDistanceCipherFar gotocrypto = new DriveDistanceCipherFar(Alliance.RED);
 
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
-        SequentialCommand bAndR = releaseAndBackUp();
 
-        Command[] cmds = {clamp, wack, offPad, stop, align, turntocrypto, outtake, bAndR, farMultiglyph()};
+        Command[] cmds = {clamp, wack, offPad, stop, align, turntocrypto, gotocrypto, outtake};
         return new SequentialCommand(cmds);
     }
 
@@ -116,7 +115,7 @@ public class AutoCodes {
         DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, 0, 1);
         Wait stop2 = new Wait(0.5);
 //        TurnUntilKey deteckkey = new TurnUntilKey(-1, -90);
-        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.BLUE, DriveDistanceCipher.Position.CLOSE);
+        DriveDistanceCipherClose gotocrypto = new DriveDistanceCipherClose(Alliance.BLUE, DriveDistanceCipherClose.Position.CLOSE);
 
         TurnGyroPID turn = new TurnGyroPID(90, 3);
 
@@ -138,7 +137,7 @@ public class AutoCodes {
         DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, Math.PI, 1);
         Wait stop2 = new Wait(0.5);
 //        TurnUntilKey detectkey = new TurnUntilKey(1, 90);
-        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.RED, DriveDistanceCipher.Position.CLOSE);
+        DriveDistanceCipherClose gotocrypto = new DriveDistanceCipherClose(Alliance.RED, DriveDistanceCipherClose.Position.CLOSE);
 
         TurnGyroPID turn = new TurnGyroPID(90, 3);
 
@@ -159,7 +158,7 @@ public class AutoCodes {
         DriveOffPad offPad = new DriveOffPad(Alliance.RED);
         Wait stop = new Wait(0.1);
         DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, Math.PI, 0.4);
-        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.RED, DriveDistanceCipher.Position.CLOSE);
+        DriveDistanceCipherClose gotocrypto = new DriveDistanceCipherClose(Alliance.RED, DriveDistanceCipherClose.Position.CLOSE);
 
         TurnGyroPID turn = new TurnGyroPID(90, 2);
 
@@ -181,7 +180,7 @@ public class AutoCodes {
         DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
         Wait stop = new Wait(0.1);
         DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, 0, 0.4);
-        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.BLUE, DriveDistanceCipher.Position.CLOSE);
+        DriveDistanceCipherClose gotocrypto = new DriveDistanceCipherClose(Alliance.BLUE, DriveDistanceCipherClose.Position.CLOSE);
 
         TurnGyroPID turn = new TurnGyroPID(90, 2);
 
@@ -228,11 +227,6 @@ public class AutoCodes {
         return new SequentialCommand(cmds);
     }
 
-    public static SequentialCommand farMultiglyph() {
-        Command[] cmds = {};
-        return new SequentialCommand(cmds);
-    }
-
     public static SequentialCommand backUpAndRam() {
         Command[] cmds = {
                 new MoveIntakeArm(0.8),
@@ -265,7 +259,7 @@ public class AutoCodes {
     }
 
     public static SequentialCommand phase2Test() {
-        DriveDistanceCipher gotocrypto = new DriveDistanceCipher(Alliance.RED, DriveDistanceCipher.Position.CLOSE);
+        DriveDistanceCipherClose gotocrypto = new DriveDistanceCipherClose(Alliance.RED, DriveDistanceCipherClose.Position.CLOSE);
 
         TurnGyroPID turn = new TurnGyroPID(90, 3);
 

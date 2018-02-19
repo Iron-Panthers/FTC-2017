@@ -5,6 +5,10 @@ package org.firstinspires.ftc.team7316.util;
  */
 public class Constants {
 
+    public static final double SQRT2 = Math.sqrt(2);
+    public static final double RADIAN_TO_DEGREES = 180 / Math.PI;
+    public static final double DEGREES_TO_RADIANS = Math.PI / 180;
+
     public static final double JOYSTICK_DRIVE_DEADZONE = 0.05;
     public static final double DRIVER_MOTOR_DEADZONE = 0.1;
     public static final double ENCODER_TICK_PER_REV = 1120; //halved due to gear ratio
@@ -37,10 +41,6 @@ public class Constants {
     public static final double DEGREES_PER_SECOND_COAST = 180;
     public static final double DEGREES_PER_SECOND_HALFPOWER = 95;
 
-    //in degrees (rudimentary values for now)
-    public static final double FAR_CRYPTO_CLOSE_COLUMN_ANGLE = 15;
-    public static final double FAR_CRYPTO_CENTER_COLUMN_ANGLE = 30;
-    public static final double FAR_CRYPTO_FAR_COLUMN_ANGLE = 45;
     //drive distances
     public static final double JEWEL_WHACK_DISTANCE = 3.5; //inches
     public static final double FAR_CRYPTO_DISTANCE = 8; //inches after driving for time after off the balancing pad
@@ -55,9 +55,9 @@ public class Constants {
     public static final double MIDDLE_COLUMN_DISTANCE_CLOSE = 16.5;
     public static final double LEFT_COLUMN_DISTANCE_CLOSE = 24;
 
-    public static final double RIGHT_COLUMN_DISTANCE_FAR = 8;
+    public static final double CLOSE_COLUMN_DISTANCE_FAR = 8;
     public static final double MIDDLE_COLUMN_DISTANCE_FAR = 15;
-    public static final double LEFT_COLUMN_DISTANCE_FAR = 23;
+    public static final double FAR_COLUMN_DISTANCE_FAR = 23;
 
     public static final double MULTIGLYPH_BACKUP_DISTANCE = 10;
     public static final double MULTIGLYPH_DIST_TO_PIT = 15;
@@ -67,6 +67,11 @@ public class Constants {
     public static final double COLUMN_SEPARATION = 6;
 
     public static final double PLATE_TO_CRYPTO_FAR = 18;
+
+    //in degrees (rudimentary values for now)
+    public static final double CLOSE_COLUMN_ANGLE_FAR = Math.atan(Constants.CLOSE_COLUMN_DISTANCE_FAR / Constants.PLATE_TO_CRYPTO_FAR) * Constants.RADIAN_TO_DEGREES;
+    public static final double MIDDLE_COLUMN_ANGLE_FAR = Math.atan(Constants.MIDDLE_COLUMN_DISTANCE_FAR / Constants.PLATE_TO_CRYPTO_FAR) * Constants.RADIAN_TO_DEGREES;
+    public static final double FAR_COLUMN_ANGLE_FAR = Math.atan(Constants.FAR_COLUMN_DISTANCE_FAR / Constants.PLATE_TO_CRYPTO_FAR) * Constants.RADIAN_TO_DEGREES;
 
     //drive times(temporary) and their powers
     public static final double RED_OFF_PAD_TIME = 2;
@@ -138,9 +143,6 @@ public class Constants {
     public static final double FORWARD_MOTOR_DEADZONE = 0.1;
     public static final double STRAFING_MOTOR_DEADZONE = 0.5;
     public static final double TURNING_MOTOR_DEADZONE = 0;
-
-    public static final double SQRT2 = Math.sqrt(2);
-    public static final double RADIAN_TO_DEGREES = 180 / Math.PI;
 
     //Key is from Jerry's Vuforia dev account
     public static final String vuforiaLicenseKey = "AX5kYPX/////AAAAGU3PfsyXBULLmvcBPSA/sq8MU9VRtH0JkRzhv6Gggr2CpIl9G4uMhuk/GpUW7pgNKluG8PpL85nQo2AakItuDJUgOkCwK6w0YHQPx6+rf8jZM98Fp1lcmH85r/w2JyjVZB43mQAGuyrlJMi24YR9n6m93YNrtv710/h8DuurXnKBtn2ucrsyUjAVfKJzlIXrAB7sZ8MZDqA1rWD+GqoO5pWAW2sobpl64F4A1Fzf+Zzn340wOoH6UEHTyRb1clkSezxvc129fij+4Ev5jOJioiFJyCcF7YXY9zczVpyByqad0w+HqAR2VXj8hKBgL6SRZ6yQ5GmrUY1/5JUQXiMwdRfT5RKjHMlqKP9f9J1x/V7l";
