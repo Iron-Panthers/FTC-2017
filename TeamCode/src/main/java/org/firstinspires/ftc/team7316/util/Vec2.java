@@ -2,6 +2,8 @@ package org.firstinspires.ftc.team7316.util;
 
 /**
  * Created by Maxim on 9/13/2017.
+ *
+ * lmao you suck
  */
 
 public class Vec2 {
