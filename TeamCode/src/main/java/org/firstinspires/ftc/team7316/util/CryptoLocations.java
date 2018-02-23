@@ -60,6 +60,8 @@ public class CryptoLocations {
         double dXToBox = xToPicto - DX_TO_COLUMN;
         double dYToBox = yToPicto - DY_TO_COLUMN;
         double angleToDest = -Math.toDegrees(Math.atan2(dYToBox, dXToBox));
+        //  wait does this really need to be negative
+        //  it already gives an angle the robot to turn to, for red though
         if (AUTO_CONFIG == CLOSE_RED_AUTO || AUTO_CONFIG == FAR_RED_AUTO) {
             angleToDest += 180;
         }
