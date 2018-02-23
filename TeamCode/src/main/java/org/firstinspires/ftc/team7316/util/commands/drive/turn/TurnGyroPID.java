@@ -28,7 +28,7 @@ import java.util.List;
  */
 public class TurnGyroPID extends Command {
 
-    public static final double ERROR_THRESHOLD = 2, DELTA_THRESHOLD = 2, MAX_POWER = 1, ACCEL_RATE = 150;
+    public static final double ERROR_THRESHOLD = 4, DELTA_THRESHOLD = 2, MAX_POWER = 1, ACCEL_RATE = 150;
     private double wantedAngle, startAngle, targetAngleCurrent, targetAngleFinal, TURN_TIME, ACCEL_TIME, COAST_TIME, MAX_SPEED;
 
     private Direction direction;

@@ -138,7 +138,7 @@ public class AutoCodes {
         DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
         Wait stop = new Wait(0.1);
 
-        TurnGyroPID facePicto = new TurnGyroPID(CryptoLocations.BLUE_TURN_TO_PITCO);
+        TurnGyroPID facePicto = new TurnGyroPID(CryptoLocations.BLUE_TURN_TO_PICTO);
 
         TurnGyroCryptoVP turnToCrypto = new TurnGyroCryptoVP();
 

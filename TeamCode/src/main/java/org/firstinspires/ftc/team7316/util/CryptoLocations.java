@@ -12,7 +12,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 public class CryptoLocations {
 
     public static final double RED_TURN_TO_PICTO = 18;
-    public static final double BLUE_TURN_TO_PITCO = 25;
+    public static final double BLUE_TURN_TO_PICTO = 25;
 
     public static final int CLOSE_RED_AUTO = 0;
     public static final int FAR_RED_AUTO = 1;
