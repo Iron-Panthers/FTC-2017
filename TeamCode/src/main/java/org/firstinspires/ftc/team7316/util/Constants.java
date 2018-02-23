@@ -137,7 +137,7 @@ public class Constants {
     public static final double VP_DRIVE_D = 0;
     public static final double VP_DRIVE_F = 0;
 
-    public static final double DISTANCE_ERROR_RANGE = 0.6; //inches
+    public static final double DISTANCE_ERROR_RANGE = 1.5; //inches
     public static final int DISTANCE_ERROR_RANGE_TICKS = inchesToTicks(DISTANCE_ERROR_RANGE);
 
     public static final double FORWARD_MOTOR_DEADZONE = 0.1;
