@@ -8,6 +8,7 @@ import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistanceCipherClose;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistanceCipherFar;
+import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistanceCryptoVP;
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroCipherFar;
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroCryptoVP;
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroPID;
@@ -141,9 +142,11 @@ public class AutoCodes {
 
         TurnGyroCryptoVP turnToCrypto = new TurnGyroCryptoVP();
 
+        DriveDistanceCryptoVP driveToCrypto = new DriveDistanceCryptoVP();
+
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
-        Command[] cmds = {clamp, wack, offPad, stop, facePicto, turnToCrypto, outtake};
+        Command[] cmds = {clamp, wack, offPad, stop, facePicto, turnToCrypto, driveToCrypto, outtake};
         return new SequentialCommand(cmds);
     }
 
@@ -203,9 +206,11 @@ public class AutoCodes {
 
         TurnGyroCryptoVP turnToCrypto = new TurnGyroCryptoVP();
 
+        DriveDistanceCryptoVP driveToCrypto = new DriveDistanceCryptoVP();
+
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
-        Command[] cmds = {clamp, wack, offPad, stop, facePicto, turnToCrypto, outtake};
+        Command[] cmds = {clamp, wack, offPad, stop, facePicto, turnToCrypto, driveToCrypto, outtake};
         return new SequentialCommand(cmds);
     }
 
