@@ -18,10 +18,9 @@ public class BlueCloseMutliglyph extends AutoBaseOpMode {
 
     @Override
     public void onInit() {
-        CryptoLocations.AUTO_CONFIG = CryptoLocations.CLOSE_BLUE_AUTO;
         Hardware.instance.vuforiaCameraWrapper.startTracking();
         Scheduler.instance.add(AutoCodes.blueCloseMultiglyph());
-        Scheduler.instance.add(new UpdateVuforia());
+        Scheduler.instance.add(new UpdateVuforia(CryptoLocations.CLOSE_BLUE_AUTO));
     }
 
     @Override

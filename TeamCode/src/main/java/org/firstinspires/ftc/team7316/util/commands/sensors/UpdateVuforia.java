@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.team7316.util.commands.sensors;
 
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
+import org.firstinspires.ftc.team7316.util.CryptoLocations;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 
@@ -9,6 +10,13 @@ import org.firstinspires.ftc.team7316.util.commands.Command;
  */
 
 public class UpdateVuforia extends Command {
+
+    private int automode;
+
+    public UpdateVuforia(int automode) {
+        this.automode = automode;
+    }
+
     @Override
     public void init() {
 
@@ -26,6 +34,6 @@ public class UpdateVuforia extends Command {
 
     @Override
     protected void end() {
-
+        CryptoLocations.setConfig(Hardware.instance.vuforiaCameraWrapper.vuMark, automode);
     }
 }

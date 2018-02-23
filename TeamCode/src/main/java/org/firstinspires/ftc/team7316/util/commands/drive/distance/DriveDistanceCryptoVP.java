@@ -11,7 +11,7 @@ import org.firstinspires.ftc.team7316.util.commands.Command;
 
 public class DriveDistanceCryptoVP extends Command {
 
-    DriveDistance drive;
+    private DriveDistance drive;
 
     @Override
     public void init() {
