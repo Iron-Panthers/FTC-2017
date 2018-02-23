@@ -2,12 +2,14 @@ package org.firstinspires.ftc.team7316.util.commands;
 
 import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Constants;
+import org.firstinspires.ftc.team7316.util.CryptoLocations;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveOffPad;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistanceCipherClose;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistanceCipherFar;
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroCipherFar;
+import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroCryptoVP;
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroPID;
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnReturnClose;
 import org.firstinspires.ftc.team7316.util.commands.flow.SequentialCommand;
@@ -127,6 +129,24 @@ public class AutoCodes {
         return new SequentialCommand(cmds);
     }
 
+    public static SequentialCommand blueCloseMultiglyphVP() {
+        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+
+        Command wack = wackJewelBasic(Alliance.BLUE);
+
+        DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
+        Wait stop = new Wait(0.1);
+
+        TurnGyroPID facePicto = new TurnGyroPID(CryptoLocations.BLUE_TURN_TO_PITCO);
+
+        TurnGyroCryptoVP turnToCrypto = new TurnGyroCryptoVP();
+
+        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
+
+        Command[] cmds = {clamp, wack, offPad, stop, facePicto, turnToCrypto, outtake};
+        return new SequentialCommand(cmds);
+    }
+
     public static SequentialCommand redClose() {
         MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
 
@@ -168,6 +188,24 @@ public class AutoCodes {
         SequentialCommand bAndR = releaseAndBackUp();
 
         Command[] cmds = {clamp, wack, offPad, stop, align, gotocrypto, turn, approach, outtake, bAndR, closeMultiglyph()};
+        return new SequentialCommand(cmds);
+    }
+
+    public static SequentialCommand redCloseMultiglyphVP() {
+        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+
+        Command wack = wackJewelBasic(Alliance.RED);
+
+        DriveOffPad offPad = new DriveOffPad(Alliance.RED);
+        Wait stop = new Wait(0.1);
+
+        TurnGyroPID facePicto = new TurnGyroPID(CryptoLocations.RED_TURN_TO_PICTO);
+
+        TurnGyroCryptoVP turnToCrypto = new TurnGyroCryptoVP();
+
+        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
+
+        Command[] cmds = {clamp, wack, offPad, stop, facePicto, turnToCrypto, outtake};
         return new SequentialCommand(cmds);
     }
 

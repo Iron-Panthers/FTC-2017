@@ -114,16 +114,12 @@ public class VuforiaCameraWrapper {
                 Hardware.log("rx", rX);
                 Hardware.log("ry", rY);
                 Hardware.log("rz", rZ);
+
+                setCipherLocation();
             }
         }
         else {
             Hardware.log("VuMark", "not visible");
-            tX = 0;
-            tY = 0;
-            tZ = 0;
-            rX = 0;
-            rY = 0;
-            rZ = 0;
         }
     }
 

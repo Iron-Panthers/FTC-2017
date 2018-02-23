@@ -3,6 +3,7 @@ package org.firstinspires.ftc.team7316.modes.auto;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.team7316.modes.AutoBaseOpMode;
+import org.firstinspires.ftc.team7316.util.CryptoLocations;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.Scheduler;
 import org.firstinspires.ftc.team7316.util.commands.AutoCodes;
@@ -17,6 +18,7 @@ public class BlueCloseMutliglyph extends AutoBaseOpMode {
 
     @Override
     public void onInit() {
+        CryptoLocations.AUTO_CONFIG = CryptoLocations.CLOSE_BLUE_AUTO;
         Hardware.instance.vuforiaCameraWrapper.startTracking();
         Scheduler.instance.add(AutoCodes.blueCloseMultiglyph());
         Scheduler.instance.add(new UpdateVuforia());
