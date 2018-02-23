@@ -5,7 +5,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 /**
  * The coordinate system is relative to the picto.
  * Picto is love, picto is life. Coordinate system in millimeters and degrees.
- * Make sure to {@link #setConfig()} before trying to use functions.
+ * Make sure to {@link #setConfig(RelicRecoveryVuMark, int)} before trying to use functions.
  *
  * Created by andrew on 2/22/18.
  */
@@ -19,9 +19,10 @@ public class CryptoLocations {
     public static final int CLOSE_BLUE_AUTO = 2;
     public static final int FAR_BLUE_AUTO = 3;
 
-    private static RelicRecoveryVuMark PICTO_LOCATION;
+    private static RelicRecoveryVuMark PICTO_LOCATION = RelicRecoveryVuMark.UNKNOWN;
     private static int AUTO_CONFIG = 0;
 
+    //  distances to crypto are measured from the balancing stone
     private static final double CLOSE_RED_LEFT_X = 467;
     private static final double CLOSE_RED_CENTER_X = 670;
     private static final double CLOSE_RED_RIGHT_X = 874;
@@ -40,6 +41,7 @@ public class CryptoLocations {
     private static final double FAR_BLUE_RIGHT_Y = -1116;
     private static final double FAR_BLUE_X = 1310;
 
+    //  how far away from the wall the robot will stop
     private static final double SPACING_DISTANCE = 152;
 
     private static double DX_TO_COLUMN = 0;
