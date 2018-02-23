@@ -29,7 +29,7 @@ import java.util.List;
 public class TurnGyroPID extends Command {
 
     public static final double ERROR_THRESHOLD = 2, DELTA_THRESHOLD = 2, MAX_POWER = 1, ACCEL_RATE = 150;
-    private double deltaAngle, startAngle, targetAngleCurrent, targetAngleFinal, TURN_TIME, ACCEL_TIME, COAST_TIME, MAX_SPEED;
+    private double wantedAngle, startAngle, targetAngleCurrent, targetAngleFinal, TURN_TIME, ACCEL_TIME, COAST_TIME, MAX_SPEED;
 
     private Direction direction;
 
@@ -61,25 +61,25 @@ public class TurnGyroPID extends Command {
      * DISCLAIMER: right now it's not delta angle, but the actual target angle
      * this will be fixed later
      * and by later i mean never
-     * @param deltaAngle the amount to turn in DEGREES
+     * @param wantedAngle the amount to turn in DEGREES
      */
-    public TurnGyroPID(double deltaAngle) {
-        this(deltaAngle, 6);
+    public TurnGyroPID(double wantedAngle) {
+        this(wantedAngle, 6);
     }
 
-    public TurnGyroPID(double deltaAngle, double timeout) {
-        this(deltaAngle, timeout, 90);
+    public TurnGyroPID(double wantedAngle, double timeout) {
+        this(wantedAngle, timeout, 90);
     }
 
-    public TurnGyroPID(double deltaAngle, double timeout, double maxspeed) {
+    public TurnGyroPID(double wantedAngle, double timeout, double maxspeed) {
         requires(Subsystems.instance.driveBase);
         this.MAX_SPEED = maxspeed;
 
-        this.deltaAngle = deltaAngle;
+        this.wantedAngle = wantedAngle;
         this.timeout = timeout;
 
         this.ACCEL_TIME = this.MAX_SPEED / ACCEL_RATE;
-        this.COAST_TIME = (deltaAngle - ACCEL_RATE * ACCEL_TIME * ACCEL_TIME) / this.MAX_SPEED;
+        this.COAST_TIME = (wantedAngle - ACCEL_RATE * ACCEL_TIME * ACCEL_TIME) / this.MAX_SPEED;
         this.TURN_TIME = ACCEL_TIME * 2 + COAST_TIME;
     }
 
@@ -87,8 +87,8 @@ public class TurnGyroPID extends Command {
     public void init() {
         startAngle = gyro.getHeading();
         targetAngleCurrent = gyro.getHeading();
-//        targetAngleFinal = this.deltaAngle + gyro.getHeading();
-        targetAngleFinal = this.deltaAngle; //TEMPORARY
+//        targetAngleFinal = this.wantedAngle + gyro.getHeading();
+        targetAngleFinal = this.wantedAngle; //TEMPORARY
         completedCount = 0;
 
         Log.i(Hardware.tag, "TurnGyroPID start angle = " + startAngle + "; final angle = " + targetAngleFinal);
@@ -115,7 +115,7 @@ public class TurnGyroPID extends Command {
         double time = timer.seconds();
         updateCurrentTarget(time);
 
-        if(Math.abs(deltaAngle - gyro.getHeading()) <= ERROR_THRESHOLD) {
+        if(Math.abs(wantedAngle - gyro.getHeading()) <= ERROR_THRESHOLD) {
             completedCount++;
         }
 
