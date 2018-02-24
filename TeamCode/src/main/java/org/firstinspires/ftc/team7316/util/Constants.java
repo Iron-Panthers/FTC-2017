@@ -152,7 +152,7 @@ public class Constants {
     }
     public static int millimetersToTicks(double dist) {
         //lol
-        return (int)((double)ENCODER_TICK_PER_REV / ENCODER_TICK_PER_REV / (WHEEL_CIRCUMFERENCE * 25.4) * dist);
+        return (int)(ENCODER_TICK_PER_REV / ENCODER_REV_PER_WHEEL_REV / (WHEEL_CIRCUMFERENCE * 25.4) * dist);
     }
 
     /**
