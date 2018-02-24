@@ -3,6 +3,7 @@ package org.firstinspires.ftc.team7316.modes.auto;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.team7316.modes.AutoBaseOpMode;
+import org.firstinspires.ftc.team7316.util.CryptoLocations;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.Scheduler;
 import org.firstinspires.ftc.team7316.util.commands.AutoCodes;
@@ -19,7 +20,7 @@ public class RedFar extends AutoBaseOpMode {
     public void onInit() {
         Hardware.instance.vuforiaCameraWrapper.startTracking();
         Scheduler.instance.add(AutoCodes.redFar());
-        Scheduler.instance.add(new UpdateVuforia());
+        Scheduler.instance.add(new UpdateVuforia(CryptoLocations.FAR_RED_AUTO));
     }
 
     @Override

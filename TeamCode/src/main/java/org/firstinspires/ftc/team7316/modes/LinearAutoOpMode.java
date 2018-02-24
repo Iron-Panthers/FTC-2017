@@ -2,6 +2,7 @@ package org.firstinspires.ftc.team7316.modes;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.team7316.util.CryptoLocations;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.Scheduler;
 import org.firstinspires.ftc.team7316.util.commands.Command;
@@ -30,7 +31,7 @@ public abstract class LinearAutoOpMode extends LinearOpMode {
         Hardware.setTelemetry(telemetry);
         Subsystems.createSubsystems();
         Hardware.instance.vuforiaCameraWrapper.startTracking();
-        Scheduler.instance.add(new UpdateVuforia());
+        Scheduler.instance.add(new UpdateVuforia(CryptoLocations.CLOSE_RED_AUTO));
     }
 
     @Override

@@ -3,6 +3,7 @@ package org.firstinspires.ftc.team7316.modes.test_opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.team7316.modes.AutoBaseOpMode;
+import org.firstinspires.ftc.team7316.util.CryptoLocations;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.Scheduler;
 import org.firstinspires.ftc.team7316.util.commands.AutoCodes;
@@ -17,7 +18,7 @@ public class Phase2Test extends AutoBaseOpMode {
     public void onInit() {
         Hardware.instance.vuforiaCameraWrapper.startTracking();
         Scheduler.instance.add(AutoCodes.phase2Test());
-        Scheduler.instance.add(new UpdateVuforia());
+        Scheduler.instance.add(new UpdateVuforia(CryptoLocations.CLOSE_RED_AUTO));
     }
 
     @Override
