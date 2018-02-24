@@ -52,11 +52,14 @@ public class CryptoLocations {
      * CW is positive, CCW is negative.
      *
      * @param angleOfRobot Bearing of robot
-     * @param xToPicto X delta from picto to robot
-     * @param yToPicto Y delta from picto to robot
+     * @param angleToPicto Delta angle from picto to robot
+     * @param zToPicto Z delta from picto to robot
      * @return A delta angle
      */
-    public static double deltaAngleForBox(double angleOfRobot, double xToPicto, double yToPicto) {
+    public static double deltaAngleForBox(double angleOfRobot, double angleToPicto, double zToPicto) {
+        double xToPicto = Math.sin(-angleToPicto)*zToPicto;
+        double yToPicto = Math.cos(-angleToPicto)*zToPicto;
+
         double dXToBox = xToPicto - DX_TO_COLUMN;
         double dYToBox = yToPicto - DY_TO_COLUMN;
         double angleToDest = -Math.toDegrees(Math.atan2(dYToBox, dXToBox));
@@ -74,11 +77,13 @@ public class CryptoLocations {
      * Robot is placed in front of box so that you need only to outtake.
      *
      * @param angleToPicto Angle at picto
-     * @param xToPicto X delta from picto to robot
-     * @param yToPicto Y delta from picto to robot
+     * @param zToPicto Z delta from picto to robot
      * @return A delta angle
      */
-    public static double distanceForBox(double angleToPicto, double xToPicto, double yToPicto) {
+    public static double distanceForBox(double angleToPicto, double zToPicto) {
+        double xToPicto = Math.sin(-angleToPicto)*zToPicto;
+        double yToPicto = Math.cos(-angleToPicto)*zToPicto;
+
         double dXToBox = xToPicto - DX_TO_COLUMN;
         double dYToBox = yToPicto - DY_TO_COLUMN;
 
