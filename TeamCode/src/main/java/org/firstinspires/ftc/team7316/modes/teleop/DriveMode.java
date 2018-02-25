@@ -23,7 +23,6 @@ public class DriveMode extends TeleopBaseOpMode {
 
     @Override
     public void onInit() {
-        Hardware.setHardwareMap(hardwareMap);
         Scheduler.inTeleop = true;
 
         // Set up our telemetry dashboard

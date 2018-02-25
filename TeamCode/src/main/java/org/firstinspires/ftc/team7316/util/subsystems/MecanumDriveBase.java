@@ -237,17 +237,18 @@ public class MecanumDriveBase extends Subsystem {
     }
 
     public void driveWithSpeeds() {
-        if(wantedTurnSpeed == 0) {
-            if(prevTurnSpeed != 0) {
+        if(!Hardware.gyro_offline) {
+            if (wantedTurnSpeed == 0) {
+                if (prevTurnSpeed != 0) {
+                    updateTargetHeading();
+                }
+                //  it's {target - current} instead of {current - target} for error since it needs to be inverted
+                wantedTurnSpeed += Util.wrap(targetHeading - Hardware.instance.gyroWrapper.getHeading()) * GYRO_FEEDBACK_POWER_RATIO;
+            } else {
                 updateTargetHeading();
             }
-            //  it's {target - current} instead of {current - target} for error since it needs to be inverted
-            wantedTurnSpeed += Util.wrap(targetHeading - Hardware.instance.gyroWrapper.getHeading()) * GYRO_FEEDBACK_POWER_RATIO;
+            prevTurnSpeed = wantedTurnSpeed;
         }
-        else {
-            updateTargetHeading();
-        }
-        prevTurnSpeed = wantedTurnSpeed;
         setMotors(weighting * (wantedFlBrSpeed + wantedTurnSpeed),
                 weighting * (wantedFrBlSpeed - wantedTurnSpeed),
                 weighting * (wantedFrBlSpeed + wantedTurnSpeed),
