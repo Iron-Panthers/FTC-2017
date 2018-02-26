@@ -86,7 +86,7 @@ public class TurnGyroPID extends Command {
     @Override
     public void init() {
         startAngle = gyro.getHeading();
-        targetAngleCurrent = gyro.getHeading();
+        targetAngleCurrent = startAngle;
 //        targetAngleFinal = this.wantedAngle + gyro.getHeading();
         targetAngleFinal = this.wantedAngle; //TEMPORARY
         completedCount = 0;
@@ -105,9 +105,8 @@ public class TurnGyroPID extends Command {
         Subsystems.instance.driveBase.resetMotors();
         sumError = 0;
         deltaError = 0;
-        lastError = error();
+        lastError = error(startAngle);
         timer.reset();
-        Hardware.log("big man", "turning");
     }
 
     @Override
@@ -119,13 +118,16 @@ public class TurnGyroPID extends Command {
             completedCount++;
         }
 
-        double error = error();
+        double currentHeading = gyro.getHeading();
+
+        double error = error(currentHeading);
         double deltaTime = time - previousTime;
         deltaError = (error - lastError) * deltaTime;
         sumError += error;
 
         double power = Constants.GYRO_P *error + Constants.GYRO_I *sumError + Constants.GYRO_D*deltaError + Constants.GYRO_F*getPredictedSpeed(time);
 
+        Hardware.log("current heading", currentHeading);
         Hardware.log("current error", error);
         Hardware.log("current target", targetAngleCurrent);
         Hardware.log("delta error", deltaError);
@@ -253,8 +255,8 @@ public class TurnGyroPID extends Command {
      * Positive angles mean to the right, while negative angles mean to the left.
      * @return the error
      */
-    private double error() {
-        return Util.wrap(targetAngleCurrent - gyro.getHeading());
+    private double error(double heading) {
+        return Util.wrap(targetAngleCurrent - heading);
     }
 
     public static void writeCSVGyro(List<Double> times, List<Double> targets, List<Double> positions, List<Double> errors, List<Double> powers,
