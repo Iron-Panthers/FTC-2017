@@ -11,7 +11,7 @@ import org.firstinspires.ftc.team7316.util.commands.*;
 
 public abstract class Subsystem {
 
-    public Command currentCmd;
+    public volatile Command currentCmd;
     public boolean needsDefault = true;
 
     /**
@@ -32,6 +32,10 @@ public abstract class Subsystem {
         } else {
             return defaultAutoCommand();
         }
+    }
+
+    public synchronized void setCommand(Command cmd) {
+        this.currentCmd = cmd;
     }
 
 }

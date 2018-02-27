@@ -28,6 +28,10 @@ public abstract class Command {
     public abstract void loop();
     public abstract boolean shouldRemove();
 
+    public CommandType getCommandType() {
+        return CommandType.USES_LOOP;
+    }
+
     public void _end() {
         if (terminatedListener != null) {
             terminatedListener.onTerminated(this);
