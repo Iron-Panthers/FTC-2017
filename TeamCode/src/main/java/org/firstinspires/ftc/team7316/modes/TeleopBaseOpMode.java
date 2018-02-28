@@ -17,6 +17,7 @@ public abstract class TeleopBaseOpMode extends OpMode {
     @Override
     public void init() {
         Log.i(Hardware.tag, "======================================= STARTING TELEOP ===================================================");
+        Scheduler.initialize();
         Scheduler.inTeleop = true;
         Scheduler.instance.clear();
         Hardware.setHardwareMap(hardwareMap);

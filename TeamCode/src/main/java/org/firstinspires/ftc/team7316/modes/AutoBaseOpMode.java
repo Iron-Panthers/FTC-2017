@@ -24,6 +24,7 @@ public abstract class AutoBaseOpMode extends OpMode {
     @Override
     public void init() {
         Log.i(Hardware.tag, "=========================== STARTING AUTO ================================");
+        Scheduler.initialize();
         Scheduler.inTeleop = false;
         Scheduler.instance.clear();
         Hardware.setHardwareMap(hardwareMap);

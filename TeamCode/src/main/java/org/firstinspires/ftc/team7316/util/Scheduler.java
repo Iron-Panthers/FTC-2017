@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.team7316.util;
 
 import org.firstinspires.ftc.team7316.util.commands.Command;
+import org.firstinspires.ftc.team7316.util.scheduler.ExecutorScheduler;
 import org.firstinspires.ftc.team7316.util.scheduler.SingleThreadedScheduler;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public abstract class Scheduler {
     public static Scheduler instance;
 
     public static void initialize() {
-        instance = new SingleThreadedScheduler();
+        instance = new ExecutorScheduler();
     }
 
     public abstract void add(Command command);

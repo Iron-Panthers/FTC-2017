@@ -24,6 +24,7 @@ public abstract class LinearAutoOpMode extends LinearOpMode {
     public abstract Command[] createCommands();
 
     public void initialize() {
+        Scheduler.initialize();
         Scheduler.inTeleop = false;
         Scheduler.instance.clear();
         Hardware.setHardwareMap(hardwareMap);
