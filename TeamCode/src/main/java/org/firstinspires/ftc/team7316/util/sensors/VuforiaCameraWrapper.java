@@ -16,6 +16,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 import org.firstinspires.ftc.team7316.util.Constants;
+import org.firstinspires.ftc.team7316.util.CryptoLocations;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.teamcode.R;
 
@@ -91,7 +92,7 @@ public class VuforiaCameraWrapper {
                  * it is perhaps unlikely that you will actually need to act on this pose information, but
                  * we illustrate it nevertheless, for completeness. */
             OpenGLMatrix pose = ((VuforiaTrackableDefaultListener)relicTemplate.getListener()).getPose();
-//            Hardware.log("Pose", format(pose));
+            Hardware.log("Pose", format(pose));
 
                 /* We further illustrate how to decompose the pose into useful rotational and
                  * translational components */
@@ -111,9 +112,12 @@ public class VuforiaCameraWrapper {
                 rX = rot.firstAngle;
                 rY = rot.secondAngle;
                 rZ = rot.thirdAngle;
-                Hardware.log("rx", rX);
+//                Hardware.log("rx", rX);
                 Hardware.log("ry", rY);
-                Hardware.log("rz", rZ);
+//                Hardware.log("rz", rZ);
+
+//                Hardware.log("target angle", CryptoLocations.deltaAngleForBox(Hardware.instance.gyroWrapper.getHeading(), rY, tZ, tX));
+//                Hardware.log("target distance", CryptoLocations.distanceForBox(rY, tZ, tX));
 
                 setCipherLocation();
             }

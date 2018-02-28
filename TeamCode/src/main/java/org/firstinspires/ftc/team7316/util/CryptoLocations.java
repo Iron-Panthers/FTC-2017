@@ -56,12 +56,27 @@ public class CryptoLocations {
      * @param zToPicto Z delta from picto to robot
      * @return A delta angle
      */
-    public static double deltaAngleForBox(double angleOfRobot, double angleToPicto, double zToPicto) {
+    public static double deltaAngleForBox(double angleOfRobot, double camAngle, double zNormalToPicto, double xFromNormal) {
+        zNormalToPicto = Math.abs(zNormalToPicto);
+        xFromNormal -= centerTxForTz(zNormalToPicto);
+        double angleToPicto = camAngle - Math.atan2(xFromNormal, zNormalToPicto);
+//        Hardware.log("angleToPicto", angleToPicto);
+
+        double zToPicto = Math.sqrt(zNormalToPicto*zNormalToPicto + xFromNormal*xFromNormal);
+//        Hardware.log("zToPicto", zToPicto);
+
         double xToPicto = Math.sin(-angleToPicto)*zToPicto;
         double yToPicto = Math.cos(-angleToPicto)*zToPicto;
 
+//        Hardware.log("xToPicto", xToPicto);
+//        Hardware.log("yToPicto", yToPicto);
+
         double dXToBox = xToPicto - DX_TO_COLUMN;
         double dYToBox = yToPicto - DY_TO_COLUMN;
+
+//        Hardware.log("dXToBox", dXToBox);
+//        Hardware.log("dYToBos", dYToBox);
+
         double angleToDest = -Math.toDegrees(Math.atan2(dYToBox, dXToBox));
         if (AUTO_CONFIG == CLOSE_RED_AUTO || AUTO_CONFIG == FAR_RED_AUTO) {
             angleToDest += 180;
@@ -78,7 +93,13 @@ public class CryptoLocations {
      * @param zToPicto Z delta from picto to robot
      * @return A delta angle
      */
-    public static double distanceForBox(double angleToPicto, double zToPicto) {
+    public static double distanceForBox(double camAngle, double zNormalToPicto, double xFromNormal) {
+        zNormalToPicto = Math.abs(zNormalToPicto);
+        xFromNormal -= centerTxForTz(zNormalToPicto);
+        Hardware.log("adjusted xFromNormal", xFromNormal);
+        double angleToPicto = camAngle - Math.atan2(xFromNormal, zNormalToPicto);
+        double zToPicto = Math.sqrt(zNormalToPicto*zNormalToPicto + xFromNormal*xFromNormal);
+
         double xToPicto = Math.sin(-angleToPicto)*zToPicto;
         double yToPicto = Math.cos(-angleToPicto)*zToPicto;
 
@@ -147,6 +168,10 @@ public class CryptoLocations {
                 CryptoLocations.DY_TO_COLUMN = CryptoLocations.FAR_BLUE_RIGHT_Y;
             }
         }
+    }
+
+    private static double centerTxForTz(double tZ) {
+        return tZ*0.0987 - 18.57; //magic numbers from desmos, just trust them thanks bye
     }
 
 }
