@@ -12,16 +12,22 @@ import org.firstinspires.ftc.team7316.util.commands.Command;
 public class TurnGyroCryptoVP extends Command {
 
     private TurnGyroPID turn;
+    private double amount;
+    private double fullAmount;
 
     @Override
     public void init() {
-        turn = new TurnGyroPID(CryptoLocations.deltaAngleForBox(Hardware.instance.gyroWrapper.getHeading(), Hardware.instance.vuforiaCameraWrapper.irY, Hardware.instance.vuforiaCameraWrapper.itZ, Hardware.instance.vuforiaCameraWrapper.itX), 3);
+        amount = CryptoLocations.deltaAngleForBox(Hardware.instance.gyroWrapper.getHeading(), Hardware.instance.vuforiaCameraWrapper.irY, Hardware.instance.vuforiaCameraWrapper.itZ, Hardware.instance.vuforiaCameraWrapper.itY);
+        fullAmount = Hardware.instance.gyroWrapper.getHeading() + amount;
+        turn = new TurnGyroPID(Hardware.instance.gyroWrapper.getHeading() + amount, 3);
         turn.init();
     }
 
     @Override
     public void loop() {
         turn.loop();
+        Hardware.log("turn amount delta", amount);
+        Hardware.log("turn amount dest", fullAmount);
     }
 
     @Override

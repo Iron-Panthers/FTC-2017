@@ -78,7 +78,7 @@ public class Constants {
     public static final double BLUE_OFF_PAD_TIME = 1.7;
     public static final double DRIVE_FORWARD_TIME = 1.6; //driving off the pad and to the parking also for now
 
-    public static final double OFF_PAD_POWER = 0.25;
+    public static final double OFF_PAD_POWER = 0.35;
     public static final double FORWARD_POWER_FOR_TIME = 0.1; //was 0.3 whne jewel waacked forward
     public static final double BACKWARD_POWER_FOR_TIME = 0.15; //when  jewel wacked backwards
 
@@ -152,7 +152,7 @@ public class Constants {
     }
     public static int millimetersToTicks(double dist) {
         //lol
-        return (int)(ENCODER_TICK_PER_REV / ENCODER_REV_PER_WHEEL_REV / (WHEEL_CIRCUMFERENCE * 25.4) * dist);
+        return (int)(ENCODER_TICK_PER_REV * ENCODER_REV_PER_WHEEL_REV / (WHEEL_CIRCUMFERENCE * 25.4) * dist);
     }
 
     /**

@@ -13,6 +13,7 @@ import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroCipherFar
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroCryptoVP;
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroPID;
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnReturnClose;
+import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnUntilKey;
 import org.firstinspires.ftc.team7316.util.commands.flow.SequentialCommand;
 import org.firstinspires.ftc.team7316.util.commands.flow.SimultaneousKeyCommand;
 import org.firstinspires.ftc.team7316.util.commands.flow.Wait;
@@ -199,10 +200,10 @@ public class AutoCodes {
 
         Command wack = wackJewelBasic(Alliance.RED);
 
-        DriveOffPad offPad = new DriveOffPad(Alliance.RED);
+        DriveForTime offPad = new DriveForTime(0.65, 0, 1);
         Wait stop = new Wait(0.1);
 
-        TurnGyroPID facePicto = new TurnGyroPID(CryptoLocations.RED_TURN_TO_PICTO);
+        TurnUntilKey facePicto = new TurnUntilKey(CryptoLocations.RED_TURN_TO_PICTO);
 
         TurnGyroCryptoVP turnToCrypto = new TurnGyroCryptoVP();
 

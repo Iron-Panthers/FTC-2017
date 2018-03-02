@@ -11,7 +11,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
  */
 public class CryptoLocations {
 
-    public static final double RED_TURN_TO_PICTO = 18;
+    public static final double RED_TURN_TO_PICTO = 45;
     public static final double BLUE_TURN_TO_PICTO = 25;
 
     public static final int CLOSE_RED_AUTO = 0;
@@ -23,9 +23,9 @@ public class CryptoLocations {
     private static int AUTO_CONFIG = 0;
 
     //  distances to crypto are measured from the balancing stone
-    private static final double CLOSE_RED_LEFT_X = 467;
-    private static final double CLOSE_RED_CENTER_X = 670;
-    private static final double CLOSE_RED_RIGHT_X = 874;
+    private static final double CLOSE_RED_LEFT_X = 520;
+    private static final double CLOSE_RED_CENTER_X = 710;
+    private static final double CLOSE_RED_RIGHT_X = 900;
 
     private static final double FAR_RED_LEFT_Y = 710;
     private static final double FAR_RED_CENTER_Y = 914;
@@ -48,65 +48,66 @@ public class CryptoLocations {
     private static double DY_TO_COLUMN = 0;
 
     /**
-     * Gets delta angle needed to point at the correct box from this position.
+     *  Gets delta angle needed to point at the correct box from this position.
      * CW is positive, CCW is negative.
      *
-     * @param angleOfRobot Bearing of robot
-     * @param angleToPicto Delta angle from picto to robot
-     * @param zToPicto Z delta from picto to robot
-     * @return A delta angle
+     * @param angleOfRobot Angle of robot from Gyro in degrees
+     * @param camAngle Angle of camera to picto in degrees
+     * @param zNormalToPicto Distance from cam line to picto in mm
+     * @param xFromNormal Distance from camera to cam normal in mm
+     * @return Angle from robot to correct crypto location
      */
     public static double deltaAngleForBox(double angleOfRobot, double camAngle, double zNormalToPicto, double xFromNormal) {
         zNormalToPicto = Math.abs(zNormalToPicto);
-        xFromNormal -= centerTxForTz(zNormalToPicto);
+        camAngle = camAngle * Math.PI/180;
+
         double angleToPicto = camAngle - Math.atan2(xFromNormal, zNormalToPicto);
-//        Hardware.log("angleToPicto", angleToPicto);
 
         double zToPicto = Math.sqrt(zNormalToPicto*zNormalToPicto + xFromNormal*xFromNormal);
-//        Hardware.log("zToPicto", zToPicto);
-
         double xToPicto = Math.sin(-angleToPicto)*zToPicto;
         double yToPicto = Math.cos(-angleToPicto)*zToPicto;
-
-//        Hardware.log("xToPicto", xToPicto);
-//        Hardware.log("yToPicto", yToPicto);
 
         double dXToBox = xToPicto - DX_TO_COLUMN;
         double dYToBox = yToPicto - DY_TO_COLUMN;
 
-//        Hardware.log("dXToBox", dXToBox);
-//        Hardware.log("dYToBos", dYToBox);
+        Hardware.log("dXToBox", dXToBox);
+        Hardware.log("dYToBos", dYToBox);
 
         double angleToDest = -Math.toDegrees(Math.atan2(dYToBox, dXToBox));
         if (AUTO_CONFIG == CLOSE_RED_AUTO || AUTO_CONFIG == FAR_RED_AUTO) {
             angleToDest += 180;
         }
 
+        Hardware.log("result angle", angleToDest - angleOfRobot);
         return angleToDest - angleOfRobot;
     }
 
     /**
-     * Gets distance needed to move from this position to correct column.
-     * Robot is placed in front of box so that you need only to outtake.
+     * Gets distance from current robot location to correct crypto based on
+     * pictograph location
      *
-     * @param angleToPicto Angle at picto
-     * @param zToPicto Z delta from picto to robot
-     * @return A delta angle
+     * @param camAngle Angle of camera to picto
+     * @param zNormalToPicto Dist from cam line to picto
+     * @param xFromNormal Dist from cam normal to cam position along cam line
+     * @return Distance from robot location to destination crypto column
      */
     public static double distanceForBox(double camAngle, double zNormalToPicto, double xFromNormal) {
         zNormalToPicto = Math.abs(zNormalToPicto);
-        xFromNormal -= centerTxForTz(zNormalToPicto);
+        camAngle = camAngle * Math.PI/180;
+
         Hardware.log("adjusted xFromNormal", xFromNormal);
         double angleToPicto = camAngle - Math.atan2(xFromNormal, zNormalToPicto);
         double zToPicto = Math.sqrt(zNormalToPicto*zNormalToPicto + xFromNormal*xFromNormal);
 
-        double xToPicto = Math.sin(-angleToPicto)*zToPicto;
+        double xToPicto = -Math.sin(-angleToPicto)*zToPicto;
         double yToPicto = Math.cos(-angleToPicto)*zToPicto;
 
         double dXToBox = xToPicto - DX_TO_COLUMN;
         double dYToBox = yToPicto - DY_TO_COLUMN;
 
         double dist = Math.sqrt(dXToBox*dXToBox + dYToBox*dYToBox);
+
+        Hardware.log("result dist", dist - SPACING_DISTANCE);
         return dist - SPACING_DISTANCE;
     }
 

@@ -67,7 +67,7 @@ public class JewelArm extends Subsystem {
                 wacker.setPosition(wackPositionNeutral);
                 break;
             case INITIAL:
-                wacker.setPosition(wackPositionNeutral);
+                wacker.setPosition(wackPositionInit);
         }
     }
 

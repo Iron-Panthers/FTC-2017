@@ -12,11 +12,13 @@ import org.firstinspires.ftc.team7316.util.commands.Command;
 public class DriveDistanceCryptoVP extends Command {
 
     private DriveDistance drive;
+    private double distance;
 
     @Override
     public void init() {
         drive = new DriveDistance(Constants.millimetersToTicks(CryptoLocations.distanceForBox(Hardware.instance.vuforiaCameraWrapper.irY, Hardware.instance.vuforiaCameraWrapper.itZ, Hardware.instance.vuforiaCameraWrapper.itX)), 3);
         drive.init();
+        distance = CryptoLocations.distanceForBox(Hardware.instance.vuforiaCameraWrapper.irY, Hardware.instance.vuforiaCameraWrapper.itZ, Hardware.instance.vuforiaCameraWrapper.itX);
     }
 
     @Override

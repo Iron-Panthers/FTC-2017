@@ -66,6 +66,8 @@ public class VuforiaCameraWrapper {
         ((VuforiaTrackableDefaultListener)relicTemplate.getListener()).setPhoneInformation(new OpenGLMatrix(), CAMERA_DIRECTION);
 
         relicTrackables.activate();
+
+        CryptoLocations.setConfig(RelicRecoveryVuMark.CENTER, 0);
     }
 
     public void setCipherLocation() {
@@ -116,8 +118,8 @@ public class VuforiaCameraWrapper {
                 Hardware.log("ry", rY);
 //                Hardware.log("rz", rZ);
 
-//                Hardware.log("target angle", CryptoLocations.deltaAngleForBox(Hardware.instance.gyroWrapper.getHeading(), rY, tZ, tX));
-//                Hardware.log("target distance", CryptoLocations.distanceForBox(rY, tZ, tX));
+                Hardware.log("target angle", CryptoLocations.deltaAngleForBox(Hardware.instance.gyroWrapper.getHeading(), rY, tZ, tY));
+                Hardware.log("target distance", CryptoLocations.distanceForBox(rY, tZ, tY));
 
                 setCipherLocation();
             }
