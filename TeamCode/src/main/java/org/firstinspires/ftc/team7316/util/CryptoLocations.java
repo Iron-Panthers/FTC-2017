@@ -64,8 +64,8 @@ public class CryptoLocations {
         double angleToPicto = camAngle - Math.atan2(xFromNormal, zNormalToPicto);
 
         double zToPicto = Math.sqrt(zNormalToPicto*zNormalToPicto + xFromNormal*xFromNormal);
-        double xToPicto = Math.sin(-angleToPicto)*zToPicto;
-        double yToPicto = Math.cos(-angleToPicto)*zToPicto;
+        double xToPicto = Math.sin(angleToPicto)*zToPicto;
+        double yToPicto = Math.cos(angleToPicto)*zToPicto;
 
         double dXToBox = xToPicto - DX_TO_COLUMN;
         double dYToBox = yToPicto - DY_TO_COLUMN;
@@ -97,10 +97,10 @@ public class CryptoLocations {
 
         Hardware.log("adjusted xFromNormal", xFromNormal);
         double angleToPicto = camAngle - Math.atan2(xFromNormal, zNormalToPicto);
-        double zToPicto = Math.sqrt(zNormalToPicto*zNormalToPicto + xFromNormal*xFromNormal);
 
-        double xToPicto = -Math.sin(-angleToPicto)*zToPicto;
-        double yToPicto = Math.cos(-angleToPicto)*zToPicto;
+        double zToPicto = Math.sqrt(zNormalToPicto*zNormalToPicto + xFromNormal*xFromNormal);
+        double xToPicto = Math.sin(angleToPicto)*zToPicto;
+        double yToPicto = Math.cos(angleToPicto)*zToPicto;
 
         double dXToBox = xToPicto - DX_TO_COLUMN;
         double dYToBox = yToPicto - DY_TO_COLUMN;
