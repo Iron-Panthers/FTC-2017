@@ -133,7 +133,7 @@ public class CryptoLocations {
                 CryptoLocations.DY_TO_COLUMN = CryptoLocations.FAR_BLUE_LEFT_Y;
             }
         }
-        else if (PICTO_LOCATION == RelicRecoveryVuMark.CENTER) {
+        else if (PICTO_LOCATION == RelicRecoveryVuMark.CENTER || PICTO_LOCATION == RelicRecoveryVuMark.UNKNOWN) {
             if (AUTO_CONFIG == CryptoLocations.CLOSE_RED_AUTO) {
                 CryptoLocations.DX_TO_COLUMN = CryptoLocations.CLOSE_RED_CENTER_X;
                 CryptoLocations.DY_TO_COLUMN = 0;

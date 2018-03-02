@@ -16,14 +16,15 @@ public class DriveDistanceCryptoVP extends Command {
 
     @Override
     public void init() {
-        drive = new DriveDistance(Constants.millimetersToTicks(CryptoLocations.distanceForBox(Hardware.instance.vuforiaCameraWrapper.irY, Hardware.instance.vuforiaCameraWrapper.itZ, Hardware.instance.vuforiaCameraWrapper.itX)), 3);
-        drive.init();
         distance = CryptoLocations.distanceForBox(Hardware.instance.vuforiaCameraWrapper.irY, Hardware.instance.vuforiaCameraWrapper.itZ, Hardware.instance.vuforiaCameraWrapper.itX);
+        drive = new DriveDistance(Constants.millimetersToTicks(distance), 3);
+        drive.init();
     }
 
     @Override
     public void loop() {
         drive.loop();
+        Hardware.log("drive distance total", distance);
     }
 
     @Override

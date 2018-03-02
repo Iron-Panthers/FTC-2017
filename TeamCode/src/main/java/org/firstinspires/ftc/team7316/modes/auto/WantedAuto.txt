@@ -1,4 +1,5 @@
 todo
+this is outdated lmao
 1. new phone location
     - front of robot
     - tilted accordingly to see marks if possible

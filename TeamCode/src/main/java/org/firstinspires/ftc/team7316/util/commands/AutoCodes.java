@@ -23,6 +23,7 @@ import org.firstinspires.ftc.team7316.util.commands.intake.RunIntake;
 import org.firstinspires.ftc.team7316.util.commands.jewelarm.MoveJewelArm;
 import org.firstinspires.ftc.team7316.util.commands.jewelarm.WackJewel;
 import org.firstinspires.ftc.team7316.util.commands.sensors.PollColor;
+import org.firstinspires.ftc.team7316.util.commands.sensors.UpdateVuforia;
 import org.firstinspires.ftc.team7316.util.subsystems.JewelArm;
 
 /**
@@ -203,7 +204,8 @@ public class AutoCodes {
         DriveForTime offPad = new DriveForTime(0.65, 0, 1);
         Wait stop = new Wait(0.1);
 
-        TurnUntilKey facePicto = new TurnUntilKey(CryptoLocations.RED_TURN_TO_PICTO);
+//        TurnUntilKey facePicto = new TurnUntilKey(CryptoLocations.RED_TURN_TO_PICTO);
+        SimultaneousKeyCommand facePicto = new SimultaneousKeyCommand(new TurnUntilKey(CryptoLocations.RED_TURN_TO_PICTO), new UpdateVuforia(CryptoLocations.CLOSE_RED_AUTO));
 
         TurnGyroCryptoVP turnToCrypto = new TurnGyroCryptoVP();
 
@@ -211,7 +213,7 @@ public class AutoCodes {
 
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
-        Command[] cmds = {clamp, wack, offPad, stop, facePicto, turnToCrypto, driveToCrypto, outtake};
+        Command[] cmds = {clamp, wack, offPad, stop, facePicto, turnToCrypto, driveToCrypto, outtake, closeMultiglyph()};
         return new SequentialCommand(cmds);
     }
 

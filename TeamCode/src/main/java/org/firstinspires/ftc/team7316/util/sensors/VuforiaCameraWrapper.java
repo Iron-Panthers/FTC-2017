@@ -66,8 +66,6 @@ public class VuforiaCameraWrapper {
         ((VuforiaTrackableDefaultListener)relicTemplate.getListener()).setPhoneInformation(new OpenGLMatrix(), CAMERA_DIRECTION);
 
         relicTrackables.activate();
-
-        CryptoLocations.setConfig(RelicRecoveryVuMark.CENTER, 0);
     }
 
     public void setCipherLocation() {
