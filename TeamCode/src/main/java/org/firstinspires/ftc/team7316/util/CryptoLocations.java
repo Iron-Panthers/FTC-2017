@@ -57,7 +57,7 @@ public class CryptoLocations {
      * @param xFromNormal Distance from camera to cam normal in mm
      * @return Angle from robot to correct crypto location
      */
-    public static double deltaAngleForBox(double angleOfRobot, double camAngle, double zNormalToPicto, double xFromNormal) {
+    public static double deltaAngleForBox(double camAngle, double zNormalToPicto, double xFromNormal) {
         zNormalToPicto = Math.abs(zNormalToPicto);
         camAngle = camAngle * Math.PI/180;
 
@@ -68,19 +68,19 @@ public class CryptoLocations {
         double xToPicto = Math.sin(angleToPicto)*zToPicto;
         double yToPicto = Math.cos(angleToPicto)*zToPicto;
 
-        double dXToBox = -(xToPicto - DX_TO_COLUMN);
+        double dXToBox = xToPicto - DX_TO_COLUMN;
         double dYToBox = yToPicto - DY_TO_COLUMN;
 
         Hardware.log("dXToBox", dXToBox);
         Hardware.log("dYToBos", dYToBox);
 
-        double angleToDest = Math.toDegrees(Math.atan2(dYToBox, dXToBox));
+        double angleToDest = -Math.toDegrees(Math.atan2(dYToBox, dXToBox));
         Hardware.log("anlge pre adjust", angleToDest);
         if (AUTO_CONFIG == CLOSE_RED_AUTO || AUTO_CONFIG == FAR_RED_AUTO) {
             angleToDest += 180;
         }
 
-        return angleToDest - angleOfRobot;
+        return angleToDest - camAngle;
     }
 
     /**
