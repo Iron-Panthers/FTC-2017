@@ -92,7 +92,7 @@ public class VuforiaCameraWrapper {
                  * it is perhaps unlikely that you will actually need to act on this pose information, but
                  * we illustrate it nevertheless, for completeness. */
             OpenGLMatrix pose = ((VuforiaTrackableDefaultListener)relicTemplate.getListener()).getPose();
-            Hardware.log("Pose", format(pose));
+//            Hardware.log("Pose", format(pose));
 
                 /* We further illustrate how to decompose the pose into useful rotational and
                  * translational components */
@@ -104,7 +104,7 @@ public class VuforiaCameraWrapper {
                 tX = trans.get(0);
                 tY = trans.get(1);
                 tZ = trans.get(2);
-                Hardware.log("tx", tX);
+//                Hardware.log("tx", tX);
                 Hardware.log("tY", tY);
                 Hardware.log("tZ", tZ);
 
@@ -115,9 +115,6 @@ public class VuforiaCameraWrapper {
 //                Hardware.log("rx", rX);
                 Hardware.log("ry", rY);
 //                Hardware.log("rz", rZ);
-
-                Hardware.log("target angle", CryptoLocations.deltaAngleForBox(Hardware.instance.gyroWrapper.getHeading(), rY, tZ, tY));
-                Hardware.log("target distance", CryptoLocations.distanceForBox(rY, tZ, tY));
 
                 setCipherLocation();
             }

@@ -62,23 +62,24 @@ public class CryptoLocations {
         camAngle = camAngle * Math.PI/180;
 
         double angleToPicto = camAngle - Math.atan2(xFromNormal, zNormalToPicto);
+        Hardware.log("angle to picto", angleToPicto);
 
         double zToPicto = Math.sqrt(zNormalToPicto*zNormalToPicto + xFromNormal*xFromNormal);
         double xToPicto = Math.sin(angleToPicto)*zToPicto;
         double yToPicto = Math.cos(angleToPicto)*zToPicto;
 
-        double dXToBox = xToPicto - DX_TO_COLUMN;
+        double dXToBox = -(xToPicto - DX_TO_COLUMN);
         double dYToBox = yToPicto - DY_TO_COLUMN;
 
         Hardware.log("dXToBox", dXToBox);
         Hardware.log("dYToBos", dYToBox);
 
-        double angleToDest = -Math.toDegrees(Math.atan2(dYToBox, dXToBox));
+        double angleToDest = Math.toDegrees(Math.atan2(dYToBox, dXToBox));
+        Hardware.log("anlge pre adjust", angleToDest);
         if (AUTO_CONFIG == CLOSE_RED_AUTO || AUTO_CONFIG == FAR_RED_AUTO) {
             angleToDest += 180;
         }
 
-        Hardware.log("result angle", angleToDest - angleOfRobot);
         return angleToDest - angleOfRobot;
     }
 
@@ -95,7 +96,7 @@ public class CryptoLocations {
         zNormalToPicto = Math.abs(zNormalToPicto);
         camAngle = camAngle * Math.PI/180;
 
-        Hardware.log("adjusted xFromNormal", xFromNormal);
+//        Hardware.log("adjusted xFromNormal", xFromNormal);
         double angleToPicto = camAngle - Math.atan2(xFromNormal, zNormalToPicto);
 
         double zToPicto = Math.sqrt(zNormalToPicto*zNormalToPicto + xFromNormal*xFromNormal);
@@ -107,7 +108,7 @@ public class CryptoLocations {
 
         double dist = Math.sqrt(dXToBox*dXToBox + dYToBox*dYToBox);
 
-        Hardware.log("result dist", dist - SPACING_DISTANCE);
+//        Hardware.log("result dist", dist - SPACING_DISTANCE);
         return dist - SPACING_DISTANCE;
     }
 

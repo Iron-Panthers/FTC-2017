@@ -201,7 +201,7 @@ public class AutoCodes {
 
         Command wack = wackJewelBasic(Alliance.RED);
 
-        DriveForTime offPad = new DriveForTime(0.65, 0, 1);
+        DriveForTime offPad = new DriveForTime(0.65, 0, 0.55);
         Wait stop = new Wait(0.1);
 
 //        TurnUntilKey facePicto = new TurnUntilKey(CryptoLocations.RED_TURN_TO_PICTO);

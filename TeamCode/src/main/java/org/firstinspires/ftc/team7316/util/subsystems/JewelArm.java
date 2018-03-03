@@ -19,7 +19,7 @@ public class JewelArm extends Subsystem {
     public final double armPositionIn = 1;
     public final double armPositionOut = 0.05;
 
-    public final double wackPositionInit = 0.65;
+    public final double wackPositionInit = 0.6;
     public final double wackPositionNeutral = 0.5;  //originally 0.5
     public final double wackPositionForward = 0;
     public final double wackPositionBackward = 1;
