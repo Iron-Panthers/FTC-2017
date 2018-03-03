@@ -19,8 +19,8 @@ public class CryptoLocations {
     public static final int CLOSE_BLUE_AUTO = 2;
     public static final int FAR_BLUE_AUTO = 3;
 
-    private static RelicRecoveryVuMark PICTO_LOCATION = RelicRecoveryVuMark.UNKNOWN;
-    private static int AUTO_CONFIG = 0;
+    public static RelicRecoveryVuMark PICTO_LOCATION = RelicRecoveryVuMark.UNKNOWN;
+    public static int AUTO_CONFIG = 0;
 
     //  distances to crypto are measured from the balancing stone
     private static final double CLOSE_RED_LEFT_X = 520;
@@ -46,6 +46,7 @@ public class CryptoLocations {
 
     private static double DX_TO_COLUMN = 0;
     private static double DY_TO_COLUMN = 0;
+    private static double PHONE_X_OFFSET = 240;
 
     /**
      *  Gets delta angle needed to point at the correct box from this position.
@@ -57,8 +58,8 @@ public class CryptoLocations {
      * @param xFromNormal Distance from camera to cam normal in mm
      * @return Angle from robot to correct crypto location
      */
-    public static double deltaAngleForBox(double camAngle, double zNormalToPicto, double xFromNormal) {
-        zNormalToPicto = Math.abs(zNormalToPicto);
+    public static double angleForBox(double camAngle, double zNormalToPicto, double xFromNormal) {
+        zNormalToPicto = Math.abs(zNormalToPicto) + PHONE_X_OFFSET;
         camAngle = camAngle * Math.PI/180;
 
         double angleToPicto = camAngle - Math.atan2(xFromNormal, zNormalToPicto);
@@ -80,7 +81,7 @@ public class CryptoLocations {
             angleToDest += 180;
         }
 
-        return angleToDest - camAngle;
+        return angleToDest;
     }
 
     /**
@@ -93,7 +94,7 @@ public class CryptoLocations {
      * @return Distance from robot location to destination crypto column
      */
     public static double distanceForBox(double camAngle, double zNormalToPicto, double xFromNormal) {
-        zNormalToPicto = Math.abs(zNormalToPicto);
+        zNormalToPicto = Math.abs(zNormalToPicto) + PHONE_X_OFFSET;
         camAngle = camAngle * Math.PI/180;
 
 //        Hardware.log("adjusted xFromNormal", xFromNormal);

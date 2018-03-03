@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.team7316.util.commands.drive.turn;
 
-import org.firstinspires.ftc.team7316.util.Alliance;
+import android.util.Log;
+
 import org.firstinspires.ftc.team7316.util.CryptoLocations;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.Command;
@@ -13,21 +14,21 @@ public class TurnGyroCryptoVP extends Command {
 
     private TurnGyroPID turn;
     private double amount;
-    private double fullAmount;
 
     @Override
     public void init() {
-        amount = CryptoLocations.deltaAngleForBox(Hardware.instance.vuforiaCameraWrapper.irY, Hardware.instance.vuforiaCameraWrapper.itZ, Hardware.instance.vuforiaCameraWrapper.itY);
-        fullAmount = Hardware.instance.gyroWrapper.getHeading() + amount;
-        turn = new TurnGyroPID(Hardware.instance.gyroWrapper.getHeading() + amount, 4);
+        amount = CryptoLocations.angleForBox(Hardware.instance.vuforiaCameraWrapper.rY, Hardware.instance.vuforiaCameraWrapper.tZ, Hardware.instance.vuforiaCameraWrapper.tY);
+        for (int i = 0; i < 10; i++) {
+            Log.i("irY", String.valueOf(Hardware.instance.vuforiaCameraWrapper.rY));
+        }
+        turn = new TurnGyroPID(amount, 4);
         turn.init();
     }
 
     @Override
     public void loop() {
-        //turn.loop();
-        Hardware.log("turn amount delta", amount);
-        Hardware.log("turn amount dest", fullAmount);
+        turn.loop();
+        Log.d("turn amount delta", String.valueOf(amount));
     }
 
     @Override

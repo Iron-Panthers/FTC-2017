@@ -24,6 +24,7 @@ public class RedCloseMultiglyphVP extends AutoBaseOpMode {
 
     @Override
     public void onLoop() {
-
+        Hardware.log("crypto DAB", CryptoLocations.AUTO_CONFIG);
+        Hardware.log("crypto LOOK", CryptoLocations.PICTO_LOCATION);
     }
 }
