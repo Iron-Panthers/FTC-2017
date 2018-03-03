@@ -23,26 +23,28 @@ public class CryptoLocations {
     public static int AUTO_CONFIG = 0;
 
     //  distances to crypto are measured from the balancing stone
-    private static final double CLOSE_RED_LEFT_X = 520;
-    private static final double CLOSE_RED_CENTER_X = 710;
-    private static final double CLOSE_RED_RIGHT_X = 900;
+    private static final double CLOSE_RED_LEFT_X = 490;
+    private static final double CLOSE_RED_CENTER_X = 700;
+    private static final double CLOSE_RED_RIGHT_X = 885;
+    private static final double CLOSE_RED_Y = 180;
 
     private static final double FAR_RED_LEFT_Y = 710;
     private static final double FAR_RED_CENTER_Y = 914;
     private static final double FAR_RED_RIGHT_Y = 1116;
-    private static final double FAR_RED_X = 975;
+    private static final double FAR_RED_X = 815;
 
     private static final double CLOSE_BLUE_LEFT_X = 955;
     private static final double CLOSE_BLUE_CENTER_X = 1158;
     private static final double CLOSE_BLUE_RIGHT_X = 1361;
+    private static final double CLOSE_BLUE_Y = 160;
 
     private static final double FAR_BLUE_LEFT_Y = -710;
     private static final double FAR_BLUE_CENTER_Y = -914;
     private static final double FAR_BLUE_RIGHT_Y = -1116;
-    private static final double FAR_BLUE_X = 1310;
+    private static final double FAR_BLUE_X = 1150;
 
     //  how far away from the wall the robot will stop
-    private static final double SPACING_DISTANCE = 152;
+    private static final double SPACING_DISTANCE = 100;
 
     private static double DX_TO_COLUMN = 0;
     private static double DY_TO_COLUMN = 0;
@@ -52,7 +54,6 @@ public class CryptoLocations {
      *  Gets delta angle needed to point at the correct box from this position.
      * CW is positive, CCW is negative.
      *
-     * @param angleOfRobot Angle of robot from Gyro in degrees
      * @param camAngle Angle of camera to picto in degrees
      * @param zNormalToPicto Distance from cam line to picto in mm
      * @param xFromNormal Distance from camera to cam normal in mm
@@ -120,7 +121,7 @@ public class CryptoLocations {
         if (PICTO_LOCATION == RelicRecoveryVuMark.LEFT) {
             if (AUTO_CONFIG == CryptoLocations.CLOSE_RED_AUTO) {
                 CryptoLocations.DX_TO_COLUMN = CryptoLocations.CLOSE_RED_LEFT_X;
-                CryptoLocations.DY_TO_COLUMN = 0;
+                CryptoLocations.DY_TO_COLUMN = CryptoLocations.CLOSE_RED_Y;
             }
             else if (AUTO_CONFIG == CryptoLocations.FAR_RED_AUTO) {
                 CryptoLocations.DX_TO_COLUMN = CryptoLocations.FAR_RED_X;
@@ -128,7 +129,7 @@ public class CryptoLocations {
             }
             else if (AUTO_CONFIG == CryptoLocations.CLOSE_BLUE_AUTO) {
                 CryptoLocations.DX_TO_COLUMN = CryptoLocations.CLOSE_BLUE_LEFT_X;
-                CryptoLocations.DY_TO_COLUMN = 0;
+                CryptoLocations.DY_TO_COLUMN = CryptoLocations.CLOSE_BLUE_Y;
             }
             else if (AUTO_CONFIG == CryptoLocations.FAR_BLUE_AUTO) {
                 CryptoLocations.DX_TO_COLUMN = CryptoLocations.FAR_BLUE_X;
@@ -138,7 +139,7 @@ public class CryptoLocations {
         else if (PICTO_LOCATION == RelicRecoveryVuMark.CENTER || PICTO_LOCATION == RelicRecoveryVuMark.UNKNOWN) {
             if (AUTO_CONFIG == CryptoLocations.CLOSE_RED_AUTO) {
                 CryptoLocations.DX_TO_COLUMN = CryptoLocations.CLOSE_RED_CENTER_X;
-                CryptoLocations.DY_TO_COLUMN = 0;
+                CryptoLocations.DY_TO_COLUMN = CryptoLocations.CLOSE_RED_Y;
             }
             else if (AUTO_CONFIG == CryptoLocations.FAR_RED_AUTO) {
                 CryptoLocations.DX_TO_COLUMN = CryptoLocations.FAR_RED_X;
@@ -146,7 +147,7 @@ public class CryptoLocations {
             }
             else if (AUTO_CONFIG == CryptoLocations.CLOSE_BLUE_AUTO) {
                 CryptoLocations.DX_TO_COLUMN = CryptoLocations.CLOSE_BLUE_CENTER_X;
-                CryptoLocations.DY_TO_COLUMN = 0;
+                CryptoLocations.DY_TO_COLUMN = CryptoLocations.CLOSE_BLUE_Y;
             }
             else if (AUTO_CONFIG == CryptoLocations.FAR_BLUE_AUTO) {
                 CryptoLocations.DX_TO_COLUMN = CryptoLocations.FAR_BLUE_X;
@@ -156,7 +157,7 @@ public class CryptoLocations {
         else if (PICTO_LOCATION == RelicRecoveryVuMark.RIGHT) {
             if (AUTO_CONFIG == CryptoLocations.CLOSE_RED_AUTO) {
                 CryptoLocations.DX_TO_COLUMN = CryptoLocations.CLOSE_RED_RIGHT_X;
-                CryptoLocations.DY_TO_COLUMN = 0;
+                CryptoLocations.DY_TO_COLUMN = CryptoLocations.CLOSE_RED_Y;
             }
             else if (AUTO_CONFIG == CryptoLocations.FAR_RED_AUTO) {
                 CryptoLocations.DX_TO_COLUMN = CryptoLocations.FAR_RED_X;
@@ -164,7 +165,7 @@ public class CryptoLocations {
             }
             else if (AUTO_CONFIG == CryptoLocations.CLOSE_BLUE_AUTO) {
                 CryptoLocations.DX_TO_COLUMN = CryptoLocations.CLOSE_BLUE_RIGHT_X;
-                CryptoLocations.DY_TO_COLUMN = 0;
+                CryptoLocations.DY_TO_COLUMN = CryptoLocations.CLOSE_BLUE_Y;
             }
             else if (AUTO_CONFIG == CryptoLocations.FAR_BLUE_AUTO) {
                 CryptoLocations.DX_TO_COLUMN = CryptoLocations.FAR_BLUE_X;

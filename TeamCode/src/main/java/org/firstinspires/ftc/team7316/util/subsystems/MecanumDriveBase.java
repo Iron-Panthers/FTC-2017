@@ -152,7 +152,7 @@ public class MecanumDriveBase extends Subsystem {
 
 
 //    public void setGyroTarget(double degrees) {
-//        targetAngle = Hardware.instance.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle + degrees;
+//        targetAngle = Hardware.instance.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle + degrees;
 //    }
 
     public void resetMotorModes() {

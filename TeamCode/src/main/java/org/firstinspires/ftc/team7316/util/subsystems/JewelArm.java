@@ -17,12 +17,12 @@ public class JewelArm extends Subsystem {
     private Servo wacker;
 
     public final double armPositionIn = 1;
-    public final double armPositionOut = 0.05;
+    public final double armPositionOut = 0;
 
     public final double wackPositionInit = 0.6;
     public final double wackPositionNeutral = 0.5;  //originally 0.5
-    public final double wackPositionForward = 0;
-    public final double wackPositionBackward = 1;
+    public final double wackPositionForward = 0.2;
+    public final double wackPositionBackward = 0.8;
 
     public JewelArm() {
         arm = Hardware.instance.rightJewelArm;

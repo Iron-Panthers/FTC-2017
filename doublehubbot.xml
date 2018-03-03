@@ -14,7 +14,7 @@
             <Servo name="bap" port="5" />
             <ModernRoboticsAnalogTouchSensor name="gt" port="3" />
             <AdafruitColorSensor name="cs" port="0" bus="2" />
-            <LynxEmbeddedIMU name="gyro" port="0" bus="0" />
+            <LynxEmbeddedIMU name="imu2" port="0" bus="0" />
         </LynxModule>
         <LynxModule name="Expansion Hub 3" port="3">
             <NeveRest40Gearmotor name="mdbr" port="0" />
@@ -23,7 +23,7 @@
             <NeveRest40Gearmotor name="mdbl" port="3" />
             <Servo name="flag" port="2" />
             <Servo name="ths" port="4" />
-            <LynxEmbeddedIMU name="imu" port="0" bus="0" />
+            <LynxEmbeddedIMU name="imu1" port="0" bus="0" />
         </LynxModule>
     </LynxUsbDevice>
 </Robot>

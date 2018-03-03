@@ -54,7 +54,7 @@ public class Hardware {
     private static final String WACKING_JEWEL_ARM_NAME = "bap";
     private static final String COLOR_SENSOR_NAME = "cs";
 
-    private static final String GYRO_NAME = "gyro";
+    private static final String IMU_NAME = "imu2";
 
     public static boolean colorsensor_offline;
     public static boolean gyro_offline;
@@ -94,12 +94,12 @@ public class Hardware {
 
     public VuforiaCameraWrapper vuforiaCameraWrapper;
 
-    public BNO055IMU gyro;
+    public BNO055IMU imu;
     public GyroWrapper gyroWrapper;
 
     public Hardware (HardwareMap map) {
 
-        //drive motors
+        // drive motors
         frontLeftDriveMotor = map.dcMotor.get(LEFT_FRONT_DRIVE_MOTOR_NAME);
         frontLeftDriveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         frontLeftDriveMotor.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -122,7 +122,7 @@ public class Hardware {
         backRightDriveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRightDriveMotorWrapper = new DCMotorWrapper(backRightDriveMotor, new PID(Constants.DRIVE_P, Constants.DRIVE_I, Constants.DRIVE_D, Constants.DRIVE_F));
 
-        //intake hardware
+        // intake hardware
         rightIntakeMotor = map.dcMotor.get(RIGHT_INTAKE_MOTOR_NAME);
         rightIntakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
@@ -141,14 +141,14 @@ public class Hardware {
 
         tailHookServo = map.servo.get(TAIL_HOOK_SERVO_NAME);
 
-//        relic grabber hardware
+        // relic grabber hardware
         relicArmMotor = map.dcMotor.get(RELIC_ARM_MOTOR_NAME);
         relicShoulderServo = map.crservo.get(RELIC_SHOULDER_SERVO_NAME);
 //        relicWristServo = map.servo.get(RELIC_WRIST_SERVO_NAME);
         relicHandServoLeft = map.servo.get(RELIC_HAND_SERVO_LEFT_NAME);
         relicHandServoRight = map.servo.get(RELIC_HAND_SERVO_RIGHT_NAME);
 
-        //jewel arm hardware
+        // jewel arm hardware
         rightJewelArm = map.servo.get(RIGHT_JEWEL_ARM_NAME);
         wackingJewelArm = map.servo.get(WACKING_JEWEL_ARM_NAME);
         try {
@@ -161,7 +161,7 @@ public class Hardware {
             colorsensor_offline = true;
         }
 
-        //gyro shenanigans
+        // gyro shenanigans
         BNO055IMU.Parameters gyroParams = new BNO055IMU.Parameters();
         gyroParams.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
         gyroParams.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
@@ -170,19 +170,14 @@ public class Hardware {
         gyroParams.loggingTag          = "IMU";
         gyroParams.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
 
-        try {
-            gyro = map.get(BNO055IMU.class, GYRO_NAME);
-            gyro.initialize(gyroParams);
-            gyroWrapper = new GyroWrapper(gyro);
-            gyro_offline = false;
-        }
-        catch (Exception e) {
-            gyro_offline = true;
-        }
+        imu = map.get(BNO055IMU.class, IMU_NAME);
+        imu.initialize(gyroParams);
+        gyroWrapper = new GyroWrapper(imu);
+
+        // hopefully this catches the imu errors
+        gyro_offline = imu.getSystemStatus() == BNO055IMU.SystemStatus.SYSTEM_ERROR || !imu.isGyroCalibrated();
 
         vuforiaCameraWrapper = new VuforiaCameraWrapper();
-
-        //Scheduler.instance.addTask(frontSideInfaredSensor);
     }
 
     public static void setHardwareMap(HardwareMap map) {
@@ -198,5 +193,4 @@ public class Hardware {
             telemetry.addData(caption, value);
         }
     }
-
 }

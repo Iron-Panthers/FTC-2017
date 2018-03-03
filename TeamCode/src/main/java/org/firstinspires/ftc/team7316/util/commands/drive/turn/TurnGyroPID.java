@@ -125,7 +125,7 @@ public class TurnGyroPID extends Command {
         deltaError = (error - lastError) * deltaTime;
         sumError += error;
 
-        double power = Constants.GYRO_P *error + Constants.GYRO_I *sumError + Constants.GYRO_D*deltaError + Constants.GYRO_F*getPredictedSpeed(time);
+        double power = Constants.GYRO_P * error + Constants.GYRO_I * sumError + Constants.GYRO_D * deltaError + Constants.GYRO_F * getPredictedSpeed(time);
 
         Hardware.log("current heading", currentHeading);
         Hardware.log("current error", error);

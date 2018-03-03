@@ -78,6 +78,13 @@ public class VuforiaCameraWrapper {
         irZ = rZ;
     }
 
+    /**
+     * Measurements right now.
+     * tY is the normal horizontal displacement of the pictograph.
+     * tZ is the normal displacement to the pictograph.
+     * rY is the rotation of the robot relative to the pictograph.
+     * Every other measurement isn't currently used.
+     */
     public void update() {
         RelicRecoveryVuMark cipher = RelicRecoveryVuMark.from(relicTemplate);
 
