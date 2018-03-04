@@ -4,6 +4,7 @@ import org.firstinspires.ftc.robotcore.external.Const;
 import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.CryptoLocations;
+import org.firstinspires.ftc.team7316.util.IntWrapper;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveOffPad;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistanceCipherClose;
@@ -148,12 +149,13 @@ public class AutoCodes {
 
         TurnGyroCryptoVP turnToCrypto = new TurnGyroCryptoVP();
 
-        DriveDistanceCryptoVP driveToCrypto = new DriveDistanceCryptoVP();
+//        DriveDistanceCryptoVP driveToCrypto = new DriveDistanceCryptoVP();
 
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
-        Command[] cmds = {clamp, wack, offPad, stop, facePicto, turnToCrypto, driveToCrypto, outtake, closeMultiglyph()};
-        return new SequentialCommand(cmds);
+//        Command[] cmds = {clamp, wack, offPad, stop, facePicto, turnToCrypto, driveToCrypto, outtake, closeMultiglyph()};
+//        return new SequentialCommand(cmds);
+        return new SequentialCommand({};)
     }
 
     public static SequentialCommand redClose() {
@@ -212,13 +214,14 @@ public class AutoCodes {
 
         TurnGyroCryptoVP turnToCrypto = new TurnGyroCryptoVP();
 
-        DriveDistanceCryptoVP driveToCrypto = new DriveDistanceCryptoVP();
+        IntWrapper DISTANCE_TRAVELLED = new IntWrapper(0);
+        DriveDistanceCryptoVP driveToCrypto = new DriveDistanceCryptoVP(DISTANCE_TRAVELLED);
 
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
-        DriveDistance backup = new DriveDistance(Constants.inchesToTicks(-7), 2);
+        DriveDistance backup = new DriveDistance(DISTANCE_TRAVELLED, 3);
 
-        Command[] cmds = {clamp, wack, offPad, stop, facePicto, turnToCrypto, driveToCrypto, outtake, backup, closeMultiglyph()};
+        Command[] cmds = {clamp, wack, offPad, stop, facePicto, turnToCrypto, driveToCrypto, outtake, backup, closeMultiglyphVP()};
         return new SequentialCommand(cmds);
     }
 
@@ -268,6 +271,24 @@ public class AutoCodes {
 
         TurnReturnClose turn180_2 = new TurnReturnClose();
 //        TurnGyroPID turn180_2 = new TurnGyroPID(90, 3, 120);
+
+        DriveDistance backToCrypto = new DriveDistance(Constants.inchesToTicks(cryptoDist), 1800, 4);
+        IntakeForTime outtake2 = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
+        SimultaneousKeyCommand bAndR2 = new SimultaneousKeyCommand(backUpAndRam(), new RunIntake(0.6));
+
+        Command[] cmds = {openIntake, turn180, mowDownGlyphs, closeIntake, turn180_2, backToCrypto, outtake2, bAndR2};
+        return new SequentialCommand(cmds);
+    }
+
+    public static SequentialCommand closeMultiglyphVP() {
+        MoveIntakeArm openIntake = new MoveIntakeArm(0.8);
+        TurnGyroPID turn180 = new TurnGyroPID(-90, 3, 120);
+        SimultaneousKeyCommand mowDownGlyphs = new SimultaneousKeyCommand(new DriveDistance(Constants.inchesToTicks(Constants.MULTIGLYPH_DIST_TO_PIT + Constants.MULTIGLYPH_DIST_TO_COLLECT), 1800, 5), new RunIntake(-0.7));
+        SimultaneousKeyCommand closeIntake = new SimultaneousKeyCommand(new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION), new RunIntake(-0.7));
+
+        double cryptoDist = Constants.MULTIGLYPH_DIST_TO_PIT + Constants.MULTIGLYPH_DIST_TO_COLLECT;
+
+        TurnReturnClose turn180_2 = new TurnReturnClose();
 
         DriveDistance backToCrypto = new DriveDistance(Constants.inchesToTicks(cryptoDist), 1800, 4);
         IntakeForTime outtake2 = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);

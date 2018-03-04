@@ -3,6 +3,7 @@ package org.firstinspires.ftc.team7316.util.commands.drive.distance;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.CryptoLocations;
 import org.firstinspires.ftc.team7316.util.Hardware;
+import org.firstinspires.ftc.team7316.util.IntWrapper;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 
 /**
@@ -11,12 +12,18 @@ import org.firstinspires.ftc.team7316.util.commands.Command;
 
 public class DriveDistanceCryptoVP extends Command {
 
+    public IntWrapper distanceWrapper;
     private DriveDistance drive;
     private double distance;
+
+    public DriveDistanceCryptoVP(IntWrapper distance) {
+        this.distanceWrapper = distance;
+    }
 
     @Override
     public void init() {
         distance = CryptoLocations.distanceForBox(Hardware.instance.vuforiaCameraWrapper.rY, Hardware.instance.vuforiaCameraWrapper.tZ, Hardware.instance.vuforiaCameraWrapper.tX);
+        distanceWrapper.value = -(int)distance;
         drive = new DriveDistance(Constants.millimetersToTicks(distance), 3);
         drive.init();
     }

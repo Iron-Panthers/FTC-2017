@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.team7316.copypastaLib.CombinedPath;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
+import org.firstinspires.ftc.team7316.util.IntWrapper;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
@@ -23,6 +24,7 @@ import java.util.List;
 
 public class DriveDistance extends Command {
 
+    private IntWrapper referenceDistance;
     private int distance; // in ticks
     private int maxVelocity; // in ticks per second
     private final int MAXACCEL = 1500; //ticks per second per second
@@ -58,8 +60,16 @@ public class DriveDistance extends Command {
      */
     public DriveDistance(int ticks, int maxVelocity, double timeout) {
         requires(Subsystems.instance.driveBase);
-        this.distance = ticks;
+        referenceDistance = new IntWrapper(ticks);
         this.maxVelocity = maxVelocity;
+        this.timeout = timeout;
+        timer = new ElapsedTime();
+    }
+
+    public DriveDistance(IntWrapper ticks, double timeout) {
+        requires(Subsystems.instance.driveBase);
+        referenceDistance = ticks;
+        this.maxVelocity = (int) (Constants.TICKS_PER_SECOND_HALFPOWER * 0.75);
         this.timeout = timeout;
         timer = new ElapsedTime();
     }
@@ -74,6 +84,8 @@ public class DriveDistance extends Command {
 
     @Override
     public void init() {
+        distance = referenceDistance.value;
+
         timer.reset();
         completedCount = 0;
         Subsystems.instance.driveBase.resetMotors();
@@ -161,4 +173,5 @@ public class DriveDistance extends Command {
             e.printStackTrace();
         }
     }
+
 }
