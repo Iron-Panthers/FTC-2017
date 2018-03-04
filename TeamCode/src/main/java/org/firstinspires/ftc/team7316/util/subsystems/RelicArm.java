@@ -63,12 +63,12 @@ public class RelicArm extends Subsystem {
     }
 
     public void openClaw() {
-        relicHandServoLeft.setPosition(0.9);
-        relicHandServoRight.setPosition(0.9);
+        relicHandServoLeft.setPosition(0.45);
+        relicHandServoRight.setPosition(0.45);
     }
 
     public void closeClaw() {
-        relicHandServoLeft.setPosition(0.5);
-        relicHandServoRight.setPosition(0.5);
+        relicHandServoLeft.setPosition(0.8);
+        relicHandServoRight.setPosition(0.8);
     }
 }
