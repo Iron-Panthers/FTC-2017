@@ -48,7 +48,8 @@ public class CryptoLocations {
 
     private static double DX_TO_COLUMN = 0;
     private static double DY_TO_COLUMN = 0;
-    private static double PHONE_X_OFFSET = 240;
+    private static double PHONE_Z_OFFSET = 200;
+    private static double PHONE_X_OFFSET = 210;
 
     /**
      *  Gets delta angle needed to point at the correct box from this position.
@@ -60,7 +61,8 @@ public class CryptoLocations {
      * @return Angle from robot to correct crypto location
      */
     public static double angleForBox(double camAngle, double zNormalToPicto, double xFromNormal) {
-        zNormalToPicto = Math.abs(zNormalToPicto) + PHONE_X_OFFSET;
+        zNormalToPicto = Math.abs(zNormalToPicto) + PHONE_Z_OFFSET;
+        xFromNormal += PHONE_X_OFFSET;
         camAngle = camAngle * Math.PI/180;
 
         double angleToPicto = camAngle - Math.atan2(xFromNormal, zNormalToPicto);
@@ -95,7 +97,8 @@ public class CryptoLocations {
      * @return Distance from robot location to destination crypto column
      */
     public static double distanceForBox(double camAngle, double zNormalToPicto, double xFromNormal) {
-        zNormalToPicto = Math.abs(zNormalToPicto) + PHONE_X_OFFSET;
+        zNormalToPicto = Math.abs(zNormalToPicto) + PHONE_Z_OFFSET;
+        xFromNormal += PHONE_X_OFFSET;
         camAngle = camAngle * Math.PI/180;
 
 //        Hardware.log("adjusted xFromNormal", xFromNormal);
