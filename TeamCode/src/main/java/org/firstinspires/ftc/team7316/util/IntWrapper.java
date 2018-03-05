@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.team7316.util;
 
 /**
+ * The absolute worst class ever created.
+ *
  * Created by fatty on 3/3/18.
  */
 
