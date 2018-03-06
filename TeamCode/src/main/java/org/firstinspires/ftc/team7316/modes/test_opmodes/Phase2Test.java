@@ -18,7 +18,7 @@ public class Phase2Test extends AutoBaseOpMode {
     public void onInit() {
         Hardware.instance.vuforiaCameraWrapper.startTracking();
         Scheduler.instance.add(AutoCodes.phase2Test());
-        Scheduler.instance.add(new UpdateVuforia(CryptoLocations.CLOSE_RED_AUTO));
+        Scheduler.instance.add(new UpdateVuforia());
     }
 
     @Override

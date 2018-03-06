@@ -20,7 +20,7 @@ public class RedClose extends AutoBaseOpMode {
     public void onInit() {
         Hardware.instance.vuforiaCameraWrapper.startTracking();
         Scheduler.instance.add(AutoCodes.redClose());
-        Scheduler.instance.add(new UpdateVuforia(CryptoLocations.CLOSE_RED_AUTO));
+        Scheduler.instance.add(new UpdateVuforia());
     }
 
     @Override

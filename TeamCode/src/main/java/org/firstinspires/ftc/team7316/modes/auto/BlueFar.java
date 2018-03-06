@@ -20,7 +20,7 @@ public class BlueFar extends AutoBaseOpMode {
     public void onInit() {
         Hardware.instance.vuforiaCameraWrapper.startTracking();
         Scheduler.instance.add(AutoCodes.blueFar());
-        Scheduler.instance.add(new UpdateVuforia(CryptoLocations.FAR_BLUE_AUTO));
+        Scheduler.instance.add(new UpdateVuforia());
     }
 
     @Override

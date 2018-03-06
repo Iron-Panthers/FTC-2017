@@ -19,7 +19,6 @@ public class RedFarMultiglyph extends AutoBaseOpMode {
     public void onInit() {
         Hardware.instance.vuforiaCameraWrapper.startTracking();
         Scheduler.instance.add(AutoCodes.redFarMultiglyph());
-        Scheduler.instance.add(new UpdateVuforia(CryptoLocations.FAR_RED_AUTO));
     }
 
     @Override

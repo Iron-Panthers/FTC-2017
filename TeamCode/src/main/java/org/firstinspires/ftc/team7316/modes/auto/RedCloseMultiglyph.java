@@ -20,7 +20,6 @@ public class RedCloseMultiglyph extends AutoBaseOpMode {
     public void onInit() {
         Hardware.instance.vuforiaCameraWrapper.startTracking();
         Scheduler.instance.add(AutoCodes.redFarMultiglyph());
-        Scheduler.instance.add(new UpdateVuforia(CryptoLocations.CLOSE_RED_AUTO));
     }
 
     @Override

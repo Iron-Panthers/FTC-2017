@@ -20,7 +20,7 @@ public class RedCloseMiddle extends AutoBaseOpMode {
         Hardware.instance.vuforiaCameraWrapper.vuMark = RelicRecoveryVuMark.CENTER;
         Hardware.instance.vuforiaCameraWrapper.startTracking();
         Scheduler.instance.add(AutoCodes.blueClose());
-        Scheduler.instance.add(new UpdateVuforia(CryptoLocations.CLOSE_RED_AUTO));
+        Scheduler.instance.add(new UpdateVuforia());
     }
 
     @Override

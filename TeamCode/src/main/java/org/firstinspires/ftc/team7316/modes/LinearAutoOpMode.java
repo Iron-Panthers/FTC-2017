@@ -31,7 +31,7 @@ public abstract class LinearAutoOpMode extends LinearOpMode {
         Hardware.setTelemetry(telemetry);
         Subsystems.createSubsystems();
         Hardware.instance.vuforiaCameraWrapper.startTracking();
-        Scheduler.instance.add(new UpdateVuforia(CryptoLocations.CLOSE_RED_AUTO));
+        Scheduler.instance.add(new UpdateVuforia());
     }
 
     @Override

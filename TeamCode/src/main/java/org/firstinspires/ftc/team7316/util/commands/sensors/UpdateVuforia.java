@@ -29,6 +29,5 @@ public class UpdateVuforia extends Command {
 
     @Override
     protected void end() {
-        CryptoLocations.cryptoKeyLocation = Hardware.instance.vuforiaCameraWrapper.vuMark;
     }
 }

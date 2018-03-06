@@ -20,7 +20,7 @@ public class BlueClose extends AutoBaseOpMode {
     public void onInit() {
         Hardware.instance.vuforiaCameraWrapper.startTracking();
         Scheduler.instance.add(AutoCodes.blueClose());
-        Scheduler.instance.add(new UpdateVuforia(CryptoLocations.CLOSE_BLUE_AUTO));
+        Scheduler.instance.add(new UpdateVuforia());
     }
 
     @Override
