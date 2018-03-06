@@ -143,7 +143,7 @@ public class AutoCodes {
 
         Command wack = wackJewelBasic(Alliance.BLUE);
 
-        DriveForTime offPad = new DriveForTime(0.6, Math.PI, 0.9);
+        DriveForTime offPad = new DriveForTime(0.3, Math.PI, 1.25);
         Wait stop = new Wait(0.1);
 
         Command[] cmds = {clamp, wack, offPad, stop, putGlyph(true, CryptoLocations.CLOSE_BLUE_AUTO), closeMultiglyphVP(-75, CryptoLocations.CLOSE_BLUE_AUTO), closeMultiglyphVP(-45, CryptoLocations.CLOSE_BLUE_AUTO)};
@@ -194,7 +194,7 @@ public class AutoCodes {
 
         Command wack = wackJewelBasic(Alliance.RED);
 
-        DriveForTime offPad = new DriveForTime(0.6, 0, 0.9);
+        DriveForTime offPad = new DriveForTime(0.3, 0, 1.25);
         Wait stop = new Wait(0.1);
 
         Command[] cmds = {clamp, wack, offPad, stop, putGlyph(true, CryptoLocations.CLOSE_RED_AUTO), closeMultiglyphVP(-75, CryptoLocations.CLOSE_RED_AUTO), closeMultiglyphVP(-60, CryptoLocations.CLOSE_RED_AUTO)};

@@ -36,20 +36,20 @@ public class CryptoLocations {
     private static int AUTO_CONFIG = 0;
 
     //  distances to crypto are measured from the balancing stone
-    private static final double CLOSE_RED_LEFT_X = 490;
+    private static final double CLOSE_RED_LEFT_X = 865;
     private static final double CLOSE_RED_CENTER_X = 700;
-    private static final double CLOSE_RED_RIGHT_X = 865;
-    private static final double CLOSE_RED_Y = 200;
+    private static final double CLOSE_RED_RIGHT_X = 490;
+    private static final double CLOSE_RED_Y = 190;
 
-    private static final double FAR_RED_LEFT_Y = 710;
+    private static final double FAR_RED_LEFT_Y = 1116;
     private static final double FAR_RED_CENTER_Y = 914;
-    private static final double FAR_RED_RIGHT_Y = 1116;
+    private static final double FAR_RED_RIGHT_Y = 710;
     private static final double FAR_RED_X = 815;
 
-    private static final double CLOSE_BLUE_LEFT_X = 955;
+    private static final double CLOSE_BLUE_LEFT_X = 1361;
     private static final double CLOSE_BLUE_CENTER_X = 1158;
-    private static final double CLOSE_BLUE_RIGHT_X = 1361;
-    private static final double CLOSE_BLUE_Y = 160;
+    private static final double CLOSE_BLUE_RIGHT_X = 955;
+    private static final double CLOSE_BLUE_Y = 190;
 
     private static final double FAR_BLUE_LEFT_Y = -710;
     private static final double FAR_BLUE_CENTER_Y = -914;
@@ -57,7 +57,7 @@ public class CryptoLocations {
     private static final double FAR_BLUE_X = 1150;
 
     //  how far away from the wall the robot will stop
-    private static final double SPACING_DISTANCE = 360;
+    private static final double SPACING_DISTANCE = 330;
 
     private static double DX_TO_COLUMN = 0;
     private static double DY_TO_COLUMN = 0;
@@ -209,14 +209,14 @@ public class CryptoLocations {
     }
 
     public static double distanceForConfig() {
-        double x = 400;
+        double x = 325;
         double y = 600;
                 //600 mm y
         //400 mm x
         x-= CryptoLocations.DX_TO_COLUMN;
         y-= CryptoLocations.DY_TO_COLUMN;
 
-        return Math.sqrt(x*x+y*y);//fuck you//;)
+        return Math.sqrt(x*x+y*y) - SPACING_DISTANCE;//fuck you//;)
     }
 
 }

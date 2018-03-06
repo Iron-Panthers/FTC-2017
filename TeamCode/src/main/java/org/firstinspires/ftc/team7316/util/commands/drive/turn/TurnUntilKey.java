@@ -91,13 +91,13 @@ public class TurnUntilKey extends Command {
     public void loop() {
         if (CLOCKWISE) {
             if (turnAmount - Hardware.instance.gyroWrapper.getHeading() > 0) {
-                Subsystems.instance.driveBase.turnMotors(0.5);
+                Subsystems.instance.driveBase.turnMotors(0.45);
             } else {
                 Subsystems.instance.driveBase.turnMotors(0.25);
             }
         } else {
             if (turnAmount - Hardware.instance.gyroWrapper.getHeading() < 0) {
-                Subsystems.instance.driveBase.turnMotors(-0.5);
+                Subsystems.instance.driveBase.turnMotors(-0.45);
             } else {
                 Subsystems.instance.driveBase.turnMotors(-0.25);
             }
@@ -110,7 +110,7 @@ public class TurnUntilKey extends Command {
     public boolean shouldRemove() {
         // 2000 ms / 75 ms is 27 ish
         // 75 ms is the average dT
-        return Hardware.instance.vuforiaCameraWrapper.vuMark != RelicRecoveryVuMark.UNKNOWN || timer.seconds() > 2;
+        return Hardware.instance.vuforiaCameraWrapper.vuMark != RelicRecoveryVuMark.UNKNOWN || timer.seconds() > 3;
     }
 
     @Override
