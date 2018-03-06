@@ -197,7 +197,7 @@ public class AutoCodes {
         DriveForTime offPad = new DriveForTime(0.6, 0, 0.9);
         Wait stop = new Wait(0.1);
 
-        Command[] cmds = {clamp, wack, offPad, stop, putGlyph(true, CryptoLocations.CLOSE_RED_AUTO), closeMultiglyphVP(-75, CryptoLocations.CLOSE_RED_AUTO), closeMultiglyphVP(-45, CryptoLocations.CLOSE_RED_AUTO)};
+        Command[] cmds = {clamp, wack, offPad, stop, putGlyph(true, CryptoLocations.CLOSE_RED_AUTO), closeMultiglyphVP(-75, CryptoLocations.CLOSE_RED_AUTO), closeMultiglyphVP(-60, CryptoLocations.CLOSE_RED_AUTO)};
         return new SequentialCommand(cmds);
     }
 

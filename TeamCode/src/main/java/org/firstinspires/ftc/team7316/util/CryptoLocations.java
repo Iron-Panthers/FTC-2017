@@ -208,4 +208,15 @@ public class CryptoLocations {
         return mark;
     }
 
+    public static double distanceForConfig() {
+        double x = 400;
+        double y = 600;
+                //600 mm y
+        //400 mm x
+        x-= CryptoLocations.DX_TO_COLUMN;
+        y-= CryptoLocations.DY_TO_COLUMN;
+
+        return Math.sqrt(x*x+y*y);//fuck you//;)
+    }
+
 }
