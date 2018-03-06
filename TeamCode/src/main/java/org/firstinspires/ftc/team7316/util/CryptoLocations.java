@@ -23,11 +23,14 @@ public class CryptoLocations {
     public static final int CLOSE_BLUE_AUTO = 2;
     public static final int FAR_BLUE_AUTO = 3;
 
-    private static ArrayList<RelicRecoveryVuMark> all = new ArrayList<>(Arrays.asList(new RelicRecoveryVuMark[]{
-        RelicRecoveryVuMark.RIGHT,
-        RelicRecoveryVuMark.CENTER,
-        RelicRecoveryVuMark.LEFT,
-        RelicRecoveryVuMark.UNKNOWN}));
+    private static ArrayList<RelicRecoveryVuMark> all;
+    public static void resetCryptoLocations() {
+        all = new ArrayList<>(Arrays.asList(new RelicRecoveryVuMark[]{
+                RelicRecoveryVuMark.RIGHT,
+                RelicRecoveryVuMark.CENTER,
+                RelicRecoveryVuMark.LEFT,
+                RelicRecoveryVuMark.UNKNOWN}));
+    }
 
     private static RelicRecoveryVuMark PICTO_LOCATION = RelicRecoveryVuMark.UNKNOWN;
     private static int AUTO_CONFIG = 0;
@@ -35,8 +38,8 @@ public class CryptoLocations {
     //  distances to crypto are measured from the balancing stone
     private static final double CLOSE_RED_LEFT_X = 490;
     private static final double CLOSE_RED_CENTER_X = 700;
-    private static final double CLOSE_RED_RIGHT_X = 885;
-    private static final double CLOSE_RED_Y = 180;
+    private static final double CLOSE_RED_RIGHT_X = 865;
+    private static final double CLOSE_RED_Y = 200;
 
     private static final double FAR_RED_LEFT_Y = 710;
     private static final double FAR_RED_CENTER_Y = 914;
@@ -54,7 +57,7 @@ public class CryptoLocations {
     private static final double FAR_BLUE_X = 1150;
 
     //  how far away from the wall the robot will stop
-    private static final double SPACING_DISTANCE = 100;
+    private static final double SPACING_DISTANCE = 360;
 
     private static double DX_TO_COLUMN = 0;
     private static double DY_TO_COLUMN = 0;

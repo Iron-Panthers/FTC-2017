@@ -19,6 +19,9 @@ public class Scheduler {
     private ArrayList<Command> commands = new ArrayList<>();
     private ArrayList<Command> newCommandBuffer = new ArrayList<>();
 
+    private boolean shouldClear = false;
+    private boolean shouldAddDefault = false;
+
     private Scheduler () {}
 
     public ArrayList<Command> getCommands() {
@@ -39,7 +42,20 @@ public class Scheduler {
 
     public void loop() {
 
+        if (shouldClear) {
+            commands.clear();
+            shouldClear = false;
+        }
+
         addFromBuffer();
+
+        if (shouldAddDefault) {
+            Scheduler.instance.add(Subsystems.instance.driveBase.getDefaultCommand());
+            Scheduler.instance.add(Subsystems.instance.glyphIntake.getDefaultCommand());
+            Scheduler.instance.add(Subsystems.instance.jewelArm.getDefaultCommand());
+            Scheduler.instance.add(Subsystems.instance.relicArm.getDefaultCommand());
+            shouldAddDefault = false;
+        }
 
         for (int i = commands.size() - 1; i >= 0; i--) {
             Command cmd = commands.get(i);
@@ -99,14 +115,11 @@ public class Scheduler {
     }
 
     public void addDefaultCommands() {
-        Scheduler.instance.add(Subsystems.instance.driveBase.getDefaultCommand());
-        Scheduler.instance.add(Subsystems.instance.glyphIntake.getDefaultCommand());
-        Scheduler.instance.add(Subsystems.instance.jewelArm.getDefaultCommand());
-        Scheduler.instance.add(Subsystems.instance.relicArm.getDefaultCommand());
+        shouldAddDefault = true;
     }
 
     public void clear() {
-        this.commands.clear();
+        shouldClear = true;
     }
 
 }

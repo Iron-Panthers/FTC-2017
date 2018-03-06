@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.team7316.util.commands.drive.distance;
 
+import android.os.Debug;
+import android.util.Log;
+
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.team7316.copypastaLib.CombinedPath;
@@ -104,7 +107,8 @@ public class DriveDistance extends Command {
             completedCount ++;
         }
         Subsystems.instance.driveBase.driveWithPID();
-        Hardware.log("driving distance", "cool and good");
+
+        Hardware.log("driving distance", distance);
         Hardware.log("flError", Hardware.instance.frontLeftDriveMotorWrapper.getError());
         Hardware.log("frError", Hardware.instance.frontRightDriveMotorWrapper.getError());
         Hardware.log("current target", Hardware.instance.frontLeftDriveMotorWrapper.pid.getTargetTicksCurrent());

@@ -2,6 +2,8 @@ package org.firstinspires.ftc.team7316.util.commands.drive.turn;
 
 import android.transition.Scene;
 
+import com.qualcomm.robotcore.util.ElapsedTime;
+
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.team7316.util.CryptoLocations;
 import org.firstinspires.ftc.team7316.util.Hardware;
@@ -9,6 +11,7 @@ import org.firstinspires.ftc.team7316.util.Scheduler;
 import org.firstinspires.ftc.team7316.util.Util;
 import org.firstinspires.ftc.team7316.util.commands.AutoCodes;
 import org.firstinspires.ftc.team7316.util.commands.Command;
+import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 /**
@@ -67,37 +70,39 @@ public class TurnUntilKey extends Command {
 //        turnback.end();
 //    }
 
-    private TurnGyroPID turn;
     private double turnAmount;
     private boolean CLOCKWISE;
     private int count = 0;
     private int autoCode;
+    private ElapsedTime timer = new ElapsedTime();
 
     public TurnUntilKey(double guessAngle, int autoCode) {
-        this.turnAmount = guessAngle;
+        this.turnAmount = guessAngle - 15;
         this.autoCode = autoCode;
     }
 
     @Override
     public void init() {
         CLOCKWISE = Util.wrap(turnAmount - Hardware.instance.gyroWrapper.getHeading()) > 0;
-
-        turn = new TurnGyroPID(turnAmount, 3);
-        turn.init();
+        timer.reset();
     }
 
     @Override
     public void loop() {
-        if (turn.shouldRemove()) {
-            if (CLOCKWISE) {
-                Subsystems.instance.driveBase.turnMotors(0.35);
+        if (CLOCKWISE) {
+            if (turnAmount - Hardware.instance.gyroWrapper.getHeading() > 0) {
+                Subsystems.instance.driveBase.turnMotors(0.5);
             } else {
-                Subsystems.instance.driveBase.turnMotors(-0.35);
+                Subsystems.instance.driveBase.turnMotors(0.25);
             }
-            count++;
         } else {
-            turn.loop();
+            if (turnAmount - Hardware.instance.gyroWrapper.getHeading() < 0) {
+                Subsystems.instance.driveBase.turnMotors(-0.5);
+            } else {
+                Subsystems.instance.driveBase.turnMotors(-0.25);
+            }
         }
+        count++;
         Hardware.instance.vuforiaCameraWrapper.update();
     }
 
@@ -105,18 +110,17 @@ public class TurnUntilKey extends Command {
     public boolean shouldRemove() {
         // 2000 ms / 75 ms is 27 ish
         // 75 ms is the average dT
-        return Hardware.instance.vuforiaCameraWrapper.vuMark != RelicRecoveryVuMark.UNKNOWN || count > 27;
+        return Hardware.instance.vuforiaCameraWrapper.vuMark != RelicRecoveryVuMark.UNKNOWN || timer.seconds() > 2;
     }
 
     @Override
     protected void end() {
-        if (count >= 27) {
+        if (Hardware.instance.vuforiaCameraWrapper.vuMark == RelicRecoveryVuMark.UNKNOWN) {
             Scheduler.instance.clear();
             Scheduler.instance.addDefaultCommands();
 
             Scheduler.instance.add(AutoCodes.oldAutoForCode(autoCode));
         }
-        turn.interrupt();
     }
 
 }

@@ -146,7 +146,7 @@ public class AutoCodes {
         DriveForTime offPad = new DriveForTime(0.6, Math.PI, 0.9);
         Wait stop = new Wait(0.1);
 
-        Command[] cmds = {clamp, wack, offPad, stop, putGlyph(null, CryptoLocations.CLOSE_BLUE_AUTO), closeMultiglyphVP(-75, CryptoLocations.CLOSE_BLUE_AUTO), closeMultiglyphVP(-45, CryptoLocations.CLOSE_BLUE_AUTO)};
+        Command[] cmds = {clamp, wack, offPad, stop, putGlyph(true, CryptoLocations.CLOSE_BLUE_AUTO), closeMultiglyphVP(-75, CryptoLocations.CLOSE_BLUE_AUTO), closeMultiglyphVP(-45, CryptoLocations.CLOSE_BLUE_AUTO)};
         return new SequentialCommand(cmds);
     }
 
@@ -197,7 +197,7 @@ public class AutoCodes {
         DriveForTime offPad = new DriveForTime(0.6, 0, 0.9);
         Wait stop = new Wait(0.1);
 
-        Command[] cmds = {clamp, wack, offPad, stop, putGlyph(null, CryptoLocations.CLOSE_RED_AUTO), closeMultiglyphVP(-75, CryptoLocations.CLOSE_RED_AUTO), closeMultiglyphVP(-45, CryptoLocations.CLOSE_RED_AUTO)};
+        Command[] cmds = {clamp, wack, offPad, stop, putGlyph(true, CryptoLocations.CLOSE_RED_AUTO), closeMultiglyphVP(-75, CryptoLocations.CLOSE_RED_AUTO), closeMultiglyphVP(-45, CryptoLocations.CLOSE_RED_AUTO)};
         return new SequentialCommand(cmds);
     }
 
@@ -252,7 +252,7 @@ public class AutoCodes {
         return new SequentialCommand(cmds);
     }
 
-    public static SequentialCommand putGlyph(RelicRecoveryVuMark location, int autoLocation) {
+    public static SequentialCommand putGlyph(boolean useKeyMark, int autoLocation) {
         TurnUntilKey facePicto;
         if (autoLocation == CryptoLocations.CLOSE_RED_AUTO || autoLocation == CryptoLocations.FAR_RED_AUTO) {
             facePicto = new TurnUntilKey(CryptoLocations.RED_TURN_TO_PICTO, autoLocation);
@@ -260,7 +260,7 @@ public class AutoCodes {
             facePicto = new TurnUntilKey(CryptoLocations.BLUE_TURN_TO_PICTO, autoLocation);
         }
 
-        SetConfigVuforia config = new SetConfigVuforia(location, autoLocation);
+        SetConfigVuforia config = new SetConfigVuforia(useKeyMark, autoLocation);
 
         TurnGyroCryptoVP turnToCrypto = new TurnGyroCryptoVP();
 
@@ -277,7 +277,7 @@ public class AutoCodes {
 
     public static SequentialCommand closeMultiglyphVP(double driveAngle, int automode) {
         GetGlyphAndReturn get = new GetGlyphAndReturn(driveAngle);
-        SequentialCommand put = putGlyph(CryptoLocations.popLocation(), automode);
+        SequentialCommand put = putGlyph(false, automode);
 
         Command[] cmds = {get, put};
         return new SequentialCommand(cmds);

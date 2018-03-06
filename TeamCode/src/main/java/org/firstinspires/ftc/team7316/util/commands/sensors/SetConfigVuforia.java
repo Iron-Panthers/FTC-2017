@@ -12,19 +12,19 @@ import org.firstinspires.ftc.team7316.util.commands.*;
 public class SetConfigVuforia extends Command {
 
     private int autoCode;
-    private RelicRecoveryVuMark mark;
-    public SetConfigVuforia(RelicRecoveryVuMark mark, int autoCode) {
+    private boolean keyMark;
+    public SetConfigVuforia(boolean keyMark, int autoCode) {
         this.autoCode = autoCode;
-        this.mark = mark;
+        this.keyMark = keyMark;
     }
 
     @Override
     public void init() {
-        if (mark == null) {
+        if (keyMark) {
             CryptoLocations.setConfig(Hardware.instance.vuforiaCameraWrapper.vuMark, autoCode);
             CryptoLocations.removeLocation(Hardware.instance.vuforiaCameraWrapper.vuMark);
         } else {
-            CryptoLocations.setConfig(mark, autoCode);
+            CryptoLocations.setConfig(CryptoLocations.popLocation(), autoCode);
         }
     }
 
