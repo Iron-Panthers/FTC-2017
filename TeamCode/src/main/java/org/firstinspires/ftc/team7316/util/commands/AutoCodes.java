@@ -1,11 +1,14 @@
 package org.firstinspires.ftc.team7316.util.commands;
 
 import org.firstinspires.ftc.robotcore.external.Const;
+import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.team7316.util.Alliance;
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.CryptoLocations;
+import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.IntWrapper;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveOffPad;
+import org.firstinspires.ftc.team7316.util.commands.drive.GetGlyphAndReturn;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistanceCipherClose;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
@@ -33,17 +36,6 @@ import org.firstinspires.ftc.team7316.util.subsystems.JewelArm;
  * All the sequential commands to run
  */
 public class AutoCodes {
-
-    /*
-    public static SimultaneousCommands robotDriveDistanceAccurate(double distance, double power) {
-        DriveDistanceAccurate leftMotor = new DriveDistanceAccurate(Constants.inchesToTicks(distance), power, Hardware.instance.leftDriveMotor);
-        DriveDistanceAccurate rightMotor = new DriveDistanceAccurate(Constants.inchesToTicks(distance), power, Hardware.instance.rightDriveMotor);
-        Command[] both = {leftMotor, rightMotor};
-
-        SimultaneousCommands bothDrive = new SimultaneousCommands(both);
-        return bothDrive;
-    }
-    */
 
     public static SequentialCommand blueFar() {
         MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
@@ -149,12 +141,8 @@ public class AutoCodes {
 
         TurnGyroCryptoVP turnToCrypto = new TurnGyroCryptoVP();
 
-//        DriveDistanceCryptoVP driveToCrypto = new DriveDistanceCryptoVP();
-
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
-//        Command[] cmds = {clamp, wack, offPad, stop, facePicto, turnToCrypto, driveToCrypto, outtake, closeMultiglyph()};
-//        return new SequentialCommand(cmds);
         return new SequentialCommand({};)
     }
 
@@ -209,19 +197,7 @@ public class AutoCodes {
         DriveForTime offPad = new DriveForTime(0.6, 0, 0.9);
         Wait stop = new Wait(0.1);
 
-//        TurnUntilKey facePicto = new TurnUntilKey(CryptoLocations.RED_TURN_TO_PICTO);
-        SimultaneousKeyCommand facePicto = new SimultaneousKeyCommand(new TurnUntilKey(CryptoLocations.RED_TURN_TO_PICTO), new UpdateVuforia(CryptoLocations.CLOSE_RED_AUTO));
-
-        TurnGyroCryptoVP turnToCrypto = new TurnGyroCryptoVP();
-
-        IntWrapper DISTANCE_TRAVELLED = new IntWrapper(0);
-        DriveDistanceCryptoVP driveToCrypto = new DriveDistanceCryptoVP(DISTANCE_TRAVELLED);
-
-        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
-
-        DriveDistance backup = new DriveDistance(DISTANCE_TRAVELLED, 3);
-
-        Command[] cmds = {clamp, wack, offPad, stop, facePicto, turnToCrypto, driveToCrypto, outtake, backup, closeMultiglyphVP()};
+        Command[] cmds = {clamp, wack, offPad, stop, putGlyph(null, CryptoLocations.CLOSE_RED_AUTO), closeMultiglyphVP(-75, CryptoLocations.CLOSE_RED_AUTO), closeMultiglyphVP(-45, CryptoLocations.CLOSE_RED_AUTO)};
         return new SequentialCommand(cmds);
     }
 
@@ -280,21 +256,37 @@ public class AutoCodes {
         return new SequentialCommand(cmds);
     }
 
-    public static SequentialCommand closeMultiglyphVP() {
-        MoveIntakeArm openIntake = new MoveIntakeArm(0.8);
-        TurnGyroPID turn180 = new TurnGyroPID(-90, 3, 120);
-        SimultaneousKeyCommand mowDownGlyphs = new SimultaneousKeyCommand(new DriveDistance(Constants.inchesToTicks(Constants.MULTIGLYPH_DIST_TO_PIT + Constants.MULTIGLYPH_DIST_TO_COLLECT), 1800, 5), new RunIntake(-0.7));
-        SimultaneousKeyCommand closeIntake = new SimultaneousKeyCommand(new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION), new RunIntake(-0.7));
+    public static SequentialCommand putGlyph(RelicRecoveryVuMark location, int autoLocation) {
+        TurnUntilKey facePicto;
+        if (autoLocation == CryptoLocations.CLOSE_RED_AUTO || autoLocation == CryptoLocations.FAR_RED_AUTO) {
+            facePicto = new TurnUntilKey(CryptoLocations.RED_TURN_TO_PICTO);
+        } else {
+            facePicto = new TurnUntilKey(CryptoLocations.BLUE_TURN_TO_PICTO);
+        }
+        if (location == null) {
+            CryptoLocations.setConfig(autoLocation);
+        } else {
+            CryptoLocations.setConfig(location, autoLocation);
+        }
 
-        double cryptoDist = Constants.MULTIGLYPH_DIST_TO_PIT + Constants.MULTIGLYPH_DIST_TO_COLLECT;
+        TurnGyroCryptoVP turnToCrypto = new TurnGyroCryptoVP();
 
-        TurnReturnClose turn180_2 = new TurnReturnClose();
+        IntWrapper DISTANCE_TRAVELLED = new IntWrapper(0);
+        DriveDistanceCryptoVP driveToCrypto = new DriveDistanceCryptoVP(DISTANCE_TRAVELLED);
 
-        DriveDistance backToCrypto = new DriveDistance(Constants.inchesToTicks(cryptoDist), 1800, 4);
-        IntakeForTime outtake2 = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
-        SimultaneousKeyCommand bAndR2 = new SimultaneousKeyCommand(backUpAndRam(), new RunIntake(0.6));
+        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
-        Command[] cmds = {openIntake, turn180, mowDownGlyphs, closeIntake, turn180_2, backToCrypto, outtake2, bAndR2};
+        DriveDistance backup = new DriveDistance(DISTANCE_TRAVELLED, 3);
+
+        Command[] cmds = {facePicto, turnToCrypto, driveToCrypto, outtake, backup, closeMultiglyphVP()};
+        return new SequentialCommand(cmds);
+    }
+
+    public static SequentialCommand closeMultiglyphVP(double driveAngle, int automode) {
+        GetGlyphAndReturn get = new GetGlyphAndReturn(driveAngle);
+        SequentialCommand put = putGlyph(CryptoLocations.popLocation(), automode);
+
+        Command[] cmds = {get, put};
         return new SequentialCommand(cmds);
     }
 
@@ -338,17 +330,4 @@ public class AutoCodes {
         return new SequentialCommand(cmds);
     }
 
-
-//
-//    public static SequentialCommand driveStraight(double distance) {
-//        DriveDistance drive = new DriveDistance(distance);
-//        return new SequentialCommand(drive);
-//    }
-
-//    public static SequentialCommand driveStraightTurn(double distance, int angle) {
-//        //DriveDistance drive = new DriveDistance(distance);
-//        TurnGyroPID turn = new TurnGyroPID(angle);
-//        Command[] cmds = {turn};
-//        return new SequentialCommand(cmds);
-//    }
 }

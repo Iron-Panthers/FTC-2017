@@ -1,6 +1,10 @@
 package org.firstinspires.ftc.team7316.util;
 
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
+import org.firstinspires.ftc.team7316.util.sensors.VuforiaCameraWrapper;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * The coordinate system is relative to the picto.
@@ -19,8 +23,14 @@ public class CryptoLocations {
     public static final int CLOSE_BLUE_AUTO = 2;
     public static final int FAR_BLUE_AUTO = 3;
 
-    public static RelicRecoveryVuMark PICTO_LOCATION = RelicRecoveryVuMark.UNKNOWN;
-    public static int AUTO_CONFIG = 0;
+    private static ArrayList<RelicRecoveryVuMark> all = new ArrayList<>(Arrays.asList(new RelicRecoveryVuMark[]{
+        RelicRecoveryVuMark.RIGHT,
+        RelicRecoveryVuMark.CENTER,
+        RelicRecoveryVuMark.LEFT,
+        RelicRecoveryVuMark.UNKNOWN}));
+
+    private static RelicRecoveryVuMark PICTO_LOCATION = RelicRecoveryVuMark.UNKNOWN;
+    private static int AUTO_CONFIG = 0;
 
     //  distances to crypto are measured from the balancing stone
     private static final double CLOSE_RED_LEFT_X = 490;
@@ -117,7 +127,12 @@ public class CryptoLocations {
         return dist - SPACING_DISTANCE;
     }
 
-    public static void setConfig(RelicRecoveryVuMark PICTO_LOCATION, int AUTO_CONFIG) {
+    public static void setConfig(int AUTO_CONFIG) {
+        setConfig(Hardware.instance.vuforiaCameraWrapper.vuMark, AUTO_CONFIG);
+        CryptoLocations.removeLocation(Hardware.instance.vuforiaCameraWrapper.vuMark);
+    }
+
+        public static void setConfig(RelicRecoveryVuMark PICTO_LOCATION, int AUTO_CONFIG) {
         CryptoLocations.PICTO_LOCATION = PICTO_LOCATION;
         CryptoLocations.AUTO_CONFIG = AUTO_CONFIG;
 
@@ -179,6 +194,20 @@ public class CryptoLocations {
 
     private static double centerTxForTz(double tZ) {
         return tZ*0.0987 - 18.57; //magic numbers from desmos, just trust them thanks bye
+    }
+
+    public static RelicRecoveryVuMark emptyLocation() {
+        return all.get(0);
+    }
+
+    public static void removeLocation(RelicRecoveryVuMark mark) {
+        all.remove(mark);
+    }
+
+    public static RelicRecoveryVuMark popLocation() {
+        RelicRecoveryVuMark mark = all.get(0);
+        all.remove(0);
+        return mark;
     }
 
 }

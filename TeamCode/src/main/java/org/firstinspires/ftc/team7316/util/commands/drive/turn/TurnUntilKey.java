@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.team7316.util.commands.drive.turn;
 
+import android.transition.Scene;
+
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.team7316.util.CryptoLocations;
 import org.firstinspires.ftc.team7316.util.Hardware;
@@ -65,6 +67,8 @@ public class TurnUntilKey extends Command {
 
     private TurnGyroPID turn;
     private double turnAmount;
+    private boolean CLOCKWISE;
+    private int count = 0;
 
     public TurnUntilKey(double guessAngle) {
         this.turnAmount = guessAngle;
@@ -72,22 +76,39 @@ public class TurnUntilKey extends Command {
 
     @Override
     public void init() {
+        CLOCKWISE = Util.wrap(turnAmount - Hardware.instance.gyroWrapper.getHeading()) > 0;
+
         turn = new TurnGyroPID(turnAmount, 3);
         turn.init();
     }
 
     @Override
     public void loop() {
-        turn.loop();
+        if (turn.shouldRemove()) {
+            if (CLOCKWISE) {
+                Subsystems.instance.driveBase.turnMotors(0.35);
+            } else {
+                Subsystems.instance.driveBase.turnMotors(-0.35);
+            }
+            count++;
+        } else {
+            turn.loop();
+        }
+        Hardware.instance.vuforiaCameraWrapper.update();
     }
 
     @Override
     public boolean shouldRemove() {
-        return turn.shouldRemove() || Hardware.instance.vuforiaCameraWrapper.vuMark != RelicRecoveryVuMark.UNKNOWN;
+        // 2000 ms / 75 ms is 27 ish
+        // 75 ms is the average dT
+        return Hardware.instance.vuforiaCameraWrapper.vuMark != RelicRecoveryVuMark.UNKNOWN || count > 27;
     }
 
     @Override
     protected void end() {
+        if (count >= 27) {
+            S
+        }
         turn.interrupt();
     }
 

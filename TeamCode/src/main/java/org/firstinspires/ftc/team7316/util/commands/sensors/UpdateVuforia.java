@@ -11,11 +11,6 @@ import org.firstinspires.ftc.team7316.util.commands.Command;
 
 public class UpdateVuforia extends Command {
 
-    private int automode;
-
-    public UpdateVuforia(int automode) {
-        this.automode = automode;
-    }
 
     @Override
     public void init() {
@@ -34,6 +29,6 @@ public class UpdateVuforia extends Command {
 
     @Override
     protected void end() {
-        CryptoLocations.setConfig(Hardware.instance.vuforiaCameraWrapper.vuMark, automode);
+        CryptoLocations.cryptoKeyLocation = Hardware.instance.vuforiaCameraWrapper.vuMark;
     }
 }

@@ -97,6 +97,10 @@ public class Scheduler {
         }
     }
 
+    public void reset() {
+        
+    }
+
     public void clear() {
         this.commands.clear();
     }
