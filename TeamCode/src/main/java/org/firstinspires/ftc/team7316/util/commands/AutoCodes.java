@@ -51,6 +51,7 @@ public class AutoCodes {
         else if (code == CryptoLocations.FAR_BLUE_AUTO) {
             return blueFar();
         }
+        return null;
     }
 
     public static SequentialCommand redFar() {
@@ -151,7 +152,8 @@ public class AutoCodes {
 
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
-        return new SequentialCommand({};)
+        Command[] cmds = {};
+        return new SequentialCommand(cmds);
     }
 
     public static SequentialCommand redClose() {
