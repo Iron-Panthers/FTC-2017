@@ -132,7 +132,7 @@ public class CryptoLocations {
         CryptoLocations.removeLocation(Hardware.instance.vuforiaCameraWrapper.vuMark);
     }
 
-        public static void setConfig(RelicRecoveryVuMark PICTO_LOCATION, int AUTO_CONFIG) {
+    public static void setConfig(RelicRecoveryVuMark PICTO_LOCATION, int AUTO_CONFIG) {
         CryptoLocations.PICTO_LOCATION = PICTO_LOCATION;
         CryptoLocations.AUTO_CONFIG = AUTO_CONFIG;
 
