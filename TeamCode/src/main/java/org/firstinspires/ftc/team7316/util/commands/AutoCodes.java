@@ -143,16 +143,10 @@ public class AutoCodes {
 
         Command wack = wackJewelBasic(Alliance.BLUE);
 
-        DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
+        DriveForTime offPad = new DriveForTime(0.6, Math.PI, 0.9);
         Wait stop = new Wait(0.1);
 
-        TurnGyroPID facePicto = new TurnGyroPID(CryptoLocations.BLUE_TURN_TO_PICTO);
-
-        TurnGyroCryptoVP turnToCrypto = new TurnGyroCryptoVP();
-
-        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
-
-        Command[] cmds = {};
+        Command[] cmds = {clamp, wack, offPad, stop, putGlyph(null, CryptoLocations.CLOSE_BLUE_AUTO), closeMultiglyphVP(-75, CryptoLocations.CLOSE_BLUE_AUTO), closeMultiglyphVP(-45, CryptoLocations.CLOSE_BLUE_AUTO)};
         return new SequentialCommand(cmds);
     }
 
