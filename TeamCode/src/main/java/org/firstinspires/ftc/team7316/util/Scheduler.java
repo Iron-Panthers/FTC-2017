@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import org.firstinspires.ftc.team7316.util.commands.*;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
+import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 /**
  * Created by andrew on 9/15/16.
@@ -97,8 +98,11 @@ public class Scheduler {
         }
     }
 
-    public void reset() {
-        
+    public void addDefaultCommands() {
+        Scheduler.instance.add(Subsystems.instance.driveBase.getDefaultCommand());
+        Scheduler.instance.add(Subsystems.instance.glyphIntake.getDefaultCommand());
+        Scheduler.instance.add(Subsystems.instance.jewelArm.getDefaultCommand());
+        Scheduler.instance.add(Subsystems.instance.relicArm.getDefaultCommand());
     }
 
     public void clear() {

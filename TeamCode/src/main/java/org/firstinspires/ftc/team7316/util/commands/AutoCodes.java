@@ -28,6 +28,7 @@ import org.firstinspires.ftc.team7316.util.commands.intake.RunIntake;
 import org.firstinspires.ftc.team7316.util.commands.jewelarm.MoveJewelArm;
 import org.firstinspires.ftc.team7316.util.commands.jewelarm.WackJewel;
 import org.firstinspires.ftc.team7316.util.commands.sensors.PollColor;
+import org.firstinspires.ftc.team7316.util.commands.sensors.SetConfigVuforia;
 import org.firstinspires.ftc.team7316.util.commands.sensors.UpdateVuforia;
 import org.firstinspires.ftc.team7316.util.subsystems.JewelArm;
 
@@ -37,37 +38,24 @@ import org.firstinspires.ftc.team7316.util.subsystems.JewelArm;
  */
 public class AutoCodes {
 
-    public static SequentialCommand blueFar() {
-        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
-
-        Command wack = wackJewelBasic(Alliance.BLUE);
-
-        DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
-        Wait stop = new Wait(0.5);
-        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, 0, 1);
-        Wait stop2 = new Wait(0.5);
-//        TurnUntilKey detectkey = new TurnUntilKey(-1, -90);
-        DriveDistance backward = new DriveDistance(Constants.inchesToTicks(-Constants.FAR_CRYPTO_DISTANCE), 4);
-
-        TurnGyroPID turnleft = new TurnGyroPID(90, 3);
-        DriveDistanceCipherClose gotocrypto = new DriveDistanceCipherClose(Alliance.BLUE, DriveDistanceCipherClose.Position.FAR);
-        TurnGyroPID turnleft2 = new TurnGyroPID(180, 3);
-
-        DriveDistance approach = new DriveDistance(Constants.inchesToTicks(Constants.FAR_CRYPTO_APPROACH_BLUE), 2);
-        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
-        SequentialCommand bAndR = backUpAndRam();
-
-        Command[] cmds = {clamp, wack, offPad, stop, align, stop2, backward, turnleft, gotocrypto, turnleft2, approach, outtake, bAndR};
-        return new SequentialCommand(cmds);
+    public static SequentialCommand oldAutoForCode(int code) {
+        if (code == CryptoLocations.CLOSE_RED_AUTO) {
+            return redCloseMutliglyph();
+        }
+        else if (code == CryptoLocations.FAR_RED_AUTO) {
+            return redFar();
+        }
+        else if (code == CryptoLocations.CLOSE_BLUE_AUTO) {
+            return blueCloseMultiglyph();
+        }
+        else if (code == CryptoLocations.FAR_BLUE_AUTO) {
+            return blueFar();
+        }
     }
 
     public static SequentialCommand redFar() {
-        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+        TurnGyroPID reset = new TurnGyroPID(0, 2);
 
-        Command wack = wackJewelBasic(Alliance.RED);
-
-        DriveOffPad offPad = new DriveOffPad(Alliance.RED);
-        Wait stop = new Wait(0.5);
         DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, Math.PI, 1);
         Wait stop2 = new Wait(0.5);
 //        TurnUntilKey detectkey = new TurnUntilKey(1, 90);
@@ -81,7 +69,7 @@ public class AutoCodes {
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
         SequentialCommand bAndR = backUpAndRam();
 
-        Command[] cmds = {clamp, wack, offPad, stop, align, stop2, forward, turnleft, gotocrypto, turnright, approach, outtake, bAndR};
+        Command[] cmds = {reset, align, stop2, forward, turnleft, gotocrypto, turnright, approach, outtake, bAndR};
         return new SequentialCommand(cmds);
     }
 
@@ -89,12 +77,7 @@ public class AutoCodes {
      * Don't worry this doesn't work
      */
     public static SequentialCommand redFarMultiglyph() {
-        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
-
-        Command wack = wackJewelBasic(Alliance.RED);
-
-        DriveOffPad offPad = new DriveOffPad(Alliance.RED);
-        Wait stop = new Wait(0.1);
+        TurnGyroPID reset = new TurnGyroPID(0, 2);
         DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, Math.PI, 0.4);
 
         TurnGyroCipherFar turntocrypto = new TurnGyroCipherFar(Alliance.RED);
@@ -103,7 +86,32 @@ public class AutoCodes {
 
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
-        Command[] cmds = {clamp, wack, offPad, stop, align, turntocrypto, gotocrypto, outtake};
+        Command[] cmds = {reset, align, turntocrypto, gotocrypto, outtake};
+        return new SequentialCommand(cmds);
+    }
+
+    public static SequentialCommand blueFar() {
+        TurnGyroPID reset = new TurnGyroPID(0, 2);
+
+        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, 0, 1);
+        Wait stop2 = new Wait(0.5);
+//        TurnUntilKey detectkey = new TurnUntilKey(-1, -90);
+        DriveDistance backward = new DriveDistance(Constants.inchesToTicks(-Constants.FAR_CRYPTO_DISTANCE), 4);
+
+        TurnGyroPID turnleft = new TurnGyroPID(90, 3);
+        DriveDistanceCipherClose gotocrypto = new DriveDistanceCipherClose(Alliance.BLUE, DriveDistanceCipherClose.Position.FAR);
+        TurnGyroPID turnleft2 = new TurnGyroPID(180, 3);
+
+        DriveDistance approach = new DriveDistance(Constants.inchesToTicks(Constants.FAR_CRYPTO_APPROACH_BLUE), 2);
+        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
+        SequentialCommand bAndR = backUpAndRam();
+
+        Command[] cmds = {reset, align, stop2, backward, turnleft, gotocrypto, turnleft2, approach, outtake, bAndR};
+        return new SequentialCommand(cmds);
+    }
+
+    public static SequentialCommand blueFarMultiglyph() {
+        Command[] cmds = {};
         return new SequentialCommand(cmds);
     }
 
@@ -169,12 +177,8 @@ public class AutoCodes {
     }
 
     public static SequentialCommand redCloseMutliglyph() {
-        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+        TurnGyroPID reset = new TurnGyroPID(0, 2);
 
-        Command wack = wackJewelBasic(Alliance.RED);
-
-        DriveOffPad offPad = new DriveOffPad(Alliance.RED);
-        Wait stop = new Wait(0.1);
         DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, Math.PI, 0.4);
         DriveDistanceCipherClose gotocrypto = new DriveDistanceCipherClose(Alliance.RED, DriveDistanceCipherClose.Position.CLOSE);
 
@@ -185,7 +189,7 @@ public class AutoCodes {
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
         SequentialCommand bAndR = releaseAndBackUp();
 
-        Command[] cmds = {clamp, wack, offPad, stop, align, gotocrypto, turn, approach, outtake, bAndR, closeMultiglyph()};
+        Command[] cmds = {reset, align, gotocrypto, turn, approach, outtake, bAndR, closeMultiglyph()};
         return new SequentialCommand(cmds);
     }
 
@@ -202,12 +206,8 @@ public class AutoCodes {
     }
 
     public static SequentialCommand blueCloseMultiglyph() {
-        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+        TurnGyroPID reset = new TurnGyroPID(0, 2);
 
-        Command wack = wackJewelBasic(Alliance.BLUE);
-
-        DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
-        Wait stop = new Wait(0.1);
         DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, 0, 0.4);
         DriveDistanceCipherClose gotocrypto = new DriveDistanceCipherClose(Alliance.BLUE, DriveDistanceCipherClose.Position.CLOSE);
 
@@ -218,7 +218,7 @@ public class AutoCodes {
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
         SequentialCommand bAndR = releaseAndBackUp();
 
-        Command[] cmds = {clamp, wack, offPad, stop, align, gotocrypto, turn, approach, outtake, bAndR, closeMultiglyph()};
+        Command[] cmds = {reset, align, gotocrypto, turn, approach, outtake, bAndR, closeMultiglyph()};
         return new SequentialCommand(cmds);
     }
 
@@ -259,15 +259,12 @@ public class AutoCodes {
     public static SequentialCommand putGlyph(RelicRecoveryVuMark location, int autoLocation) {
         TurnUntilKey facePicto;
         if (autoLocation == CryptoLocations.CLOSE_RED_AUTO || autoLocation == CryptoLocations.FAR_RED_AUTO) {
-            facePicto = new TurnUntilKey(CryptoLocations.RED_TURN_TO_PICTO);
+            facePicto = new TurnUntilKey(CryptoLocations.RED_TURN_TO_PICTO, autoLocation);
         } else {
-            facePicto = new TurnUntilKey(CryptoLocations.BLUE_TURN_TO_PICTO);
+            facePicto = new TurnUntilKey(CryptoLocations.BLUE_TURN_TO_PICTO, autoLocation);
         }
-        if (location == null) {
-            CryptoLocations.setConfig(autoLocation);
-        } else {
-            CryptoLocations.setConfig(location, autoLocation);
-        }
+
+        SetConfigVuforia config = new SetConfigVuforia(location, autoLocation);
 
         TurnGyroCryptoVP turnToCrypto = new TurnGyroCryptoVP();
 
@@ -278,7 +275,7 @@ public class AutoCodes {
 
         DriveDistance backup = new DriveDistance(DISTANCE_TRAVELLED, 3);
 
-        Command[] cmds = {facePicto, turnToCrypto, driveToCrypto, outtake, backup, closeMultiglyphVP()};
+        Command[] cmds = {facePicto, config, turnToCrypto, driveToCrypto, outtake, backup};
         return new SequentialCommand(cmds);
     }
 

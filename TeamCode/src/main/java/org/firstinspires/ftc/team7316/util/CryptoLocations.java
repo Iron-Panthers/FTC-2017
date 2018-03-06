@@ -127,11 +127,6 @@ public class CryptoLocations {
         return dist - SPACING_DISTANCE;
     }
 
-    public static void setConfig(int AUTO_CONFIG) {
-        setConfig(Hardware.instance.vuforiaCameraWrapper.vuMark, AUTO_CONFIG);
-        CryptoLocations.removeLocation(Hardware.instance.vuforiaCameraWrapper.vuMark);
-    }
-
     public static void setConfig(RelicRecoveryVuMark PICTO_LOCATION, int AUTO_CONFIG) {
         CryptoLocations.PICTO_LOCATION = PICTO_LOCATION;
         CryptoLocations.AUTO_CONFIG = AUTO_CONFIG;

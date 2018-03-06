@@ -5,7 +5,9 @@ import android.transition.Scene;
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.team7316.util.CryptoLocations;
 import org.firstinspires.ftc.team7316.util.Hardware;
+import org.firstinspires.ftc.team7316.util.Scheduler;
 import org.firstinspires.ftc.team7316.util.Util;
+import org.firstinspires.ftc.team7316.util.commands.AutoCodes;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
@@ -69,9 +71,11 @@ public class TurnUntilKey extends Command {
     private double turnAmount;
     private boolean CLOCKWISE;
     private int count = 0;
+    private int autoCode;
 
-    public TurnUntilKey(double guessAngle) {
+    public TurnUntilKey(double guessAngle, int autoCode) {
         this.turnAmount = guessAngle;
+        this.autoCode = autoCode;
     }
 
     @Override
@@ -107,7 +111,10 @@ public class TurnUntilKey extends Command {
     @Override
     protected void end() {
         if (count >= 27) {
-            S
+            Scheduler.instance.clear();
+            Scheduler.instance.addDefaultCommands();
+
+            Scheduler.instance.add(AutoCodes.oldAutoForCode(autoCode));
         }
         turn.interrupt();
     }

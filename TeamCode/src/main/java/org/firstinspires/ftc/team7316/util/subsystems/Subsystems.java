@@ -32,10 +32,7 @@ public class Subsystems {
     public static void createSubsystems() {
         instance = new Subsystems();
 
-        Scheduler.instance.add(instance.driveBase.getDefaultCommand());
-        Scheduler.instance.add(instance.glyphIntake.getDefaultCommand());
-        Scheduler.instance.add(instance.jewelArm.getDefaultCommand());
-        Scheduler.instance.add(instance.relicArm.getDefaultCommand());
+        Scheduler.instance.addDefaultCommands();
 
         instance.resetSubsystems();
     }
