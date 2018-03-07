@@ -44,6 +44,11 @@ public abstract class AutoBaseOpMode extends OpMode {
         onLoop();
     }
 
+    @Override
+    public void stop() {
+        Subsystems.instance.resetSubsystems();
+    }
+
     /**
      * Runs after Hardware is initialized
      */

@@ -33,6 +33,11 @@ public abstract class TeleopBaseOpMode extends OpMode {
         onLoop();
     }
 
+    @Override
+    public void stop() {
+        Subsystems.instance.resetSubsystems();
+    }
+
     /**
      * Runs after Hardware is initialized
      */
