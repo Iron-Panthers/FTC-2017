@@ -94,13 +94,13 @@ public class TurnUntilKey extends Command {
             if (turnAmount - Hardware.instance.gyroWrapper.getHeading() > 0) {
                 Subsystems.instance.driveBase.turnMotors(0.45);
             } else {
-                Subsystems.instance.driveBase.turnMotors(0.25);
+                Subsystems.instance.driveBase.turnMotors(0.05);
             }
         } else {
             if (turnAmount - Hardware.instance.gyroWrapper.getHeading() < 0) {
                 Subsystems.instance.driveBase.turnMotors(-0.45);
             } else {
-                Subsystems.instance.driveBase.turnMotors(-0.25);
+                Subsystems.instance.driveBase.turnMotors(-0.05);
             }
         }
         count++;

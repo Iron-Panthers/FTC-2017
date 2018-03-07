@@ -17,8 +17,8 @@ import java.util.Arrays;
  */
 public class CryptoLocations {
 
-    public static final double RED_TURN_TO_PICTO = 45;
-    public static final double BLUE_TURN_TO_PICTO = 25;
+    public static final double RED_TURN_TO_PICTO = 40;
+    public static final double BLUE_TURN_TO_PICTO = -50;
 
     public static final int CLOSE_RED_AUTO = 0;
     public static final int FAR_RED_AUTO = 1;
@@ -59,12 +59,12 @@ public class CryptoLocations {
     private static final double FAR_BLUE_X = 1150;
 
     //  how far away from the wall the robot will stop
-    private static final double SPACING_DISTANCE = 200;
+    private static final double SPACING_DISTANCE = 215;
 
     private static double DX_TO_COLUMN = 0;
     private static double DY_TO_COLUMN = 0;
     private static double PHONE_Z_OFFSET = 200;
-    private static double PHONE_X_OFFSET = 190;
+    private static double PHONE_X_OFFSET = 220;
 
     /**
      *  Gets delta angle needed to point at the correct box from this position.
