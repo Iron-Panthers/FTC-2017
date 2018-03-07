@@ -46,7 +46,7 @@ public class CryptoLocations {
     private static final double FAR_RED_LEFT_Y = 1116;
     private static final double FAR_RED_CENTER_Y = 914;
     private static final double FAR_RED_RIGHT_Y = 710;
-    private static final double FAR_RED_X = 815;
+    private static final double FAR_RED_X = 690;
 
     private static final double CLOSE_BLUE_LEFT_X = 1361;
     private static final double CLOSE_BLUE_CENTER_X = 1158;
@@ -81,7 +81,7 @@ public class CryptoLocations {
         camAngle = camAngle * Math.PI/180;
 
         double angleToPicto = camAngle - Math.atan2(xFromNormal, zNormalToPicto);
-        Hardware.log("angle to picto", angleToPicto);
+        Hardware.log("angle to picto", angleToPicto * 180 / Math.PI);
 
         double zToPicto = Math.sqrt(zNormalToPicto*zNormalToPicto + xFromNormal*xFromNormal);
         double xToPicto = Math.sin(angleToPicto)*zToPicto;
@@ -99,7 +99,7 @@ public class CryptoLocations {
             angleToDest += 180;
         }
 
-        return angleToDest;
+        return Util.wrap(angleToDest);
     }
 
     /**
