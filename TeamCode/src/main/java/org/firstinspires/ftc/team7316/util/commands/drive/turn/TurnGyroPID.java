@@ -107,6 +107,8 @@ public class TurnGyroPID extends Command {
         deltaError = 0;
         lastError = error(startAngle);
         timer.reset();
+
+        Log.d(Hardware.tag, "TurnGyroPID target = " + targetAngleCurrent + "; heading = " + gyro.getHeading());
     }
 
     @Override
@@ -140,7 +142,6 @@ public class TurnGyroPID extends Command {
 
         Subsystems.instance.driveBase.turnMotors(Util.deadzoneChange(power));
 
-        Log.d(Hardware.tag, "TurnGyroPID target = " + targetAngleCurrent + "; heading = " + gyro.getHeading());
 
         times.add(timer.seconds());
         angles.add(gyro.getHeading());

@@ -99,6 +99,8 @@ public class DriveDistance extends Command {
         else {
             Subsystems.instance.driveBase.setMotorPaths(new CombinedPath.LongitudalTrapezoid(0, distance, -maxVelocity, -MAXACCEL));
         }
+
+        Log.d("Drive distance amount", String.valueOf(distance));
     }
 
     @Override

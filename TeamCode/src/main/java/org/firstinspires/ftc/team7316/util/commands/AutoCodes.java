@@ -146,7 +146,7 @@ public class AutoCodes {
         DriveForTime offPad = new DriveForTime(0.3, Math.PI, 1.25);
         Wait stop = new Wait(0.1);
 
-        Command[] cmds = {clamp, wack, offPad, stop, putGlyph(true, CryptoLocations.CLOSE_BLUE_AUTO), closeMultiglyphVP(-75, CryptoLocations.CLOSE_BLUE_AUTO), closeMultiglyphVP(-45, CryptoLocations.CLOSE_BLUE_AUTO)};
+        Command[] cmds = {clamp, wack, offPad, stop, putGlyph(true, CryptoLocations.CLOSE_BLUE_AUTO), closeMultiglyphVP(-75, CryptoLocations.CLOSE_BLUE_AUTO)};//, closeMultiglyphVP(-45, CryptoLocations.CLOSE_BLUE_AUTO)};
         return new SequentialCommand(cmds);
     }
 
@@ -197,7 +197,7 @@ public class AutoCodes {
         DriveForTime offPad = new DriveForTime(0.3, 0, 1.25);
         Wait stop = new Wait(0.1);
 
-        Command[] cmds = {clamp, wack, offPad, stop, putGlyph(true, CryptoLocations.CLOSE_RED_AUTO), closeMultiglyphVP(-75, CryptoLocations.CLOSE_RED_AUTO), closeMultiglyphVP(-60, CryptoLocations.CLOSE_RED_AUTO)};
+        Command[] cmds = {clamp, wack, offPad, stop, putGlyph(true, CryptoLocations.CLOSE_RED_AUTO), closeMultiglyphVP(-75, CryptoLocations.CLOSE_RED_AUTO)};//, closeMultiglyphVP(-60, CryptoLocations.CLOSE_RED_AUTO)};
         return new SequentialCommand(cmds);
     }
 
@@ -271,7 +271,7 @@ public class AutoCodes {
 
         DriveDistance backup = new DriveDistance(DISTANCE_TRAVELLED, 3);
 
-        Command[] cmds = {facePicto, config, turnToCrypto, driveToCrypto, outtake, backup};
+        Command[] cmds = {facePicto, config, new Wait(0.2), turnToCrypto, driveToCrypto, outtake, backup};
         return new SequentialCommand(cmds);
     }
 

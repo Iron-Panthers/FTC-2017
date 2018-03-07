@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.team7316.util;
 
+import android.util.Log;
+
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.team7316.util.sensors.VuforiaCameraWrapper;
 
@@ -39,7 +41,7 @@ public class CryptoLocations {
     private static final double CLOSE_RED_LEFT_X = 865;
     private static final double CLOSE_RED_CENTER_X = 700;
     private static final double CLOSE_RED_RIGHT_X = 490;
-    private static final double CLOSE_RED_Y = 190;
+    private static final double CLOSE_RED_Y = 130;
 
     private static final double FAR_RED_LEFT_Y = 1116;
     private static final double FAR_RED_CENTER_Y = 914;
@@ -49,7 +51,7 @@ public class CryptoLocations {
     private static final double CLOSE_BLUE_LEFT_X = 1361;
     private static final double CLOSE_BLUE_CENTER_X = 1158;
     private static final double CLOSE_BLUE_RIGHT_X = 955;
-    private static final double CLOSE_BLUE_Y = 190;
+    private static final double CLOSE_BLUE_Y = 130;
 
     private static final double FAR_BLUE_LEFT_Y = -710;
     private static final double FAR_BLUE_CENTER_Y = -914;
@@ -57,12 +59,12 @@ public class CryptoLocations {
     private static final double FAR_BLUE_X = 1150;
 
     //  how far away from the wall the robot will stop
-    private static final double SPACING_DISTANCE = 330;
+    private static final double SPACING_DISTANCE = 160;
 
     private static double DX_TO_COLUMN = 0;
     private static double DY_TO_COLUMN = 0;
     private static double PHONE_Z_OFFSET = 200;
-    private static double PHONE_X_OFFSET = 210;
+    private static double PHONE_X_OFFSET = 190;
 
     /**
      *  Gets delta angle needed to point at the correct box from this position.
@@ -75,7 +77,7 @@ public class CryptoLocations {
      */
     public static double angleForBox(double camAngle, double zNormalToPicto, double xFromNormal) {
         zNormalToPicto = Math.abs(zNormalToPicto) + PHONE_Z_OFFSET;
-        xFromNormal += PHONE_X_OFFSET;
+        xFromNormal -= PHONE_X_OFFSET;
         camAngle = camAngle * Math.PI/180;
 
         double angleToPicto = camAngle - Math.atan2(xFromNormal, zNormalToPicto);
@@ -111,7 +113,7 @@ public class CryptoLocations {
      */
     public static double distanceForBox(double camAngle, double zNormalToPicto, double xFromNormal) {
         zNormalToPicto = Math.abs(zNormalToPicto) + PHONE_Z_OFFSET;
-        xFromNormal += PHONE_X_OFFSET;
+        xFromNormal -= PHONE_X_OFFSET;
         camAngle = camAngle * Math.PI/180;
 
 //        Hardware.log("adjusted xFromNormal", xFromNormal);
@@ -126,7 +128,17 @@ public class CryptoLocations {
 
         double dist = Math.sqrt(dXToBox*dXToBox + dYToBox*dYToBox);
 
-//        Hardware.log("result dist", dist - SPACING_DISTANCE);
+        if (dist < 300 + SPACING_DISTANCE) {
+            Log.i("oops", "======= short dist fuck =======");
+            Log.i("zNorm", String.valueOf(zNormalToPicto));
+            Log.i("xFrom", String.valueOf(xFromNormal));
+            Log.i("dx to column", String.valueOf(DX_TO_COLUMN));
+            Log.i("dy to column", String.valueOf(DY_TO_COLUMN));
+            Log.i("dX to box", String.valueOf(dXToBox));
+            Log.i("dY to box", String.valueOf(dYToBox));
+            Log.i("dist final", String.valueOf(dist - SPACING_DISTANCE));
+        }
+
         return dist - SPACING_DISTANCE;
     }
 
