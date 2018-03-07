@@ -77,17 +77,15 @@ public class AutoCodes {
     /**
      * Don't worry this doesn't work
      */
-    public static SequentialCommand redFarMultiglyph() {
-        TurnGyroPID reset = new TurnGyroPID(0, 2);
-        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, Math.PI, 0.4);
+    public static SequentialCommand redFarVP() {
+        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
 
-        TurnGyroCipherFar turntocrypto = new TurnGyroCipherFar(Alliance.RED);
+        Command wack = wackJewelBasic(Alliance.RED);
 
-        DriveDistanceCipherFar gotocrypto = new DriveDistanceCipherFar(Alliance.RED);
+        DriveForTime offPad = new DriveForTime(0.3, 0, 1.25);
+        Wait stop = new Wait(0.1);
 
-        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
-
-        Command[] cmds = {reset, align, turntocrypto, gotocrypto, outtake};
+        Command[] cmds = {clamp, wack, offPad, stop, putGlyph(true, CryptoLocations.FAR_RED_AUTO, false)};//, closeMultiglyphVP(-60, CryptoLocations.CLOSE_RED_AUTO)};
         return new SequentialCommand(cmds);
     }
 
@@ -146,7 +144,7 @@ public class AutoCodes {
         DriveForTime offPad = new DriveForTime(0.3, Math.PI, 1.25);
         Wait stop = new Wait(0.1);
 
-        Command[] cmds = {clamp, wack, offPad, stop, putGlyph(true, CryptoLocations.CLOSE_BLUE_AUTO), closeMultiglyphVP(-75, CryptoLocations.CLOSE_BLUE_AUTO)};//, closeMultiglyphVP(-45, CryptoLocations.CLOSE_BLUE_AUTO)};
+        Command[] cmds = {clamp, wack, offPad, stop, putGlyph(true, CryptoLocations.CLOSE_BLUE_AUTO, true), closeMultiglyphVP(-75, CryptoLocations.CLOSE_BLUE_AUTO, false)};//, closeMultiglyphVP(-45, CryptoLocations.CLOSE_BLUE_AUTO)};
         return new SequentialCommand(cmds);
     }
 
@@ -197,7 +195,7 @@ public class AutoCodes {
         DriveForTime offPad = new DriveForTime(0.3, 0, 1.25);
         Wait stop = new Wait(0.1);
 
-        Command[] cmds = {clamp, wack, offPad, stop, putGlyph(true, CryptoLocations.CLOSE_RED_AUTO), closeMultiglyphVP(-75, CryptoLocations.CLOSE_RED_AUTO)};//, closeMultiglyphVP(-60, CryptoLocations.CLOSE_RED_AUTO)};
+        Command[] cmds = {clamp, wack, offPad, stop, putGlyph(true, CryptoLocations.CLOSE_RED_AUTO, true), closeMultiglyphVP(-75, CryptoLocations.CLOSE_RED_AUTO, false)};//, closeMultiglyphVP(-60, CryptoLocations.CLOSE_RED_AUTO)};
         return new SequentialCommand(cmds);
     }
 
@@ -252,7 +250,7 @@ public class AutoCodes {
         return new SequentialCommand(cmds);
     }
 
-    public static SequentialCommand putGlyph(boolean useKeyMark, int autoLocation) {
+    public static SequentialCommand putGlyph(boolean useKeyMark, int autoLocation, boolean continueMulti) {
         TurnUntilKey facePicto;
         if (autoLocation == CryptoLocations.CLOSE_RED_AUTO || autoLocation == CryptoLocations.FAR_RED_AUTO) {
             facePicto = new TurnUntilKey(CryptoLocations.RED_TURN_TO_PICTO, autoLocation);
@@ -271,13 +269,19 @@ public class AutoCodes {
 
         DriveDistance backup = new DriveDistance(DISTANCE_TRAVELLED, 3);
 
-        Command[] cmds = {facePicto, config, new Wait(0.2), turnToCrypto, driveToCrypto, outtake, backup};
+        Command[] cmds;
+        if(continueMulti) {
+            cmds = new Command[]{facePicto, config, new Wait(0.2), turnToCrypto, driveToCrypto, outtake, backup};
+        }
+        else {
+            cmds = new Command[]{facePicto, config, new Wait(0.2), turnToCrypto, driveToCrypto, outtake};
+        }
         return new SequentialCommand(cmds);
     }
 
-    public static SequentialCommand closeMultiglyphVP(double driveAngle, int automode) {
+    public static SequentialCommand closeMultiglyphVP(double driveAngle, int automode, boolean continueMulti) {
         GetGlyphAndReturn get = new GetGlyphAndReturn(driveAngle);
-        SequentialCommand put = putGlyph(false, automode);
+        SequentialCommand put = putGlyph(false, automode, continueMulti);
 
         Command[] cmds = {get, put};
         return new SequentialCommand(cmds);

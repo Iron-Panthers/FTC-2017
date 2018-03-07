@@ -59,7 +59,7 @@ public class CryptoLocations {
     private static final double FAR_BLUE_X = 1150;
 
     //  how far away from the wall the robot will stop
-    private static final double SPACING_DISTANCE = 160;
+    private static final double SPACING_DISTANCE = 200;
 
     private static double DX_TO_COLUMN = 0;
     private static double DY_TO_COLUMN = 0;
@@ -77,7 +77,7 @@ public class CryptoLocations {
      */
     public static double angleForBox(double camAngle, double zNormalToPicto, double xFromNormal) {
         zNormalToPicto = Math.abs(zNormalToPicto) + PHONE_Z_OFFSET;
-        xFromNormal -= PHONE_X_OFFSET;
+        xFromNormal += PHONE_X_OFFSET;
         camAngle = camAngle * Math.PI/180;
 
         double angleToPicto = camAngle - Math.atan2(xFromNormal, zNormalToPicto);
@@ -113,7 +113,7 @@ public class CryptoLocations {
      */
     public static double distanceForBox(double camAngle, double zNormalToPicto, double xFromNormal) {
         zNormalToPicto = Math.abs(zNormalToPicto) + PHONE_Z_OFFSET;
-        xFromNormal -= PHONE_X_OFFSET;
+        xFromNormal += PHONE_X_OFFSET;
         camAngle = camAngle * Math.PI/180;
 
 //        Hardware.log("adjusted xFromNormal", xFromNormal);

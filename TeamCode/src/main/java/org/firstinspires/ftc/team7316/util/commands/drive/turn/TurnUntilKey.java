@@ -85,6 +85,7 @@ public class TurnUntilKey extends Command {
     public void init() {
         CLOCKWISE = Util.wrap(turnAmount - Hardware.instance.gyroWrapper.getHeading()) > 0;
         timer.reset();
+        Hardware.instance.vuforiaCameraWrapper.update();
     }
 
     @Override
@@ -110,7 +111,7 @@ public class TurnUntilKey extends Command {
     public boolean shouldRemove() {
         // 2000 ms / 75 ms is 27 ish
         // 75 ms is the average dT
-        return Hardware.instance.vuforiaCameraWrapper.vuMark != RelicRecoveryVuMark.UNKNOWN || timer.seconds() > 3;
+        return Hardware.instance.vuforiaCameraWrapper.currentVuMark != RelicRecoveryVuMark.UNKNOWN || timer.seconds() > 3;
     }
 
     @Override

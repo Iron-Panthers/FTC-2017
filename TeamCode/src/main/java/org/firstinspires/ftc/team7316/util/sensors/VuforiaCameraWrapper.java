@@ -42,6 +42,7 @@ public class VuforiaCameraWrapper {
     public double irX, irY, irZ;    //initial angle of cipher
 
     public RelicRecoveryVuMark vuMark;
+    public RelicRecoveryVuMark currentVuMark;
 
     public VuforiaCameraWrapper() {
         params = new VuforiaLocalizer.Parameters(R.id.cameraMonitorViewId);
@@ -86,14 +87,14 @@ public class VuforiaCameraWrapper {
      * Every other measurement isn't currently used.
      */
     public void update() {
-        RelicRecoveryVuMark cipher = RelicRecoveryVuMark.from(relicTemplate);
+        currentVuMark = RelicRecoveryVuMark.from(relicTemplate);
 
-        if (cipher != RelicRecoveryVuMark.UNKNOWN) {
-            vuMark = cipher;
+        if (currentVuMark != RelicRecoveryVuMark.UNKNOWN) {
+            vuMark = currentVuMark;
                 /* Found an instance of the template. In the actual game, you will probably
                  * loop until this condition occurs, then move on to act accordingly depending
                  * on which VuMark was visible. */
-            Hardware.log("VuMark visible", cipher);
+            Hardware.log("VuMark visible", currentVuMark);
 
                 /* For fun, we also exhibit the navigational pose. In the Relic Recovery game,
                  * it is perhaps unlikely that you will actually need to act on this pose information, but
