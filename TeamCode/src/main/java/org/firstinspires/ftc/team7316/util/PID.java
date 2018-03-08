@@ -6,7 +6,7 @@ import org.firstinspires.ftc.team7316.copypastaLib.MotionPath;
 
 
 /**
- * Created by andrew on 9/12/17.
+ * Generic PID class that can be assigned to specific motors.
  */
 
 public class PID {
@@ -14,14 +14,14 @@ public class PID {
     public double p, i, d, f;
     private double previous, sum;
 
-    public double out; //FOR TESTING
+    public double out;
 
     private ElapsedTime timer;
 
     private boolean usePath;
     private MotionPath path;
 
-    /** non-motionpath garbage */
+    // non-motionpath garbage
     private Direction direction;
     private double previousTime;
     private int targetTicksCurrent = 0;
@@ -44,6 +44,9 @@ public class PID {
         reset();
     }
 
+    /**
+     * Sets the PIDF constants
+     */
     public void setPID(double p, double i, double d, double f) {
         this.p = p;
         this.i = i;
@@ -51,6 +54,9 @@ public class PID {
         this.f = f;
     }
 
+    /**
+     * Sets a motion path for the motor to follow instead of just a target distance
+     */
     public void setPath(MotionPath path) {
         usePath = true;
         this.path = path;
@@ -60,6 +66,11 @@ public class PID {
         return usePath;
     }
 
+    /**
+     * Sets a specific distance for a target, and uses a basic linear motion path
+     * @param targetTicks the desired distance reach
+     * @param currentPosition current position of the motor
+     */
     public void setTargetTicks(int targetTicks, int currentPosition) {
         usePath = false;
         targetTicksFinal = targetTicks;
@@ -73,6 +84,9 @@ public class PID {
         }
     }
 
+    /**
+     * Calculates and updates the target of the loop if there is no motion path being used
+     */
     public void updateTargetTicksCurrent() {
         double elapsedTime = timer.seconds() - previousTime;
         double distance = Constants.COAST_TICKS_PER_SECOND * elapsedTime;
@@ -111,6 +125,9 @@ public class PID {
         return targetTicksFinal;
     }
 
+    /**
+     * Calculates the actual output to the motors
+     */
     public double getPower(double error) {
         this.sum += error;
 

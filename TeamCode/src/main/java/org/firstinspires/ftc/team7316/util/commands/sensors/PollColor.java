@@ -25,6 +25,8 @@ public class PollColor extends Command {
     @Override
     public void loop() {
         Hardware.instance.colorWrapper.push();
+        Hardware.instance.colorWrapper.logSums();
+        Hardware.instance.colorWrapper.logColors();
         iteration++;
     }
 

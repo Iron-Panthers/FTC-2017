@@ -39,6 +39,10 @@ import org.firstinspires.ftc.team7316.util.subsystems.JewelArm;
  */
 public class AutoCodes {
 
+    /**
+     * Automatically selects a legacy auto sequence as a failsafe for the VP autos.
+     * @param code the ID of the current auto sequence.
+     */
     public static SequentialCommand oldAutoForCode(int code) {
         if (code == CryptoLocations.CLOSE_RED_AUTO) {
             return redCloseMutliglyph();
@@ -94,6 +98,37 @@ public class AutoCodes {
         return new SequentialCommand(cmds);
     }
 
+    /**
+     * To be implemented
+     */
+    public static SequentialCommand redFarMultiglyph() {
+        Command[] cmds = {};
+        return new SequentialCommand(cmds);
+    }
+
+    public static SequentialCommand redFarLegacy() {
+        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+
+        Command wack = wackJewelBasic(Alliance.RED);
+
+        DriveOffPad offPad = new DriveOffPad(Alliance.RED);
+
+        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, Math.PI, 1);
+        Wait stop2 = new Wait(0.2);
+        DriveDistance forward = new DriveDistance(Constants.inchesToTicks(Constants.FAR_CRYPTO_DISTANCE), 4);
+
+        TurnGyroPID turnleft = new TurnGyroPID(-90, 3);
+        DriveDistanceCipherClose gotocrypto = new DriveDistanceCipherClose(Alliance.RED, DriveDistanceCipherClose.Position.FAR);
+        TurnGyroPID turnright = new TurnGyroPID(0, 3);
+
+        DriveDistance approach = new DriveDistance(Constants.inchesToTicks(Constants.FAR_CRYPTO_APPROACH_RED), 2);
+        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
+        SequentialCommand bAndR = backUpAndRam();
+
+        Command[] cmds = {clamp, wack, offPad, align, stop2, forward, turnleft, gotocrypto, turnright, approach, outtake, bAndR};
+        return new SequentialCommand(cmds);
+    }
+
     //--------------------------------------------------------------//
     //-------------------------------BLUE FAR AUTOS-------------------------------//
     //--------------------------------------------------------------//
@@ -133,6 +168,9 @@ public class AutoCodes {
         return new SequentialCommand(cmds);
     }
 
+    /**
+     * To be implemented
+     */
     public static SequentialCommand blueFarMultiglyph() {
         Command[] cmds = {};
         return new SequentialCommand(cmds);
@@ -276,6 +314,9 @@ public class AutoCodes {
         return new SequentialCommand(cmds);
     }
 
+    /**
+     * Utilizes the blue far pictograph instead for more consistence.
+     */
     public static SequentialCommand blueCloseMultiglyphVP() {
         MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
 

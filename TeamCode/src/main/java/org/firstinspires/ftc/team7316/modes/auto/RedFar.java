@@ -19,7 +19,7 @@ public class RedFar extends AutoBaseOpMode {
     @Override
     public void onInit() {
         Hardware.instance.vuforiaCameraWrapper.startTracking();
-        Scheduler.instance.add(AutoCodes.redFar());
+        Scheduler.instance.add(AutoCodes.redFarLegacy());
         Scheduler.instance.add(new UpdateVuforia());
     }
 

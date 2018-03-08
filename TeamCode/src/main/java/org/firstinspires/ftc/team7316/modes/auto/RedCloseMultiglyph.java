@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.team7316.modes.auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.team7316.modes.AutoBaseOpMode;
 import org.firstinspires.ftc.team7316.util.Hardware;
@@ -12,6 +13,7 @@ import org.firstinspires.ftc.team7316.util.commands.AutoCodes;
  */
 
 @Autonomous(name = "red close multiglyph", group = "game autos")
+@Disabled
 public class RedCloseMultiglyph extends AutoBaseOpMode {
 
     @Override
