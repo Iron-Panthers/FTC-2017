@@ -2,6 +2,8 @@ package org.firstinspires.ftc.team7316.util.commands.drive.turn;
 
 import android.transition.Scene;
 
+import com.qualcomm.robotcore.util.ElapsedTime;
+
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.team7316.util.CryptoLocations;
 import org.firstinspires.ftc.team7316.util.Hardware;
@@ -70,7 +72,6 @@ public class TurnUntilKey extends Command {
     private TurnGyroPID turn;
     private double turnAmount;
     private boolean CLOCKWISE;
-    private int count = 0;
     private int autoCode;
 
     public TurnUntilKey(double guessAngle, int autoCode) {
@@ -82,21 +83,14 @@ public class TurnUntilKey extends Command {
     public void init() {
         CLOCKWISE = Util.wrap(turnAmount - Hardware.instance.gyroWrapper.getHeading()) > 0;
 
-        turn = new TurnGyroPID(turnAmount, 3);
+        turn = new TurnGyroPID(turnAmount, 2.5);
         turn.init();
+        Hardware.instance.vuforiaCameraWrapper.update();
     }
 
     @Override
     public void loop() {
-        if (turn.shouldRemove()) {
-            if (CLOCKWISE) {
-                Subsystems.instance.driveBase.turnMotors(0.4);
-            } else {
-                Subsystems.instance.driveBase.turnMotors(-0.4);
-            }
-        } else {
-            turn.loop();
-        }
+        turn.loop();
         Hardware.instance.vuforiaCameraWrapper.update();
     }
 
@@ -104,12 +98,12 @@ public class TurnUntilKey extends Command {
     public boolean shouldRemove() {
         // 2000 ms / 75 ms is 27 ish
         // 75 ms is the average dT
-        return Hardware.instance.vuforiaCameraWrapper.currentVuMark != RelicRecoveryVuMark.UNKNOWN || count > 27;
+        return Hardware.instance.vuforiaCameraWrapper.currentVuMark != RelicRecoveryVuMark.UNKNOWN || turn.shouldRemove();
     }
 
     @Override
     protected void end() {
-        if (count >= 27) {
+        if (Hardware.instance.vuforiaCameraWrapper.vuMark == RelicRecoveryVuMark.UNKNOWN) {
             Scheduler.instance.clear();
             Scheduler.instance.addDefaultCommands();
 

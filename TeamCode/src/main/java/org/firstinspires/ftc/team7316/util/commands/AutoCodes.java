@@ -22,6 +22,7 @@ import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnUntilKey;
 import org.firstinspires.ftc.team7316.util.commands.flow.SequentialCommand;
 import org.firstinspires.ftc.team7316.util.commands.flow.SimultaneousKeyCommand;
 import org.firstinspires.ftc.team7316.util.commands.flow.Wait;
+import org.firstinspires.ftc.team7316.util.commands.flow.WaitAndLook;
 import org.firstinspires.ftc.team7316.util.commands.intake.IntakeForTime;
 import org.firstinspires.ftc.team7316.util.commands.intake.MoveIntakeArm;
 import org.firstinspires.ftc.team7316.util.commands.intake.RunIntake;
@@ -272,10 +273,10 @@ public class AutoCodes {
 
         Command[] cmds;
         if(continueMulti) {
-            cmds = new Command[]{facePicto, config, new Wait(0.2), turnToCrypto, driveToCrypto, outtake, backup};
+            cmds = new Command[]{facePicto, new WaitAndLook(0.3), config, turnToCrypto, driveToCrypto, outtake, backup};
         }
         else {
-            cmds = new Command[]{facePicto, config, new Wait(0.2), turnToCrypto, driveToCrypto, outtake};
+            cmds = new Command[]{facePicto, new WaitAndLook(0.3), config, turnToCrypto, driveToCrypto, outtake};
         }
         return new SequentialCommand(cmds);
     }

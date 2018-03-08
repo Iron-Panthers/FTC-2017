@@ -17,7 +17,7 @@ import java.util.Arrays;
  */
 public class CryptoLocations {
 
-    public static final double RED_TURN_TO_PICTO = 40;
+    public static final double RED_TURN_TO_PICTO = 43;
     public static final double BLUE_TURN_TO_PICTO = -50;
 
     public static final int CLOSE_RED_AUTO = 0;
