@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.team7316.modes.test_opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.team7316.modes.AutoBaseOpMode;
 import org.firstinspires.ftc.team7316.util.Scheduler;
@@ -11,6 +12,7 @@ import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroPID;
  */
 
 @Autonomous
+@Disabled
 public class TurnTest180 extends AutoBaseOpMode {
 
     @Override

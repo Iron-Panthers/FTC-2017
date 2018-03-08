@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.team7316.modes.test_opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.team7316.modes.AutoBaseOpMode;
 import org.firstinspires.ftc.team7316.util.Constants;
@@ -13,6 +14,7 @@ import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance
  */
 
 @Autonomous
+@Disabled
 public class DriveDistanceTest extends AutoBaseOpMode {
 
     @Override

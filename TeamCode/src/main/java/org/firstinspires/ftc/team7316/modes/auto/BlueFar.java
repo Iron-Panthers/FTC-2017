@@ -13,13 +13,13 @@ import org.firstinspires.ftc.team7316.util.commands.sensors.UpdateVuforia;
  * Created by jerry on 10/28/17.
  */
 
-@Autonomous(name = "blue far", group = "game autos")
+@Autonomous(name = "blue far legacy", group = "game autos")
 public class BlueFar extends AutoBaseOpMode {
 
     @Override
     public void onInit() {
         Hardware.instance.vuforiaCameraWrapper.startTracking();
-        Scheduler.instance.add(AutoCodes.blueFar());
+        Scheduler.instance.add(AutoCodes.blueFarLegacy());
         Scheduler.instance.add(new UpdateVuforia());
     }
 

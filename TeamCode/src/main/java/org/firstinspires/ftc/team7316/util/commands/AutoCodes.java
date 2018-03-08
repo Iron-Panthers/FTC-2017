@@ -55,6 +55,13 @@ public class AutoCodes {
         return null;
     }
 
+    //--------------------------------------------------------------//
+    //-------------------------------RED FAR AUTOS-------------------------------//
+    //--------------------------------------------------------------//
+
+    /**
+     * Used as a failsafe for {@link #redFarVP()}
+     */
     public static SequentialCommand redFar() {
         TurnGyroPID reset = new TurnGyroPID(0, 2);
 
@@ -75,9 +82,6 @@ public class AutoCodes {
         return new SequentialCommand(cmds);
     }
 
-    /**
-     * Don't worry this doesn't work
-     */
     public static SequentialCommand redFarVP() {
         MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
 
@@ -90,6 +94,13 @@ public class AutoCodes {
         return new SequentialCommand(cmds);
     }
 
+    //--------------------------------------------------------------//
+    //-------------------------------BLUE FAR AUTOS-------------------------------//
+    //--------------------------------------------------------------//
+
+    /**
+     * Used as a failsafe for {@link #blueFarVP()}
+     */
     public static SequentialCommand blueFar() {
         TurnGyroPID reset = new TurnGyroPID(0, 2);
 
@@ -127,41 +138,39 @@ public class AutoCodes {
         return new SequentialCommand(cmds);
     }
 
-    public static SequentialCommand blueClose() {
+    /**
+     * Old blue far auto in case the VP auto becomes unreliable
+     */
+    public static SequentialCommand blueFarLegacy() {
         MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
 
         Command wack = wackJewelBasic(Alliance.BLUE);
 
         DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
-        Wait stop = new Wait(0.5);
         DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, 0, 1);
-        Wait stop2 = new Wait(0.5);
-//        TurnUntilKey deteckkey = new TurnUntilKey(-1, -90);
-        DriveDistanceCipherClose gotocrypto = new DriveDistanceCipherClose(Alliance.BLUE, DriveDistanceCipherClose.Position.CLOSE);
+        Wait stop2 = new Wait(0.2);
+        DriveDistance backward = new DriveDistance(Constants.inchesToTicks(-Constants.FAR_CRYPTO_DISTANCE), 4);
 
-        TurnGyroPID turn = new TurnGyroPID(90, 3);
+        TurnGyroPID turnleft = new TurnGyroPID(90, 3);
+        DriveDistanceCipherClose gotocrypto = new DriveDistanceCipherClose(Alliance.BLUE, DriveDistanceCipherClose.Position.FAR);
+        TurnGyroPID turnleft2 = new TurnGyroPID(180, 3);
 
-        DriveDistance approach = new DriveDistance(Constants.inchesToTicks(Constants.CLOSE_CRYPTO_APPROACH_BLUE), 2);
+        DriveDistance approach = new DriveDistance(Constants.inchesToTicks(Constants.FAR_CRYPTO_APPROACH_BLUE), 2);
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
         SequentialCommand bAndR = backUpAndRam();
 
-        Command[] cmds = {clamp, wack, offPad, stop, align, stop2, gotocrypto, turn, approach, outtake, bAndR};
+        Command[] cmds = {clamp, wack, offPad, align, stop2, backward, turnleft, gotocrypto, turnleft2, approach, outtake, bAndR};
         return new SequentialCommand(cmds);
     }
 
-    public static SequentialCommand blueCloseMultiglyphVP() {
-        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+    //--------------------------------------------------------------//
+    //-------------------------------RED CLOSE AUTOS-------------------------------//
+    //--------------------------------------------------------------//
 
-        Command wack = wackJewelBasic(Alliance.BLUE);
-
-        DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
-        DriveDistance driveMore = new DriveDistance(-Constants.inchesToTicks(20), 3.5);
-        Wait stop = new Wait(0.1);
-
-        Command[] cmds = {clamp, wack, offPad, driveMore, stop, putGlyph(true, CryptoLocations.CLOSE_RED_AUTO, true)};//, closeMultiglyphVP(-115, CryptoLocations.CLOSE_BLUE_AUTO, false)};//, closeMultiglyphVP(-45, CryptoLocations.CLOSE_BLUE_AUTO)};
-        return new SequentialCommand(cmds);
-    }
-
+    /**
+     * Very old red close auto. Use only for reference.
+     */
+    @Deprecated
     public static SequentialCommand redClose() {
         MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
 
@@ -184,6 +193,9 @@ public class AutoCodes {
         return new SequentialCommand(cmds);
     }
 
+    /**
+     * Used as a failsafe for {@link #redCloseMultiglyphVP()}
+     */
     public static SequentialCommand redCloseMutliglyph() {
         TurnGyroPID reset = new TurnGyroPID(0, 2);
 
@@ -213,6 +225,40 @@ public class AutoCodes {
         return new SequentialCommand(cmds);
     }
 
+    //--------------------------------------------------------------//
+    //-------------------------------BLUE CLOSE AUTOS-------------------------------//
+    //--------------------------------------------------------------//
+
+    /**
+     * Very old blue close auto. Use only for reference.
+     */
+    @Deprecated
+    public static SequentialCommand blueClose() {
+        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+
+        Command wack = wackJewelBasic(Alliance.BLUE);
+
+        DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
+        Wait stop = new Wait(0.5);
+        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, 0, 1);
+        Wait stop2 = new Wait(0.5);
+//        TurnUntilKey deteckkey = new TurnUntilKey(-1, -90);
+        DriveDistanceCipherClose gotocrypto = new DriveDistanceCipherClose(Alliance.BLUE, DriveDistanceCipherClose.Position.CLOSE);
+
+        TurnGyroPID turn = new TurnGyroPID(90, 3);
+
+        DriveDistance approach = new DriveDistance(Constants.inchesToTicks(Constants.CLOSE_CRYPTO_APPROACH_BLUE), 2);
+        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
+        SequentialCommand bAndR = backUpAndRam();
+
+        Command[] cmds = {clamp, wack, offPad, stop, align, stop2, gotocrypto, turn, approach, outtake, bAndR};
+        return new SequentialCommand(cmds);
+    }
+
+    /**
+     * Used as a failsafe for {@link #blueCloseMultiglyphVP()}
+     * With current auto design for {@link #blueCloseMultiglyphVP()}, this failsafe will not work right now.
+     */
     public static SequentialCommand blueCloseMultiglyph() {
         TurnGyroPID reset = new TurnGyroPID(0, 2);
 
@@ -229,6 +275,23 @@ public class AutoCodes {
         Command[] cmds = {reset, align, gotocrypto, turn, approach, outtake, bAndR, closeMultiglyph()};
         return new SequentialCommand(cmds);
     }
+
+    public static SequentialCommand blueCloseMultiglyphVP() {
+        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+
+        Command wack = wackJewelBasic(Alliance.BLUE);
+
+        DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
+        DriveDistance driveMore = new DriveDistance(-Constants.inchesToTicks(20), 3.5);
+        Wait stop = new Wait(0.1);
+
+        Command[] cmds = {clamp, wack, offPad, driveMore, stop, putGlyph(true, CryptoLocations.CLOSE_RED_AUTO, true)};//, closeMultiglyphVP(-115, CryptoLocations.CLOSE_BLUE_AUTO, false)};//, closeMultiglyphVP(-45, CryptoLocations.CLOSE_BLUE_AUTO)};
+        return new SequentialCommand(cmds);
+    }
+
+    //--------------------------------------------------------------//
+    //-------------------------------MISC FUNCTIONS-------------------------------//
+    //--------------------------------------------------------------//
 
     public static SequentialCommand wackJewelBasic(Alliance alliance) {
         MoveJewelArm movearmout = new MoveJewelArm(JewelArm.JewelArmPosition.OUT);
@@ -317,7 +380,6 @@ public class AutoCodes {
 
     /**
      * Use only for multiglyph since it backs up many distance
-     * @return
      */
     public static SequentialCommand releaseAndBackUp() {
         Command[] cmds = {
