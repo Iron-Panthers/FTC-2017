@@ -252,13 +252,8 @@ public class AutoCodes {
         return new SequentialCommand(cmds);
     }
 
-    public static SequentialCommand putGlyph(boolean useKeyMark, int autoLocation, boolean continueMulti) {
-        TurnUntilKey facePicto;
-        if (autoLocation == CryptoLocations.CLOSE_RED_AUTO || autoLocation == CryptoLocations.FAR_RED_AUTO) {
-            facePicto = new TurnUntilKey(CryptoLocations.RED_TURN_TO_PICTO, autoLocation);
-        } else {
-            facePicto = new TurnUntilKey(CryptoLocations.BLUE_TURN_TO_PICTO, autoLocation);
-        }
+    public static SequentialCommand putGlyph(boolean useKeyMark, int autoLocation, boolean continueMulti, double angle) {
+        TurnUntilKey facePicto = new TurnUntilKey(angle, autoLocation);
 
         SetConfigVuforia config = new SetConfigVuforia(useKeyMark, autoLocation);
 
@@ -281,9 +276,17 @@ public class AutoCodes {
         return new SequentialCommand(cmds);
     }
 
+    public static SequentialCommand putGlyph(boolean useKeyMark, int autoLocation, boolean continueMulti) {
+        if (autoLocation == CryptoLocations.CLOSE_RED_AUTO || autoLocation == CryptoLocations.FAR_RED_AUTO) {
+            return putGlyph(useKeyMark, autoLocation, continueMulti, CryptoLocations.RED_TURN_TO_PICTO);
+        } else {
+            return putGlyph(useKeyMark, autoLocation, continueMulti, CryptoLocations.BLUE_TURN_TO_PICTO);
+        }
+    }
+
     public static SequentialCommand closeMultiglyphVP(double driveAngle, int automode, boolean continueMulti) {
         GetGlyphAndReturn get = new GetGlyphAndReturn(driveAngle);
-        SequentialCommand put = putGlyph(false, automode, continueMulti);
+        SequentialCommand put = putGlyph(false, automode, continueMulti, 48);
 
         Command[] cmds = {get, put};
         return new SequentialCommand(cmds);

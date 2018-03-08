@@ -107,7 +107,7 @@ public class TurnUntilKey extends Command {
             Scheduler.instance.clear();
             Scheduler.instance.addDefaultCommands();
 
-            Scheduler.instance.add(AutoCodes.oldAutoForCode(autoCode));
+            //Scheduler.instance.add(AutoCodes.oldAutoForCode(autoCode));
         }
         turn.interrupt();
     }

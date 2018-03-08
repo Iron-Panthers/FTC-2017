@@ -17,7 +17,7 @@ import java.util.Arrays;
  */
 public class CryptoLocations {
 
-    public static final double RED_TURN_TO_PICTO = 43;
+    public static final double RED_TURN_TO_PICTO = 44;
     public static final double BLUE_TURN_TO_PICTO = -50;
 
     public static final int CLOSE_RED_AUTO = 0;
@@ -59,7 +59,7 @@ public class CryptoLocations {
     private static final double FAR_BLUE_X = 1150;
 
     //  how far away from the wall the robot will stop
-    private static final double SPACING_DISTANCE = 225;
+    private static final double SPACING_DISTANCE = 245;
 
     private static double DX_TO_COLUMN = 0;
     private static double DY_TO_COLUMN = 0;

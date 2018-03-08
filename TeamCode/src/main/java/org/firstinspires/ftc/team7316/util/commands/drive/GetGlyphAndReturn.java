@@ -56,12 +56,13 @@ public class GetGlyphAndReturn extends Command {
             runIntake.loop();
 
             if (currentCommand.shouldRemove() || Hardware.instance.glyphTouchSensor.isPressed()) {
-                encoderTicksTravelled = Math.abs(Hardware.instance.frontLeftDriveMotor.getCurrentPosition()) - 60;
+                double radians = Hardware.instance.gyroWrapper.getHeading() * Math.PI / 180;
+                encoderTicksTravelled = (int)(Math.abs(Hardware.instance.frontLeftDriveMotor.getCurrentPosition()) * Math.sin(-radians)) - 100;
 
                 currentCommand.interrupt();
                 Subsystems.instance.glyphIntake.setServoPosition(Constants.INTAKE_CLAMP_GLYPH_POSITION);
 
-                currentCommand = new TurnGyroPID(Util.wrap(driveAngle+175), 4);
+                currentCommand = new TurnGyroPID(90, 4);
                 currentCommand.init();
                 commandIndex++;
             }
