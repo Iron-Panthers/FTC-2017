@@ -110,6 +110,18 @@ public class AutoCodes {
         return new SequentialCommand(cmds);
     }
 
+    public static SequentialCommand blueFarVP() {
+        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+
+        Command wack = wackJewelBasic(Alliance.BLUE);
+
+        DriveForTime offPad = new DriveForTime(0.3, Math.PI, 1.25);
+        Wait stop = new Wait(0.1);
+
+        Command[] cmds = {clamp, wack, offPad, stop, putGlyph(true, CryptoLocations.FAR_BLUE_AUTO, false)};//, closeMultiglyphVP(-60, CryptoLocations.CLOSE_RED_AUTO)};
+        return new SequentialCommand(cmds);
+    }
+
     public static SequentialCommand blueFarMultiglyph() {
         Command[] cmds = {};
         return new SequentialCommand(cmds);

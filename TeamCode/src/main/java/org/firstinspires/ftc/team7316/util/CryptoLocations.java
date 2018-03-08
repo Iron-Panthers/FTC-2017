@@ -48,15 +48,15 @@ public class CryptoLocations {
     private static final double FAR_RED_RIGHT_Y = 710;
     private static final double FAR_RED_X = 690;
 
-    private static final double CLOSE_BLUE_LEFT_X = 1361;
+    private static final double CLOSE_BLUE_LEFT_X = 955;
     private static final double CLOSE_BLUE_CENTER_X = 1158;
-    private static final double CLOSE_BLUE_RIGHT_X = 955;
+    private static final double CLOSE_BLUE_RIGHT_X = 1361;
     private static final double CLOSE_BLUE_Y = 130;
 
     private static final double FAR_BLUE_LEFT_Y = -710;
     private static final double FAR_BLUE_CENTER_Y = -914;
     private static final double FAR_BLUE_RIGHT_Y = -1116;
-    private static final double FAR_BLUE_X = 1150;
+    private static final double FAR_BLUE_X = 850;
 
     //  how far away from the wall the robot will stop
     private static final double SPACING_DISTANCE = 245;
