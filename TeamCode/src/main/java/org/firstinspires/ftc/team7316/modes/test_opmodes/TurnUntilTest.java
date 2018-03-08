@@ -11,7 +11,7 @@ import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnUntilKey;
  * Created by jerry on 3/6/18.
  */
 
-@Autonomous
+@Autonomous(name = "TurnUntilTest")
 public class TurnUntilTest extends AutoBaseOpMode {
     @Override
     public void onInit() {

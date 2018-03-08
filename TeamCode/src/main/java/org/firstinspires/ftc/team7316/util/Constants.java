@@ -126,7 +126,7 @@ public class Constants {
     public static final double DRIVE_D = 0; // 0.0
     public static final double DRIVE_F = 0.5/TICKS_PER_SECOND_HALFPOWER;   //originally 0.00007
 
-    public static final double AUTO_DEADZONE = 0.15;
+    public static final double AUTO_DEADZONE = 0.2;
 
     public static final double GYRO_P = 0.025;
     public static final double GYRO_I = 0; //original 0.002

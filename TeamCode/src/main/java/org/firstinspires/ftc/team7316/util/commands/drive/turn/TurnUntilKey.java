@@ -90,9 +90,9 @@ public class TurnUntilKey extends Command {
     public void loop() {
         if (turn.shouldRemove()) {
             if (CLOCKWISE) {
-                Subsystems.instance.driveBase.turnMotors(0.35);
+                Subsystems.instance.driveBase.turnMotors(0.4);
             } else {
-                Subsystems.instance.driveBase.turnMotors(-0.35);
+                Subsystems.instance.driveBase.turnMotors(-0.4);
             }
             count++;
         } else {
