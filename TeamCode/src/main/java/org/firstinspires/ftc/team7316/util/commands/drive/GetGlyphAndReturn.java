@@ -56,7 +56,7 @@ public class GetGlyphAndReturn extends Command {
             runIntake.loop();
 
             if (currentCommand.shouldRemove() || Hardware.instance.glyphTouchSensor.isPressed()) {
-                encoderTicksTravelled = Math.abs(Hardware.instance.frontLeftDriveMotor.getCurrentPosition()) - 150;
+                encoderTicksTravelled = Math.abs(Hardware.instance.frontLeftDriveMotor.getCurrentPosition()) - 60;
 
                 currentCommand.interrupt();
                 Subsystems.instance.glyphIntake.setServoPosition(Constants.INTAKE_CLAMP_GLYPH_POSITION);

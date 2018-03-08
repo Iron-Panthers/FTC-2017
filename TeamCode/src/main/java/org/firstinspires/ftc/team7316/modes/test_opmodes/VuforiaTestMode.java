@@ -27,7 +27,7 @@ public class VuforiaTestMode extends AutoBaseOpMode {
     public void onLoop() {
         Hardware.instance.vuforiaCameraWrapper.update();
         if(Hardware.instance.vuforiaCameraWrapper.vuMark != RelicRecoveryVuMark.UNKNOWN) {
-            CryptoLocations.setConfig(Hardware.instance.vuforiaCameraWrapper.vuMark, 1);
+            CryptoLocations.setConfig(Hardware.instance.vuforiaCameraWrapper.vuMark, CryptoLocations.CLOSE_RED_AUTO);
 
             double amount = CryptoLocations.angleForBox(Hardware.instance.vuforiaCameraWrapper.irY, Hardware.instance.vuforiaCameraWrapper.itZ, Hardware.instance.vuforiaCameraWrapper.itY);
             double distance = CryptoLocations.distanceForBox(Hardware.instance.vuforiaCameraWrapper.irY, Hardware.instance.vuforiaCameraWrapper.itZ, Hardware.instance.vuforiaCameraWrapper.itY);

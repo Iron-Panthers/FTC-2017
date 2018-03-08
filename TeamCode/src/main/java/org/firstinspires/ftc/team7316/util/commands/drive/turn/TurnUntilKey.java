@@ -94,7 +94,6 @@ public class TurnUntilKey extends Command {
             } else {
                 Subsystems.instance.driveBase.turnMotors(-0.4);
             }
-            count++;
         } else {
             turn.loop();
         }
@@ -105,7 +104,7 @@ public class TurnUntilKey extends Command {
     public boolean shouldRemove() {
         // 2000 ms / 75 ms is 27 ish
         // 75 ms is the average dT
-        return Hardware.instance.vuforiaCameraWrapper.vuMark != RelicRecoveryVuMark.UNKNOWN || count > 27;
+        return Hardware.instance.vuforiaCameraWrapper.currentVuMark != RelicRecoveryVuMark.UNKNOWN || count > 27;
     }
 
     @Override
