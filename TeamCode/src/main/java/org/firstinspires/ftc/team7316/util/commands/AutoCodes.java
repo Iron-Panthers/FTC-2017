@@ -51,7 +51,7 @@ public class AutoCodes {
             return redFar();
         }
         else if (code == CryptoLocations.CLOSE_BLUE_AUTO) {
-            return blueCloseMultiglyph();
+            return redCloseMutliglyph();
         }
         else if (code == CryptoLocations.FAR_BLUE_AUTO) {
             return blueFar();
@@ -233,6 +233,7 @@ public class AutoCodes {
 
     /**
      * Used as a failsafe for {@link #redCloseMultiglyphVP()}
+     * Currently also the failsafe for {@link #blueCloseMultiglyphVP()}
      */
     public static SequentialCommand redCloseMutliglyph() {
         TurnGyroPID reset = new TurnGyroPID(0, 2);
@@ -260,6 +261,27 @@ public class AutoCodes {
         Wait stop = new Wait(0.1);
 
         Command[] cmds = {clamp, wack, offPad, stop, putGlyph(true, CryptoLocations.CLOSE_RED_AUTO, true), closeMultiglyphVP(-75, CryptoLocations.CLOSE_RED_AUTO, false)};//, closeMultiglyphVP(-60, CryptoLocations.CLOSE_RED_AUTO)};
+        return new SequentialCommand(cmds);
+    }
+
+    public static SequentialCommand redCloseMultiglyphLegacy() {
+        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+
+        Command wack = wackJewelBasic(Alliance.RED);
+
+        DriveOffPad offPad = new DriveOffPad(Alliance.RED);
+        Wait stop = new Wait(0.1);
+
+        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, Math.PI, 0.4);
+        DriveDistanceCipherClose gotocrypto = new DriveDistanceCipherClose(Alliance.RED, DriveDistanceCipherClose.Position.CLOSE);
+
+        TurnGyroPID turn = new TurnGyroPID(90, 2);
+
+        DriveForTime approach = new DriveForTime(0.6, 0, 0.4);
+        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
+        SequentialCommand bAndR = releaseAndBackUp();
+
+        Command[] cmds = {clamp, wack, offPad, stop, align, gotocrypto, turn, approach, outtake, bAndR, closeMultiglyph()};
         return new SequentialCommand(cmds);
     }
 
@@ -322,11 +344,33 @@ public class AutoCodes {
 
         Command wack = wackJewelBasic(Alliance.BLUE);
 
-        DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
+        DriveForTime offPad = new DriveForTime(0.3, Math.PI, 1.25);
         DriveDistance driveMore = new DriveDistance(-Constants.inchesToTicks(20), 3.5);
         Wait stop = new Wait(0.1);
 
         Command[] cmds = {clamp, wack, offPad, driveMore, stop, putGlyph(true, CryptoLocations.CLOSE_RED_AUTO, true), closeMultiglyphVP(-75, CryptoLocations.CLOSE_BLUE_AUTO, false)};//, closeMultiglyphVP(-45, CryptoLocations.CLOSE_BLUE_AUTO)};
+        return new SequentialCommand(cmds);
+    }
+
+    public static SequentialCommand blueCloseMultiglyphLegacy() {
+        MoveIntakeArm clamp = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
+
+        Command wack = wackJewelBasic(Alliance.BLUE);
+
+        DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
+
+        Wait stop = new Wait(0.1);
+        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, 0, 0.4);
+        DriveDistanceCipherClose gotocrypto = new DriveDistanceCipherClose(Alliance.BLUE, DriveDistanceCipherClose.Position.CLOSE);
+
+        TurnGyroPID turn = new TurnGyroPID(90, 2);
+
+//        DriveDistance approach = new DriveDistance(Constants.inchesToTicks(Constants.CLOSE_CRYPTO_APPROACH_BLUE), 2);
+        DriveForTime approach = new DriveForTime(0.6, 0, 0.4);
+        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
+        SequentialCommand bAndR = releaseAndBackUp();
+
+        Command[] cmds = {clamp, wack, offPad, stop, align, gotocrypto, turn, approach, outtake, bAndR, closeMultiglyph()};
         return new SequentialCommand(cmds);
     }
 
@@ -394,11 +438,11 @@ public class AutoCodes {
         Command[] cmds;
         if(continueMulti) {
             backup = new DriveDistance(DISTANCE_TRAVELLED, 3);
-            cmds = new Command[]{facePicto, new WaitAndLook(0.3), config, turnToCrypto, driveToCrypto, outtake, release, backup};
+            cmds = new Command[]{facePicto, new WaitAndLook(0.3, autoLocation), config, turnToCrypto, driveToCrypto, outtake, release, backup};
         }
         else {
             backup = new DriveDistance(Constants.inchesToTicks(-6), 1);
-            cmds = new Command[]{facePicto, new WaitAndLook(0.3), config, turnToCrypto, driveToCrypto, outtake, release, backup};
+            cmds = new Command[]{facePicto, new WaitAndLook(0.3, autoLocation), config, turnToCrypto, driveToCrypto, outtake, release, backup};
         }
         return new SequentialCommand(cmds);
     }

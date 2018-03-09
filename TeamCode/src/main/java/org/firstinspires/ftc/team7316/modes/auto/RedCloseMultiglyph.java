@@ -12,14 +12,13 @@ import org.firstinspires.ftc.team7316.util.commands.AutoCodes;
  * Created by jerry on 1/29/18.
  */
 
-@Autonomous(name = "red close multiglyph", group = "game autos")
-@Disabled
+@Autonomous(name = "red close multiglyph legacy", group = "game autos")
 public class RedCloseMultiglyph extends AutoBaseOpMode {
 
     @Override
     public void onInit() {
         Hardware.instance.vuforiaCameraWrapper.startTracking();
-        Scheduler.instance.add(AutoCodes.redFarVP());
+        Scheduler.instance.add(AutoCodes.redCloseMultiglyphLegacy());
     }
 
     @Override

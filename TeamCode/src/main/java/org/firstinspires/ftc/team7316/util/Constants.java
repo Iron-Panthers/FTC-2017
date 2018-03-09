@@ -106,9 +106,9 @@ public class Constants {
     //Jewel arm shenanigans
     public static final double ARM_SERVO_TRAVEL_TIME = 1;
 
-    public static final int COLOROFFSET_R = 65;
+    public static final int COLOROFFSET_R = 30;
     public static final int COLOROFFSET_G = 40;
-    public static final int COLOROFFSET_B = 30;
+    public static final int COLOROFFSET_B = 35;
 
     public static final int NO_COLOR_RED = 10;
     public static final int NO_COLOR_GREEN = 20;
@@ -116,7 +116,7 @@ public class Constants {
 
     public static final int MIN_COLOR_VALUE = 10;
     public static final int COLOR_BUFFER_SIZE = 3;
-    public static final double COLOR_DIFFERENCE = 5 * COLOR_BUFFER_SIZE;
+    public static final double COLOR_DIFFERENCE = 4 * COLOR_BUFFER_SIZE;
 
     public static final int NO_COLOR_THRESHOLD_RED = NO_COLOR_RED * COLOR_BUFFER_SIZE;
     public static final int NO_COLOR_THRESHOLD_BLUE = NO_COLOR_BLUE * COLOR_BUFFER_SIZE;
@@ -133,11 +133,6 @@ public class Constants {
     public static final double GYRO_I = 0; //original 0.002
     public static final double GYRO_D = 0; //original 0.0004
     public static final double GYRO_F = Util.map(0.5, AUTO_DEADZONE, 1, 0, 1)/DEGREES_PER_SECOND_HALFPOWER; //original 0.00397
-
-    public static final double VP_DRIVE_P = 0;
-    public static final double VP_DRIVE_I = 0;
-    public static final double VP_DRIVE_D = 0;
-    public static final double VP_DRIVE_F = 0;
 
     public static final double DISTANCE_ERROR_RANGE = 2.25; //inches
     public static final int DISTANCE_ERROR_RANGE_TICKS = inchesToTicks(DISTANCE_ERROR_RANGE);

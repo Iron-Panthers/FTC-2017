@@ -103,12 +103,12 @@ public class TurnUntilKey extends Command {
 
     @Override
     protected void end() {
-        if (Hardware.instance.vuforiaCameraWrapper.vuMark == RelicRecoveryVuMark.UNKNOWN) {
-            Scheduler.instance.clear();
-            Scheduler.instance.addDefaultCommands();
-
-            //Scheduler.instance.add(AutoCodes.oldAutoForCode(autoCode));
-        }
+//        if (Hardware.instance.vuforiaCameraWrapper.vuMark == RelicRecoveryVuMark.UNKNOWN) {
+//            Scheduler.instance.clear();
+//            Scheduler.instance.addDefaultCommands();
+//
+//            Scheduler.instance.add(AutoCodes.oldAutoForCode(autoCode));
+//        }
         turn.interrupt();
     }
 

@@ -14,14 +14,13 @@ import org.firstinspires.ftc.team7316.util.commands.sensors.UpdateVuforia;
  * Created by jerry on 1/30/18.
  */
 
-@Autonomous(name = "blue close multiglyph", group = "game autos")
-@Disabled
+@Autonomous(name = "blue close multiglyph legacy", group = "game autos")
 public class BlueCloseMutliglyph extends AutoBaseOpMode {
 
     @Override
     public void onInit() {
         Hardware.instance.vuforiaCameraWrapper.startTracking();
-        Scheduler.instance.add(AutoCodes.blueCloseMultiglyph());
+        Scheduler.instance.add(AutoCodes.blueCloseMultiglyphLegacy());
     }
 
     @Override

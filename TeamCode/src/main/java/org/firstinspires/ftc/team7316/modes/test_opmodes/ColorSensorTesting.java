@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.team7316.modes.test_opmodes;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -13,6 +14,7 @@ import org.firstinspires.ftc.team7316.util.Constants;
  * Created by jerry on 11/7/17.
  */
 
+@Autonomous
 public class ColorSensorTesting extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {

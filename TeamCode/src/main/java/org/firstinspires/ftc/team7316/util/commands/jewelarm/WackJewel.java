@@ -37,48 +37,28 @@ public class WackJewel extends Command {
         timer.reset();
         if(colorWrapper.noColor) {
             Hardware.log("oof", "no color detected");
-//            turncommand = new BlankCommand(Subsystems.instance.driveBase, true);
         }
         else {
             if (alliance.shouldHitForward(colorWrapper.sumR(), colorWrapper.sumB())) {
-//                drivecommand = new DriveDistance(Constants.JEWEL_WHACK_DISTANCE);
-//                colorWrapper.drivenForward = true;
-
-//                turncommand = new TurnGyroPID(-Constants.JEWEL_WACK_DELTA, 3);
                 Subsystems.instance.jewelArm.moveWacker(JewelArm.JewelWackPosition.FORWARD);
 
             } else {
-//                drivecommand = new DriveDistance(-Constants.JEWEL_WHACK_DISTANCE);
-//                colorWrapper.drivenForward = false;
-
-//                turncommand = new TurnGyroPID(Constants.JEWEL_WACK_DELTA, 3);
                 Subsystems.instance.jewelArm.moveWacker(JewelArm.JewelWackPosition.BACKWARD);
             }
-//            drivecommand.init();
-//            turncommand.init();
         }
     }
 
     @Override
     public void loop() {
         Hardware.log("whacking jewel", "yes");
-//        Hardware.log("flError", Hardware.instance.frontLeftDriveMotorWrapper.getError());
-//        Hardware.log("frError", Hardware.instance.frontRightDriveMotorWrapper.getError());
-//        drivecommand.loop();
-//        turncommand.loop();
     }
 
     @Override
     public boolean shouldRemove() {
-//        return drivecommand.shouldRemove();
-//        return turncommand.shouldRemove();
         return timer.seconds() >= servoTravelTime;
     }
 
     @Override
     protected void end() {
-//        drivecommand.interrupt();
-//        turncommand.interrupt();
-//        Subsystems.instance.jewelArm.moveWacker(JewelArm.JewelWackPosition.NEUTRAL);
     }
 }
