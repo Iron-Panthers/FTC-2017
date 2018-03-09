@@ -31,7 +31,7 @@ public abstract class AutoBaseOpMode extends OpMode {
         Log.i(Hardware.tag, "=========================== STARTING AUTO ================================");
         Scheduler.inTeleop = false;
         CryptoLocations.resetCryptoLocations();
-        Scheduler.instance.clear();
+        Scheduler.instance.wipe();
         Hardware.setHardwareMap(hardwareMap);
         Hardware.setTelemetry(telemetry);
         Subsystems.createSubsystems();

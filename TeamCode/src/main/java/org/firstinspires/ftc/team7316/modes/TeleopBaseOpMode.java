@@ -18,7 +18,7 @@ public abstract class TeleopBaseOpMode extends OpMode {
     public void init() {
         Log.i(Hardware.tag, "======================================= STARTING TELEOP ===================================================");
         Scheduler.inTeleop = true;
-        Scheduler.instance.clear();
+        Scheduler.instance.wipe();
         Hardware.setHardwareMap(hardwareMap);
         Hardware.setTelemetry(telemetry);
         OI.createInputs(gamepad1, gamepad2);

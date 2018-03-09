@@ -39,14 +39,14 @@ public class WaitAndLook extends Command {
 
     @Override
     public boolean shouldRemove() {
-        return time.seconds() > this.wantedTime;
+        return time.seconds() > this.wantedTime || Hardware.instance.vuforiaCameraWrapper.currentVuMark != RelicRecoveryVuMark.UNKNOWN;
     }
 
     @Override
     public void end() {
         //  when no pictograph is seen, clear scheduler of everything and add legacy code
         if(Hardware.instance.vuforiaCameraWrapper.vuMark == RelicRecoveryVuMark.UNKNOWN) {
-            Scheduler.instance.clear();
+            Scheduler.instance.wipe();
             Subsystems.instance.resetSubsystems();
             Scheduler.instance.add(AutoCodes.oldAutoForCode(autoConfig));
         }

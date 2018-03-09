@@ -28,7 +28,7 @@ public class Constants {
 
     public static final double INTAKE_LIFT_POWER = 1;
     public static final double INTAKE_LEFT_POWER_WEIGHTING = 0.85;
-    public static final double INTAKE_RIGHT_POWER_WEIGHTING = 0.55;
+    public static final double INTAKE_RIGHT_POWER_WEIGHTING = 0.85;
 
     //-----------Auto constants-----------//
     public static final double COAST_TICKS_PER_SECOND = 500;//rough estimate 1670

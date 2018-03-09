@@ -14,12 +14,13 @@ import org.firstinspires.ftc.team7316.util.sensors.GyroWrapper;
 @Autonomous
 public class GyroCalibration extends AutoBaseOpMode {
 
-    private BNO055IMU imu = Hardware.instance.imu;
-    private GyroWrapper gyro = Hardware.instance.gyroWrapper;
+    private BNO055IMU imu;
+    private GyroWrapper gyro;
 
     @Override
     public void onInit() {
-
+        imu = Hardware.instance.imu;
+        gyro = Hardware.instance.gyroWrapper;
     }
 
     @Override

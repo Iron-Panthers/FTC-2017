@@ -118,8 +118,18 @@ public class Scheduler {
         shouldAddDefault = true;
     }
 
+    /**
+     * Only clears the current command running.
+     */
     public void clear() {
         shouldClear = true;
     }
 
+    /**
+     * Completely wipes the buffer and command sequences.
+     */
+    public void wipe() {
+         newCommandBuffer.clear();
+         clear();
+    }
 }

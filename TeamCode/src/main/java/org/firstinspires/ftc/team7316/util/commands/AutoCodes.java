@@ -412,6 +412,14 @@ public class AutoCodes {
         return new SequentialCommand(cmds);
     }
 
+    public static SequentialCommand closeMultiglyphVP(double driveAngle, int automode, boolean continueMulti) {
+        GetGlyphAndReturn get = new GetGlyphAndReturn(driveAngle);
+        SequentialCommand put = putGlyph(false, automode, continueMulti, 48);
+
+        Command[] cmds = {get, put};
+        return new SequentialCommand(cmds);
+    }
+
     /**
      * Gets the orientation of the robot and drives to the cryptobox to drop off the glyph.
      * @param useKeyMark whether the robot should cycle cryptobox columns
@@ -438,11 +446,11 @@ public class AutoCodes {
         Command[] cmds;
         if(continueMulti) {
             backup = new DriveDistance(DISTANCE_TRAVELLED, 3);
-            cmds = new Command[]{facePicto, new WaitAndLook(0.3, autoLocation), config, turnToCrypto, driveToCrypto, outtake, release, backup};
+            cmds = new Command[]{facePicto, new WaitAndLook(0.7, autoLocation), config, turnToCrypto, driveToCrypto, outtake, release, backup};
         }
         else {
             backup = new DriveDistance(Constants.inchesToTicks(-6), 1);
-            cmds = new Command[]{facePicto, new WaitAndLook(0.3, autoLocation), config, turnToCrypto, driveToCrypto, outtake, release, backup};
+            cmds = new Command[]{facePicto, new WaitAndLook(0.7, autoLocation), config, turnToCrypto, driveToCrypto, outtake, release, backup};
         }
         return new SequentialCommand(cmds);
     }
@@ -453,14 +461,6 @@ public class AutoCodes {
         } else {
             return putGlyph(useKeyMark, autoLocation, continueMulti, CryptoLocations.BLUE_TURN_TO_PICTO);
         }
-    }
-
-    public static SequentialCommand closeMultiglyphVP(double driveAngle, int automode, boolean continueMulti) {
-        GetGlyphAndReturn get = new GetGlyphAndReturn(driveAngle);
-        SequentialCommand put = putGlyph(false, automode, continueMulti, 48);
-
-        Command[] cmds = {get, put};
-        return new SequentialCommand(cmds);
     }
 
     public static SequentialCommand backUpAndRam() {
