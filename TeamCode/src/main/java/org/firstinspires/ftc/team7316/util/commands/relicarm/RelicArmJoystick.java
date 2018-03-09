@@ -58,6 +58,9 @@ public class RelicArmJoystick extends Command {
             relicArm.clawServoTarget = Util.clamp(relicArm.clawServoTarget - OI.instance.gp2.right_stick.getX() / 20.0, 0.45, 0.8);
             relicArm.setArmPower(OI.instance.gp2.left_stick.getY());
         }
+        else {
+            relicArm.setArmPower(0);
+        }
 
         relicArm.setClawPosition(relicArm.clawServoTarget);
     }
