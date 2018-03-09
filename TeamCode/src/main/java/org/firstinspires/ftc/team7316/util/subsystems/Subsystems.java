@@ -3,7 +3,7 @@ package org.firstinspires.ftc.team7316.util.subsystems;
 import org.firstinspires.ftc.team7316.util.Scheduler;
 
 /**
- * Created by andrew on 10/18/17.
+ * Every subsystem that needs to be used is placed in here.
  */
 
 public class Subsystems {

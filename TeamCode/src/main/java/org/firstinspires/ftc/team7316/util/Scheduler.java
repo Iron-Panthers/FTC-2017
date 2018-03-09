@@ -9,7 +9,7 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 /**
- * Created by andrew on 9/15/16.
+ * Controls and manages all the commands of the robot.
  */
 public class Scheduler {
 
@@ -119,7 +119,7 @@ public class Scheduler {
     }
 
     /**
-     * Only clears the current command running.
+     * Only clears the current commands running.
      */
     public void clear() {
         shouldClear = true;

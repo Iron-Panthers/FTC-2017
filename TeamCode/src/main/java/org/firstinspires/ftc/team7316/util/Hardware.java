@@ -17,7 +17,7 @@ import org.firstinspires.ftc.team7316.util.sensors.GyroWrapper;
 import org.firstinspires.ftc.team7316.util.sensors.VuforiaCameraWrapper;
 
 /**
- * Created by andrew on 9/15/16.
+ * Contains all the hardware names and actual hardware objects
  */
 
 public class Hardware {
