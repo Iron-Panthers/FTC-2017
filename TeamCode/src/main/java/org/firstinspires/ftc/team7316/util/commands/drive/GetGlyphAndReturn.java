@@ -12,6 +12,8 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 /**
  * Created by jerry on 3/3/18.
+ *
+ * Jank sequential command that goes to the glyph pit, takes a glyphs, and returns to the cryptobox
  */
 
 public class GetGlyphAndReturn extends Command {

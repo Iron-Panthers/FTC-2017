@@ -368,6 +368,13 @@ public class AutoCodes {
         return new SequentialCommand(cmds);
     }
 
+    /**
+     * Gets the orientation of the robot and drives to the cryptobox to drop off the glyph.
+     * @param useKeyMark whether the robot should cycle cryptobox columns
+     * @param autoLocation auto configuration found in CryptoLocations
+     * @param continueMulti whether the robot should chain multiglyph
+     * @param angle the angle the robot should turn to in order to see the pictograph
+     */
     public static SequentialCommand putGlyph(boolean useKeyMark, int autoLocation, boolean continueMulti, double angle) {
         TurnUntilKey facePicto = new TurnUntilKey(angle, autoLocation);
 
@@ -380,14 +387,18 @@ public class AutoCodes {
 
         IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 
-        DriveDistance backup = new DriveDistance(DISTANCE_TRAVELLED, 3);
+        MoveIntakeArm release = new MoveIntakeArm(Constants.INTAKE_SERVO_OPEN_POSITION);
+
+        DriveDistance backup;
 
         Command[] cmds;
         if(continueMulti) {
-            cmds = new Command[]{facePicto, new WaitAndLook(0.3), config, turnToCrypto, driveToCrypto, outtake, backup};
+            backup = new DriveDistance(DISTANCE_TRAVELLED, 3);
+            cmds = new Command[]{facePicto, new WaitAndLook(0.3), config, turnToCrypto, driveToCrypto, outtake, release, backup};
         }
         else {
-            cmds = new Command[]{facePicto, new WaitAndLook(0.3), config, turnToCrypto, driveToCrypto, outtake};
+            backup = new DriveDistance(Constants.inchesToTicks(-6), 1);
+            cmds = new Command[]{facePicto, new WaitAndLook(0.3), config, turnToCrypto, driveToCrypto, outtake, release, backup};
         }
         return new SequentialCommand(cmds);
     }
