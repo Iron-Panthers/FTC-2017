@@ -156,8 +156,10 @@ public class CryptoLocations {
                 CryptoLocations.DY_TO_COLUMN = CryptoLocations.FAR_RED_LEFT_Y;
             }
             else if (AUTO_CONFIG == CryptoLocations.CLOSE_BLUE_AUTO) {
-                CryptoLocations.DX_TO_COLUMN = CryptoLocations.CLOSE_BLUE_LEFT_X;
-                CryptoLocations.DY_TO_COLUMN = CryptoLocations.CLOSE_BLUE_Y;
+//                CryptoLocations.DX_TO_COLUMN = CryptoLocations.CLOSE_BLUE_LEFT_X;
+//                CryptoLocations.DY_TO_COLUMN = CryptoLocations.CLOSE_BLUE_Y;
+                CryptoLocations.DX_TO_COLUMN = CryptoLocations.CLOSE_RED_RIGHT_X;
+                CryptoLocations.DY_TO_COLUMN = CryptoLocations.CLOSE_RED_Y;
             }
             else if (AUTO_CONFIG == CryptoLocations.FAR_BLUE_AUTO) {
                 CryptoLocations.DX_TO_COLUMN = CryptoLocations.FAR_BLUE_X;
@@ -174,8 +176,10 @@ public class CryptoLocations {
                 CryptoLocations.DY_TO_COLUMN = CryptoLocations.FAR_RED_CENTER_Y;
             }
             else if (AUTO_CONFIG == CryptoLocations.CLOSE_BLUE_AUTO) {
-                CryptoLocations.DX_TO_COLUMN = CryptoLocations.CLOSE_BLUE_CENTER_X;
-                CryptoLocations.DY_TO_COLUMN = CryptoLocations.CLOSE_BLUE_Y;
+//                CryptoLocations.DX_TO_COLUMN = CryptoLocations.CLOSE_BLUE_CENTER_X;
+//                CryptoLocations.DY_TO_COLUMN = CryptoLocations.CLOSE_BLUE_Y;
+                CryptoLocations.DX_TO_COLUMN = CryptoLocations.CLOSE_RED_CENTER_X;
+                CryptoLocations.DY_TO_COLUMN = CryptoLocations.CLOSE_RED_Y;
             }
             else if (AUTO_CONFIG == CryptoLocations.FAR_BLUE_AUTO) {
                 CryptoLocations.DX_TO_COLUMN = CryptoLocations.FAR_BLUE_X;
@@ -192,8 +196,10 @@ public class CryptoLocations {
                 CryptoLocations.DY_TO_COLUMN = CryptoLocations.FAR_RED_RIGHT_Y;
             }
             else if (AUTO_CONFIG == CryptoLocations.CLOSE_BLUE_AUTO) {
-                CryptoLocations.DX_TO_COLUMN = CryptoLocations.CLOSE_BLUE_RIGHT_X;
-                CryptoLocations.DY_TO_COLUMN = CryptoLocations.CLOSE_BLUE_Y;
+//                CryptoLocations.DX_TO_COLUMN = CryptoLocations.CLOSE_BLUE_RIGHT_X;
+//                CryptoLocations.DY_TO_COLUMN = CryptoLocations.CLOSE_BLUE_Y;
+                CryptoLocations.DX_TO_COLUMN = CryptoLocations.CLOSE_RED_LEFT_X;
+                CryptoLocations.DY_TO_COLUMN = CryptoLocations.CLOSE_RED_Y;
             }
             else if (AUTO_CONFIG == CryptoLocations.FAR_BLUE_AUTO) {
                 CryptoLocations.DX_TO_COLUMN = CryptoLocations.FAR_BLUE_X;

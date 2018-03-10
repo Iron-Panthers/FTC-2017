@@ -352,7 +352,7 @@ public class AutoCodes {
         DriveDistance driveMore = new DriveDistance(-Constants.inchesToTicks(20), 3.5);
         Wait stop = new Wait(0.1);
 
-        Command[] cmds = {clamp, wack, offPad, driveMore, stop, putGlyph(true, CryptoLocations.CLOSE_RED_AUTO, true), closeMultiglyphVP(-75, CryptoLocations.CLOSE_BLUE_AUTO, false)};//, closeMultiglyphVP(-45, CryptoLocations.CLOSE_BLUE_AUTO)};
+        Command[] cmds = {clamp, wack, offPad, driveMore, stop, putGlyph(true, CryptoLocations.CLOSE_BLUE_AUTO, true), closeMultiglyphVP(-75, CryptoLocations.CLOSE_BLUE_AUTO, false)};//, closeMultiglyphVP(-45, CryptoLocations.CLOSE_BLUE_AUTO)};
         return new SequentialCommand(cmds);
     }
 
