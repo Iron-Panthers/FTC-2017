@@ -20,7 +20,7 @@ public class StrafeTurn extends Command {
     private double turnRate, driveRate;
 
     /**
-     * @param targetAngle
+     * @param targetAngle desired absolute angle
      * @param turnRate
      * @param driveRate
      */

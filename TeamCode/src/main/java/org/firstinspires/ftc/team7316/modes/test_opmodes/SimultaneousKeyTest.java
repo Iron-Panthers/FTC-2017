@@ -43,7 +43,7 @@ public class SimultaneousKeyTest extends AutoBaseOpMode {
 //                new DriveDistance(-10)
 //            )
 //        );
-        Scheduler.instance.add(AutoCodes.closeMultiglyph());
+        Scheduler.instance.add(AutoCodes.closeMultiglyph(false));
     }
 
     @Override

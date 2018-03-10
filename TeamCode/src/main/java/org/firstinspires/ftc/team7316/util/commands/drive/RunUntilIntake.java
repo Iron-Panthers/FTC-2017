@@ -11,28 +11,39 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 public class RunUntilIntake extends Command {
 
+    private int count;
+    private boolean prevTouch;
+
     private int maxTicks;
     private DriveDistance cmd;
 
     public RunUntilIntake(int maxTicks) {
         this.maxTicks = maxTicks;
-        cmd = new DriveDistance(maxTicks, 4);
     }
 
     @Override
     public void init() {
+        count = 0;
+        cmd = new DriveDistance(maxTicks, 4);
         cmd.init();
     }
 
     @Override
     public void loop() {
+        boolean state = Hardware.instance.glyphTouchSensor.isPressed();
+
+        if(!prevTouch && state) {
+            count++;
+        }
+
         Subsystems.instance.glyphIntake.setIntakePower(-0.7, -0.7);
         cmd.loop();
+        prevTouch = state;
     }
 
     @Override
     public boolean shouldRemove() {
-        return Hardware.instance.glyphTouchSensor.isPressed() || cmd.shouldRemove();
+        return count >= 2 || cmd.shouldRemove();
     }
 
     @Override

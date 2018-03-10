@@ -63,7 +63,7 @@ public class Constants {
 
     public static final double MULTIGLYPH_BACKUP_DISTANCE = 10;
     public static final double MULTIGLYPH_DIST_TO_PIT = 15;
-    public static final double MULTIGLYPH_DIST_TO_COLLECT = 10;
+    public static final double MULTIGLYPH_DIST_TO_COLLECT = 15;
     public static final int MAX_TICKS_TO_MULTIGLYPH_CLOSE = inchesToTicks(40);
     public static final int MAX_TICKS_TO_MULTIGLYPH_FAR = inchesToTicks(50);
 

@@ -13,7 +13,7 @@ import org.firstinspires.ftc.team7316.util.commands.AutoCodes;
 public class MultiglyphTest extends AutoBaseOpMode {
     @Override
     public void onInit() {
-        Scheduler.instance.add(AutoCodes.closeMultiglyph());
+        Scheduler.instance.add(AutoCodes.closeMultiglyph(false));
     }
 
     @Override
