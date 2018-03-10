@@ -67,8 +67,8 @@ public class GlyphIntake extends Subsystem {
     }
 
     /**
-     * Positive powers (presumably) set the intake to actually... well... intake
-     * Negative powers to outtake
+     * Negative powers (presumably) set the intake to actually... well... intake
+     * Positive powers to outtake
      * @param leftPower The left intake wheel power
      * @param rightPower The right intake wheel power
      */

@@ -22,8 +22,8 @@ public class DriveDistanceCryptoVP extends Command {
 
     @Override
     public void init() {
-        distance = CryptoLocations.distanceForBox(Hardware.instance.vuforiaCameraWrapper.rY, Hardware.instance.vuforiaCameraWrapper.tZ, Hardware.instance.vuforiaCameraWrapper.tX);
-        distanceWrapper.value = -Constants.millimetersToTicks(distance); //-Constants.millimetersToTicks(CryptoLocations.distanceForConfig());
+        distance = CryptoLocations.distanceForBox(Hardware.instance.vuforiaCameraWrapper.rY, Hardware.instance.vuforiaCameraWrapper.tZ, Hardware.instance.vuforiaCameraWrapper.tY);
+        distanceWrapper.value = -Constants.millimetersToTicks(distance);
         drive = new DriveDistance(Constants.millimetersToTicks(distance), 2);
         drive.init();
     }

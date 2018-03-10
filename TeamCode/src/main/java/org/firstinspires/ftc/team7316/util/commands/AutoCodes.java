@@ -7,6 +7,7 @@ import org.firstinspires.ftc.team7316.util.IntWrapper;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveOffPad;
 import org.firstinspires.ftc.team7316.util.commands.drive.GetGlyphAndReturnClose;
 import org.firstinspires.ftc.team7316.util.commands.drive.GetGlyphAndReturnFar;
+import org.firstinspires.ftc.team7316.util.commands.drive.RunUntilIntake;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistanceCipherClose;
 import org.firstinspires.ftc.team7316.util.commands.drive.DriveForTime;
@@ -364,7 +365,7 @@ public class AutoCodes {
         DriveOffPad offPad = new DriveOffPad(Alliance.BLUE);
 
         Wait stop = new Wait(0.1);
-        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, 0, 0.4);
+        DriveForTime align = new DriveForTime(Constants.OFF_PAD_POWER, 0, 0.7);
         DriveDistanceCipherClose gotocrypto = new DriveDistanceCipherClose(Alliance.BLUE, DriveDistanceCipherClose.Position.CLOSE);
 
         TurnGyroPID turn = new TurnGyroPID(90, 2);
@@ -421,7 +422,8 @@ public class AutoCodes {
 //        SimultaneousKeyCommand mowDownGlyphs = new SimultaneousKeyCommand(new DriveDistance(distancetopit), new RunIntake(-0.7));
 //        DriveDistance driveToPit = new DriveDistance(Constants.inchesToTicks(distancetopit), 1800, 4);
 //        DriveWhileIntake mowDownGlyphs = new DriveWhileIntake(-0.7, 0.4, 1.5);
-        SimultaneousKeyCommand mowDownGlyphs = new SimultaneousKeyCommand(new DriveDistance(Constants.inchesToTicks(Constants.MULTIGLYPH_DIST_TO_PIT + Constants.MULTIGLYPH_DIST_TO_COLLECT), 1800, 5), new RunIntake(-0.7));
+//        SimultaneousKeyCommand mowDownGlyphs = new SimultaneousKeyCommand(new DriveDistance(Constants.inchesToTicks(Constants.MULTIGLYPH_DIST_TO_PIT + Constants.MULTIGLYPH_DIST_TO_COLLECT), 1800, 5), new RunIntake(-0.7));
+        RunUntilIntake mowDownGlyphs = new RunUntilIntake(Constants.inchesToTicks(Constants.MULTIGLYPH_DIST_TO_PIT + Constants.MULTIGLYPH_DIST_TO_COLLECT));
 //        MoveIntakeArm closeIntake = new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION);
         SimultaneousKeyCommand closeIntake = new SimultaneousKeyCommand(new MoveIntakeArm(Constants.INTAKE_CLAMP_GLYPH_POSITION), new RunIntake(-0.7));
 
@@ -430,7 +432,7 @@ public class AutoCodes {
         TurnReturnClose turn180_2 = new TurnReturnClose();
 //        TurnGyroPID turn180_2 = new TurnGyroPID(90, 3, 120);
 
-        DriveDistance backToCrypto = new DriveDistance(Constants.inchesToTicks(cryptoDist), 1800, 4);
+        DriveDistance backToCrypto = new DriveDistance(Constants.inchesToTicks(cryptoDist + 5), 1800, 4);
         IntakeForTime outtake2 = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
         SimultaneousKeyCommand bAndR2 = new SimultaneousKeyCommand(backUpAndRam(), new RunIntake(0.6));
 

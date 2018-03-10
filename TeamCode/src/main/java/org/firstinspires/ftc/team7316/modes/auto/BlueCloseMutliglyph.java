@@ -21,6 +21,7 @@ public class BlueCloseMutliglyph extends AutoBaseOpMode {
     public void onInit() {
         Hardware.instance.vuforiaCameraWrapper.startTracking();
         Scheduler.instance.add(AutoCodes.blueCloseMultiglyphLegacy());
+        Scheduler.instance.add(new UpdateVuforia());
     }
 
     @Override

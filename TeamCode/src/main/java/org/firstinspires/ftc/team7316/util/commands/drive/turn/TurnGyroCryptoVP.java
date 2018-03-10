@@ -18,7 +18,7 @@ public class TurnGyroCryptoVP extends Command {
     @Override
     public void init() {
         amount = CryptoLocations.angleForBox(Hardware.instance.vuforiaCameraWrapper.rY, Hardware.instance.vuforiaCameraWrapper.tZ, Hardware.instance.vuforiaCameraWrapper.tY);
-        turn = new TurnGyroPID(amount, 4);
+        turn = new TurnGyroPID(amount, 2);
         turn.init();
 
         Log.d("turn amount delta", String.valueOf(amount));
