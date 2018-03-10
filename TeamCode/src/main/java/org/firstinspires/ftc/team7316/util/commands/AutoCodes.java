@@ -490,7 +490,7 @@ public class AutoCodes {
     }
 
     public static SequentialCommand putGlyph(boolean useKeyMark, int autoLocation, boolean continueMulti) {
-        if (autoLocation == CryptoLocations.CLOSE_RED_AUTO || autoLocation == CryptoLocations.FAR_RED_AUTO) {
+        if (autoLocation == CryptoLocations.CLOSE_RED_AUTO || autoLocation == CryptoLocations.FAR_RED_AUTO || autoLocation == CryptoLocations.CLOSE_BLUE_AUTO) {
             return putGlyph(useKeyMark, autoLocation, continueMulti, CryptoLocations.RED_TURN_TO_PICTO);
         } else {
             return putGlyph(useKeyMark, autoLocation, continueMulti, CryptoLocations.BLUE_TURN_TO_PICTO);
