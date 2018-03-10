@@ -2,12 +2,10 @@ package org.firstinspires.ftc.team7316.util.commands.drive;
 
 import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
-import org.firstinspires.ftc.team7316.util.Util;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance;
 import org.firstinspires.ftc.team7316.util.commands.drive.turn.TurnGyroPID;
 import org.firstinspires.ftc.team7316.util.commands.intake.RunIntake;
-import org.firstinspires.ftc.team7316.util.subsystems.Subsystem;
 import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 /**
@@ -16,7 +14,7 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
  * Jank sequential command that goes to the glyph pit, takes a glyphs, and returns to the cryptobox
  */
 
-public class GetGlyphAndReturn extends Command {
+public class GetGlyphAndReturnClose extends Command {
 
     private int encoderTicksTravelled = 0;
     private double driveAngle = -75;
@@ -24,7 +22,7 @@ public class GetGlyphAndReturn extends Command {
     private RunIntake runIntake;
     private int commandIndex = 0;
 
-    public GetGlyphAndReturn(double driveAngle) {
+    public GetGlyphAndReturnClose(double driveAngle) {
         requires(Subsystems.instance.driveBase);
         requires(Subsystems.instance.glyphIntake);
         this.driveAngle = driveAngle;
@@ -46,7 +44,7 @@ public class GetGlyphAndReturn extends Command {
             if (currentCommand.shouldRemove()) {
                 currentCommand.interrupt();
 
-                currentCommand = new DriveDistance(Constants.MAX_TICKS_TO_MULTIGLYPH);
+                currentCommand = new DriveDistance(Constants.MAX_TICKS_TO_MULTIGLYPH_CLOSE);
                 runIntake = new RunIntake(-0.7);
                 Subsystems.instance.glyphIntake.setServoPosition(Constants.INTAKE_SERVO_MAX_POSITION);
 
@@ -59,7 +57,7 @@ public class GetGlyphAndReturn extends Command {
 
             if (currentCommand.shouldRemove() || Hardware.instance.glyphTouchSensor.isPressed()) {
                 double radians = Hardware.instance.gyroWrapper.getHeading() * Math.PI / 180;
-                encoderTicksTravelled = (int)(Math.abs(Hardware.instance.frontLeftDriveMotor.getCurrentPosition()) * Math.sin(-radians)) - Constants.millimetersToTicks(50);
+                encoderTicksTravelled = (int)(Math.abs(Hardware.instance.frontLeftDriveMotor.getCurrentPosition()) * Math.sin(-radians)) - Constants.millimetersToTicks(40);
 
                 currentCommand.interrupt();
                 Subsystems.instance.glyphIntake.setServoPosition(Constants.INTAKE_CLAMP_GLYPH_POSITION);

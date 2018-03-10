@@ -20,7 +20,6 @@ public class ColorSensorTesting extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
         ColorSensor sensor = hardwareMap.colorSensor.get("cs");
-        sensor.enableLed(true);
         waitForStart();
 
         while (opModeIsActive()) {

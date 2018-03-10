@@ -63,7 +63,8 @@ public class Constants {
     public static final double MULTIGLYPH_BACKUP_DISTANCE = 10;
     public static final double MULTIGLYPH_DIST_TO_PIT = 15;
     public static final double MULTIGLYPH_DIST_TO_COLLECT = 10;
-    public static final int MAX_TICKS_TO_MULTIGLYPH = inchesToTicks(40);
+    public static final int MAX_TICKS_TO_MULTIGLYPH_CLOSE = inchesToTicks(40);
+    public static final int MAX_TICKS_TO_MULTIGLYPH_FAR = inchesToTicks(50);
 
     public static final double PIT_TO_CRYPTO_CLOSE = 66;  //inches
     public static final double COLUMN_SEPARATION = 6;
@@ -106,9 +107,9 @@ public class Constants {
     //Jewel arm shenanigans
     public static final double ARM_SERVO_TRAVEL_TIME = 1;
 
-    public static final int COLOROFFSET_R = 30;
-    public static final int COLOROFFSET_G = 40;
-    public static final int COLOROFFSET_B = 35;
+    public static final int COLOROFFSET_R = 15;
+    public static final int COLOROFFSET_G = 0;
+    public static final int COLOROFFSET_B = 0;
 
     public static final int NO_COLOR_RED = 10;
     public static final int NO_COLOR_GREEN = 20;
@@ -116,7 +117,7 @@ public class Constants {
 
     public static final int MIN_COLOR_VALUE = 10;
     public static final int COLOR_BUFFER_SIZE = 3;
-    public static final double COLOR_DIFFERENCE = 4 * COLOR_BUFFER_SIZE;
+    public static final double COLOR_DIFFERENCE = 1;
 
     public static final int NO_COLOR_THRESHOLD_RED = NO_COLOR_RED * COLOR_BUFFER_SIZE;
     public static final int NO_COLOR_THRESHOLD_BLUE = NO_COLOR_BLUE * COLOR_BUFFER_SIZE;

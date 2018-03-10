@@ -44,9 +44,9 @@ public class CryptoLocations {
     private static final double CLOSE_RED_Y = 130;
 
     private static final double FAR_RED_LEFT_Y = 1050;
-    private static final double FAR_RED_CENTER_Y = 914;
+    private static final double FAR_RED_CENTER_Y = 890;
     private static final double FAR_RED_RIGHT_Y = 710;
-    private static final double FAR_RED_X = 690;
+    private static final double FAR_RED_X = 700;
 
     private static final double CLOSE_BLUE_LEFT_X = 955;
     private static final double CLOSE_BLUE_CENTER_X = 1158;
