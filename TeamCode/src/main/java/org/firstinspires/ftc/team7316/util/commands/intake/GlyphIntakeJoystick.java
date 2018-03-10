@@ -43,6 +43,10 @@ public class GlyphIntakeJoystick extends Command {
                 Hardware.log("ist good", "ya");
                 this.intake.setServoPosition(Constants.INTAKE_CLAMP_GLYPH_POSITION);
             }
+            else if(OI.instance.gp2.rightTriggerWrapper.state()) {
+                //  on the off chance the chain skips or something, we need to clamp harder
+                this.intake.setServoPosition(Constants.INTAKE_CLAMP_GLYPH_STRONG_POSITION);
+            }
             else if(OI.instance.gp2.right_stick.getX() >= 0){
                 this.intake.setServoPositionScaled(1 - OI.instance.gp2.right_stick.getX());
             }
