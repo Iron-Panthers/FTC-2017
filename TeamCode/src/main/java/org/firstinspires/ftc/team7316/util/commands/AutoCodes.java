@@ -416,7 +416,7 @@ public class AutoCodes {
     }
 
     public static SequentialCommand closeMultiglyph() {
-//        StraightTurn moveToPit = new StraightTurn(-90, 0.7, 0.45);
+//        StrafeTurn moveToPit = new StrafeTurn(-90, 0.7, 0.45);
         MoveIntakeArm openIntake = new MoveIntakeArm(0.8);
         TurnGyroPID turn180 = new TurnGyroPID(-90, 3, 120);
 //        SimultaneousKeyCommand mowDownGlyphs = new SimultaneousKeyCommand(new DriveDistance(distancetopit), new RunIntake(-0.7));

@@ -51,7 +51,7 @@ public class BlueCloseMutliglyph extends AutoBaseOpMode {
 //        IntakeForTime outtake = new IntakeForTime(Constants.OUTTAKE_POWER, Constants.OUTTAKE_TIME);
 //        BackupAndRam bAndR = new BackupAndRam();
 //
-//        StraightTurn moveToPit = new StraightTurn(-90, 0.7, 0.45);
+//        StrafeTurn moveToPit = new StrafeTurn(-90, 0.7, 0.45);
 //        DriveWhileIntake collectGlyphs = new DriveWhileIntake(0.7, 0.35, 3);
 //        TurnGyroPID turn180 = new TurnGyroPID(90, 4, 100);
 //

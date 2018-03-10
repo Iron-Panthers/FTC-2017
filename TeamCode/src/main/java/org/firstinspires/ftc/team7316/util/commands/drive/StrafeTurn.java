@@ -10,7 +10,9 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
  * Created by jerry on 1/28/18.
  */
 
-public class StraightTurn extends Command {
+public class StrafeTurn extends Command {
+
+    private boolean clockwise;
 
     private final double FINISH_THRESHOLD = 5;  //what is accuracy
 
@@ -19,10 +21,10 @@ public class StraightTurn extends Command {
 
     /**
      * @param targetAngle
-     * @param turnRate set to negative to turn left while driving
+     * @param turnRate
      * @param driveRate
      */
-    public StraightTurn(double targetAngle, double turnRate, double driveRate) {
+    public StrafeTurn(double targetAngle, double turnRate, double driveRate) {
         requires(Subsystems.instance.driveBase);
 
         this.targetAngle = targetAngle;
@@ -33,6 +35,8 @@ public class StraightTurn extends Command {
     @Override
     public void init() {
         startAngle = Hardware.instance.gyroWrapper.getHeading();
+
+        clockwise = Util.wrap(targetAngle - startAngle) < 0;
     }
 
     @Override
@@ -52,7 +56,10 @@ public class StraightTurn extends Command {
 
     @Override
     public boolean shouldRemove() {
-        return Math.abs(targetAngle - Hardware.instance.gyroWrapper.getHeading()) < FINISH_THRESHOLD;
+        if(clockwise) {
+            return Hardware.instance.gyroWrapper.getHeading() >= targetAngle;
+        }
+        return Hardware.instance.gyroWrapper.getHeading() <= targetAngle;
     }
 
     @Override

@@ -55,7 +55,8 @@ public class RelicArmJoystick extends Command {
 
         //  once the left trigger is pressed it should remap the joysticks (and disable intake buttons)
         if(OI.instance.gp2.leftTriggerWrapper.state()) {
-            relicArm.clawServoTarget = Util.clamp(relicArm.clawServoTarget - OI.instance.gp2.right_stick.getX() / 20.0, 0.45, 0.8);
+            //  the weak servo has reversed controls, currently modifying numbers based on that
+            relicArm.clawServoTarget = Util.clamp(relicArm.clawServoTarget - OI.instance.gp2.right_stick.getX() / 20.0, 0.45, 0.9);
             relicArm.setArmPower(OI.instance.gp2.left_stick.getY());
         }
         else {
