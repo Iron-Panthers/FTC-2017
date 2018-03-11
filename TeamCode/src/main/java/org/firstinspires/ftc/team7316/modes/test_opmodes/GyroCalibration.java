@@ -29,5 +29,7 @@ public class GyroCalibration extends AutoBaseOpMode {
         Hardware.log("calibration status", imu.getCalibrationStatus().toString());
         Hardware.log("gyro calibrated", imu.isGyroCalibrated());
         Hardware.log("gyro heading", gyro.getHeading());
+        Hardware.log("gyro pitch", gyro.getPitch());
+        Hardware.log("gyro roll", gyro.getRoll());
     }
 }

@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.team7316.util.commands.drive;
 
+import org.firstinspires.ftc.team7316.util.Constants;
 import org.firstinspires.ftc.team7316.util.Hardware;
 import org.firstinspires.ftc.team7316.util.commands.Command;
 import org.firstinspires.ftc.team7316.util.commands.drive.distance.DriveDistance;
@@ -24,7 +25,7 @@ public class RunUntilIntake extends Command {
     @Override
     public void init() {
         count = 0;
-        cmd = new DriveDistance(maxTicks, 4);
+        cmd = new DriveDistance(maxTicks, 5);
         cmd.init();
     }
 
@@ -34,6 +35,10 @@ public class RunUntilIntake extends Command {
 
         if(!prevTouch && state) {
             count++;
+        }
+
+        if(count >= 1) {
+            Subsystems.instance.glyphIntake.setServoPosition(Constants.INTAKE_CLAMP_GLYPH_POSITION);
         }
 
         Subsystems.instance.glyphIntake.setIntakePower(-0.7, -0.7);

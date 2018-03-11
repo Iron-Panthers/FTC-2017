@@ -17,7 +17,7 @@ public class JewelArm extends Subsystem {
     private Servo wacker;
 
     public final double armPositionIn = 1;
-    public final double armPositionOut = 0.03;
+    public final double armPositionOut = 0.02;
 
     public final double wackPositionInit = 0.6;
     public final double wackPositionNeutral = 0.5;  //originally 0.5

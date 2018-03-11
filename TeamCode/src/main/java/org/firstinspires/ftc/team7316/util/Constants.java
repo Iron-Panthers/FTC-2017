@@ -63,11 +63,11 @@ public class Constants {
 
     public static final double MULTIGLYPH_BACKUP_DISTANCE = 10;
     public static final double MULTIGLYPH_DIST_TO_PIT = 15;
-    public static final double MULTIGLYPH_DIST_TO_COLLECT = 15;
+    public static final double MULTIGLYPH_DIST_TO_COLLECT = 20;
     public static final int MAX_TICKS_TO_MULTIGLYPH_CLOSE = inchesToTicks(40);
     public static final int MAX_TICKS_TO_MULTIGLYPH_FAR = inchesToTicks(50);
 
-    public static final double PIT_TO_CRYPTO_CLOSE = 66;  //inches
+    public static final double PIT_TO_CRYPTO_CLOSE = 76;  //inches
     public static final double COLUMN_SEPARATION = 6;
 
     public static final double PLATE_TO_CRYPTO_FAR = 18;
@@ -82,7 +82,7 @@ public class Constants {
     public static final double BLUE_OFF_PAD_TIME = 1.7;
     public static final double DRIVE_FORWARD_TIME = 1.6; //driving off the pad and to the parking also for now
 
-    public static final double OFF_PAD_POWER = 0.35;
+    public static final double OFF_PAD_POWER = 0.25;
     public static final double FORWARD_POWER_FOR_TIME = 0.1; //was 0.3 whne jewel waacked forward
     public static final double BACKWARD_POWER_FOR_TIME = 0.15; //when  jewel wacked backwards
 
@@ -117,7 +117,7 @@ public class Constants {
     public static final int NO_COLOR_BLUE = 20;
 
     public static final int MIN_COLOR_VALUE = 10;
-    public static final int COLOR_BUFFER_SIZE = 3;
+    public static final int COLOR_BUFFER_SIZE = 4;
     public static final double COLOR_DIFFERENCE = 1;
 
     public static final int NO_COLOR_THRESHOLD_RED = NO_COLOR_RED * COLOR_BUFFER_SIZE;

@@ -12,7 +12,7 @@ import org.firstinspires.ftc.team7316.util.subsystems.Subsystems;
 
 public class DriveOffPad extends Command {
 
-    private final double FLAT_THRESHOLD = 2; //in degrees whatever
+    private final double FLAT_THRESHOLD = 1.25; //in degrees whatever
     private double flatAngle;
 
     private boolean tilted = false;
