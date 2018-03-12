@@ -32,6 +32,8 @@ import org.firstinspires.ftc.team7316.util.subsystems.JewelArm;
 
 /**
  * Contains all the sequential commands to run
+ *
+ * RIP vp auto you will not be missed
  */
 public class AutoCodes {
 
