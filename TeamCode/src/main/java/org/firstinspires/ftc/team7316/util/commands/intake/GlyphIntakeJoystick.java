@@ -72,6 +72,13 @@ public class GlyphIntakeJoystick extends Command {
             this.intake.setLiftPower(0);
         }
 
+        //  Lock servo TODO: Make it toggleable?
+        if (OI.instance.gp2.left_bumper.state()) {
+            this.intake.setGlyphLockPosition(Constants.INTAKE_LOCK_MAX_POSITION);
+        } else {
+            this.intake.setGlyphLockPosition(Constants.INTAKE_LOCK_MIN_POSITION);
+        }
+
         //  flag servo stuff
         if(Hardware.instance.glyphTouchSensor.isPressed()) {
             Hardware.instance.flagServo.setPosition(0.5);

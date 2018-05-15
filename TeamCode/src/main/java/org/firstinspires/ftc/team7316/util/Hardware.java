@@ -38,6 +38,7 @@ public class Hardware {
     private static final String INTAKE_LIFT_MOTOR_NAME = "ilm";
 
     private static final String INTAKE_SERVO_NAME = "is";
+    private static final String INTAKE_GLYPH_LOCK_SERVO_NAME = "isl";
 
     private static final String GLYPH_FLAG_SERVO_NAME = "flag";
     private static final String GLYPH_TOUCH_SENSOR_NAME = "gt";
@@ -75,6 +76,7 @@ public class Hardware {
     public DcMotor intakeLiftMotor;
 
     public Servo intakeServo;
+    public Servo intakeGlyphLockServo;
 
     public Servo flagServo;
     public TouchSensor glyphTouchSensor;
@@ -135,6 +137,8 @@ public class Hardware {
 
         intakeServo = map.servo.get(INTAKE_SERVO_NAME);
         intakeServo.setDirection(Servo.Direction.REVERSE);
+
+        intakeGlyphLockServo = map.servo.get(INTAKE_GLYPH_LOCK_SERVO_NAME);
 
         flagServo = map.servo.get(GLYPH_FLAG_SERVO_NAME);
         glyphTouchSensor = map.touchSensor.get(GLYPH_TOUCH_SENSOR_NAME);

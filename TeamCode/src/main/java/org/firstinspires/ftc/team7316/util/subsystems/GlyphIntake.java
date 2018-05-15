@@ -17,7 +17,7 @@ public class GlyphIntake extends Subsystem {
 
     private Command glyphIntakeJoystick;
 
-    private Servo servo;
+    private Servo servo, glyphLock;
     private DcMotor rightIntakeMotor;
     private DcMotor leftIntakeMotor;
     private DcMotor intakeLiftMotor;
@@ -32,6 +32,7 @@ public class GlyphIntake extends Subsystem {
         this.rightIntakeMotor = Hardware.instance.rightIntakeMotor;
         this.leftIntakeMotor = Hardware.instance.leftIntakeMotor;
         this.servo = Hardware.instance.intakeServo;
+        this.glyphLock = Hardware.instance.intakeGlyphLockServo;
         this.intakeLiftMotor = Hardware.instance.intakeLiftMotor;
 
         liftStopped = false;
@@ -53,6 +54,10 @@ public class GlyphIntake extends Subsystem {
     @Override
     public void reset() {
         setIntakePower(0, 0);
+    }
+
+    public void setGlyphLockPosition(double position) {
+        glyphLock.setPosition(position);
     }
 
     public void setServoPosition(double position) {

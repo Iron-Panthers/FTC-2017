@@ -9,6 +9,10 @@ public class Constants {
     public static final double RADIAN_TO_DEGREES = 180 / Math.PI;
     public static final double DEGREES_TO_RADIANS = Math.PI / 180;
 
+    // TODO: Calibrate lock
+    public static final double INTAKE_LOCK_MAX_POSITION = 0.7;
+    public static final double INTAKE_LOCK_MIN_POSITION = 0.4;
+
     public static final double JOYSTICK_DRIVE_DEADZONE = 0.05;
     public static final double DRIVER_MOTOR_DEADZONE = 0.1;
     public static final double ENCODER_TICK_PER_REV = 1120; //halved due to gear ratio
@@ -145,6 +149,7 @@ public class Constants {
 
     //Key is from Jerry's Vuforia dev account
     public static final String vuforiaLicenseKey = "AX5kYPX/////AAAAGU3PfsyXBULLmvcBPSA/sq8MU9VRtH0JkRzhv6Gggr2CpIl9G4uMhuk/GpUW7pgNKluG8PpL85nQo2AakItuDJUgOkCwK6w0YHQPx6+rf8jZM98Fp1lcmH85r/w2JyjVZB43mQAGuyrlJMi24YR9n6m93YNrtv710/h8DuurXnKBtn2ucrsyUjAVfKJzlIXrAB7sZ8MZDqA1rWD+GqoO5pWAW2sobpl64F4A1Fzf+Zzn340wOoH6UEHTyRb1clkSezxvc129fij+4Ev5jOJioiFJyCcF7YXY9zczVpyByqad0w+HqAR2VXj8hKBgL6SRZ6yQ5GmrUY1/5JUQXiMwdRfT5RKjHMlqKP9f9J1x/V7l";
+
     //distance in inches
     public static int inchesToTicks(double dist) {
         return (int)(ENCODER_TICK_PER_REV * ENCODER_REV_PER_WHEEL_REV / WHEEL_CIRCUMFERENCE * dist);
