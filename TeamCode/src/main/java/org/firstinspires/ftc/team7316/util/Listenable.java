@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.team7316.util;
 
-import org.firstinspires.ftc.team7316.util.commands.conditions.Conditional;
 import org.firstinspires.ftc.team7316.util.commands.*;
 import org.firstinspires.ftc.team7316.util.commands.flow.WhileHeldWrapper;
 
@@ -10,7 +9,7 @@ import java.util.List;
 /**
  * Created by andrew on 11/29/16.
  */
-public abstract class Listenable extends Command implements Conditional {
+public abstract class Listenable extends Command {
     private List<Command> onPressed = new ArrayList<>();
     private List<WhileHeldWrapper> whileHeld = new ArrayList<>();
     private boolean lastValue = false;
@@ -50,4 +49,5 @@ public abstract class Listenable extends Command implements Conditional {
         lastValue = currentValue;
     }
 
+    public abstract boolean state();
 }

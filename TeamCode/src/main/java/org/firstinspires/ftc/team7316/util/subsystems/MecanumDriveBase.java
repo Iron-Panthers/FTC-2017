@@ -24,9 +24,10 @@ public class MecanumDriveBase extends Subsystem {
 
     private double prevTurnSpeed = 0;
     private double targetHeading = 0;
-    private final double GYRO_FEEDBACK_POWER_RATIO = 0.04;  // preliminary value
+    private final double GYRO_FEEDBACK_POWER_RATIO = 0.65;  // preliminary value
 
     private double wantedTurnSpeed = 0;
+    private double wantedDriveAngle = 0;
 
     private double wantedOmega; //in degrees per second
 
@@ -86,6 +87,7 @@ public class MecanumDriveBase extends Subsystem {
     public void setWantedSpeedAndMovementAngle(double wantedSpeed, double wantedMovementAngle) {
 
         Hardware.log("wantedSpeed", wantedSpeed);
+        this.wantedDriveAngle = wantedMovementAngle;
 
         double strafingDeadzone = strafingDeadzone(wantedMovementAngle);
         wantedSpeed = (Constants.SQRT2 - strafingDeadzone) * wantedSpeed + strafingDeadzone;
