@@ -23,7 +23,8 @@ public class TriggerWrapper extends ButtonWrapper {
      * @return If the trigger is sufficiently pressed
      */
     @Override
-    public boolean state() {
+    public boolean pressedState() {
+        addToScheduler();
         return getCurrentValue() > threshold;
     }
 

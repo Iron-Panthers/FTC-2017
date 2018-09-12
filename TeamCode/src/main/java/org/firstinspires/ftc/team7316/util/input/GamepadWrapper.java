@@ -15,7 +15,6 @@ public class GamepadWrapper {
 
     public JoystickWrapper left_stick, right_stick;
     public AxisWrapper left_axis_y, right_axis_y;
-    public AxisWrapper r_trigger;
 
     public ButtonWrapper a_button, b_button, x_button, y_button;
     public ButtonWrapper dp_up, dp_down, dp_right, dp_left;
@@ -32,14 +31,10 @@ public class GamepadWrapper {
         this.left_axis_y = new AxisWrapper(GamepadAxis.L_STICK_Y, this);
         this.right_axis_y = new AxisWrapper(GamepadAxis.R_STICK_Y, this);
 
-        this.a_button = new ToggleButtonWrapper(GamepadButton.A_BUTTON, this);
-        this.b_button = new ToggleButtonWrapper(GamepadButton.B_BUTTON, this);
+        this.a_button = new ButtonWrapper(GamepadButton.A_BUTTON, this);
+        this.b_button = new ButtonWrapper(GamepadButton.B_BUTTON, this);
         this.x_button = new ButtonWrapper(GamepadButton.X_BUTTON, this);
         this.y_button = new ButtonWrapper(GamepadButton.Y_BUTTON, this);
-//        this.a_button = new SingleButtonPressWrapper(GamepadButton.A_BUTTON, this);
-//        this.b_button = new SingleButtonPressWrapper(GamepadButton.B_BUTTON, this);
-//        this.x_button = new SingleButtonPressWrapper(GamepadButton.X_BUTTON, this);
-//        this.y_button = new SingleButtonPressWrapper(GamepadButton.Y_BUTTON, this);
 
         this.dp_left = new ButtonWrapper(GamepadButton.DPAD_LEFT, this);
         this.dp_right = new ButtonWrapper(GamepadButton.DPAD_RIGHT, this);
@@ -51,25 +46,6 @@ public class GamepadWrapper {
 
         this.leftTriggerWrapper = new TriggerWrapper(GamepadAxis.L_TRIGGER, this);
         this.rightTriggerWrapper = new TriggerWrapper(GamepadAxis.R_TRIGGER, this);
-
-        this.r_trigger = new AxisWrapper(GamepadAxis.L_TRIGGER, this);
-
-        addToScheduler();
-    }
-
-    private void addToScheduler() {
-        Scheduler.instance.add(a_button);
-        Scheduler.instance.add(b_button);
-        Scheduler.instance.add(x_button);
-        Scheduler.instance.add(y_button);
-        Scheduler.instance.add(dp_left);
-        Scheduler.instance.add(dp_right);
-        Scheduler.instance.add(dp_down);
-        Scheduler.instance.add(dp_up);
-        Scheduler.instance.add(left_bumper);
-        Scheduler.instance.add(right_bumper);
-        Scheduler.instance.add(leftTriggerWrapper);
-        Scheduler.instance.add(rightTriggerWrapper);
     }
 
     public boolean buttonState(GamepadButton buttonIndex) {
