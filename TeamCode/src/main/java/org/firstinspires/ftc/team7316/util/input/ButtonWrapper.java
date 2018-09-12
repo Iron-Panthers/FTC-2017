@@ -15,6 +15,7 @@ public class ButtonWrapper extends Listenable {
     protected boolean addedToScheduler = false;
 
     private boolean toggledValue = false;
+    private boolean prevToggledValue = false;
     private boolean buttonHasBeenTouched = false;
 
     boolean lastValue; // for detecting rising/falling edges
@@ -27,16 +28,6 @@ public class ButtonWrapper extends Listenable {
     @Override
     public void init() {
 
-    }
-
-    @Override
-    public void subLoop() {
-        // Deals with the toggledState function
-        boolean currentValue = state();
-        if (currentValue && !lastValue) {
-            toggledValue = !toggledValue;
-        }
-        lastValue = currentValue;
     }
 
     @Override
@@ -55,33 +46,23 @@ public class ButtonWrapper extends Listenable {
     }
 
     public boolean pressedState() {
-        addToScheduler();
         return state();
     }
 
     public boolean toggledState() {
-        addToScheduler();
+        boolean value = state();
+        if(value && !prevToggledValue) {
+            toggledValue = !toggledValue;
+        }
+        prevToggledValue = value;
         return toggledValue;
     }
 
     public boolean singlePressedState() {
-        addToScheduler();
         if(state() && !buttonHasBeenTouched) {
             buttonHasBeenTouched = true;
             return true;
         }
         return false;
-    }
-
-    /**
-     * This button adds itself to the scheduler on call.
-     * Used so that unused buttons aren't added to the scheduler for efficiency.
-     * Call this on any method that retrieves state so it knows when to add itself to scheduler.
-     */
-    protected void addToScheduler() {
-        if(!addedToScheduler) {
-            Scheduler.instance.add(this);
-            addedToScheduler = true;
-        }
     }
 }
